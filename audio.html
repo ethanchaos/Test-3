@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Audio Gallery</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #121212; color: #fff; padding: 20px; text-align: center; }
+    h1 { color: #1e90ff; }
+    .audio-card { background: #1e1e1e; margin: 15px auto; padding: 15px; border-radius: 10px; width: 90%; max-width: 500px; }
+    audio { width: 100%; margin-top: 10px; }
+    .info { color: #ccc; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h1>🎧 Audio Library</h1>
+  <div id="audioList">Loading audio files...</div>
+
+  <script>
+    async function loadAudio() {
+      try {
+        const res = await fetch('uploads.json');
+        const files = await res.json();
+        const audioFiles = files.filter(f => f.type === 'audio');
+        const container = document.getElementById('audioList');
+        container.innerHTML = '';
+
+        if (audioFiles.length === 0) {
+          container.innerHTML = '<p>No audio files found.</p>';
+          return;
+        }
+
+        audioFiles.forEach(file => {
+          const div = document.createElement('div');
+          div.className = 'audio-card';
+          div.innerHTML = `
+            <h3>${file.name}</h3>
+            <div class="info">Size: ${file.size} | Date: ${file.date}</div>
+            <audio controls src="${file.url}"></audio>
+          `;
+          container.appendChild(div);
+        });
+      } catch (err) {
+        document.getElementById('audioList').innerHTML = 'Error loading files.';
+      }
+    }
+    loadAudio();
+  </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Gallery</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #111; color: #fff; text-align: center; }
+    h1 { color: #1e90ff; margin-top: 20px; }
+    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; padding: 20px; }
+    .card { background: #1e1e1e; border-radius: 10px; padding: 10px; }
+    img { width: 100%; border-radius: 10px; }
+    .info { margin-top: 5px; font-size: 14px; color: #ccc; }
+  </style>
+</head>
+<body>
+  <h1>🖼️ Image Gallery</h1>
+  <div class="gallery" id="imageList">Loading images...</div>
+
+  <script>
+    async function loadImages() {
+      try {
+        const res = await fetch('uploads.json');
+        const files = await res.json();
+        const images = files.filter(f => f.type === 'image');
+        const container = document.getElementById('imageList');
+        container.innerHTML = '';
+
+        if (images.length === 0) {
+          container.innerHTML = '<p>No images found.</p>';
+          return;
+        }
+
+        images.forEach(file => {
+          const div = document.createElement('div');
+          div.className = 'card';
+          div.innerHTML = `
+            <img src="${file.url}" alt="${file.name}">
+            <div class="info">${file.name} <br>📅 ${file.date}</div>
+          `;
+          container.appendChild(div);
+        });
+      } catch (err) {
+        document.getElementById('imageList').innerHTML = 'Error loading images.';
+      }
+    }
+    loadImages();
+  </script>
+</body>
+</html>
