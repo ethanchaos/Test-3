@@ -19,5 +19,12 @@
     "size": "0.03MB",
     "type": "image",
     "date": "2025-10-09"
+  },
+  {
+    "name": "prisss.zip",
+    "url": "https://raw.githubusercontent.com/ethanchaos/Test-3/main/uploads/prisss.zip",
+    "size": "1.61 KB",
+    "type": "application/zip",
+    "date": "2025-10-09"
   }
 ]
