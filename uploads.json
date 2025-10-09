@@ -63,9 +63,9 @@
     "config_id": "hatunnel"
   },
   {
-    "name": "      ZA MTN Daily Ã¢Â­ÂÃ¢Â­ÂÃ¢Â­Â",
+    "name": "      ZA MTN Daily ÃÂ¢ÃÂ­ÃÂÃÂ¢ÃÂ­ÃÂÃÂ¢ÃÂ­ÃÂ",
     "vpn": "HA Tunnel",
-    "filename": "----__ZA_MTN_Daily_Ã¢Â­ÂÃ¢Â­ÂÃ¢Â­Â.hat",
+    "filename": "----__ZA_MTN_Daily_ÃÂ¢ÃÂ­ÃÂÃÂ¢ÃÂ­ÃÂÃÂ¢ÃÂ­ÃÂ.hat",
     "date": "10 Oct 2025",
     "config_id": "hatunnel"
   },
@@ -77,9 +77,16 @@
     "config_id": "hatunnel"
   },
   {
-    "name": "    ᴍᴛɴ 500ᴍʙ    ",
+    "name": "    á´á´É´ 500á´Ê    ",
     "vpn": "HA Tunnel",
-    "filename": "----ᴍᴛɴ_500ᴍʙ----.hat",
+    "filename": "----á´á´É´_500á´Ê----.hat",
+    "date": "10 Oct 2025",
+    "config_id": "hatunnel"
+  },
+  {
+    "name": "  MTN  1GB    ",
+    "vpn": "HA Tunnel",
+    "filename": "--MTN--1GB----.hat",
     "date": "10 Oct 2025",
     "config_id": "hatunnel"
   }
