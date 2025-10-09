@@ -63,9 +63,16 @@
     "config_id": "hatunnel"
   },
   {
-    "name": "      ZA MTN Daily ⭐⭐⭐",
+    "name": "      ZA MTN Daily â­â­â­",
     "vpn": "HA Tunnel",
-    "filename": "----__ZA_MTN_Daily_⭐⭐⭐.hat",
+    "filename": "----__ZA_MTN_Daily_â­â­â­.hat",
+    "date": "10 Oct 2025",
+    "config_id": "hatunnel"
+  },
+  {
+    "name": "     MTN free 1   ",
+    "vpn": "HA Tunnel",
+    "filename": "----_MTN_free_1_--.hat",
     "date": "10 Oct 2025",
     "config_id": "hatunnel"
   }
