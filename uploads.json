@@ -7,13 +7,6 @@
     "date": "2025-10-08"
   },
   {
-    "name": "IMG-20250924-WA0125.jpg",
-    "url": "https://raw.githubusercontent.com/ethanchaos/Test-3/main/uploads/IMG-20250924-WA0125.jpg",
-    "size": "0.04MB",
-    "type": "image",
-    "date": "2025-10-08"
-  },
-  {
     "name": "IMG-20251006-WA0000.jpg",
     "url": "https://raw.githubusercontent.com/ethanchaos/Test-3/main/uploads/IMG-20251006-WA0000.jpg",
     "size": "0.03MB",
@@ -63,9 +56,9 @@
     "config_id": "hatunnel"
   },
   {
-    "name": "      ZA MTN Daily ÃÂ¢ÃÂ­ÃÂÃÂ¢ÃÂ­ÃÂÃÂ¢ÃÂ­ÃÂ",
+    "name": "      ZA MTN Daily ÃÂÃÂ¢ÃÂÃÂ­ÃÂÃÂÃÂÃÂ¢ÃÂÃÂ­ÃÂÃÂÃÂÃÂ¢ÃÂÃÂ­ÃÂÃÂ",
     "vpn": "HA Tunnel",
-    "filename": "----__ZA_MTN_Daily_ÃÂ¢ÃÂ­ÃÂÃÂ¢ÃÂ­ÃÂÃÂ¢ÃÂ­ÃÂ.hat",
+    "filename": "----__ZA_MTN_Daily_ÃÂÃÂ¢ÃÂÃÂ­ÃÂÃÂÃÂÃÂ¢ÃÂÃÂ­ÃÂÃÂÃÂÃÂ¢ÃÂÃÂ­ÃÂÃÂ.hat",
     "date": "10 Oct 2025",
     "config_id": "hatunnel"
   },
@@ -77,9 +70,9 @@
     "config_id": "hatunnel"
   },
   {
-    "name": "    á´á´É´ 500á´Ê    ",
+    "name": "    Ã¡Â´ÂÃ¡Â´ÂÃÂ´ 500Ã¡Â´ÂÃÂ    ",
     "vpn": "HA Tunnel",
-    "filename": "----á´á´É´_500á´Ê----.hat",
+    "filename": "----Ã¡Â´ÂÃ¡Â´ÂÃÂ´_500Ã¡Â´ÂÃÂ----.hat",
     "date": "10 Oct 2025",
     "config_id": "hatunnel"
   },
