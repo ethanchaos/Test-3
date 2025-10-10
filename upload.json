@@ -75,5 +75,12 @@
     "filename": "_telkom_unlimited_junior_.hc",
     "date": "10 Oct 2025",
     "config_id": "httpcustom"
+  },
+  {
+    "name": "---- za mtn daily  1",
+    "vpn": "HA Tunnel",
+    "filename": "----_za_mtn_daily__1.hat",
+    "date": "10 Oct 2025",
+    "config_id": "hatunnel"
   }
 ]
