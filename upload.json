@@ -26,5 +26,12 @@
     "filename": "mtn_zaf_500gb.hat",
     "date": "10 Oct 2025",
     "config_id": "hatunnel"
+  },
+  {
+    "name": "---- za mtn daily ",
+    "vpn": "HA Tunnel",
+    "filename": "----_za_mtn_daily_.hat",
+    "date": "10 Oct 2025",
+    "config_id": "hatunnel"
   }
 ]
