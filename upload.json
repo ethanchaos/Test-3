@@ -68,5 +68,12 @@
     "filename": "_1__2.hat",
     "date": "10 Oct 2025",
     "config_id": "hatunnel"
+  },
+  {
+    "name": " telkom unlimited junior ",
+    "vpn": "HTTP Custom",
+    "filename": "_telkom_unlimited_junior_.hc",
+    "date": "10 Oct 2025",
+    "config_id": "httpcustom"
   }
 ]
