@@ -47,5 +47,12 @@
     "filename": "3_days_u.k1_slow_ssh.hc",
     "date": "10 Oct 2025",
     "config_id": "httpcustom"
+  },
+  {
+    "name": "germany 7 days 500 kb s ssh",
+    "vpn": "HTTP Custom",
+    "filename": "germany_7_days_500_kb_s_ssh.hc",
+    "date": "10 Oct 2025",
+    "config_id": "httpcustom"
   }
 ]
