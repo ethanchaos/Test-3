@@ -12,5 +12,12 @@
     "filename": "_1_.hat",
     "date": "10 Oct 2025",
     "config_id": "hatunnel"
+  },
+  {
+    "name": "mtn plug",
+    "vpn": "HA Tunnel",
+    "filename": "mtn_plug.hat",
+    "date": "10 Oct 2025",
+    "config_id": "hatunnel"
   }
 ]
