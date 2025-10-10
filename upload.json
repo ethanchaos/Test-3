@@ -40,5 +40,12 @@
     "filename": "_1__1.hat",
     "date": "10 Oct 2025",
     "config_id": "hatunnel"
+  },
+  {
+    "name": "3 days u.k1 slow ssh",
+    "vpn": "HTTP Custom",
+    "filename": "3_days_u.k1_slow_ssh.hc",
+    "date": "10 Oct 2025",
+    "config_id": "httpcustom"
   }
 ]
