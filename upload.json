@@ -1,22 +1,29 @@
 [
   {
-    "name": "1Gb Mzizi ð",
+    "name": " -----s ----",
+    "vpn": "Stark VPN",
+    "filename": "_-----s_----.stk",
+    "date": "11 Oct 2025",
+    "config_id": "starkvpn"
+  },
+  {
+    "name": "1Gb Mzizi Ã°ÂÂÂ",
     "vpn": "Unknown VPN",
-    "filename": "1Gb Mzizi ð.maya",
+    "filename": "1Gb Mzizi Ã°ÂÂÂ.maya",
     "date": "11 Oct 2025",
     "config_id": "unknown"
   },
   {
-    "name": "Ã°ÂÂÂMTN-200MBÃ°ÂÂ«Â¥SANELE",
+    "name": "ÃÂ°ÃÂÃÂÃÂMTN-200MBÃÂ°ÃÂÃÂ«ÃÂ¥SANELE",
     "vpn": "Jez Proxy",
-    "filename": "Ã°ÂÂÂMTN-200MBÃ°ÂÂ«Â¥SANELE.jez",
+    "filename": "ÃÂ°ÃÂÃÂÃÂMTN-200MBÃÂ°ÃÂÃÂ«ÃÂ¥SANELE.jez",
     "date": "11 Oct 2025",
     "config_id": "jezproxy"
   },
   {
-    "name": "ÃÂ°ÃÂÃÂÃÂTELKOM ÃÂ°ÃÂÃÂÃÂ¿ÃÂ°ÃÂÃÂÃÂ¦UNLIMITED ÃÂ°ÃÂÃÂÃÂ¹by ÃÂ°ÃÂÃÂÃÂJUNIOR",
+    "name": "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂTELKOM ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ¿ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ¦UNLIMITED ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ¹by ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂJUNIOR",
     "vpn": "HTTP Custom",
-    "filename": "ÃÂ°ÃÂÃÂÃÂTELKOM ÃÂ°ÃÂÃÂÃÂ¿ÃÂ°ÃÂÃÂÃÂ¦UNLIMITED ÃÂ°ÃÂÃÂÃÂ¹by ÃÂ°ÃÂÃÂÃÂJUNIOR.hc",
+    "filename": "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂTELKOM ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ¿ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ¦UNLIMITED ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ¹by ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂJUNIOR.hc",
     "date": "11 Oct 2025",
     "config_id": "httpcustom"
   },
