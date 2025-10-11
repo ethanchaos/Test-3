@@ -1,8 +1,15 @@
 [
   {
-    "name": "🌍TELKOM 🇿🇦UNLIMITED 🌹by 🌜JUNIOR",
+    "name": "🌄MTN-200MB🫥SANELE",
+    "vpn": "Jez Proxy",
+    "filename": "🌄MTN-200MB🫥SANELE.jez",
+    "date": "11 Oct 2025",
+    "config_id": "jezproxy"
+  },
+  {
+    "name": "ðTELKOM ð¿ð¦UNLIMITED ð¹by ðJUNIOR",
     "vpn": "HTTP Custom",
-    "filename": "🌍TELKOM 🇿🇦UNLIMITED 🌹by 🌜JUNIOR.hc",
+    "filename": "ðTELKOM ð¿ð¦UNLIMITED ð¹by ðJUNIOR.hc",
     "date": "11 Oct 2025",
     "config_id": "httpcustom"
   },
