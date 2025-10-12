@@ -1,15 +1,22 @@
 [
   {
-    "name": "🥹princess Mk 2",
+    "name": "02Aug 1",
     "vpn": "HTTP Custom",
-    "filename": "🥹princess Mk_2.hc",
+    "filename": "02Aug_1.hc",
     "date": "12 Oct 2025",
     "config_id": "httpcustom"
   },
   {
-    "name": "7 days Canada ð¥ 2",
+    "name": "ð¥¹princess Mk 2",
     "vpn": "HTTP Custom",
-    "filename": "7 days Canada ð¥_2.hc",
+    "filename": "ð¥¹princess Mk_2.hc",
+    "date": "12 Oct 2025",
+    "config_id": "httpcustom"
+  },
+  {
+    "name": "7 days Canada Ã°ÂÂÂ¥ 2",
+    "vpn": "HTTP Custom",
+    "filename": "7 days Canada Ã°ÂÂÂ¥_2.hc",
     "date": "12 Oct 2025",
     "config_id": "httpcustom"
   }
