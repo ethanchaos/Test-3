@@ -1,25 +1,9 @@
 [
   {
-    "name": "🥹princess Mk 1",
+    "name": "7 days Canada 🔥 2",
     "vpn": "HTTP Custom",
-    "filename": "🥹princess Mk_1.hc",
+    "filename": "7 days Canada 🔥_2.hc",
     "date": "12 Oct 2025",
     "config_id": "httpcustom"
-  },
-  {
-    "name": "02Aug",
-    "vpn": "HTTP Custom",
-    "filename": "02Aug.hc",
-    "date": "12 Oct 2025",
-    "config_id": "httpcustom"
-  },
-
-  {
-    "name": "3 days U.K1 SLOW SSH",
-    "vpn": "HTTP Custom",
-    "filename": "3 days U.K1 SLOW SSH.hc",
-    "date": "12 Oct 2025",
-    "config_id": "httpcustom"
-  },
-
+  }
 ]
