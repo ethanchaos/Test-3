@@ -1,5 +1,12 @@
 [
   {
+    "name": "Voda Fast By Syamthanda",
+    "vpn": "HTTP Custom",
+    "filename": "Voda Fast By Syamthanda.hc",
+    "date": "12 Oct 2025",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "02Aug 1",
     "vpn": "HTTP Custom",
     "filename": "02Aug_1.hc",
@@ -7,16 +14,16 @@
     "config_id": "httpcustom"
   },
   {
-    "name": "ð¥¹princess Mk 2",
+    "name": "Ã°ÂÂ¥Â¹princess Mk 2",
     "vpn": "HTTP Custom",
-    "filename": "ð¥¹princess Mk_2.hc",
+    "filename": "Ã°ÂÂ¥Â¹princess Mk_2.hc",
     "date": "12 Oct 2025",
     "config_id": "httpcustom"
   },
   {
-    "name": "7 days Canada Ã°ÂÂÂ¥ 2",
+    "name": "7 days Canada ÃÂ°ÃÂÃÂÃÂ¥ 2",
     "vpn": "HTTP Custom",
-    "filename": "7 days Canada Ã°ÂÂÂ¥_2.hc",
+    "filename": "7 days Canada ÃÂ°ÃÂÃÂÃÂ¥_2.hc",
     "date": "12 Oct 2025",
     "config_id": "httpcustom"
   }
