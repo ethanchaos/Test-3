@@ -1,5 +1,12 @@
 [
   {
+    "name": "INDONESIA KID VODACOM UNLIMITED",
+    "vpn": "HTTP Custom",
+    "filename": "INDONESIA KID VODACOM UNLIMITED.hc",
+    "date": "12 Oct 2025",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "TELEKOM SA UNLIMITED",
     "vpn": "HTTP Custom",
     "filename": "TELEKOM SA UNLIMITED.hc",
