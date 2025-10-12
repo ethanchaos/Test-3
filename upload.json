@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN 300MB DAILY BY PANTHER",
+    "vpn": "TLS Tunnel",
+    "filename": "MTN 300MB DAILY BY PANTHER.tls",
+    "date": "12 Oct 2025",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "MPR Vodacom 100mb limited",
     "vpn": "TLS Tunnel",
     "filename": "MPR Vodacom 100mb limited.tls",
