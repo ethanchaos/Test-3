@@ -1,5 +1,12 @@
 [
   {
+    "name": "TELEKOM SA UNLIMITED",
+    "vpn": "HTTP Custom",
+    "filename": "TELEKOM SA UNLIMITED.hc",
+    "date": "12 Oct 2025",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "KING INNOCENT",
     "vpn": "HA Tunnel",
     "filename": "KING INNOCENT.hat",
