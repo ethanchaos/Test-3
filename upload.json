@@ -1,5 +1,12 @@
 [
   {
+    "name": "Vodacom 100mbs by Trever B FREENET COMMUNITY",
+    "vpn": "HA Tunnel",
+    "filename": "Vodacom 100mbs by Trever B FREENET COMMUNITY.hat",
+    "date": "12 Oct 2025",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "MTN SA 300MB BY KING LUB",
     "vpn": "HA Tunnel",
     "filename": "MTN SA 300MB BY KING LUB.hat",
