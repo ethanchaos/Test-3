@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN ZA 300MB",
+    "vpn": "HA Tunnel",
+    "filename": "MTN ZA 300MB.hat",
+    "date": "12 Oct 2025",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "INDONESIA KID VODACOM UNLIMITED",
     "vpn": "HTTP Custom",
     "filename": "INDONESIA KID VODACOM UNLIMITED.hc",
