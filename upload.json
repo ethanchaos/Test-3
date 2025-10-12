@@ -1,16 +1,9 @@
 [
   {
-    "name": "Voda Fast By Syamthanda",
+    "name": "02Aug 2",
     "vpn": "HTTP Custom",
-    "filename": "Voda Fast By Syamthanda.hc",
+    "filename": "02Aug_2.hc",
     "date": "12 Oct 2025",
     "config_id": "httpcustom"
-  },
-  {
-    "name": "02Aug 1",
-    "vpn": "HTTP Custom",
-    "filename": "02Aug_1.hc",
-    "date": "12 Oct 2025",
-    "config_id": "httpcustom"
-  },
+  }
 ]
