@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN SA 300MB BY KING LUB",
+    "vpn": "HA Tunnel",
+    "filename": "MTN SA 300MB BY KING LUB.hat",
+    "date": "12 Oct 2025",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "mtn 300mbps 500mbps by TREVER B FREENET COMMUNITY",
     "vpn": "HA Tunnel",
     "filename": "mtn 300mbps 500mbps by TREVER B FREENET COMMUNITY.hat",
