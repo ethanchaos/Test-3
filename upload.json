@@ -1,5 +1,12 @@
 [
   {
+    "name": "Bloodline",
+    "vpn": "HTTP Custom",
+    "filename": "Bloodline.hc",
+    "date": "12 Oct 2025",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "Vodacom 100mbs by Trever B FREENET COMMUNITY",
     "vpn": "HA Tunnel",
     "filename": "Vodacom 100mbs by Trever B FREENET COMMUNITY.hat",
