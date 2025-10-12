@@ -1,5 +1,12 @@
 [
   {
+    "name": "KING INNOCENT",
+    "vpn": "HA Tunnel",
+    "filename": "KING INNOCENT.hat",
+    "date": "12 Oct 2025",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "4 MASTERS OF FREENET",
     "vpn": "HA Tunnel",
     "filename": "4 MASTERS OF FREENET.hat",
