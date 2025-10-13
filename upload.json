@@ -1,5 +1,12 @@
 [
   {
+    "name": "France 1 Voda unlimited",
+    "vpn": "HTTP Custom",
+    "filename": "France 1 Voda unlimited.hc",
+    "date": "13 Oct 2025",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "Bloodline",
     "vpn": "HTTP Custom",
     "filename": "Bloodline.hc",
