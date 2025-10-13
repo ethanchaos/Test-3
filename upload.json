@@ -1,5 +1,12 @@
 [
   {
+    "name": "OTC DNS UNLIMITED",
+    "vpn": "HTTP Custom",
+    "filename": "OTC DNS UNLIMITED.hc",
+    "date": "13 Oct 2025",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "SA VODACOM Fast dns 1",
     "vpn": "HTTP Custom",
     "filename": "SA VODACOM Fast dns 1.hc",
