@@ -1,5 +1,12 @@
 [
   {
+    "name": "MR E CHAOS VODACOM SLOW DNS",
+    "vpn": "HTTP Custom",
+    "filename": "MR E CHAOS VODACOM SLOW DNS.hc",
+    "date": "14 Oct 2025",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "OTC DNS UNLIMITED",
     "vpn": "HTTP Custom",
     "filename": "OTC DNS UNLIMITED.hc",
