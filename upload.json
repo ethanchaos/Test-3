@@ -1,5 +1,12 @@
 [
   {
+    "name": "VODACOM SLOW DNS SA1",
+    "vpn": "HTTP Custom",
+    "filename": "VODACOM SLOW DNS SA1.hc",
+    "date": "15 Oct 2025",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "VODACOM SLOW DNS SA2",
     "vpn": "HTTP Custom",
     "filename": "VODACOM SLOW DNS SA2.hc",
