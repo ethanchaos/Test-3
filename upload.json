@@ -1,5 +1,12 @@
 [
   {
+    "name": "Tk Master VodaCom-SA",
+    "vpn": "HTTP Custom",
+    "filename": "Tk Master VodaCom-SA.hc",
+    "date": "18 Oct 2025",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "VODACOM SLOW DNS SA1",
     "vpn": "HTTP Custom",
     "filename": "VODACOM SLOW DNS SA1.hc",
