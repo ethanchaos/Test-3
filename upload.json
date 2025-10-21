@@ -1,5 +1,12 @@
 [
   {
+    "name": "Mtn 300MB DAILY shane MPR",
+    "vpn": "TLS Tunnel",
+    "filename": "Mtn 300MB DAILY shane MPR.tls",
+    "date": "21 Oct 2025",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "MTN 300MB DAILY BY PANTHER 1",
     "vpn": "TLS Tunnel",
     "filename": "MTN 300MB DAILY BY PANTHER_1.tls",
