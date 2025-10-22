@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN 300MB IG ASIPHE",
+    "vpn": "HA Tunnel",
+    "filename": "MTN 300MB IG ASIPHE.hat",
+    "date": "22 Oct 2025",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "Mtn 500MB DAILY Shane MPR",
     "vpn": "TLS Tunnel",
     "filename": "Mtn 500MB DAILY Shane MPR.tls",
