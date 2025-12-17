@@ -1,5 +1,12 @@
 [
   {
+    "name": "300 MB per day ",
+    "vpn": "TLS Tunnel",
+    "filename": "300 MB per day .tls",
+    "date": "17 Dec 2025",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "MTN 300MB IG ASIPHE",
     "vpn": "HA Tunnel",
     "filename": "MTN 300MB IG ASIPHE.hat",
