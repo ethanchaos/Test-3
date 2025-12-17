@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN 500 MB ",
+    "vpn": "ZIV PN Tunnel",
+    "filename": "MTN 500 MB .ziv",
+    "date": "18 Dec 2025",
+    "config_id": "zivpntunnel"
+  },
+  {
     "name": "KING X BOY 100MB400MB MTN SA",
     "vpn": "TLS Tunnel",
     "filename": "KING X BOY 100MB400MB MTN SA.tls",
