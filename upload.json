@@ -1,6 +1,13 @@
 [
   {
     "name": "MTN 300MB DAILY",
+    "vpn": "ZIV PN Tunnel",
+    "filename": "MTN 300MB DAILY.ziv",
+    "date": "17 Dec 2025",
+    "config_id": "zivpntunnel"
+  },
+  {
+    "name": "MTN 300MB DAILY",
     "vpn": "Unknown VPN",
     "filename": "MTN 300MB DAILY.ktr",
     "date": "17 Dec 2025",
