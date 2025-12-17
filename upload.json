@@ -1,5 +1,12 @@
 [
   {
+    "name": "daily plug",
+    "vpn": "HA Tunnel",
+    "filename": "daily plug.hat",
+    "date": "17 Dec 2025",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "   1      ",
     "vpn": "NPV Tunnel",
     "filename": "   1      .npvt",
