@@ -1,6 +1,13 @@
 [
   {
     "name": "SHANE - 300 MB MTN",
+    "vpn": "Unknown VPN",
+    "filename": "SHANE - 300 MB MTN.lnk",
+    "date": "18 Dec 2025",
+    "config_id": "unknown"
+  },
+  {
+    "name": "SHANE - 300 MB MTN",
     "vpn": "HA Tunnel",
     "filename": "SHANE - 300 MB MTN.hat",
     "date": "18 Dec 2025",
