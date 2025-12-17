@@ -1,5 +1,12 @@
 [
   {
+    "name": "wboss600mtn",
+    "vpn": "HA Tunnel",
+    "filename": "wboss600mtn.hat",
+    "date": "17 Dec 2025",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "UDP UNLIMITED PLUG",
     "vpn": "HTTP Custom",
     "filename": "UDP UNLIMITED PLUG.hc",
