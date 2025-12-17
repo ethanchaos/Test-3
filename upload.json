@@ -1,5 +1,12 @@
 [
   {
+    "name": "Heart",
+    "vpn": "HA Tunnel",
+    "filename": "Heart.hat",
+    "date": "17 Dec 2025",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "daily plug",
     "vpn": "HA Tunnel",
     "filename": "daily plug.hat",
