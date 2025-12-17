@@ -1,5 +1,12 @@
 [
   {
+    "name": "SHANE - 500 MB MTN",
+    "vpn": "HA Tunnel",
+    "filename": "SHANE - 500 MB MTN.hat",
+    "date": "18 Dec 2025",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "SHANE - 300 MB MTN",
     "vpn": "TLS Tunnel",
     "filename": "SHANE - 300 MB MTN.tls",
