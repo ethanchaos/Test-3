@@ -1,6 +1,13 @@
 [
   {
     "name": "MTN 500MB PLUG",
+    "vpn": "TLS Tunnel",
+    "filename": "MTN 500MB PLUG.tls",
+    "date": "17 Dec 2025",
+    "config_id": "tlstunnel"
+  },
+  {
+    "name": "MTN 500MB PLUG",
     "vpn": "Unknown VPN",
     "filename": "MTN 500MB PLUG.lnk",
     "date": "17 Dec 2025",
