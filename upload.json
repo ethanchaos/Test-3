@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN 300MB DAILY",
+    "vpn": "HTTP Custom",
+    "filename": "MTN 300MB DAILY.hc",
+    "date": "17 Dec 2025",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "MTN 300MB DAILY V1.0 ",
     "vpn": "NPV Tunnel",
     "filename": "MTN 300MB DAILY V1.0 .npvt",
