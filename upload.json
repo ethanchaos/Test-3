@@ -1,5 +1,12 @@
 [
   {
+    "name": "UDP UNLIMITED PLUG",
+    "vpn": "HTTP Custom",
+    "filename": "UDP UNLIMITED PLUG.hc",
+    "date": "17 Dec 2025",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "UDP PLUG",
     "vpn": "ZIV PN Tunnel",
     "filename": "UDP PLUG.ziv",
