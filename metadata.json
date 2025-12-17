@@ -1,42 +1,42 @@
 {
   "httpcustom": {
     "last_updated": "2025-12-17 07:28:52",
-    "count": 24
+    "count": 0
   },
   "hatunnel": {
     "last_updated": "2025-12-15 12:15:00",
-    "count": 18
+    "count": 0
   },
   "darktunnel": {
     "last_updated": "2025-12-10 09:40:10",
-    "count": 15
+    "count": 0
   },
   "httpinjector": {
     "last_updated": "2025-12-14 14:22:05",
-    "count": 12
+    "count": 0
   },
   "npvttunnel": {
     "last_updated": "2025-12-12 10:05:32",
-    "count": 8
+    "count": 0
   },
   "opentunnel": {
     "last_updated": "2025-12-10 18:50:10",
-    "count": 10
+    "count": 0
   },
   "tlstunnel": {
     "last_updated": "2025-12-17 08:12:50",
-    "count": 23
+    "count": 0
   },
-  "zivpn": {
+  "zivpntunnel": {
     "last_updated": "2025-12-12 13:10:15",
-    "count": 8
+    "count": 0
   },
-  "ssc": {
+  "sshcustom": {
     "last_updated": "2025-12-12 13:10:15",
-    "count": 8
+    "count": 0
   },
   "linklayer": {
     "last_updated": "2025-12-12 13:10:15",
-    "count": 8
+    "count": 0
   }
 }
