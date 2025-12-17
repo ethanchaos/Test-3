@@ -4,8 +4,8 @@
     "count": 2
   },
   "hatunnel": {
-    "last_updated": "2025-12-17 20:24:59",
-    "count": 3
+    "last_updated": "2025-12-18 01:08:02",
+    "count": 6
   },
   "darktunnel": {
     "last_updated": "2025-12-10 09:40:10",
@@ -24,12 +24,12 @@
     "count": 0
   },
   "tlstunnel": {
-    "last_updated": "2025-12-17 20:22:32",
-    "count": 5
+    "last_updated": "2025-12-18 01:08:02",
+    "count": 8
   },
   "zivpntunnel": {
-    "last_updated": "2025-12-17 20:22:32",
-    "count": 2
+    "last_updated": "2025-12-18 01:08:02",
+    "count": 3
   },
   "sshcustom": {
     "last_updated": "2025-12-12 13:10:15",
@@ -44,7 +44,7 @@
     "count": 2
   },
   "unknown": {
-    "last_updated": "2025-12-17 20:22:32",
-    "count": 3
+    "last_updated": "2025-12-18 01:08:02",
+    "count": 5
   }
 }
