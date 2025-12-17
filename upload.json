@@ -1,5 +1,12 @@
 [
   {
+    "name": "KING X BOY 100MB400MB MTN SA",
+    "vpn": "TLS Tunnel",
+    "filename": "KING X BOY 100MB400MB MTN SA.tls",
+    "date": "18 Dec 2025",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "wboss600mtn",
     "vpn": "HA Tunnel",
     "filename": "wboss600mtn.hat",
