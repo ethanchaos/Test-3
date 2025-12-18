@@ -1,8 +1,15 @@
 [
   {
     "name": "a  - 300  TN",
+    "vpn": "TLS Tunnel",
+    "filename": "a  - 300  TN.tls",
+    "date": "18 Dec 2025",
+    "config_id": "tlstunnel"
+  },
+  {
+    "name": "aâ - 300  TN",
     "vpn": "HA Tunnel",
-    "filename": "a  - 300  TN.hat",
+    "filename": "aâ - 300  TN.hat",
     "date": "18 Dec 2025",
     "config_id": "hatunnel"
   },
