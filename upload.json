@@ -1,5 +1,12 @@
 [
   {
+    "name": "v510",
+    "vpn": "Lets VPN GO",
+    "filename": "v510.js",
+    "date": "18 Dec 2025",
+    "config_id": "letsvpngo"
+  },
+  {
     "name": "SHANE - 500 MB MTN",
     "vpn": "TLS Tunnel",
     "filename": "SHANE - 500 MB MTN.tls",
