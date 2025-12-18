@@ -1,5 +1,12 @@
 [
   {
+    "name": "a  - 300  TN",
+    "vpn": "HA Tunnel",
+    "filename": "a  - 300  TN.hat",
+    "date": "18 Dec 2025",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "v510",
     "vpn": "Lets VPN GO",
     "filename": "v510.js",
