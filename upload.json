@@ -1,8 +1,15 @@
 [
   {
-    "name": "★KYLE XY[ Nigeria][🇳🇬]★ 1",
+    "name": "😈MTN 500MB DAILY BY PANTHER😈(2) 1",
+    "vpn": "TLS Tunnel",
+    "filename": "😈MTN 500MB DAILY BY PANTHER😈(2)_1.tls",
+    "date": "31 Dec 2025",
+    "config_id": "tlstunnel"
+  },
+  {
+    "name": "âKYLE XY[ Nigeria][ð³ð¬]â 1",
     "vpn": "HA Tunnel",
-    "filename": "★KYLE XY[ Nigeria][🇳🇬]★_1.hat",
+    "filename": "âKYLE XY[ Nigeria][ð³ð¬]â_1.hat",
     "date": "31 Dec 2025",
     "config_id": "hatunnel"
   },
