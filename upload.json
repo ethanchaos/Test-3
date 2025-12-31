@@ -1,5 +1,12 @@
 [
   {
+    "name": "version519 1 1",
+    "vpn": "Lets VPN GO",
+    "filename": "version519_1_1.js",
+    "date": "31 Dec 2025",
+    "config_id": "letsvpngo"
+  },
+  {
     "name": "UDP UNLIMITED PLUG 1",
     "vpn": "HTTP Custom",
     "filename": "UDP UNLIMITED PLUG_1.hc",
