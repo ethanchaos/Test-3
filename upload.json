@@ -1,5 +1,12 @@
 [
   {
+    "name": "[TLS6.1][𝗠𝗧𝗡📶][𝗭𝗔𝗙🇿🇦][𝗡𝗘𝗪😇𝗦𝗜𝗠🤡𝗗𝗔𝗜𝗟𝗬][꧁༒ᴍⁱᴋʰᴏᵖᴀᵖᴘᵃ🇻🇦⃠༒꧂] 091907 1",
+    "vpn": "TLS Tunnel",
+    "filename": "[TLS6.1][𝗠𝗧𝗡📶][𝗭𝗔𝗙🇿🇦][𝗡𝗘𝗪😇𝗦𝗜𝗠🤡𝗗𝗔𝗜𝗟𝗬][꧁༒ᴍⁱᴋʰᴏᵖᴀᵖᴘᵃ🇻🇦⃠༒꧂]_091907_1.tls",
+    "date": "31 Dec 2025",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "MTN 1GB BY PANTHER 2",
     "vpn": "HA Tunnel",
     "filename": "MTN 1GB BY PANTHER_2.hat",
