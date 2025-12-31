@@ -1,12 +1,18 @@
 [
   {
+    "name": " VODACOM  UNLIMITED PLUG ",
+    "vpn": "HTTP Custom",
+    "filename": "_VODACOM__UNLIMITED PLUG .hc",
+    "date": "31 Dec 2025",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "MTN 1GB BY PANTHER 1",
     "vpn": "HA Tunnel",
     "filename": "MTN 1GB BY PANTHER_1.hat",
     "date": "31 Dec 2025",
     "config_id": "hatunnel"
   },
-
   {
     "name": "version519 1 1 1",
     "vpn": "Lets VPN GO",
