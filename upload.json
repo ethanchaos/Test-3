@@ -1,12 +1,18 @@
 [
   {
+    "name": "version519 1 1 1",
+    "vpn": "Lets VPN GO",
+    "filename": "version519_1_1_1.js",
+    "date": "31 Dec 2025",
+    "config_id": "letsvpngo"
+  },
+  {
     "name": "MTN 1GB BY PANTHER",
     "vpn": "HA Tunnel",
     "filename": "MTN 1GB BY PANTHER.hat",
     "date": "31 Dec 2025",
     "config_id": "hatunnel"
   },
-
   {
     "name": "version519 1 1",
     "vpn": "Lets VPN GO",
