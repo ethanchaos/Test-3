@@ -6,20 +6,7 @@
     "date": "31 Dec 2025",
     "config_id": "hatunnel"
   },
-  {
-    "name": "ðMTN 500MB DAILY BY PANTHERð(2) 1",
-    "vpn": "TLS Tunnel",
-    "filename": "ðMTN 500MB DAILY BY PANTHERð(2)_1.tls",
-    "date": "31 Dec 2025",
-    "config_id": "tlstunnel"
-  },
-  {
-    "name": "Ã¢ÂÂKYLE XY[ Nigeria][Ã°ÂÂÂ³Ã°ÂÂÂ¬]Ã¢ÂÂ 1",
-    "vpn": "HA Tunnel",
-    "filename": "Ã¢ÂÂKYLE XY[ Nigeria][Ã°ÂÂÂ³Ã°ÂÂÂ¬]Ã¢ÂÂ_1.hat",
-    "date": "31 Dec 2025",
-    "config_id": "hatunnel"
-  },
+
   {
     "name": "version519 1 1 1",
     "vpn": "Lets VPN GO",
