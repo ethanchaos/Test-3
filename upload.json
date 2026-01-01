@@ -1,5 +1,12 @@
 [
   {
+    "name": "Chaoshub [MTN SA 300MBD]-File 8",
+    "vpn": "TLS Tunnel",
+    "filename": "Chaoshub [MTN SA 300MBD]-File 8.tls",
+    "date": "1 Jan 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "300MB-DAILYIMTN-ZA",
     "vpn": "HTTP Injector",
     "filename": "300MB-DAILYIMTN-ZA.ehi",
