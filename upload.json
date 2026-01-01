@@ -1,5 +1,12 @@
 [
   {
+    "name": " UDP NEW YEAR EVE ",
+    "vpn": "ZIV PN Tunnel",
+    "filename": "_UDP NEW YEAR EVE_.ziv",
+    "date": "1 Jan 2026",
+    "config_id": "zivpntunnel"
+  },
+  {
     "name": " MTN 300MB NEW YEAR EVE ",
     "vpn": "HTTP Custom",
     "filename": "_MTN 300MB NEW YEAR EVE_.hc",
