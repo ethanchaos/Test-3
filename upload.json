@@ -1,5 +1,12 @@
 [
   {
+    "name": " MTN 500MB DAILY BY PANTHER (2)",
+    "vpn": "TLS Tunnel",
+    "filename": "_MTN 500MB DAILY BY PANTHER_(2).tls",
+    "date": "1 Jan 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "PREMIUM UDP BY IMPLAYBOYRSA ",
     "vpn": "ZIV PN Tunnel",
     "filename": "PREMIUM UDP BY IMPLAYBOYRSA .ziv",
