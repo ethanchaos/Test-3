@@ -1,5 +1,12 @@
 [
   {
+    "name": "                  I[   ]I  MTN-ZA  300MB-DAILY",
+    "vpn": "HA Tunnel",
+    "filename": "__________________I[___]I__MTN-ZA__300MB-DAILY.hat",
+    "date": "1 Jan 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "Shane MTN unknown",
     "vpn": "TLS Tunnel",
     "filename": "Shane_MTN_unknown.tls",
