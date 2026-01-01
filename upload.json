@@ -1,39 +1,47 @@
 [
   {
     "name": "🤍NEW MTN 300MB🤍",
+    "vpn": "NPV Tunnel",
+    "filename": "🤍NEW MTN 300MB🤍.npvt",
+    "github_filename": "NEW_MTN_300MB.npvt",
+    "date": "1 Jan 2026",
+    "config_id": "npvtunnel"
+  },
+  {
+    "name": "ð¤NEW MTN 300MBð¤",
     "vpn": "HTTP Custom",
-    "filename": "🤍NEW MTN 300MB🤍.hc",
+    "filename": "ð¤NEW MTN 300MBð¤.hc",
     "github_filename": "NEW_MTN_300MB.hc",
     "date": "1 Jan 2026",
     "config_id": "httpcustom"
   },
   {
-    "name": "ð1GB MTN DAILY BY PANTHERð",
+    "name": "Ã°ÂÂÂ1GB MTN DAILY BY PANTHERÃ°ÂÂÂ",
     "vpn": "TLS Tunnel",
-    "filename": "ð1GB MTN DAILY BY PANTHERð.tls",
+    "filename": "Ã°ÂÂÂ1GB MTN DAILY BY PANTHERÃ°ÂÂÂ.tls",
     "github_filename": "1GB_MTN_DAILY_BY_PANTHER.tls",
     "date": "1 Jan 2026",
     "config_id": "tlstunnel"
   },
   {
-    "name": "Ã°ÂÂ¤ÂNEW UDP PLUGÃ°ÂÂ¤Â",
+    "name": "ÃÂ°ÃÂÃÂ¤ÃÂNEW UDP PLUGÃÂ°ÃÂÃÂ¤ÃÂ",
     "vpn": "HTTP Custom",
-    "filename": "Ã°ÂÂ¤ÂNEW UDP PLUGÃ°ÂÂ¤Â.hc",
+    "filename": "ÃÂ°ÃÂÃÂ¤ÃÂNEW UDP PLUGÃÂ°ÃÂÃÂ¤ÃÂ.hc",
     "github_filename": "NEW_UDP_PLUG.hc",
     "date": "1 Jan 2026",
     "config_id": "httpcustom"
   },
   {
-    "name": "Shane test file ÃÂ°ÃÂÃÂ¥ÃÂ²",
+    "name": "Shane test file ÃÂÃÂ°ÃÂÃÂÃÂÃÂ¥ÃÂÃÂ²",
     "vpn": "TLS Tunnel",
-    "filename": "Shane test file ÃÂ°ÃÂÃÂ¥ÃÂ².tls",
+    "filename": "Shane test file ÃÂÃÂ°ÃÂÃÂÃÂÃÂ¥ÃÂÃÂ².tls",
     "date": "1 Jan 2026",
     "config_id": "tlstunnel"
   },
   {
-    "name": "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂMTN 500MB DAILY BY PANTHERÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ(2) 3",
+    "name": "ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂMTN 500MB DAILY BY PANTHERÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ(2) 3",
     "vpn": "TLS Tunnel",
-    "filename": "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂMTN 500MB DAILY BY PANTHERÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ(2)_3.tls",
+    "filename": "ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂMTN 500MB DAILY BY PANTHERÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ(2)_3.tls",
     "date": "1 Jan 2026",
     "config_id": "tlstunnel"
   }
