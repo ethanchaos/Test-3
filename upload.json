@@ -1,5 +1,12 @@
 [
   {
+    "name": "Mtn daily plug",
+    "vpn": "TLS Tunnel",
+    "filename": "Mtn daily plug.tls",
+    "date": "1 Jan 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "Shane unknown limit.",
     "vpn": "TLS Tunnel",
     "filename": "Shane unknown limit..tls",
