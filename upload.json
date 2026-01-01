@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN 500 MB PLUG",
+    "vpn": "HA Tunnel",
+    "filename": "MTN 500 MB PLUG.hat",
+    "date": "1 Jan 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "MTN 1GB BY PANTHER 1",
     "vpn": "HA Tunnel",
     "filename": "MTN 1GB BY PANTHER_1.hat",
