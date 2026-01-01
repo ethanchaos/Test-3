@@ -1,5 +1,12 @@
 [
   {
+    "name": "[PREMIUM FILE] BY KSI",
+    "vpn": "HTTP Custom",
+    "filename": "[PREMIUM FILE] BY KSI.hc",
+    "date": "1 Jan 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "Chaoshub [MTN SA 300MBD]-File 7",
     "vpn": "TLS Tunnel",
     "filename": "Chaoshub [MTN SA 300MBD]-File 7.tls",
