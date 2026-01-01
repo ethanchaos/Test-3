@@ -1,5 +1,12 @@
 [
   {
+    "name": "MR SHADOW[]MTN 600MB ",
+    "vpn": "HA Tunnel",
+    "filename": "MR SHADOW[]MTN 600MB .hat",
+    "date": "1 Jan 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "KYLE XY MTN UNKNOWN LIMIT",
     "vpn": "HA Tunnel",
     "filename": "KYLE XY MTN UNKNOWN LIMIT.hat",
