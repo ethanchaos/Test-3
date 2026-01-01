@@ -1,5 +1,12 @@
 [
   {
+    "name": " MTN 300MB NEW YEAR EVE ",
+    "vpn": "HTTP Custom",
+    "filename": "_MTN 300MB NEW YEAR EVE_.hc",
+    "date": "1 Jan 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": " MTN 15MB NEW YEAR EVE ",
     "vpn": "HTTP Custom",
     "filename": "_MTN 15MB NEW YEAR EVE_.hc",
