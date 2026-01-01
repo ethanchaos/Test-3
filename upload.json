@@ -1,15 +1,23 @@
 [
   {
-    "name": "Shane test file 🥲",
+    "name": "🤍NEW UDP PLUG🤍",
+    "vpn": "HTTP Custom",
+    "filename": "🤍NEW UDP PLUG🤍.hc",
+    "github_filename": "NEW_UDP_PLUG.hc",
+    "date": "1 Jan 2026",
+    "config_id": "httpcustom"
+  },
+  {
+    "name": "Shane test file ð¥²",
     "vpn": "TLS Tunnel",
-    "filename": "Shane test file 🥲.tls",
+    "filename": "Shane test file ð¥².tls",
     "date": "1 Jan 2026",
     "config_id": "tlstunnel"
   },
   {
-    "name": "ðMTN 500MB DAILY BY PANTHERð(2) 3",
+    "name": "Ã°ÂÂÂMTN 500MB DAILY BY PANTHERÃ°ÂÂÂ(2) 3",
     "vpn": "TLS Tunnel",
-    "filename": "ðMTN 500MB DAILY BY PANTHERð(2)_3.tls",
+    "filename": "Ã°ÂÂÂMTN 500MB DAILY BY PANTHERÃ°ÂÂÂ(2)_3.tls",
     "date": "1 Jan 2026",
     "config_id": "tlstunnel"
   }
