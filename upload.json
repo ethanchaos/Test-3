@@ -1,5 +1,12 @@
 [
   {
+    "name": "MR SHADOW[  ]MTN 600MB",
+    "vpn": "HA Tunnel",
+    "filename": "MR SHADOW[__]MTN 600MB.hat",
+    "date": "1 Jan 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": " UDP NEW YEAR EVE ",
     "vpn": "ZIV PN Tunnel",
     "filename": "_UDP NEW YEAR EVE_.ziv",
