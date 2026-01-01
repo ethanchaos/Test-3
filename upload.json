@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN-ZA  200MB DAILY",
+    "vpn": "HA Tunnel",
+    "filename": "MTN-ZA__200MB DAILY.hat",
+    "date": "1 Jan 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "MTN 5  MB BY PANTHER",
     "vpn": "HA Tunnel",
     "filename": "MTN 5__MB BY PANTHER.hat",
