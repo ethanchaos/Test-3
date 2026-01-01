@@ -1,5 +1,12 @@
 [
   {
+    "name": "Chaoshub [MTN SA 300MBD]-File 1",
+    "vpn": "TLS Tunnel",
+    "filename": "Chaoshub [MTN SA 300MBD]-File 1.tls",
+    "date": "1 Jan 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "Chaoshub [MTN SA 300MBD]-File 8",
     "vpn": "TLS Tunnel",
     "filename": "Chaoshub [MTN SA 300MBD]-File 8.tls",
