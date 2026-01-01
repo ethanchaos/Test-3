@@ -1,5 +1,12 @@
 [
   {
+    "name": "300MB-DAILYIMTN-ZA",
+    "vpn": "HTTP Injector",
+    "filename": "300MB-DAILYIMTN-ZA.ehi",
+    "date": "1 Jan 2026",
+    "config_id": "httpinjector"
+  },
+  {
     "name": "I[MTN-ZA]I  I500MB-DAILY   ",
     "vpn": "TLS Tunnel",
     "filename": "I[MTN-ZA]I__I500MB-DAILY___.tls",
