@@ -1,5 +1,12 @@
 [
   {
+    "name": "servers521",
+    "vpn": "Lets VPN GO",
+    "filename": "servers521.js",
+    "date": "4 Jan 2026",
+    "config_id": "letsvpngo"
+  },
+  {
     "name": "UDP 1JAN ",
     "vpn": "ZIV PN Tunnel",
     "filename": "UDP 1JAN_.ziv",
