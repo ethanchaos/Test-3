@@ -1,5 +1,12 @@
 [
   {
+    "name": "version521",
+    "vpn": "Lets VPN GO",
+    "filename": "version521.js",
+    "date": "4 Jan 2026",
+    "config_id": "letsvpngo"
+  },
+  {
     "name": "servers521",
     "vpn": "Lets VPN GO",
     "filename": "servers521.js",
