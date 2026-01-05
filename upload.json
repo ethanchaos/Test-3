@@ -1,5 +1,12 @@
 [
   {
+    "name": "version523",
+    "vpn": "Lets VPN GO",
+    "filename": "version523.js",
+    "date": "5 Jan 2026",
+    "config_id": "letsvpngo"
+  },
+  {
     "name": "  []   -500  []   1",
     "vpn": "HTTP Custom",
     "filename": "__[]___-500__[]___1.hc",
