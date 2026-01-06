@@ -1,5 +1,12 @@
 [
   {
+    "name": " MTN 600MB BY PANTHER ",
+    "vpn": "HA Tunnel",
+    "filename": "_MTN 600MB BY PANTHER_.hat",
+    "date": "6 Jan 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "1 GB MTN ",
     "vpn": "HA Tunnel",
     "filename": "1 GB MTN .hat",
@@ -7,16 +14,16 @@
     "config_id": "hatunnel"
   },
   {
-    "name": "AllNET-UDP VPSÂ¹",
+    "name": "AllNET-UDP VPSÃÂ¹",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPSÂ¹.ziv",
+    "filename": "AllNET-UDP VPSÃÂ¹.ziv",
     "date": "6 Jan 2026",
     "config_id": "zivpntunnel"
   },
   {
-    "name": "AllNET-UDP VPSÃÂ²",
+    "name": "AllNET-UDP VPSÃÂÃÂ²",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPSÃÂ².ziv",
+    "filename": "AllNET-UDP VPSÃÂÃÂ².ziv",
     "date": "6 Jan 2026",
     "config_id": "zivpntunnel"
   },
