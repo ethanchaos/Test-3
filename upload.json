@@ -1,5 +1,12 @@
 [
   {
+    "name": "                  I[   ]I  MTN-ZA  300MB-DAILY 1",
+    "vpn": "HA Tunnel",
+    "filename": "__________________I[___]I__MTN-ZA__300MB-DAILY_1.hat",
+    "date": "6 Jan 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "NIGERIA PLUG 1",
     "vpn": "HA Tunnel",
     "filename": "NIGERIA PLUG_1.hat",
