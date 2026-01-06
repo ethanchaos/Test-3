@@ -1,5 +1,12 @@
 [
   {
+    "name": "GOAT PLUG",
+    "vpn": "HTTP Custom",
+    "filename": "GOAT PLUG.hc",
+    "date": "6 Jan 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "MTN 300MB DAILY   ",
     "vpn": "TLS Tunnel",
     "filename": "MTN 300MB DAILY __.tls",
