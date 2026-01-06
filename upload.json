@@ -1,5 +1,12 @@
 [
   {
+    "name": "VODACOM SA UNLIMITED PREMIUM UDP",
+    "vpn": "HTTP Custom",
+    "filename": "VODACOM SA UNLIMITED PREMIUM UDP.hc",
+    "date": "6 Jan 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "Vodacom fast unlimited",
     "vpn": "TLS Tunnel",
     "filename": "Vodacom_fast_unlimited.tls",
