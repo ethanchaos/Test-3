@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN 300MB DAILY   ",
+    "vpn": "TLS Tunnel",
+    "filename": "MTN 300MB DAILY __.tls",
+    "date": "6 Jan 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "Shene premium plug ",
     "vpn": "HTTP Custom",
     "filename": "Shene premium plug .hc",
