@@ -1,5 +1,12 @@
 [
   {
+    "name": "AllNET-UDP VPS 5",
+    "vpn": "ZIV PN Tunnel",
+    "filename": "AllNET-UDP VPS 5.ziv",
+    "date": "6 Jan 2026",
+    "config_id": "zivpntunnel"
+  },
+  {
     "name": "GOAT PLUG",
     "vpn": "HTTP Custom",
     "filename": "GOAT PLUG.hc",
