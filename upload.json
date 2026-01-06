@@ -1,5 +1,12 @@
 [
   {
+    "name": "Shene premium plug ",
+    "vpn": "HTTP Custom",
+    "filename": "Shene premium plug .hc",
+    "date": "6 Jan 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "ZET FLASH   MTN UNKNOWN LIMIT  ",
     "vpn": "HA Tunnel",
     "filename": "ZET FLASH _ MTN UNKNOWN LIMIT _.hat",
