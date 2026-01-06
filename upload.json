@@ -1,8 +1,15 @@
 [
   {
-    "name": "AllNET-UDP VPS²",
+    "name": "AllNET-UDP VPS¹",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPS².ziv",
+    "filename": "AllNET-UDP VPS¹.ziv",
+    "date": "6 Jan 2026",
+    "config_id": "zivpntunnel"
+  },
+  {
+    "name": "AllNET-UDP VPSÂ²",
+    "vpn": "ZIV PN Tunnel",
+    "filename": "AllNET-UDP VPSÂ².ziv",
     "date": "6 Jan 2026",
     "config_id": "zivpntunnel"
   },
