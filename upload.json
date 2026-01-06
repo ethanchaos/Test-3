@@ -1,15 +1,22 @@
 [
   {
-    "name": "AllNET-UDP VPS¹",
+    "name": "1 GB MTN ",
+    "vpn": "HA Tunnel",
+    "filename": "1 GB MTN .hat",
+    "date": "6 Jan 2026",
+    "config_id": "hatunnel"
+  },
+  {
+    "name": "AllNET-UDP VPSÂ¹",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPS¹.ziv",
+    "filename": "AllNET-UDP VPSÂ¹.ziv",
     "date": "6 Jan 2026",
     "config_id": "zivpntunnel"
   },
   {
-    "name": "AllNET-UDP VPSÂ²",
+    "name": "AllNET-UDP VPSÃÂ²",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPSÂ².ziv",
+    "filename": "AllNET-UDP VPSÃÂ².ziv",
     "date": "6 Jan 2026",
     "config_id": "zivpntunnel"
   },
