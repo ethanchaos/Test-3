@@ -1,5 +1,12 @@
 [
   {
+    "name": "ZET FLASH   MTN UNKNOWN LIMIT  ",
+    "vpn": "HA Tunnel",
+    "filename": "ZET FLASH _ MTN UNKNOWN LIMIT _.hat",
+    "date": "6 Jan 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "VODACOM SA UNLIMITED PREMIUM UDP",
     "vpn": "HTTP Custom",
     "filename": "VODACOM SA UNLIMITED PREMIUM UDP.hc",
