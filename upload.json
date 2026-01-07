@@ -1,5 +1,12 @@
 [
   {
+    "name": " FAST VODACOM PLUG ",
+    "vpn": "HTTP Custom",
+    "filename": "_FAST VODACOM PLUG_.hc",
+    "date": "7 Jan 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "  Theboy166    [mtn Premium 500MB]",
     "vpn": "TLS Tunnel",
     "filename": "__Theboy166 ___[mtn Premium 500MB].tls",
