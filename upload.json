@@ -1,5 +1,12 @@
 [
   {
+    "name": " MTN 300MB #2",
+    "vpn": "HTTP Custom",
+    "filename": "_MTN 300MB #2.hc",
+    "date": "7 Jan 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "  MTN 300MB #1  ",
     "vpn": "HTTP Custom",
     "filename": "__MTN 300MB #1__.hc",
