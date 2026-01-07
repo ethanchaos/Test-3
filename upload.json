@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN SA 1GB. UNDISPUTED",
+    "vpn": "HTTP Custom",
+    "filename": "MTN SA 1GB. UNDISPUTED.hc",
+    "date": "7 Jan 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "The boy premium 1GB MTN ",
     "vpn": "TLS Tunnel",
     "filename": "The boy premium 1GB MTN_.tls",
