@@ -70,13 +70,6 @@
     "config_id": "httpcustom"
   },
   {
-    "name": "300MB SA   ",
-    "vpn": "TLS Tunnel",
-    "filename": "300MB SA __.tls",
-    "date": "7 Jan 2026",
-    "config_id": "tlstunnel"
-  },
-  {
     "name": " FAST VODACOM PLUG ",
     "vpn": "HTTP Custom",
     "filename": "_FAST VODACOM PLUG_.hc",
