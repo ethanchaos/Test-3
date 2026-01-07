@@ -49,13 +49,6 @@
     "config_id": "hatunnel"
   },
   {
-    "name": "MTN 300Mb per day ",
-    "vpn": "TLS Tunnel",
-    "filename": "MTN 300Mb_per day .tls",
-    "date": "7 Jan 2026",
-    "config_id": "tlstunnel"
-  },
-  {
     "name": "All NETWORK PLUG",
     "vpn": "HTTP Custom",
     "filename": "All_NETWORK_PLUG.hc",
