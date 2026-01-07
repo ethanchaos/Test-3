@@ -1,19 +1,19 @@
 {
   "httpcustom": {
-    "last_updated": "2026-01-07T16:12:14.294Z",
-    "count": 16
+    "last_updated": "2026-01-07 18:22:11",
+    "count": 42
   },
   "hatunnel": {
-    "last_updated": "2026-01-07T16:10:34.600Z",
-    "count": 21
+    "last_updated": "2026-01-07 18:22:11",
+    "count": 41
   },
   "darktunnel": {
     "last_updated": "2025-12-10 09:40:10",
     "count": 0
   },
   "httpinjector": {
-    "last_updated": "2026-01-01 23:05:26",
-    "count": 2
+    "last_updated": "2026-01-07 18:22:11",
+    "count": 4
   },
   "npvttunnel": {
     "last_updated": "2025-12-12 10:05:32",
@@ -24,12 +24,12 @@
     "count": 0
   },
   "tlstunnel": {
-    "last_updated": "2026-01-07T16:12:03.764Z",
-    "count": 27
+    "last_updated": "2026-01-07 18:22:11",
+    "count": 66
   },
   "zivpntunnel": {
-    "last_updated": "2026-01-06 22:21:36",
-    "count": 10
+    "last_updated": "2026-01-07 18:22:11",
+    "count": 20
   },
   "sshcustom": {
     "last_updated": "2025-12-12 13:10:15",
@@ -48,15 +48,15 @@
     "count": 0
   },
   "letsvpngo": {
-    "last_updated": "2026-01-06 21:07:37",
-    "count": 6
+    "last_updated": "2026-01-07 18:22:11",
+    "count": 13
   },
   "socksiptunnel": {
     "last_updated": "2025-12-31 19:43:03",
     "count": 0
   },
   "starkvpn": {
-    "last_updated": "2026-01-07T16:10:32.052Z",
-    "count": 0
+    "last_updated": "2026-01-07 18:22:11",
+    "count": 1
   }
 }
