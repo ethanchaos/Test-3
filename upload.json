@@ -1,5 +1,12 @@
 [
   {
+    "name": "Theboy 166  MTN 350mb ",
+    "vpn": "HTTP Custom",
+    "filename": "Theboy 166  MTN 350mb .hc",
+    "date": "7 Jan 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "THE BOY. DAILY PLUG ",
     "vpn": "TLS Tunnel",
     "filename": "THE BOY. DAILY PLUG_.tls",
