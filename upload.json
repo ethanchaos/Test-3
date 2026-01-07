@@ -1,5 +1,12 @@
 [
   {
+    "name": "THEBOY166 [PREMIUM 1GB ] MTN",
+    "vpn": "TLS Tunnel",
+    "filename": "THEBOY166 [PREMIUM 1GB ] MTN.tls",
+    "date": "7 Jan 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "THEBOY166 [PREMIUM 1GB ] MTN 1",
     "vpn": "TLS Tunnel",
     "filename": "THEBOY166 [PREMIUM 1GB ] MTN_1.tls",
