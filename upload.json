@@ -1,5 +1,12 @@
 [
   {
+    "name": "THEBOYDOINGTHINGS MTN 1GB DAILY",
+    "vpn": "TLS Tunnel",
+    "filename": "THEBOYDOINGTHINGS MTN 1GB DAILY.tls",
+    "date": "7 Jan 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "Theboy166 MTN 500MB premium V2Ray",
     "vpn": "HTTP Custom",
     "filename": "Theboy166 MTN 500MB premium V2Ray.hc",
