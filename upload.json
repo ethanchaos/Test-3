@@ -1,5 +1,12 @@
 [
   {
+    "name": "VODACOM SA UNLIMITED PREMIUM UDP",
+    "vpn": "HTTP Custom",
+    "filename": "VODACOM SA UNLIMITED PREMIUM UDP.hc",
+    "date": "7 Jan 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "version523",
     "vpn": "Lets VPN GO",
     "filename": "version523.js",
