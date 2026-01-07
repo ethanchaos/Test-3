@@ -14,13 +14,6 @@
     "config_id": "tlstunnel"
   },
   {
-    "name": "THE BOY 166   MTN 500MB [premium]",
-    "vpn": "HTTP Custom",
-    "filename": "THE BOY_166 _ MTN 500MB_[premium].hc",
-    "date": "7 Jan 2026",
-    "config_id": "httpcustom"
-  },
-  {
     "name": " MTN-300 MB !   PLUG ",
     "vpn": "HA Tunnel",
     "filename": "_MTN-300 MB ! _ PLUG_.hat",
