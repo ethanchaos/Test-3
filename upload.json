@@ -1,5 +1,12 @@
 [
   {
+    "name": "  MTN 15MB CHAII  ",
+    "vpn": "HTTP Custom",
+    "filename": "__MTN 15MB CHAII__.hc",
+    "date": "7 Jan 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "  []   -500  []  ",
     "vpn": "HTTP Custom",
     "filename": "__[]___-500__[]__.hc",
