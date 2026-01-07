@@ -1,5 +1,12 @@
 [
   {
+    "name": "Shene premium plug ",
+    "vpn": "HTTP Custom",
+    "filename": "Shene premium plug .hc",
+    "date": "7 Jan 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "Shane-Mtn500mb",
     "vpn": "TLS Tunnel",
     "filename": "Shane-Mtn500mb.tls",
