@@ -1,5 +1,12 @@
 [
   {
+    "name": "Theboy 166 MTN 500mb premium",
+    "vpn": "TLS Tunnel",
+    "filename": "Theboy 166 MTN 500mb premium.tls",
+    "date": "7 Jan 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "Theboy 166  MTN 350mb ",
     "vpn": "HTTP Custom",
     "filename": "Theboy 166  MTN 350mb .hc",
