@@ -1,5 +1,12 @@
 [
   {
+    "name": "[MR SHADOW ][300MB ]",
+    "vpn": "TLS Tunnel",
+    "filename": "[MR SHADOW_][300MB_].tls",
+    "date": "7 Jan 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": " VODACOM UNLIMITED    UNDISPUTED  JUNIOR",
     "vpn": "HTTP Custom",
     "filename": "_VODACOM UNLIMITED __ UNDISPUTED _JUNIOR.hc",
