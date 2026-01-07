@@ -1,5 +1,12 @@
 [
   {
+    "name": "[PREMIUM FILE] BY KSI",
+    "vpn": "HTTP Custom",
+    "filename": "[PREMIUM FILE] BY KSI.hc",
+    "date": "7 Jan 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "[MR SHADOW ][500MB ]",
     "vpn": "TLS Tunnel",
     "filename": "[MR SHADOW_][500MB_].tls",
