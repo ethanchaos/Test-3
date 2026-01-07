@@ -1,5 +1,12 @@
 [
   {
+    "name": "500 MB DAILY plug Theboy",
+    "vpn": "HTTP Custom",
+    "filename": "500 MB DAILY plug Theboy.hc",
+    "date": "7 Jan 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "MTN PLUG",
     "vpn": "TLS Tunnel",
     "filename": "MTN PLUG.tls",
