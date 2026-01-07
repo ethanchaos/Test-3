@@ -1,5 +1,12 @@
 [
   {
+    "name": "All NETWORK PLUG",
+    "vpn": "HTTP Custom",
+    "filename": "All_NETWORK_PLUG.hc",
+    "date": "7 Jan 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "300MB SA   ",
     "vpn": "TLS Tunnel",
     "filename": "300MB SA __.tls",
