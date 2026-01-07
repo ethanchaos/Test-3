@@ -1,5 +1,12 @@
 [
   {
+    "name": "  []   -500  []   1",
+    "vpn": "HTTP Custom",
+    "filename": "__[]___-500__[]___1.hc",
+    "date": "7 Jan 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": " MTN-300 MB !   PLUG ",
     "vpn": "HA Tunnel",
     "filename": "_MTN-300 MB ! _ PLUG_.hat",
