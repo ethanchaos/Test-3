@@ -1,5 +1,12 @@
 [
   {
+    "name": "The boy 166 daily-plug",
+    "vpn": "HTTP Custom",
+    "filename": "The boy 166 daily-plug.hc",
+    "date": "7 Jan 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "The boy  166  MTN [Premium V2Ray]",
     "vpn": "HTTP Custom",
     "filename": "The boy _166_ MTN [Premium V2Ray].hc",
