@@ -1,5 +1,12 @@
 [
   {
+    "name": "The boy 166 [mTN 700MB daily]",
+    "vpn": "TLS Tunnel",
+    "filename": "The boy 166_[mTN 700MB daily].tls",
+    "date": "7 Jan 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "MTN SA 1GB. UNDISPUTED",
     "vpn": "HTTP Custom",
     "filename": "MTN SA 1GB. UNDISPUTED.hc",
