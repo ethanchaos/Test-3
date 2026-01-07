@@ -1,5 +1,12 @@
 [
   {
+    "name": "TLS PLUG",
+    "vpn": "TLS Tunnel",
+    "filename": "TLS PLUG.tls",
+    "date": "7 Jan 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "THEBOYDOINGTHINGS MTN 700MB DAILY PLUG ",
     "vpn": "TLS Tunnel",
     "filename": "THEBOYDOINGTHINGS MTN 700MB DAILY PLUG_.tls",
