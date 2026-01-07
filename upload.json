@@ -1,5 +1,12 @@
 [
   {
+    "name": "NIGERIA PLUG",
+    "vpn": "HA Tunnel",
+    "filename": "NIGERIA PLUG.hat",
+    "date": "7 Jan 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "NIGERIA PLUG 1",
     "vpn": "HA Tunnel",
     "filename": "NIGERIA PLUG_1.hat",
