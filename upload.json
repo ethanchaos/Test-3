@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTNSA  500MB DAILY",
+    "vpn": "HTTP Injector",
+    "filename": "MTNSA__500MB DAILY.ehi",
+    "date": "7 Jan 2026",
+    "config_id": "httpinjector"
+  },
+  {
     "name": "MTN-ZA  300MB DAILY",
     "vpn": "HA Tunnel",
     "filename": "MTN-ZA__300MB DAILY.hat",
