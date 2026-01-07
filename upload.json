@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN-ZA  200MB DAILY",
+    "vpn": "HA Tunnel",
+    "filename": "MTN-ZA__200MB DAILY.hat",
+    "date": "7 Jan 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "MTN-200+  THE RETURN OF  LOGIC LORD   ",
     "vpn": "HA Tunnel",
     "filename": "MTN-200+  THE RETURN OF _LOGIC LORD __.hat",
