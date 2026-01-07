@@ -1,5 +1,12 @@
 [
   {
+    "name": " MTN 500MB DAILY BY PANTHER (2)",
+    "vpn": "TLS Tunnel",
+    "filename": "_MTN 500MB DAILY BY PANTHER_(2).tls",
+    "date": "7 Jan 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": " MTN 300MB NEW YEAR EVE ",
     "vpn": "HTTP Custom",
     "filename": "_MTN 300MB NEW YEAR EVE_.hc",
