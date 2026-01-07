@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN 5  MB BY PANTHER",
+    "vpn": "HA Tunnel",
+    "filename": "MTN 5__MB BY PANTHER.hat",
+    "date": "7 Jan 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "MTN 300Mb per day ",
     "vpn": "TLS Tunnel",
     "filename": "MTN 300Mb_per day .tls",
