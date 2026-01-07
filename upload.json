@@ -119,13 +119,6 @@
     "config_id": "tlstunnel"
   },
   {
-    "name": ". MTN ZAF 500MB  166 ",
-    "vpn": "TLS Tunnel",
-    "filename": ". MTN ZAF 500MB  166_.tls",
-    "date": "7 Jan 2026",
-    "config_id": "tlstunnel"
-  },
-  {
     "name": "THE BOY 166 MTN 1 GB DAILY  ",
     "vpn": "HTTP Custom",
     "filename": "THE BOY 166 MTN 1 GB DAILY _.hc",
