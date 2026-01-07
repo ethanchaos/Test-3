@@ -1,5 +1,12 @@
 [
   {
+    "name": "Shane-Mtn500mb",
+    "vpn": "TLS Tunnel",
+    "filename": "Shane-Mtn500mb.tls",
+    "date": "7 Jan 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "Shane MTN unknown",
     "vpn": "TLS Tunnel",
     "filename": "Shane_MTN_unknown.tls",
