@@ -1,5 +1,12 @@
 [
   {
+    "name": "1 GB MTN ",
+    "vpn": "HA Tunnel",
+    "filename": "1 GB MTN .hat",
+    "date": "7 Jan 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "[TWITTER-BUNDLES ][WORLDWIDE  ][DAILY ]",
     "vpn": "HA Tunnel",
     "filename": "[TWITTER-BUNDLES_][WORLDWIDE _][DAILY_].hat",
