@@ -1,5 +1,12 @@
 [
   {
+    "name": "  MTN 15MB CHAII  ",
+    "vpn": "HTTP Custom",
+    "filename": "__MTN 15MB CHAII__.hc",
+    "date": "7 Jan 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "The boy 166 mtn 300mb daily plug",
     "vpn": "HTTP Custom",
     "filename": "The boy 166 mtn 300mb daily plug.hc",
