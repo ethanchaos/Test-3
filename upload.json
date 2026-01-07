@@ -1,5 +1,12 @@
 [
   {
+    "name": "Theboy166 MTN 500MB premium V2Ray",
+    "vpn": "HTTP Custom",
+    "filename": "Theboy166 MTN 500MB premium V2Ray.hc",
+    "date": "7 Jan 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "THEBOY166 [PREMIUM 1GB ] MTN",
     "vpn": "TLS Tunnel",
     "filename": "THEBOY166 [PREMIUM 1GB ] MTN.tls",
