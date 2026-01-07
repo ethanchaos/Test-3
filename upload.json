@@ -1,5 +1,12 @@
 [
   {
+    "name": "1GB MTN DAILY BY PANTHER",
+    "vpn": "TLS Tunnel",
+    "filename": "1GB_MTN_DAILY_BY_PANTHER.tls",
+    "date": "7 Jan 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "1 GB MTN ",
     "vpn": "HA Tunnel",
     "filename": "1 GB MTN .hat",
