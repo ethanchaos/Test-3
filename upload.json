@@ -28,13 +28,6 @@
     "config_id": "tlstunnel"
   },
   {
-    "name": "  MTN UNKNOWN LIMIT  ",
-    "vpn": "HTTP Custom",
-    "filename": "__MTN UNKNOWN LIMIT__.hc",
-    "date": "7 Jan 2026",
-    "config_id": "httpcustom"
-  },
-  {
     "name": " MTN 300MB #2",
     "vpn": "HTTP Custom",
     "filename": "_MTN 300MB #2.hc",
