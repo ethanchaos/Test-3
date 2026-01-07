@@ -1,5 +1,12 @@
 [
   {
+    "name": "Theboydoingthings MTN 300MB daily",
+    "vpn": "TLS Tunnel",
+    "filename": "Theboydoingthings MTN 300MB daily.tls",
+    "date": "7 Jan 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "THEBOYDOINGTHINGS MTN 1GB DAILY",
     "vpn": "TLS Tunnel",
     "filename": "THEBOYDOINGTHINGS MTN 1GB DAILY.tls",
