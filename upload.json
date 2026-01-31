@@ -1,5 +1,12 @@
 [
   {
+    "name": "Katlego  (2)",
+    "vpn": "TLS Tunnel",
+    "filename": "Katlego  (2).tls",
+    "date": "31 Jan 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "version526 2",
     "vpn": "Lets VPN GO",
     "filename": "version526_2.js",
