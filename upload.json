@@ -1,5 +1,12 @@
 [
   {
+    "name": "version533",
+    "vpn": "Lets VPN GO",
+    "filename": "version533.js",
+    "date": "3 Feb 2026",
+    "config_id": "letsvpngo"
+  },
+  {
     "name": "Premium   ",
     "vpn": "NPV Tunnel",
     "filename": "Premium __.npvt",
