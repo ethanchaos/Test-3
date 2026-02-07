@@ -1,5 +1,12 @@
 [
   {
+    "name": "Shene premium plug  1",
+    "vpn": "HTTP Custom",
+    "filename": "Shene premium plug _1.hc",
+    "date": "7 Feb 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "version526 1 1 2",
     "vpn": "Lets VPN GO",
     "filename": "version526_1_1_2.js",
