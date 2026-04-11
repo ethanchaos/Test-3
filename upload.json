@@ -1,5 +1,12 @@
 [
   {
+    "name": "50 MB Last push  ",
+    "vpn": "HA Tunnel",
+    "filename": "50 MB Last push _.hat",
+    "date": "11 Apr 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "MTN 50MB CHAII",
     "vpn": "HA Tunnel",
     "filename": "MTN 50MB CHAII.hat",
