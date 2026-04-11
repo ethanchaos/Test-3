@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN 50MB CHAII",
+    "vpn": "HA Tunnel",
+    "filename": "MTN 50MB CHAII.hat",
+    "date": "11 Apr 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "version521 1 1 1 1",
     "vpn": "Lets VPN GO",
     "filename": "version521_1_1_1_1.js",
