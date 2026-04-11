@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTNSA  100MB DAILY[YOUNG TEE]",
+    "vpn": "HTTP Custom",
+    "filename": "MTNSA__100MB DAILY[YOUNG TEE].hc",
+    "date": "11 Apr 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "JUST UDP",
     "vpn": "HTTP Custom",
     "filename": "JUST UDP.hc",
