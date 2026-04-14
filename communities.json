@@ -1,0 +1,62 @@
+[
+  {
+    "id": "confighub-sa",
+    "name": "ConfigHub SA",
+    "description": "Official ConfigHub South Africa community group",
+    "platform": "whatsapp-group",
+    "size": "1K – 5K members",
+    "pic": "pics/chsa.jpg",
+    "href": "https://chat.whatsapp.com/KqGgcDDj2kuLBZVa9AWQWY?mode=hqrc",
+    "status": "active",
+    "activity": "Active",
+    "enabled": true
+  },
+  {
+    "id": "drops-configs",
+    "name": "Drops & Configs",
+    "description": "Daily config drops and VPN files",
+    "platform": "whatsapp-channel",
+    "size": "500 – 1K members",
+    "pic": "pics/drops.jpg",
+    "href": "#",
+    "status": "active",
+    "activity": "Updates daily",
+    "enabled": true
+  },
+  {
+    "id": "confighub-telegram",
+    "name": "ConfigHub Updates",
+    "description": "Fastest config drops on Telegram",
+    "platform": "telegram",
+    "size": "500 – 1K members",
+    "pic": "pics/tgch.jpg",
+    "href": "#",
+    "status": "active",
+    "activity": "Active",
+    "enabled": true
+  },
+  {
+    "id": "confighub-youtube",
+    "name": "ConfigHub Tutorials",
+    "description": "Weekly VPN tutorial videos",
+    "platform": "youtube",
+    "size": "100 – 500 members",
+    "pic": "pics/ytch.jpg",
+    "href": "#",
+    "status": "active",
+    "activity": "Videos weekly",
+    "enabled": true
+  },
+  {
+    "id": "confighub-tiktok",
+    "name": "ConfigHub Shorts",
+    "description": "Short-form VPN tips and tricks",
+    "platform": "tiktok",
+    "size": "100 – 500 members",
+    "pic": "pics/tkch.jpg",
+    "href": "#",
+    "status": "active",
+    "activity": "Weekly uploads",
+    "enabled": false
+  }
+]
