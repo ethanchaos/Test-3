@@ -16,7 +16,7 @@
     "id": "req-1776219575775",
     "name": "Gg",
     "platform": "tiktok",
-    "size": "500 ÃÂ¢ÃÂÃÂ 1K",
+    "size": "500 ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ 1K",
     "pic": "pics/1776219570186-1000169975.jpg",
     "href": "ccf",
     "status": "active",
@@ -28,7 +28,7 @@
     "id": "req-1776219665386",
     "name": "Chaoshub",
     "platform": "tiktok",
-    "size": "500 Ã¢ÂÂ 1K",
+    "size": "500 ÃÂ¢ÃÂÃÂ 1K",
     "pic": "pics/1776219661366-1000169974.jpg",
     "href": "rff",
     "status": "active",
@@ -40,7 +40,7 @@
     "id": "req-1776219727689",
     "name": "Ffff",
     "platform": "twitter",
-    "size": "100 â 500",
+    "size": "100 Ã¢ÂÂ 500",
     "pic": "pics/1776219723386-1000169974.jpg",
     "href": "dddf",
     "status": "pending",
@@ -59,5 +59,17 @@
     "activity": "",
     "enabled": false,
     "submittedAt": "2026-04-15T03:50:42.188Z"
+  },
+  {
+    "id": "req-1776267641293",
+    "name": "Ccc",
+    "platform": "facebook",
+    "size": "0 - 100",
+    "pic": "pics/1776267633213-1000180282.jpeg",
+    "href": "vvhh",
+    "status": "pending",
+    "activity": "",
+    "enabled": false,
+    "submittedAt": "2026-04-15T15:40:41.293Z"
   }
 ]
