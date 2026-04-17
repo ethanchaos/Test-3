@@ -1,5 +1,12 @@
 [
   {
+    "name": " MTN 15MB  1",
+    "vpn": "HTTP Injector",
+    "filename": "_MTN 15MB__1.ehi",
+    "date": "17 Apr 2026",
+    "config_id": "httpinjector"
+  },
+  {
     "name": " MTN 50MB CHAII  041842 1",
     "vpn": "HA Tunnel",
     "filename": "_MTN 50MB CHAII__041842_1.hat",
