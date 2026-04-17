@@ -1,5 +1,12 @@
 [
   {
+    "name": "  MTN 600MB PHARAGON  ",
+    "vpn": "TLS Tunnel",
+    "filename": "__MTN 600MB_PHARAGON__.tls",
+    "date": "17 Apr 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "300 mb per day mtn 1",
     "vpn": "HA Tunnel",
     "filename": "300 mb per day mtn_1.hat",
