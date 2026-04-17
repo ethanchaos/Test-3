@@ -1,0 +1,26 @@
+[
+  {
+    "id": 6,
+    "title": "🎉 New Configs Added",
+    "message": "Fresh VPN configurations have been uploaded. Tap to explore the latest additions in the config explorer.",
+    "link": "https://ethanchaos.srcnexus.app/imported_project_4/exp",
+    "date": "2026-04-12",
+    "priority": "high"
+  },
+  {
+    "id": 7,
+    "title": "App Update Available",
+    "message": "ConfigHub v1.1 is out with a new uploader UI and faster config loading. Check the updates page for details.",
+    "link": "https://ethanchaos.srcnexus.app/imported_project_4/updates.html",
+    "date": "2026-04-11",
+    "priority": "high"
+  },
+  {
+    "id": 8,
+    "title": "New partnership coming",
+    "message": "Three new community config packs have been approved. Visit the Community page to download them.",
+    "link": "google.com",
+    "date": "2026-04-10",
+    "priority": "high"
+  }
+]
