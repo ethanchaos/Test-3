@@ -1,0 +1,73 @@
+{
+  "navDropdown": [
+    {
+      "label": "Home",
+      "href": "index.html",
+      "icon": "fas fa-house"
+    },
+    {
+      "label": "Uploader",
+      "href": "uploader.html",
+      "icon": "fas fa-cloud-upload-alt",
+      "external": false
+    },
+    {
+      "label": "WhatsApp Channel",
+      "href": "https://whatsapp.com/channel/0029VbAL2mRC6ZvhCR8jjI0G",
+      "icon": "fab fa-whatsapp",
+      "external": true
+    },
+    {
+      "label": "TikTok",
+      "href": "https://www.tiktok.com/@ethanchaos",
+      "icon": "fab fa-tiktok",
+      "external": true
+    },
+    {
+      "label": "Contact Dav",
+      "href": "https://t.me/EthanChaoss",
+      "icon": "fab fa-telegram",
+      "external": true
+    }
+  ],
+  "bottomNav": [
+    {
+      "id": "home",
+      "label": "Home",
+      "href": "index.html",
+      "icon": "fas fa-home",
+      "active": true,
+      "type": "regular"
+    },
+    {
+      "id": "news",
+      "label": "News",
+      "href": "News.html",
+      "icon": "fas fa-newspaper",
+      "type": "regular"
+    },
+    {
+      "id": "upload",
+      "label": "Upload",
+      "href": "uploader.html",
+      "icon": "fas fa-arrow-up",
+      "type": "fab"
+    },
+    {
+      "id": "apps",
+      "label": "Apps",
+      "href": "apps.html",
+      "icon": "fas fa-mobile-alt",
+      "external": true,
+      "type": "regular"
+    },
+    {
+      "id": "community",
+      "label": "Community",
+      "href": "community.html",
+      "external": true,
+      "icon": "fas fa-users",
+      "type": "regular"
+    }
+  ]
+}

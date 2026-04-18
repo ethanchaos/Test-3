@@ -1,0 +1,10 @@
+{
+  "_comment": "ConfigHub addonlinks.json — JSON addon registry. Switch ADDON_SOURCE to 'json' in mainactivity.js to use this file instead of the inline list.",
+  "addons": [
+    {
+      "id":      "loader",
+      "src":     "loader.js",
+      "enabled": true 
+    }
+  ]
+}

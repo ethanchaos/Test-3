@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Download VPN apps for Android - ConfigHub App Gallery">
+    <meta name="keywords" content="VPN apps, download VPN, HTTP Custom, HA Tunnel, free VPN apps">
+    <title>ConfigHub - App Gallery</title>
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="apps.css">
+    
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GL0YEB7LF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GL0YEB7LF6');
+</script>
+</head>
+<body>
+
+    <!-- ── Header ── -->
+    <header id="mainHeader">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <div class="logo-text">Confighub</div>
+            </a>
+            <div class="nav-right">
+                <button class="search-icon-btn" id="searchIconBtn" aria-label="Search apps">
+                    <i class="fas fa-search"></i>
+                </button>
+            <div class="nav-container">
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
+                </button>
+        <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="index.html"><i class="fas fa-house"></i> Home</a>
+                    <a href="uploader.html/"><i class="fas fa-cloud-upload-alt"></i> Uploader</a>
+                    <a href="https://whatsapp.com/channel/0029VbAL2mRC6ZvhCR8jjI0G" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a>
+                    <a href="https://www.tiktok.com/@ethanchaos" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+                    <a href="https://t.me/EthanChaoss" target="_blank"><i class="fab fa-telegram"></i> Contact Dav</a>
+                </div>
+            </div> <!-- /.nav-container -->
+            </div> <!-- /.nav-right -->
+        </nav>
+    </header>
+
+    <!-- ── Search Overlay ── -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-backdrop" id="searchBackdrop"></div>
+        <div class="search-panel" id="searchPanel">
+            <div class="search-input-row">
+                <i class="fas fa-search search-input-icon"></i>
+                <input
+                    type="text"
+                    id="searchInput"
+                    class="search-input"
+                    placeholder="Search apps…"
+                    autocomplete="off"
+                    spellcheck="false"
+                >
+                <button class="search-close-btn" id="searchCloseBtn" aria-label="Close search">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+            <div class="search-empty" id="searchEmpty">
+                <i class="fas fa-ghost"></i>
+                <p>No apps found</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Hero ── -->
+    <section class="post-hero">
+        <h1>App Gallery</h1>
+        <p>Download VPN apps directly to your device</p>
+    </section>
+
+    <!-- ── App list (populated by apps.js) ── -->
+    <div class="container">
+        <h2 class="cards-title">Available Apps</h2>
+        <div class="apps-list" id="appsList">
+            <!-- cards injected here by apps.js -->
+        </div>
+    </div>
+
+    <!-- ── Footer ── -->
+    <div class="footer">
+        <p>ConfigHub &copy; 2025 | VPN App Gallery</p>
+        <p style="font-size:0.7rem;margin-top:5px;">All apps are sourced from official stores</p>
+    </div>
+
+ 
+      <!-- Bottom Navigation -->
+    <div class="bottom-nav-wrapper">
+        <nav class="bottom-nav" id="bottomNav">
+            <a href="index.html" class="bottom-nav-item " data-nav="home">
+                <div class="nav-icon-wrap"><i class="fas fa-home"></i></div>
+                <span>Home</span>
+            </a>
+            <a href="News.html" class="bottom-nav-item" data-nav="news">
+                <div class="nav-icon-wrap"><i class="fas fa-newspaper"></i></div>
+                <span>News</span>
+            </a>
+            <a href="uploader.html" class="bottom-nav-item bottom-nav-upload" data-nav="upload">
+                <div class="upload-fab"><i class="fas fa-arrow-up"></i></div>
+                <span>Upload</span>
+            </a>
+            <a href="apps.html" target="_blank" class="bottom-nav-item active" data-nav="apps">
+                <div class="nav-icon-wrap"><i class="fas fa-mobile-alt"></i></div>
+                <span>Apps</span>
+            </a>
+            <a href="community.html" target="_blank" class="bottom-nav-item" data-nav="community">
+                <div class="nav-icon-wrap"><i class="fas fa-users"></i></div>
+                <span>Community</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- ── Logic ── -->
+    <script src="apps.js"></script>
+
+</body>
+</html>

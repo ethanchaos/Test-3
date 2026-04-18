@@ -1,0 +1,66 @@
+{
+  "topStory": {
+    "id": "top-001",
+    "category": "system",
+    "title": "Major Platform Upgrade",
+    "description": "Loading speed improved significantly and multiple bugs squashed across the platform. Everything runs smoother and more stable than before.",
+    "date": "2026-03-28",
+    "link": null
+  },
+  "updates": [
+    {
+      "id": "upd-001",
+      "category": "vpn",
+      "title": "New HA Tunnel Config Released",
+      "description": "Working config added with better connection stability for users on congested networks.",
+      "date": "2026-03-27",
+      "isNew": true,
+      "link": "https://yoursite.com/ha-tunnel"
+    },
+    {
+      "id": "upd-002",
+      "category": "scanner",
+      "title": "Scanner Engine Improved",
+      "description": "Faster scanning with reduced delay and better accuracy across all network types.",
+      "date": "2026-03-26",
+      "isNew": true,
+      "link": null
+    },
+    {
+      "id": "upd-003",
+      "category": "tools",
+      "title": "New Utility Tool Added",
+      "description": "Quick system check and diagnostic tool now available under the Tools section.",
+      "date": "2026-03-25",
+      "isNew": false,
+      "link": "https://yoursite.com/tools"
+    },
+    {
+      "id": "upd-004",
+      "category": "hotfix",
+      "title": "Login Hotfix Deployed",
+      "description": "Fixed login failures for some users and resolved session timeout bugs.",
+      "date": "2026-03-24",
+      "isNew": false,
+      "link": null
+    },
+    {
+      "id": "upd-005",
+      "category": "vpn",
+      "title": "HTTP Injector Profile Updated",
+      "description": "Latest profile for HTTP Injector updated to match current server endpoints.",
+      "date": "2026-03-23",
+      "isNew": false,
+      "link": "https://yoursite.com/http-injector"
+    },
+    {
+      "id": "upd-006",
+      "category": "system",
+      "title": "Server Maintenance Complete",
+      "description": "Scheduled maintenance completed. All services are back online at full speed.",
+      "date": "2026-03-22",
+      "isNew": false,
+      "link": null
+    }
+  ]
+}

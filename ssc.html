@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Download working VPN configurations for all supported apps">
+    <meta name="keywords" content="VPN configs, free VPN, VPN files, HTTP Custom, TLS Tunnel, HA Tunnel, Lets VPN GO">
+    <title>Confighub – VPN Config Downloader</title>
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GL0YEB7LF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GL0YEB7LF6');
+</script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="mainHeader">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <div class="logo-text">Confighub</div>
+            </a>
+            <div class="nav-container">
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="index.html"><i class="fas fa-house"></i> Home</a>
+                     <a href="uploader.html"><i class="fas fa-cloud-upload-alt"></i> Uploader</a>    
+                    <a href="https://whatsapp.com/channel/0029VbAL2mRC6ZvhCR8jjI0G" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a>
+                    <a href="https://www.tiktok.com/@ethanchaos" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+                    <a href="https://t.me/EthanChaoss" target="_blank"><i class="fab fa-telegram"></i> Contact Dav</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Content -->
+    <section class="content-section">
+        <!-- Main Content -->
+        <div class="main-container">
+            <!-- Page Header -->
+            <div class="section-header">
+                <h1> SSH Custom Configurations</h1>
+                <p>Download working SSH Custom configuration files</p>
+            </div>
+            
+            <div class="loading-spinner" id="loadingSpinner">
+                <i class="fas fa-spinner"></i>
+            </div>
+            
+            <div class="empty-state hidden" id="emptyState">
+                <i class="fas fa-folder-open"></i>
+                <h3>No SSH Custom files available</h3>
+                <p>Check back later for SSH Custom configurations or contact the administrator if you believe this is an error.</p>
+            </div>
+
+            <div class="error-state hidden" id="errorState">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Error Loading Files</h3>
+                <p>There was a problem loading the configuration files. Please try refreshing the page or check back later.</p>
+                <button id="retryButton" style="margin-top: 1rem; background: var(--accent-blue); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">
+                    Try Again
+                </button>
+            </div>
+
+            <section class="files-section">
+                <div class="config-list hidden" id="configList">
+                    <!-- Files will be inserted here -->
+                </div>
+            </section>
+
+        </div>
+    </section>
+
+   
+
+   <!-- Bottom Navigation -->
+    <div class="bottom-nav-wrapper">
+        <nav class="bottom-nav" id="bottomNav">
+            <a href="index.html" class="bottom-nav-item active" data-nav="home">
+                <div class="nav-icon-wrap"><i class="fas fa-home"></i></div>
+                <span>Home</span>
+            </a>
+            <a href="News.html" class="bottom-nav-item" data-nav="news">
+                <div class="nav-icon-wrap"><i class="fas fa-newspaper"></i></div>
+                <span>News</span>
+            </a>
+            <a href="uploader.html" class="bottom-nav-item bottom-nav-upload" data-nav="upload">
+                <div class="upload-fab"><i class="fas fa-arrow-up"></i></div>
+                <span>Upload</span>
+            </a>
+            <a href="apps.html" target="_blank" class="bottom-nav-item" data-nav="apps">
+                <div class="nav-icon-wrap"><i class="fas fa-mobile-alt"></i></div>
+                <span>Apps</span>
+            </a>
+            <a href="community.html" target="_blank" class="bottom-nav-item" data-nav="community">
+                <div class="nav-icon-wrap"><i class="fas fa-users"></i></div>
+                <span>Community</span>
+            </a>
+        </nav>
+    </div>
+    <!-- JSON source registry (must load first) -->
+    <script src="sources.js"></script>
+
+    <!-- Page filter: HA Tunnel files only -->
+  
+<!-- Page filter: HA Tunnel files only -->
+<script>
+const VPN_SEARCH_TERMS = ['ssc','sshcustom','ssh custom','sshcus'];
+const VPN_DISPLAY_NAME = "SSH Custom";
+const VPN_ICON = "fas fa-lock";
+</script>
+       
+
+    <!-- Shared JS (must come after filter config) -->
+    <script src="app.js"></script>
+
+</body>
+</html>

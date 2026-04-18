@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="monetag" content="e4cb37169b7974dc002901d6469ba1ff">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Confighub - VPN File Uploader</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="uploader.css">
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GL0YEB7LF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GL0YEB7LF6');
+</script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header id="mainHeader">
+    <nav class="navbar">
+      <a class="logo" href="index.html">
+        <i class="fas fa-shield-alt"></i>
+        <div class="logo-text">Confighub</div>
+      </a>
+      <div class="nav-container">
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="dropdown-menu" id="dropdownMenu">
+          <a href="index.html"><i class="fas fa-house"></i> Home</a>
+          <a href="uploader.html"><i class="fas fa-cloud-upload-alt"></i> Uploader</a>
+          <a href="https://whatsapp.com/channel/0029VbAL2mRC6ZvhCR8jjI0G" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a>
+          <a href="https://www.tiktok.com/@ethanchaos" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+          <a href="https://t.me/EthanChaoss" target="_blank"><i class="fab fa-telegram"></i> Contact Dav</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Page Title -->
+  <section class="page-title">
+    <div class="page-title-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+    <h1>VPN File Uploader</h1>
+    <p>Upload and manage VPN configuration files for multiple applications</p>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-container">
+
+    <!-- Upload Section -->
+    <section class="upload-section" id="uploadSection">
+      <div class="section-header">
+        <h2>Upload VPN Files</h2>
+      </div>
+
+      <div class="upload-area" id="uploadArea">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <h3>Drag &amp; Drop VPN Files Here</h3>
+        <p>Supported formats: .dark, .hc, .pcx, .sip, .agn, .v2, .hat, .aro, .stk, .hex, .ziv, .sbr, .ssc, .vhd, .ssh, .rez, .tnl, .ost, .tls, .sut, .ehi, .npv4, .npvt, .ink, .pin, .roy, .conf, .jez</p>
+        <input type="file" id="fileInput" class="file-input" multiple>
+        <div class="button-group">
+          <button class="upload-btn" id="browseBtn">
+            <i class="fas fa-folder-open"></i> Browse Files
+          </button>
+          <button class="upload-btn show-files-btn" id="showFilesBtn">
+            <i class="fas fa-list"></i> Show Supported Files
+          </button>
+        </div>
+      </div>
+
+      <div class="selected-files" id="selectedFiles">
+        <div class="files-empty-state">
+          <i class="fas fa-file-upload"></i>
+          <p>No files selected yet</p>
+        </div>
+      </div>
+
+      <div class="upload-progress" id="uploadProgress">
+        <div class="progress-circle">
+          <svg viewBox="0 0 100 100">
+            <circle class="progress-circle-bg"   cx="50" cy="50" r="45"></circle>
+            <circle class="progress-circle-fill" cx="50" cy="50" r="45"></circle>
+          </svg>
+          <div class="progress-text">0%</div>
+        </div>
+        <div class="upload-status" id="uploadStatus">Uploading files...</div>
+      </div>
+
+      <button class="upload-btn" id="uploadBtn" disabled style="margin-top:1rem;">
+        <i class="fas fa-upload"></i> Upload Files
+      </button>
+    </section>
+
+    <!-- VPN Format Info -->
+    <section class="vpn-info" id="vpnInfo">
+      <h3><i class="fas fa-info-circle"></i> Supported VPN Formats</h3>
+      <div class="vpn-grid" id="vpnGrid"></div>
+    </section>
+
+  </main>
+
+  <!-- Unicode Rename Modal -->
+  <div class="rename-modal" id="renameModal">
+    <div class="rename-modal-content">
+      <div class="rename-modal-header">
+        <h3><i class="fas fa-exclamation-triangle"></i> Rename Files with Unicode/Emojis</h3>
+        <button class="rename-close" id="renameClose">&times;</button>
+      </div>
+      <div class="rename-modal-body">
+        <p>Some files contain Unicode characters or emojis that are not allowed. Please rename these files before uploading. All keyboard characters are allowed, but Unicode characters (like Arabic, Chinese, Cyrillic) and emojis are not supported.</p>
+        <div class="rename-list" id="renameList"></div>
+      </div>
+      <div class="rename-modal-footer">
+        <div class="rename-info">
+          <i class="fas fa-info-circle"></i> Only standard keyboard characters are allowed
+        </div>
+        <div class="rename-actions">
+          <button class="upload-btn rename-cancel-btn" id="renameCancelBtn">
+            <i class="fas fa-times"></i> Cancel Upload
+          </button>
+          <button class="upload-btn rename-apply-btn" id="renameApplyBtn">
+            <i class="fas fa-check"></i> Apply Renames &amp; Upload
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>ConfigHub &copy; 2025 | VPN File Uploader</p>
+    <p style="margin-top:4px;font-size:0.7rem;">All uploads are securely stored</p>
+  </footer>
+
+  <!-- Bottom Navigation (Upload highlighted) -->
+  <div class="bottom-nav-wrapper">
+    <nav class="bottom-nav" id="bottomNav">
+      <a href="index.html" class="bottom-nav-item" data-nav="home">
+        <div class="nav-icon-wrap"><i class="fas fa-home"></i></div>
+        <span>Home</span>
+      </a>
+      <a href="News.html" class="bottom-nav-item" data-nav="news">
+        <div class="nav-icon-wrap"><i class="fas fa-newspaper"></i></div>
+        <span>News</span>
+      </a>
+      <a href="#" class="bottom-nav-item bottom-nav-upload active" data-nav="upload">
+        <div class="upload-fab"><i class="fas fa-arrow-up"></i></div>
+        <span>Upload</span>
+      </a>
+      <a href="apps.html" class="bottom-nav-item" data-nav="apps">
+        <div class="nav-icon-wrap"><i class="fas fa-mobile-alt"></i></div>
+        <span>Apps</span>
+      </a>
+      <a href="community.html" target="_blank"
+         class="bottom-nav-item" data-nav="community">
+        <div class="nav-icon-wrap"><i class="fas fa-users"></i></div>
+        <span>Community</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Scripts: API layer first, then UI logic -->
+    <script src="onNativeFilesSelected.js"></script>
+  <script src="https://magnificent-naiad-0fdac0.netlify.app//uploaderapi.js"></script>
+  <script src="notifwriter.js"></script>   <!-- NEW — must come before uploader.js -->
+
+  <script src="uploader.js"></script>
+
+</body>
+</html>

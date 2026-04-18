@@ -1,0 +1,120 @@
+
+/* ============================================================
+   ConfigHub — loader.css
+   White background, black spinner.
+   Smooth fade+scale on enter and exit.
+   Page-to-page transition handled by loader.js.
+   ============================================================ */
+
+/* ── Overlay ── */
+#ch-loader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+
+  /* Enter: fade + subtle scale-up from slightly below */
+  opacity: 0;
+  transform: scale(1.03);
+  animation: ch-overlay-enter 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Exit state — added by JS */
+#ch-loader-overlay.ch-loader--hidden {
+  animation: ch-overlay-exit 0.75s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  pointer-events: none;
+}
+
+@keyframes ch-overlay-enter {
+  from {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes ch-overlay-exit {
+  0%   { opacity: 1;   transform: translateY(0)    scale(1);    }
+  100% { opacity: 0;   transform: translateY(12px) scale(0.99); }
+}
+
+/* ── Spinning ring — black on white ── */
+.ch-loader-ring {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  /* Entrance: delayed so the overlay fade-in completes first */
+  opacity: 0;
+  animation: ch-ring-appear 0.2s ease 0.25s forwards;
+}
+
+@keyframes ch-ring-appear {
+  to { opacity: 1; }
+}
+
+.ch-loader-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  border: 3.5px solid transparent;
+  border-top-color: #1a1a1a;   /* black ring on white */
+  border-radius: 50%;
+  animation: ch-spin 0.9s cubic-bezier(0.55, 0.15, 0.45, 0.85) infinite;
+}
+
+.ch-loader-ring div:nth-child(1) { animation-delay: -0.45s; }
+.ch-loader-ring div:nth-child(2) { animation-delay: -0.3s;  }
+.ch-loader-ring div:nth-child(3) { animation-delay: -0.15s; }
+.ch-loader-ring div:nth-child(4) { animation-delay: 0s;     }
+
+@keyframes ch-spin {
+  0%   { transform: rotate(0deg);   }
+  100% { transform: rotate(360deg); }
+}
+
+/* ── Page-transition wipe — used on link-click navigation ── */
+#ch-page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 99998;
+  background: #ffffff;
+  pointer-events: none;
+
+  /* Sit hidden, ready to animate */
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#ch-page-transition.ch-pt--active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Body fade-in after navigation ── */
+body.ch-page-enter {
+  animation: ch-body-enter 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes ch-body-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

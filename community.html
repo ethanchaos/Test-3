@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="ConfigHub Community - Join channels and stay updated">
+  <title>ConfigHub - Community</title>
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="community.css">
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GL0YEB7LF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GL0YEB7LF6');
+</script>
+<body>
+
+  <!-- ── Header ── -->
+  <header>
+    <div class="navbar">
+      <a href="index.html" class="logo">
+        <i class="fas fa-shield-alt"></i>
+        <span class="logo-text">ConfigHub</span>
+      </a>
+      <div class="nav-container">
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="dropdown-menu" id="dropdownMenu">
+          <a href="index.html"><i class="fas fa-home"></i> Home</a>
+          <a href="apps.html"><i class="fas fa-mobile-alt"></i> Apps</a>
+          <a href="community.html"><i class="fas fa-users"></i> Community</a>
+          <a href="News.html"><i class="fas fa-newspaper"></i> News</a>
+          <a href="uploader.html" target="_blank"><i class="fas fa-arrow-up"></i> Upload</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Hero ── -->
+  <div class="post-hero">
+    <h1>Community</h1>
+    <p>Join channels &amp; stay connected</p>
+  </div>
+
+  <!-- ── Main Content ── -->
+  <div class="container">
+
+    <div class="section-title">Channels &amp; Groups</div>
+
+    <!-- Cards injected by community.js from communities.json -->
+    <div class="community-list" id="communityList"></div>
+
+    <!-- Request Community Button -->
+    <div class="request-wrap">
+      <button class="request-btn" id="requestBtn" data-open-comm-request>
+        <i class="fas fa-plus-circle"></i>
+        Request a Community
+      </button>
+    </div>
+
+    <!-- Updates injected by community.js from commupdates.json -->
+    <div class="section-title">Updates</div>
+    <div class="updates-list" id="updatesList"></div>
+
+    <div class="footer">
+      <p>ConfigHub &copy; 2025 | Community</p>
+      <p style="font-size:0.7rem;margin-top:5px;">Managed &amp; updated by ConfigHub</p>
+    </div>
+
+  </div><!-- /.container -->
+
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav-wrapper">
+    <nav class="bottom-nav" id="bottomNav">
+      <a href="index.html" class="bottom-nav-item " data-nav="home">
+        <div class="nav-icon-wrap"><i class="fas fa-home"></i></div>
+        <span>Home</span>
+      </a>
+      <a href="News.html" class="bottom-nav-item" data-nav="news">
+        <div class="nav-icon-wrap"><i class="fas fa-newspaper"></i></div>
+        <span>News</span>
+      </a>
+      <a href="uploader.html" class="bottom-nav-item bottom-nav-upload" data-nav="upload">
+        <div class="upload-fab"><i class="fas fa-arrow-up"></i></div>
+        <span>Upload</span>
+      </a>
+      <a href="apps.html" target="_blank" class="bottom-nav-item" data-nav="apps">
+        <div class="nav-icon-wrap"><i class="fas fa-mobile-alt"></i></div>
+        <span>Apps</span>
+      </a>
+      <a href="community.html" target="_blank" class="bottom-nav-item active" data-nav="community">
+        <div class="nav-icon-wrap"><i class="fas fa-users"></i></div>
+        <span>Community</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       COMMUNITY REQUEST MODAL (Bottom Sheet)
+       ════════════════════════════════════════════ -->
+  <div id="commReqOverlay">
+    <div id="commReqModal" role="dialog" aria-modal="true" aria-labelledby="commReqTitle">
+
+      <div class="creq-handle"></div>
+
+      <div class="creq-header">
+        <h2 id="commReqTitle">
+          <i class="fas fa-paper-plane"></i>
+          Request a Community
+        </h2>
+      </div>
+
+      <!-- SUCCESS STATE -->
+      <div id="commReqSuccess">
+        <div class="creq-success-icon"><i class="fas fa-check"></i></div>
+        <h3>Request Submitted!</h3>
+        <p>Your community has been sent for review.</p>
+
+        <!-- Developer contact icons (4 platforms) -->
+        <div class="dev-contact-row">
+          <a href="#" class="dev-contact-btn" data-contact="whatsapp" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+            <span>WhatsApp</span>
+          </a>
+          <a href="https://www.tiktok.com/@ethanchaos" class="dev-contact-btn" data-contact="tiktok" target="_blank">
+            <i class="fab fa-tiktok"></i>
+            <span>TikTok</span>
+          </a>
+          <a href="https://t.me/EthanChaoss" class="dev-contact-btn" data-contact="telegram" target="_blank">
+            <i class="fab fa-telegram"></i>
+            <span>Telegram</span>
+          </a>
+          <a href="#" class="dev-contact-btn" data-contact="facebook" target="_blank">
+            <i class="fab fa-facebook"></i>
+            <span>Facebook</span>
+          </a>
+        </div>
+
+        <div class="dev-note">
+          <i class="fas fa-bolt" style="margin-right:5px;"></i>
+          Contact the dev for faster authentication.
+        </div>
+      </div>
+
+      <!-- FORM STATE -->
+      <div id="commReqForm">
+
+        <div class="creq-section-label">
+          <i class="fas fa-hashtag" style="margin-right:5px;"></i> Community Info
+        </div>
+
+        <div class="creq-body">
+          <div class="creq-field">
+            <label for="creqName">Channel / Group Name <span style="color:#c00">*</span></label>
+            <input id="creqName" type="text" maxlength="80" placeholder="e.g. ConfigHub ZA" autocomplete="off">
+          </div>
+
+          <div class="creq-field">
+            <label>Platform <span style="color:#c00">*</span></label>
+            <input type="hidden" id="creqPlatform" value="">
+            <div class="creq-platforms" id="platPills">
+              <!-- All platforms will be generated dynamically -->
+            </div>
+          </div>
+
+          <div class="creq-field">
+            <label for="creqMembers">Members Range <span style="color:#c00">*</span></label>
+            <select id="creqMembers">
+              <option value="">Select range…</option>
+              <option>0 to 100</option>
+              <option>100 to 500</option>
+              <option>500 to 1K</option>
+              <option>1K to 5K</option>
+              <option>5K to 10K</option>
+              <option>10K to 50k</option>
+            </select>
+          </div>
+
+          <div class="creq-field">
+            <label for="creqLink">Invite / Profile Link <span style="color:#c00">*</span></label>
+            <input id="creqLink" type="url" placeholder="https://…" autocomplete="off">
+          </div>
+        </div>
+
+        <div class="creq-divider"></div>
+
+        <div class="creq-section-label">
+          <i class="fas fa-user" style="margin-right:5px;"></i> Requester Information
+        </div>
+
+        <div class="creq-body">
+          <!-- Conditional fields (shown based on platform) -->
+          <div class="creq-conditional" id="condWhatsapp">
+            <div class="creq-field">
+              <label for="creqWhatsapp">Your WhatsApp Number <span style="color:#c00">*</span></label>
+              <input id="creqWhatsapp" type="tel" placeholder="+27 71 234 5678" autocomplete="off">
+              <div class="input-hint">Include country code (e.g. +27 for South Africa)</div>
+            </div>
+          </div>
+
+          <div class="creq-conditional" id="condFacebook">
+            <div class="creq-field">
+              <label for="creqFbUser">Your Facebook Username <span style="color:#c00">*</span></label>
+              <input id="creqFbUser" type="text" placeholder="your.username" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="creq-conditional" id="condInstagram">
+            <div class="creq-field">
+              <label for="creqIgUser">Your Instagram Username <span style="color:#c00">*</span></label>
+              <input id="creqIgUser" type="text" placeholder="@yourhandle" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="creq-conditional" id="condDiscord">
+            <div class="creq-field">
+              <label for="creqDiscordUser">Your Discord Username <span style="color:#c00">*</span></label>
+              <input id="creqDiscordUser" type="text" placeholder="username#1234" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="creq-conditional" id="condTwitter">
+            <div class="creq-field">
+              <label for="creqTwitterUser">Your Twitter / X Handle <span style="color:#c00">*</span></label>
+              <input id="creqTwitterUser" type="text" placeholder="@yourhandle" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="creq-conditional" id="condGeneric">
+            <div class="creq-field">
+              <label for="creqHandle">Your Handle / Username <span style="color:#c00">*</span></label>
+              <input id="creqHandle" type="text" placeholder="@yourhandle" autocomplete="off">
+            </div>
+          </div>
+
+          <!-- Optional extras -->
+          <div class="creq-field">
+            <label for="creqOptFacebook">Facebook <span class="opt-badge">Optional</span></label>
+            <input id="creqOptFacebook" type="text" placeholder="your.username" autocomplete="off">
+          </div>
+
+          <div class="creq-field">
+            <label for="creqOptTelegram">Telegram <span class="opt-badge">Optional</span></label>
+            <input id="creqOptTelegram" type="text" placeholder="@yourhandle" autocomplete="off">
+          </div>
+        </div>
+
+        <div class="creq-actions">
+          <button id="commReqCancel">Cancel</button>
+          <button id="commReqSubmit">
+            <i class="fas fa-paper-plane"></i> Submit Request
+          </button>
+        </div>
+        <div id="commReqStatus"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://magnificent-naiad-0fdac0.netlify.app//commapi.js"></script>
+  <script src="community.js"></script>
+
+</body>
+</html>

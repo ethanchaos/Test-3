@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ConfigHub — Updates</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="News.css">
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GL0YEB7LF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GL0YEB7LF6');
+</script>
+</head>
+
+<body>
+
+<!-- ── HEADER ── -->
+<header id="mainHeader">
+  <nav class="navbar">
+    <a class="logo" href="index.html">
+      <i class="fas fa-shield-alt"></i>
+      <div class="logo-text">Confighub</div>
+    </a>
+    <div class="nav-container">
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <a href="index.html"><i class="fas fa-house"></i> Home</a>
+        <a href="uploader.html"><i class="fas fa-cloud-upload-alt"></i> Uploader</a>
+        <a href="https://whatsapp.com/channel/0029VbAL2mRC6ZvhCR8jjI0G" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a>
+        <a href="https://www.tiktok.com/@ethanchaos" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+        <a href="https://t.me/EthanChaoss" target="_blank"><i class="fab fa-telegram"></i> Contact Dav</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- ── SUB-HEADER ── -->
+<div class="sub-header">
+  <span class="sub-header-title">Updates</span>
+  <div class="sub-header-right">
+    <button class="saved-toggle" id="savedToggle" onclick="toggleSavedView()">
+      ⊹ Saved <span class="count" id="savedCount">0</span>
+    </button>
+  </div>
+</div>
+
+<!-- ── SEARCH ── -->
+<div class="search-wrap">
+  <input type="text" id="searchInput" placeholder="Search updates...">
+</div>
+
+<!-- ── FILTERS ── -->
+<div class="filters">
+  <button class="filter-btn active" data-cat="all"     onclick="setFilter(this)">All</button>
+  <button class="filter-btn"        data-cat="vpn"     onclick="setFilter(this)">VPN</button>
+  <button class="filter-btn"        data-cat="scanner" onclick="setFilter(this)">Scanner</button>
+  <button class="filter-btn"        data-cat="system"  onclick="setFilter(this)">System</button>
+  <button class="filter-btn"        data-cat="tools"   onclick="setFilter(this)">Tools</button>
+  <button class="filter-btn"        data-cat="hotfix"  onclick="setFilter(this)">Hotfix</button>
+</div>
+
+<!-- ── TOP STORY (populated by JS) ── -->
+<section class="featured" id="featured">
+  <div class="featured-label">★ Top Story</div>
+  <h2 id="featuredTitle"></h2>
+  <p id="featuredDesc"></p>
+  <a class="featured-link" id="featuredLink" href="#" target="_blank">↗ View</a>
+  <div class="featured-footer">
+    <span class="featured-date" id="featuredDate"></span>
+    <span class="tag" id="featuredTag"></span>
+  </div>
+</section>
+
+<!-- ── FEED (populated by JS) ── -->
+<div class="section-label">Recent Updates</div>
+<div class="feed" id="feed"></div>
+
+<!-- ── EMPTY STATE ── -->
+<div class="empty-state" id="emptyState">
+  <div class="icon">◌</div>
+  <p>No updates match your search.</p>
+</div>
+
+<!-- ── FLOATING BACK BUTTON ── -->
+<a class="fab-back" href="index.html" title="Back to Home">
+  <i class="fas fa-arrow-left"></i>
+</a>
+
+     <!-- Bottom Navigation -->
+    <div class="bottom-nav-wrapper">
+        <nav class="bottom-nav" id="bottomNav">
+            <a href="index.html" class="bottom-nav-item" data-nav="home">
+                <div class="nav-icon-wrap"><i class="fas fa-home"></i></div>
+                <span>Home</span>
+            </a>
+            <a href="News.html" class="bottom-nav-item active" data-nav="news">
+                <div class="nav-icon-wrap"><i class="fas fa-newspaper"></i></div>
+                <span>News</span>
+            </a>
+            <a href="uploader.html" class="bottom-nav-item bottom-nav-upload" data-nav="upload">
+                <div class="upload-fab"><i class="fas fa-arrow-up"></i></div>
+                <span>Upload</span>
+            </a>
+            <a href="apps.html" target="_blank" class="bottom-nav-item" data-nav="apps">
+                <div class="nav-icon-wrap"><i class="fas fa-mobile-alt"></i></div>
+                <span>Apps</span>
+            </a>
+            <a href="community.html" target="_blank" class="bottom-nav-item" data-nav="community">
+                <div class="nav-icon-wrap"><i class="fas fa-users"></i></div>
+                <span>Community</span>
+            </a>
+        </nav>
+    </div>
+
+
+<script src="News.js"></script>
+</body>
+</html>
