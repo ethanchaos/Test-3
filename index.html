@@ -1,18 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Media Library</title>
-  <style>
-    body { font-family: Arial, sans-serif; background: #111; color: #fff; text-align: center; }
-    h1 { margin-top: 50px; }
-    a { display: inline-block; margin: 20px; padding: 15px 30px; background: #1e90ff; color: white; text-decoration: none; border-radius: 10px; transition: 0.3s; }
-    a:hover { background: #63a4ff; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Download working VPN configurations for multiple VPN clients">
+    <meta name="keywords" content="VPN configs, HTTP Custom, HA Tunnel, X Tunnel, TLS Tunnel, free VPN">
+    <title>ConfigHub - VPN Configuration Downloader</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-  <h1>Welcome to My Media Library</h1>
-  <a href="audio.html">🎵 Audio Gallery</a>
-  <a href="photos.html">🖼️ Image Gallery</a>
+
+    <!-- ── Header ── -->
+    <header id="mainHeader">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <div class="logo-text">Confighub</div>
+            </a>
+            <div class="nav-container">
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <!-- Populated by main.js from links.json -->
+                <div class="dropdown-menu" id="dropdownMenu"></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ── Hero ── -->
+    <section class="content-section">
+        <section class="post-hero">
+            <h1>VPN Configuration Downloader</h1>
+            <p>Get working configs for all major VPN clients</p>
+        </section>
+
+        <!-- ── Config Cards ── -->
+        <div class="container">
+            <h2 class="cards-title">Available Configurations</h2>
+            <!-- Populated by main.js from cards.json -->
+            <div class="mods-grid" id="modsGrid"></div>
+        </div>
+    </section>
+
+    <div class="footer">
+        <p>ConfigHub &copy; 2024 | VPN Configuration Platform</p>
+        <p style="font-size:0.7rem;margin-top:5px;">All configurations are tested and working</p>
+    </div>
+
+    <!-- ── Bottom Navigation Bar ── -->
+    <div class="bottom-nav-wrapper">
+        <!-- Populated by main.js from links.json -->
+        <nav class="bottom-nav" id="bottomNav"></nav>
+    </div>
+
+    <script src="main.js"></script>
+
 </body>
 </html>
