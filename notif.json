@@ -1,6 +1,6 @@
 [
   {
-    "id": 14,
+    "id": 15,
     "title": "🆕 New HA Tunnel Config Added",
     "message": "A fresh HA Tunnel configuration has just been added. Tap to download it now.",
     "link": "https://ethanchaos.srcnexus.app/imported_project_4/hat.html",
@@ -8,8 +8,16 @@
     "priority": "high"
   },
   {
+    "id": 14,
+    "title": "ð New HA Tunnel Config Added",
+    "message": "A fresh HA Tunnel configuration has just been added. Tap to download it now.",
+    "link": "https://ethanchaos.srcnexus.app/imported_project_4/hat.html",
+    "date": "2026-04-18",
+    "priority": "high"
+  },
+  {
     "id": 13,
-    "title": "ð New TLS Tunnel Config Added",
+    "title": "Ã°ÂÂÂ New TLS Tunnel Config Added",
     "message": "A fresh TLS Tunnel configuration has just been added. Tap to download it now.",
     "link": "https://ethanchaos.srcnexus.app/imported_project_4/tls.html",
     "date": "2026-04-18",
@@ -17,7 +25,7 @@
   },
   {
     "id": 12,
-    "title": "ð¦ 3 New HTTP Injector Configs Added",
+    "title": "Ã°ÂÂÂ¦ 3 New HTTP Injector Configs Added",
     "message": "3 new HTTP Injector configurations have just been uploaded. Tap to browse and download them.",
     "link": "https://ethanchaos.srcnexus.app/imported_project_4/ehi.html",
     "date": "2026-04-17",
@@ -25,7 +33,7 @@
   },
   {
     "id": 11,
-    "title": "ð New HTTP Injector Config Added",
+    "title": "Ã°ÂÂÂ New HTTP Injector Config Added",
     "message": "A fresh HTTP Injector configuration has just been added. Tap to download it now.",
     "link": "https://ethanchaos.srcnexus.app/imported_project_4/ehi.html",
     "date": "2026-04-17",
@@ -33,14 +41,6 @@
   },
   {
     "id": 10,
-    "title": "ð New HA Tunnel Config Added",
-    "message": "A fresh HA Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://ethanchaos.srcnexus.app/imported_project_4/hat.html",
-    "date": "2026-04-17",
-    "priority": "high"
-  },
-  {
-    "id": 9,
     "title": "Ã°ÂÂÂ New HA Tunnel Config Added",
     "message": "A fresh HA Tunnel configuration has just been added. Tap to download it now.",
     "link": "https://ethanchaos.srcnexus.app/imported_project_4/hat.html",
@@ -48,8 +48,16 @@
     "priority": "high"
   },
   {
+    "id": 9,
+    "title": "ÃÂ°ÃÂÃÂÃÂ New HA Tunnel Config Added",
+    "message": "A fresh HA Tunnel configuration has just been added. Tap to download it now.",
+    "link": "https://ethanchaos.srcnexus.app/imported_project_4/hat.html",
+    "date": "2026-04-17",
+    "priority": "high"
+  },
+  {
     "id": 6,
-    "title": "ÃÂ°ÃÂÃÂÃÂ New Configs Added",
+    "title": "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ New Configs Added",
     "message": "Fresh VPN configurations have been uploaded. Tap to explore the latest additions in the config explorer.",
     "link": "https://ethanchaos.srcnexus.app/imported_project_4/exp",
     "date": "2026-04-12",
