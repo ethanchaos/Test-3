@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN SA 300MBS VANDAL.   ",
+    "vpn": "NPV Tunnel",
+    "filename": "MTN_SA 300MBS VANDAL. __.npvt",
+    "date": "19 Apr 2026",
+    "config_id": "npvtunnel"
+  },
+  {
     "name": "GOAT   FLASH POINT¶¥",
     "vpn": "HA Tunnel",
     "filename": "GOAT _ FLASH POINT¶¥.hat",
