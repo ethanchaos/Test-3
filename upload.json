@@ -1,5 +1,12 @@
 [
   {
+    "name": "  OTC 300MB  ",
+    "vpn": "HTTP Custom",
+    "filename": "__OTC 300MB__.hc",
+    "date": "19 Apr 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "300 mb per day mtn 1 1",
     "vpn": "HA Tunnel",
     "filename": "300 mb per day mtn_1_1.hat",
