@@ -1,5 +1,12 @@
 [
   {
+    "name": "Mosh",
+    "vpn": "HTTP Custom",
+    "filename": "Mosh.hc",
+    "date": "19 Apr 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": " 3GB-MTN MOSHA  ",
     "vpn": "HA Tunnel",
     "filename": "_3GB-MTN MOSHA__.hat",
