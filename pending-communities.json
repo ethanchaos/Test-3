@@ -118,5 +118,20 @@
       "whatsapp": "+27 72 322 5958"
     },
     "submittedAt": "2026-04-19T14:48:41.742Z"
+  },
+  {
+    "id": "req-1776611754248",
+    "name": "Uluru Net",
+    "platform": "telegram",
+    "size": "100 to 500",
+    "pic": "",
+    "href": "https://t.me/uluru_net",
+    "status": "pending",
+    "activity": "",
+    "enabled": false,
+    "requester": {
+      "handle": "@Uluru_sight"
+    },
+    "submittedAt": "2026-04-19T15:15:54.251Z"
   }
 ]
