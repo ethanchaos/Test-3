@@ -70,16 +70,16 @@
     "config_id": "zivpntunnel"
   },
   {
-    "name": "AllNET-UDP VPS²",
+    "name": "AllNET-UDP VPSÂ²",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPS².ziv",
+    "filename": "AllNET-UDP VPSÂ².ziv",
     "date": "20 Apr 2026",
     "config_id": "zivpntunnel"
   },
   {
-    "name": "AllNET-UDP VPS¹",
+    "name": "AllNET-UDP VPSÂ¹",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPS¹.ziv",
+    "filename": "AllNET-UDP VPSÂ¹.ziv",
     "date": "20 Apr 2026",
     "config_id": "zivpntunnel"
   },
@@ -161,9 +161,9 @@
     "config_id": "httpcustom"
   },
   {
-    "name": "GOAT   FLASH POINT¶¥",
+    "name": "GOAT   FLASH POINTÂ¶Â¥",
     "vpn": "HA Tunnel",
-    "filename": "GOAT _ FLASH POINT¶¥.hat",
+    "filename": "GOAT _ FLASH POINTÂ¶Â¥.hat",
     "date": "20 Apr 2026",
     "config_id": "hatunnel"
   },
@@ -217,23 +217,23 @@
     "config_id": "tlstunnel"
   },
   {
-    "name": "Uluru × MTN",
+    "name": "Uluru Ã MTN",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru × MTN.npvt",
+    "filename": "Uluru Ã MTN.npvt",
     "date": "20 Apr 2026",
     "config_id": "npvtunnel"
   },
   {
-    "name": "Uluru × MTN 1",
+    "name": "Uluru Ã MTN 1",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru × MTN_1.npvt",
+    "filename": "Uluru Ã MTN_1.npvt",
     "date": "20 Apr 2026",
     "config_id": "npvtunnel"
   },
   {
-    "name": "Uluru × MTN 2",
+    "name": "Uluru Ã MTN 2",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru × MTN_2.npvt",
+    "filename": "Uluru Ã MTN_2.npvt",
     "date": "20 Apr 2026",
     "config_id": "npvtunnel"
   },
@@ -698,76 +698,6 @@
     "filename": "MTN 50MB CHAII.hat",
     "date": "11 Apr 2026",
     "config_id": "hatunnel"
-  },
-  {
-    "name": "version521 1 1 1 1",
-    "vpn": "Lets VPN GO",
-    "filename": "version521_1_1_1_1.js",
-    "date": "23 Mar 2026",
-    "config_id": "letsvpngo"
-  },
-  {
-    "name": "version521 1 1 1",
-    "vpn": "Lets VPN GO",
-    "filename": "version521_1_1_1.js",
-    "date": "12 Mar 2026",
-    "config_id": "letsvpngo"
-  },
-  {
-    "name": "version541 1",
-    "vpn": "Lets VPN GO",
-    "filename": "version541_1.js",
-    "date": "12 Mar 2026",
-    "config_id": "letsvpngo"
-  },
-  {
-    "name": "version536 1 2",
-    "vpn": "Lets VPN GO",
-    "filename": "version536_1_2.js",
-    "date": "12 Mar 2026",
-    "config_id": "letsvpngo"
-  },
-  {
-    "name": "version539 2",
-    "vpn": "Lets VPN GO",
-    "filename": "version539_2.js",
-    "date": "12 Mar 2026",
-    "config_id": "letsvpngo"
-  },
-  {
-    "name": "version536 1 1",
-    "vpn": "Lets VPN GO",
-    "filename": "version536_1_1.js",
-    "date": "12 Mar 2026",
-    "config_id": "letsvpngo"
-  },
-  {
-    "name": "version539 1",
-    "vpn": "Lets VPN GO",
-    "filename": "version539_1.js",
-    "date": "12 Mar 2026",
-    "config_id": "letsvpngo"
-  },
-  {
-    "name": "version519 1 1 1 1 2 2",
-    "vpn": "Lets VPN GO",
-    "filename": "version519_1_1_1_1_2_2.js",
-    "date": "12 Mar 2026",
-    "config_id": "letsvpngo"
-  },
-  {
-    "name": "version519 1 1 1 1 2 1",
-    "vpn": "Lets VPN GO",
-    "filename": "version519_1_1_1_1_2_1.js",
-    "date": "12 Mar 2026",
-    "config_id": "letsvpngo"
-  },
-  {
-    "name": "version540 1",
-    "vpn": "Lets VPN GO",
-    "filename": "version540_1.js",
-    "date": "12 Mar 2026",
-    "config_id": "letsvpngo"
   },
   {
     "name": "THE BOY 166   MTN 500MB [premium] 1 1 1",
