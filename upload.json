@@ -70,16 +70,16 @@
     "config_id": "zivpntunnel"
   },
   {
-    "name": "AllNET-UDP VPSÂ²",
+    "name": "AllNET-UDP VPSÃÂ²",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPSÂ².ziv",
+    "filename": "AllNET-UDP VPSÃÂ².ziv",
     "date": "20 Apr 2026",
     "config_id": "zivpntunnel"
   },
   {
-    "name": "AllNET-UDP VPSÂ¹",
+    "name": "AllNET-UDP VPSÃÂ¹",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPSÂ¹.ziv",
+    "filename": "AllNET-UDP VPSÃÂ¹.ziv",
     "date": "20 Apr 2026",
     "config_id": "zivpntunnel"
   },
@@ -161,9 +161,9 @@
     "config_id": "httpcustom"
   },
   {
-    "name": "GOAT   FLASH POINTÂ¶Â¥",
+    "name": "GOAT   FLASH POINTÃÂ¶ÃÂ¥",
     "vpn": "HA Tunnel",
-    "filename": "GOAT _ FLASH POINTÂ¶Â¥.hat",
+    "filename": "GOAT _ FLASH POINTÃÂ¶ÃÂ¥.hat",
     "date": "20 Apr 2026",
     "config_id": "hatunnel"
   },
@@ -203,13 +203,6 @@
     "config_id": "hatunnel"
   },
   {
-    "name": "MTN 1GB BY PANTHER 1",
-    "vpn": "HA Tunnel",
-    "filename": "MTN 1GB BY PANTHER_1.hat",
-    "date": "20 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
     "name": "MTN 300MB DAILY   ",
     "vpn": "TLS Tunnel",
     "filename": "MTN 300MB DAILY __.tls",
@@ -217,23 +210,23 @@
     "config_id": "tlstunnel"
   },
   {
-    "name": "Uluru Ã MTN",
+    "name": "Uluru ÃÂ MTN",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru Ã MTN.npvt",
+    "filename": "Uluru ÃÂ MTN.npvt",
     "date": "20 Apr 2026",
     "config_id": "npvtunnel"
   },
   {
-    "name": "Uluru Ã MTN 1",
+    "name": "Uluru ÃÂ MTN 1",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru Ã MTN_1.npvt",
+    "filename": "Uluru ÃÂ MTN_1.npvt",
     "date": "20 Apr 2026",
     "config_id": "npvtunnel"
   },
   {
-    "name": "Uluru Ã MTN 2",
+    "name": "Uluru ÃÂ MTN 2",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru Ã MTN_2.npvt",
+    "filename": "Uluru ÃÂ MTN_2.npvt",
     "date": "20 Apr 2026",
     "config_id": "npvtunnel"
   },
@@ -413,13 +406,6 @@
     "config_id": "httpcustom"
   },
   {
-    "name": "[  ]300MB- MTN",
-    "vpn": "HA Tunnel",
-    "filename": "[__]300MB- MTN.hat",
-    "date": "19 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
     "name": "MTN SA 300MBS VANDAL.   ",
     "vpn": "NPV Tunnel",
     "filename": "MTN_SA 300MBS VANDAL. __.npvt",
@@ -469,32 +455,11 @@
     "config_id": "httpcustom"
   },
   {
-    "name": "300 mb per day mtn 1 1",
-    "vpn": "HA Tunnel",
-    "filename": "300 mb per day mtn_1_1.hat",
-    "date": "19 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
     "name": "SHE DID IT AGAIN FAST UDP UK",
     "vpn": "ZIV PN Tunnel",
     "filename": "SHE DID IT AGAIN FAST UDP UK.ziv",
     "date": "19 Apr 2026",
     "config_id": "zivpntunnel"
-  },
-  {
-    "name": " MTN 50MB CHAII  041842 2",
-    "vpn": "HA Tunnel",
-    "filename": "_MTN 50MB CHAII__041842_2.hat",
-    "date": "18 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": "1GB MONTHLY LOCATION BASED BY TITANIC NINJA (1)-1",
-    "vpn": "HA Tunnel",
-    "filename": "1GB MONTHLY LOCATION BASED BY TITANIC NINJA (1)-1.hat",
-    "date": "18 Apr 2026",
-    "config_id": "hatunnel"
   },
   {
     "name": "  MTN 600MB PHARAGON   1",
@@ -553,13 +518,6 @@
     "config_id": "hatunnel"
   },
   {
-    "name": "50 MB Last push   2",
-    "vpn": "HA Tunnel",
-    "filename": "50 MB Last push __2.hat",
-    "date": "17 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
     "name": " MTN 15MB ",
     "vpn": "HTTP Injector",
     "filename": "_MTN 15MB_.ehi",
@@ -584,20 +542,6 @@
     "name": "300 mb per day mtn 1",
     "vpn": "HA Tunnel",
     "filename": "300 mb per day mtn_1.hat",
-    "date": "13 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": "1GB MONTHLY LOCATION BASED BY TITANIC NINJA (1)",
-    "vpn": "HA Tunnel",
-    "filename": "1GB MONTHLY LOCATION BASED BY TITANIC NINJA (1).hat",
-    "date": "13 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": " MTN 50MB CHAII  041842",
-    "vpn": "HA Tunnel",
-    "filename": "_MTN 50MB CHAII__041842.hat",
     "date": "13 Apr 2026",
     "config_id": "hatunnel"
   },
@@ -658,13 +602,6 @@
     "config_id": "httpcustom"
   },
   {
-    "name": "unknown mtn plug ....",
-    "vpn": "HA Tunnel",
-    "filename": "unknown mtn plug .....hat",
-    "date": "11 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
     "name": "300 mb per day mtn",
     "vpn": "HA Tunnel",
     "filename": "300 mb per day mtn.hat",
@@ -672,30 +609,9 @@
     "config_id": "hatunnel"
   },
   {
-    "name": "300 mb per day mtn ",
-    "vpn": "HA Tunnel",
-    "filename": "300 mb per day mtn .hat",
-    "date": "11 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
     "name": "50 MB Last push   1",
     "vpn": "HA Tunnel",
     "filename": "50 MB Last push __1.hat",
-    "date": "11 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": "50 MB Last push  ",
-    "vpn": "HA Tunnel",
-    "filename": "50 MB Last push _.hat",
-    "date": "11 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": "MTN 50MB CHAII",
-    "vpn": "HA Tunnel",
-    "filename": "MTN 50MB CHAII.hat",
     "date": "11 Apr 2026",
     "config_id": "hatunnel"
   },
