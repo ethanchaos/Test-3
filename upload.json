@@ -1,5 +1,12 @@
 [
   {
+    "name": " 3GB-MTN MOSHA  ",
+    "vpn": "HA Tunnel",
+    "filename": "_3GB-MTN MOSHA__.hat",
+    "date": "19 Apr 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "[  ]                         ",
     "vpn": "HTTP Custom",
     "filename": "[__] _______ ___ _________ __.hc",
