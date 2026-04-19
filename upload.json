@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN 300MB DAILY BY PANTHER",
+    "vpn": "HA Tunnel",
+    "filename": "MTN 300MB DAILY BY PANTHER.hat",
+    "date": "19 Apr 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "  OTC 300MB  ",
     "vpn": "HTTP Custom",
     "filename": "__OTC 300MB__.hc",
