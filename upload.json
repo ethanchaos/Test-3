@@ -70,16 +70,16 @@
     "config_id": "zivpntunnel"
   },
   {
-    "name": "AllNET-UDP VPSÃÂ²",
+    "name": "AllNET-UDP VPSÃÂÃÂ²",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPSÃÂ².ziv",
+    "filename": "AllNET-UDP VPSÃÂÃÂ².ziv",
     "date": "20 Apr 2026",
     "config_id": "zivpntunnel"
   },
   {
-    "name": "AllNET-UDP VPSÃÂ¹",
+    "name": "AllNET-UDP VPSÃÂÃÂ¹",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPSÃÂ¹.ziv",
+    "filename": "AllNET-UDP VPSÃÂÃÂ¹.ziv",
     "date": "20 Apr 2026",
     "config_id": "zivpntunnel"
   },
@@ -161,9 +161,9 @@
     "config_id": "httpcustom"
   },
   {
-    "name": "GOAT   FLASH POINTÃÂ¶ÃÂ¥",
+    "name": "GOAT   FLASH POINTÃÂÃÂ¶ÃÂÃÂ¥",
     "vpn": "HA Tunnel",
-    "filename": "GOAT _ FLASH POINTÃÂ¶ÃÂ¥.hat",
+    "filename": "GOAT _ FLASH POINTÃÂÃÂ¶ÃÂÃÂ¥.hat",
     "date": "20 Apr 2026",
     "config_id": "hatunnel"
   },
@@ -210,23 +210,23 @@
     "config_id": "tlstunnel"
   },
   {
-    "name": "Uluru ÃÂ MTN",
+    "name": "Uluru ÃÂÃÂ MTN",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru ÃÂ MTN.npvt",
+    "filename": "Uluru ÃÂÃÂ MTN.npvt",
     "date": "20 Apr 2026",
     "config_id": "npvtunnel"
   },
   {
-    "name": "Uluru ÃÂ MTN 1",
+    "name": "Uluru ÃÂÃÂ MTN 1",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru ÃÂ MTN_1.npvt",
+    "filename": "Uluru ÃÂÃÂ MTN_1.npvt",
     "date": "20 Apr 2026",
     "config_id": "npvtunnel"
   },
   {
-    "name": "Uluru ÃÂ MTN 2",
+    "name": "Uluru ÃÂÃÂ MTN 2",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru ÃÂ MTN_2.npvt",
+    "filename": "Uluru ÃÂÃÂ MTN_2.npvt",
     "date": "20 Apr 2026",
     "config_id": "npvtunnel"
   },
@@ -546,13 +546,6 @@
     "config_id": "hatunnel"
   },
   {
-    "name": " JUST UDP ",
-    "vpn": "HTTP Custom",
-    "filename": "_JUST UDP_.hc",
-    "date": "12 Apr 2026",
-    "config_id": "httpcustom"
-  },
-  {
     "name": "GODFATHER JASON 300MB   ",
     "vpn": "HA Tunnel",
     "filename": "GODFATHER JASON 300MB __.hat",
@@ -588,20 +581,6 @@
     "config_id": "httpinjector"
   },
   {
-    "name": "MTNSA  100MB DAILY[YOUNG TEE]",
-    "vpn": "HTTP Custom",
-    "filename": "MTNSA__100MB DAILY[YOUNG TEE].hc",
-    "date": "11 Apr 2026",
-    "config_id": "httpcustom"
-  },
-  {
-    "name": "JUST UDP",
-    "vpn": "HTTP Custom",
-    "filename": "JUST UDP.hc",
-    "date": "11 Apr 2026",
-    "config_id": "httpcustom"
-  },
-  {
     "name": "300 mb per day mtn",
     "vpn": "HA Tunnel",
     "filename": "300 mb per day mtn.hat",
@@ -614,12 +593,5 @@
     "filename": "50 MB Last push __1.hat",
     "date": "11 Apr 2026",
     "config_id": "hatunnel"
-  },
-  {
-    "name": "THE BOY 166   MTN 500MB [premium] 1 1 1",
-    "vpn": "HTTP Custom",
-    "filename": "THE BOY_166 _ MTN 500MB_[premium]_1_1_1.hc",
-    "date": "9 Mar 2026",
-    "config_id": "httpcustom"
   }
 ]
