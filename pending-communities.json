@@ -103,5 +103,20 @@
       "whatsapp": "66"
     },
     "submittedAt": "2026-04-19T10:55:11.300Z"
+  },
+  {
+    "id": "req-1776608012869",
+    "name": "DE BLACK PANTHER",
+    "platform": "whatsapp-group",
+    "size": "500 to 1K",
+    "pic": "",
+    "href": "https://chat.whatsapp.com/KSOhusYJRBMJKPsdX4jy2d?mode=gi_t",
+    "status": "pending",
+    "activity": "",
+    "enabled": false,
+    "requester": {
+      "whatsapp": "0731"
+    },
+    "submittedAt": "2026-04-19T14:13:32.869Z"
   }
 ]
