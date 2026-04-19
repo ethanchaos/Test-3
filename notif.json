@@ -1,5 +1,13 @@
 [
   {
+    "id": 23,
+    "title": " New HTTP Custom Config Added",
+    "message": "A fresh HTTP Custom configuration has just been added. Tap to download it now.",
+    "link": "https:\/\/vpnconfighub.netlify.app\/hc.html",
+    "date": "2026-04-19",
+    "priority": "high"
+  },
+  {
     "id": 22,
     "title": " New HA Tunnel Config Added",
     "message": "A fresh HA Tunnel configuration has just been added. Tap to download it now.",
