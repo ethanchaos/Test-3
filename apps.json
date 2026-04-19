@@ -1,4 +1,15 @@
 [
+{
+    "id": "Config-Hub",
+    "name": "Config Hub",
+    "desc": "Daily updates •vpn  File downloader ",
+    "rating": 4.6,
+    "size": "20 MB",
+    "version": "1",
+    "icon": "pics/Chaos.jpg",
+    "url": "vpnconfighubapp.html"
+  },
+  
   {
     "id": "http-custom",
     "name": "HTTP Custom",
