@@ -7,7 +7,7 @@
 // Load order in HTML:  uploaderapi.js  →  notifwriter.js  →  uploader.js
 
 // ── Site base URL (Netlify deploy) ──
-const SITE_BASE = "https://ethanchaos.srcnexus.app/imported_project_4";
+const SITE_BASE = "https://vpnconfighub.netlify.app";
 
 // ── GitHub file paths ──
 const NOTIF_JSON_PATH    = "notif.json";
@@ -147,10 +147,10 @@ class NotifWriter {
       link  = pageLink(configId);
 
       if (count === 1) {
-        title   = `🆕 New ${name} Config Added`;
+        title   = `New ${name} Config Added`;
         message = `A fresh ${name} configuration has just been added. Tap to download it now.`;
       } else {
-        title   = `📦 ${count} New ${name} Configs Added`;
+        title   = `${count} New ${name} Configs Added`;
         message = `${count} new ${name} configurations have just been uploaded. Tap to browse and download them.`;
       }
 
@@ -162,7 +162,7 @@ class NotifWriter {
     // ────────────────────────────────────────────────
     } else if (vpnCount === 2) {
       const names = entries.map(([id]) => displayName(id));
-      title   = "🆕 New Files Added";
+      title   = "New Files Added";
       message = `New files for ${names[0]} and ${names[1]} have been added recently. Tap to explore them.`;
       link    = `${SITE_BASE}/index.html`;
 
@@ -174,7 +174,7 @@ class NotifWriter {
     // ────────────────────────────────────────────────
     } else if (vpnCount === 3) {
       const names = entries.map(([id]) => displayName(id));
-      title   = "🆕 New Files Added";
+      title   = " New Files Added";
       message = `New files for ${names[0]}, ${names[1]} and ${names[2]} configs have been added. Tap to check them out.`;
       link    = `${SITE_BASE}/index.html`;
 
@@ -185,7 +185,7 @@ class NotifWriter {
     //   Link → main page
     // ────────────────────────────────────────────────
     } else {
-      title   = "🔥 Multiple Config Update";
+      title   = " Multiple Config Update";
       message = `${totalFiles} new configuration files across ${vpnCount} different VPN apps have been uploaded. Visit the site to browse all the latest additions.`;
       link    = `${SITE_BASE}/index.html`;
     }
@@ -260,11 +260,11 @@ class NotifWriter {
         `notif-ref: update to id ${nextId}`
       );
 
-      console.log(`[NotifWriter] ✅ Notification #${nextId} written successfully.`);
+      console.log(`[NotifWriter]  Notification #${nextId} written successfully.`);
 
     } catch (err) {
       // Non-fatal — never break the upload flow
-      console.error("[NotifWriter] ❌ Failed to write notification:", err);
+      console.error("[NotifWriter]  Failed to write notification:", err);
     }
   }
 }
