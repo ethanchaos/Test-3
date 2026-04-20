@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN.CO.ZA ",
+    "vpn": "HA Tunnel",
+    "filename": "MTN.CO.ZA .hat",
+    "date": "20 Apr 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": " CELLC 1GB LOCATION BASE ",
     "vpn": "HTTP Injector",
     "filename": "_CELLC 1GB LOCATION BASE_.ehi",
