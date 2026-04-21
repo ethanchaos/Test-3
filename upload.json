@@ -1,5 +1,12 @@
 [
   {
+    "name": "                300               ",
+    "vpn": "HA Tunnel",
+    "filename": "_______________ 300__ ____ _______.hat",
+    "date": "21 Apr 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "Vodacom jaster",
     "vpn": "HTTP Custom",
     "filename": "Vodacom jaster.hc",
