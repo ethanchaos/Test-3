@@ -1,5 +1,12 @@
 [
   {
+    "name": "Vodacom jaster",
+    "vpn": "HTTP Custom",
+    "filename": "Vodacom jaster.hc",
+    "date": "21 Apr 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "400MB-DAILY  I[ShadowSocks]I ",
     "vpn": "NPV Tunnel",
     "filename": "400MB-DAILY  I[ShadowSocks]I_.npvt",
