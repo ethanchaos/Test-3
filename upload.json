@@ -1,5 +1,12 @@
 [
   {
+    "name": "Themba VPN PLUGS ",
+    "vpn": "HA Tunnel",
+    "filename": "Themba VPN PLUGS .hat",
+    "date": "21 Apr 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "MTN 300 MB V2RAY",
     "vpn": "NPV Tunnel",
     "filename": "MTN_300_MB_V2RAY.npvt",
