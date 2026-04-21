@@ -1,5 +1,12 @@
 [
   {
+    "name": "----VH-GSK MTN 2OOMB-VH----",
+    "vpn": "TLS Tunnel",
+    "filename": "----VH-GSK_MTN_2OOMB-VH----.tls",
+    "date": "21 Apr 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "Benathi   MTN300    ",
     "vpn": "Stark VPN",
     "filename": "Benathi___MTN300____.stk",
