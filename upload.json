@@ -1,5 +1,12 @@
 [
   {
+    "name": "Cell c 1GB location based",
+    "vpn": "HA Tunnel",
+    "filename": "Cell c 1GB location based.hat",
+    "date": "21 Apr 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "300MB SA    1 1",
     "vpn": "TLS Tunnel",
     "filename": "300MB SA ___1_1.tls",
