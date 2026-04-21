@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN 300 MB V2RAY",
+    "vpn": "NPV Tunnel",
+    "filename": "MTN_300_MB_V2RAY.npvt",
+    "date": "21 Apr 2026",
+    "config_id": "npvtunnel"
+  },
+  {
     "name": "--------------- 300------ ",
     "vpn": "HA Tunnel",
     "filename": "---------------_300------_.hat",
