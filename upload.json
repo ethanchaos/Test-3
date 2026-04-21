@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN 300 MB JESTER",
+    "vpn": "HTTP Custom",
+    "filename": "MTN 300 MB JESTER.hc",
+    "date": "21 Apr 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "Cell c 1GB location based",
     "vpn": "HA Tunnel",
     "filename": "Cell c 1GB location based.hat",
