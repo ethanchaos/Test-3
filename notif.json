@@ -1,9 +1,17 @@
 [
   {
+    "id": 41,
+    "title": " New TLS Tunnel Config Added",
+    "message": "A fresh TLS Tunnel configuration has just been added. Tap to download it now.",
+    "link": "https:\/\/vpnconfighub.netlify.app\/tls.html",
+    "date": "2026-04-23",
+    "priority": "high"
+  },
+  {
     "id": 40,
     "title": "New Lets VPN GO Config Added",
     "message": "A fresh Lets VPN GO configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/letsgo.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/letsgo.html",
     "date": "2026-04-22",
     "priority": "high"
   },
@@ -11,7 +19,7 @@
     "id": 39,
     "title": " New HA Tunnel Config Added",
     "message": "A fresh HA Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/hat.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/hat.html",
     "date": "2026-04-22",
     "priority": "high"
   },
@@ -19,7 +27,7 @@
     "id": 38,
     "title": " New Files Added",
     "message": "New files for TLS Tunnel, HA Tunnel and NPV Tunnel configs have been added. Tap to check them out.",
-    "link": "https://vpnconfighub.netlify.app/index.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/index.html",
     "date": "2026-04-22",
     "priority": "high"
   },
@@ -27,7 +35,7 @@
     "id": 37,
     "title": " New HA Tunnel Config Added",
     "message": "A fresh HA Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/hat.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/hat.html",
     "date": "2026-04-22",
     "priority": "high"
   },
@@ -35,7 +43,7 @@
     "id": 36,
     "title": " New NPV Tunnel Config Added",
     "message": "A fresh NPV Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/npvt.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/npvt.html",
     "date": "2026-04-21",
     "priority": "high"
   },
@@ -43,7 +51,7 @@
     "id": 35,
     "title": " New HA Tunnel Config Added",
     "message": "A fresh HA Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/hat.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/hat.html",
     "date": "2026-04-21",
     "priority": "high"
   },
@@ -51,7 +59,7 @@
     "id": 34,
     "title": " New TLS Tunnel Config Added",
     "message": "A fresh TLS Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/tls.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/tls.html",
     "date": "2026-04-21",
     "priority": "high"
   },
@@ -59,7 +67,7 @@
     "id": 33,
     "title": " 2 New Stark VPN Configs Added",
     "message": "2 new Stark VPN configurations have just been uploaded. Tap to browse and download them.",
-    "link": "https://vpnconfighub.netlify.app/stk.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/stk.html",
     "date": "2026-04-21",
     "priority": "high"
   },
@@ -67,7 +75,7 @@
     "id": 32,
     "title": " New HA Tunnel Config Added",
     "message": "A fresh HA Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/hat.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/hat.html",
     "date": "2026-04-21",
     "priority": "high"
   },
@@ -75,7 +83,7 @@
     "id": 31,
     "title": " New HA Tunnel Config Added",
     "message": "A fresh HA Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/hat.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/hat.html",
     "date": "2026-04-21",
     "priority": "high"
   },
@@ -83,7 +91,7 @@
     "id": 30,
     "title": " New Files Added",
     "message": "New files for HA Tunnel, HTTP Custom and NPV Tunnel configs have been added. Tap to check them out.",
-    "link": "https://vpnconfighub.netlify.app/index.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/index.html",
     "date": "2026-04-21",
     "priority": "high"
   },
@@ -91,7 +99,7 @@
     "id": 29,
     "title": " New HA Tunnel Config Added",
     "message": "A fresh HA Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/hat.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/hat.html",
     "date": "2026-04-20",
     "priority": "high"
   },
@@ -99,7 +107,7 @@
     "id": 28,
     "title": " New Files Added",
     "message": "New files for NPV Tunnel, ZIV PN Tunnel and HTTP Injector configs have been added. Tap to check them out.",
-    "link": "https://vpnconfighub.netlify.app/index.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/index.html",
     "date": "2026-04-20",
     "priority": "high"
   },
@@ -107,7 +115,7 @@
     "id": 27,
     "title": " New TLS Tunnel Config Added",
     "message": "A fresh TLS Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/tls.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/tls.html",
     "date": "2026-04-20",
     "priority": "high"
   },
@@ -115,7 +123,7 @@
     "id": 26,
     "title": " New NPV Tunnel Config Added",
     "message": "A fresh NPV Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/npvt.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/npvt.html",
     "date": "2026-04-20",
     "priority": "high"
   },
@@ -123,7 +131,7 @@
     "id": 25,
     "title": " New HTTP Custom Config Added",
     "message": "A fresh HTTP Custom configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/hc.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/hc.html",
     "date": "2026-04-19",
     "priority": "high"
   },
@@ -131,7 +139,7 @@
     "id": 24,
     "title": " New HA Tunnel Config Added",
     "message": "A fresh HA Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/hat.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/hat.html",
     "date": "2026-04-19",
     "priority": "high"
   },
@@ -139,7 +147,7 @@
     "id": 23,
     "title": " New HTTP Custom Config Added",
     "message": "A fresh HTTP Custom configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/hc.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/hc.html",
     "date": "2026-04-19",
     "priority": "high"
   },
@@ -147,7 +155,7 @@
     "id": 22,
     "title": " New HA Tunnel Config Added",
     "message": "A fresh HA Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/hat.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/hat.html",
     "date": "2026-04-19",
     "priority": "high"
   },
@@ -155,7 +163,7 @@
     "id": 21,
     "title": " New NPV Tunnel Config Added",
     "message": "A fresh NPV Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/npvt.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/npvt.html",
     "date": "2026-04-19",
     "priority": "high"
   },
@@ -163,7 +171,7 @@
     "id": 1,
     "title": " New NPV Tunnel Config Added",
     "message": "A fresh NPV Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/npvt.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/npvt.html",
     "date": "2026-04-19",
     "priority": "high"
   },
@@ -171,7 +179,7 @@
     "id": 20,
     "title": " New HA Tunnel Config Added",
     "message": "A fresh HA Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/hat.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/hat.html",
     "date": "2026-04-19",
     "priority": "high"
   },
@@ -179,7 +187,7 @@
     "id": 19,
     "title": " New Files Added",
     "message": "New files for NPV Tunnel, ZIV PN Tunnel and HTTP Custom configs have been added. Tap to check them out.",
-    "link": "https://vpnconfighub.netlify.app/index.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/index.html",
     "date": "2026-04-19",
     "priority": "high"
   },
@@ -187,7 +195,7 @@
     "id": 18,
     "title": " New Files Added",
     "message": "New files for HA Tunnel and TLS Tunnel have been added recently. Tap to explore them.",
-    "link": "https://vpnconfighub.netlify.app/index.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/index.html",
     "date": "2026-04-19",
     "priority": "high"
   },
@@ -195,7 +203,7 @@
     "id": 17,
     "title": " New HTTP Custom Config Added",
     "message": "A fresh HTTP Custom configuration has just been added. Tap to download it now.",
-    "link": "https://ethanchaos.srcnexus.app/imported_project_4/hc.html",
+    "link": "https:\/\/ethanchaos.srcnexus.app\/imported_project_4\/hc.html",
     "date": "2026-04-19",
     "priority": "high"
   },
@@ -203,7 +211,7 @@
     "id": 16,
     "title": "New ZIV PN Tunnel Config Added",
     "message": "A fresh ZIV PN Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/ziv.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/ziv.html",
     "date": "2026-04-19",
     "priority": "high"
   },
@@ -211,7 +219,7 @@
     "id": 15,
     "title": " New HA Tunnel Config Added",
     "message": "A fresh HA Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/hat.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/hat.html",
     "date": "2026-04-18",
     "priority": "high"
   },
@@ -219,7 +227,7 @@
     "id": 14,
     "title": "New HA Tunnel Config Added",
     "message": "A fresh HA Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/hat.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/hat.html",
     "date": "2026-04-18",
     "priority": "high"
   },
@@ -227,7 +235,7 @@
     "id": 13,
     "title": " New TLS Tunnel Config Added",
     "message": "A fresh TLS Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://vpnconfighub.netlify.app/tls.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/tls.html",
     "date": "2026-04-18",
     "priority": "high"
   },
@@ -235,7 +243,7 @@
     "id": 12,
     "title": " 3 New HTTP Injector Configs Added",
     "message": "3 new HTTP Injector configurations have just been uploaded. Tap to browse and download them.",
-    "link": "https://vpnconfighub.netlify.app/ehi.html",
+    "link": "https:\/\/vpnconfighub.netlify.app\/ehi.html",
     "date": "2026-04-17",
     "priority": "high"
   },
@@ -243,7 +251,7 @@
     "id": 11,
     "title": "New HTTP Injector Config Added",
     "message": "A fresh HTTP Injector configuration has just been added. Tap to download it now.",
-    "link": "https://ethanchaos.srcnexus.app/imported_project_4/ehi.html",
+    "link": "https:\/\/ethanchaos.srcnexus.app\/imported_project_4\/ehi.html",
     "date": "2026-04-17",
     "priority": "high"
   },
@@ -251,7 +259,7 @@
     "id": 10,
     "title": " New HA Tunnel Config Added",
     "message": "A fresh HA Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://ethanchaos.srcnexus.app/imported_project_4/hat.html",
+    "link": "https:\/\/ethanchaos.srcnexus.app\/imported_project_4\/hat.html",
     "date": "2026-04-17",
     "priority": "high"
   },
@@ -259,7 +267,7 @@
     "id": 9,
     "title": " New HA Tunnel Config Added",
     "message": "A fresh HA Tunnel configuration has just been added. Tap to download it now.",
-    "link": "https://ethanchaos.srcnexus.app/imported_project_4/hat.html",
+    "link": "https:\/\/ethanchaos.srcnexus.app\/imported_project_4\/hat.html",
     "date": "2026-04-17",
     "priority": "high"
   },
@@ -267,7 +275,7 @@
     "id": 6,
     "title": " New Configs Added",
     "message": "Fresh VPN configurations have been uploaded. Tap to explore the latest additions in the config explorer.",
-    "link": "https://ethanchaos.srcnexus.app/imported_project_4/exp",
+    "link": "https:\/\/ethanchaos.srcnexus.app\/imported_project_4\/exp",
     "date": "2026-04-12",
     "priority": "high"
   },
@@ -275,7 +283,7 @@
     "id": 7,
     "title": "App Update Available",
     "message": "ConfigHub v1.1 is out with a new uploader UI and faster config loading. Check the updates page for details.",
-    "link": "https://ethanchaos.srcnexus.app/imported_project_4/updates.html",
+    "link": "https:\/\/ethanchaos.srcnexus.app\/imported_project_4\/updates.html",
     "date": "2026-04-11",
     "priority": "high"
   },
