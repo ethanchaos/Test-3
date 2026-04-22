@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN 300MB DAILY BY PANTHER 1",
+    "vpn": "HA Tunnel",
+    "filename": "MTN 300MB DAILY BY PANTHER_1.hat",
+    "date": "23 Apr 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "Zet flash  mtn 500mb rSt    1",
     "vpn": "TLS Tunnel",
     "filename": "Zet flash _mtn 500mb rSt ___1.tls",
