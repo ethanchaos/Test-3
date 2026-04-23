@@ -1,5 +1,12 @@
 [
   {
+    "name": "PARR Mtm 300MB  PLUG 1",
+    "vpn": "TLS Tunnel",
+    "filename": "PARR Mtm 300MB  PLUG_1.tls",
+    "date": "23 Apr 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "Katlego  (2)",
     "vpn": "TLS Tunnel",
     "filename": "Katlego  (2).tls",
