@@ -121,7 +121,7 @@
   },
   {
     "id": "req-1776683616724",
-    "name": "𝗞𝗮𝘆𝗯𝗲𝗲 𝗠𝗮𝗷𝗼𝗿 𝘃𝗽𝗻",
+    "name": "ðð®ðð¯ð²ð² ð ð®ð·ð¼ð¿ ðð½ð»",
     "platform": "whatsapp-group",
     "size": "10K to 50k",
     "pic": "",
@@ -131,9 +131,25 @@
     "enabled": false,
     "requester": {
       "whatsapp": "0791589209",
-      "facebook": "𝗞𝗮𝘆𝗯𝗲𝗲 𝗠𝗮𝗷𝗼𝗿",
-      "telegram": "@𝗸𝗮𝘆𝗯𝗲𝗲 𝗠𝗮𝗷𝗼𝗿123"
+      "facebook": "ðð®ðð¯ð²ð² ð ð®ð·ð¼ð¿",
+      "telegram": "@ð¸ð®ðð¯ð²ð² ð ð®ð·ð¼ð¿123"
     },
     "submittedAt": "2026-04-20T11:13:36.724Z"
+  },
+  {
+    "id": "req-1776959616886",
+    "name": "KAYBEE MAJOR VPN",
+    "platform": "whatsapp-group",
+    "size": "1K to 5K",
+    "pic": "",
+    "href": "https://chat.whatsapp.com/E7rIKKABbwN9vGRvZ8uH3U?mode=gi_t",
+    "status": "pending",
+    "activity": "",
+    "enabled": false,
+    "requester": {
+      "whatsapp": "0791589209",
+      "facebook": "https://www.facebook.com/profile.php?id=61576771960350"
+    },
+    "submittedAt": "2026-04-23T15:53:36.886Z"
   }
 ]
