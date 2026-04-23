@@ -1,5 +1,12 @@
 [
   {
+    "name": "version587 1",
+    "vpn": "Lets VPN GO",
+    "filename": "version587_1.js",
+    "date": "23 Apr 2026",
+    "config_id": "letsvpngo"
+  },
+  {
     "name": "PARR Mtm 300MB  PLUG 1",
     "vpn": "TLS Tunnel",
     "filename": "PARR Mtm 300MB  PLUG_1.tls",
