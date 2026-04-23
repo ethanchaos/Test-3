@@ -1,24 +1,10 @@
 [
   {
-    "name": "[  50         ][            ][           ] 023955",
-    "vpn": "HA Tunnel",
-    "filename": "[__50_________][________ ___][___________]_023955.hat",
-    "date": "23 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
     "name": "50MB MTN     by young Ghost   ",
     "vpn": "HA Tunnel",
     "filename": "50MB MTN ____by young Ghost __.hat",
     "date": "23 Apr 2026",
     "config_id": "hatunnel"
-  },
-  {
-    "name": "        300   ",
-    "vpn": "HTTP Custom",
-    "filename": "_______ 300___.hc",
-    "date": "23 Apr 2026",
-    "config_id": "httpcustom"
   },
   {
     "name": "    200                      ",
@@ -84,9 +70,9 @@
     "config_id": "npvtunnel"
   },
   {
-    "name": "  --Øwæmï tts ¹  mb  ---- 102759",
+    "name": "  --ÃwÃ¦mÃ¯ tts Â¹  mb  ---- 102759",
     "vpn": "HA Tunnel",
-    "filename": "__--Øwæmï_tts_¹__mb__----_102759.hat",
+    "filename": "__--ÃwÃ¦mÃ¯_tts_Â¹__mb__----_102759.hat",
     "date": "23 Apr 2026",
     "config_id": "hatunnel"
   },
@@ -105,44 +91,44 @@
     "config_id": "hatunnel"
   },
   {
-    "name": "AllNET-UDP VPSÂ²",
+    "name": "AllNET-UDP VPSÃÂ²",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPSÂ².ziv",
+    "filename": "AllNET-UDP VPSÃÂ².ziv",
     "date": "23 Apr 2026",
     "config_id": "zivpntunnel"
   },
   {
-    "name": "AllNET-UDP VPSÂ¹",
+    "name": "AllNET-UDP VPSÃÂ¹",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPSÂ¹.ziv",
+    "filename": "AllNET-UDP VPSÃÂ¹.ziv",
     "date": "23 Apr 2026",
     "config_id": "zivpntunnel"
   },
   {
-    "name": "GOAT   FLASH POINTÂ¶Â¥",
+    "name": "GOAT   FLASH POINTÃÂ¶ÃÂ¥",
     "vpn": "HA Tunnel",
-    "filename": "GOAT _ FLASH POINTÂ¶Â¥.hat",
+    "filename": "GOAT _ FLASH POINTÃÂ¶ÃÂ¥.hat",
     "date": "23 Apr 2026",
     "config_id": "hatunnel"
   },
   {
-    "name": "Uluru Ã MTN",
+    "name": "Uluru ÃÂ MTN",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru Ã MTN.npvt",
+    "filename": "Uluru ÃÂ MTN.npvt",
     "date": "23 Apr 2026",
     "config_id": "npvtunnel"
   },
   {
-    "name": "Uluru Ã MTN 1",
+    "name": "Uluru ÃÂ MTN 1",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru Ã MTN_1.npvt",
+    "filename": "Uluru ÃÂ MTN_1.npvt",
     "date": "23 Apr 2026",
     "config_id": "npvtunnel"
   },
   {
-    "name": "Uluru Ã MTN 2",
+    "name": "Uluru ÃÂ MTN 2",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru Ã MTN_2.npvt",
+    "filename": "Uluru ÃÂ MTN_2.npvt",
     "date": "23 Apr 2026",
     "config_id": "npvtunnel"
   },
