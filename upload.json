@@ -70,16 +70,9 @@
     "config_id": "npvtunnel"
   },
   {
-    "name": "  --ÃwÃ¦mÃ¯ tts Â¹  mb  ---- 102759",
+    "name": "  --ÃÂwÃÂ¦mÃÂ¯ tts ÃÂ¹  mb  ---- 102759",
     "vpn": "HA Tunnel",
-    "filename": "__--ÃwÃ¦mÃ¯_tts_Â¹__mb__----_102759.hat",
-    "date": "23 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": " MTNSA-1GB MONTHLY[K.o.F]---- (1)",
-    "vpn": "HA Tunnel",
-    "filename": "_MTNSA-1GB_MONTHLY[K.o.F]----_(1).hat",
+    "filename": "__--ÃÂwÃÂ¦mÃÂ¯_tts_ÃÂ¹__mb__----_102759.hat",
     "date": "23 Apr 2026",
     "config_id": "hatunnel"
   },
@@ -91,53 +84,46 @@
     "config_id": "hatunnel"
   },
   {
-    "name": "AllNET-UDP VPSÃÂ²",
+    "name": "AllNET-UDP VPSÃÂÃÂ²",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPSÃÂ².ziv",
+    "filename": "AllNET-UDP VPSÃÂÃÂ².ziv",
     "date": "23 Apr 2026",
     "config_id": "zivpntunnel"
   },
   {
-    "name": "AllNET-UDP VPSÃÂ¹",
+    "name": "AllNET-UDP VPSÃÂÃÂ¹",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPSÃÂ¹.ziv",
+    "filename": "AllNET-UDP VPSÃÂÃÂ¹.ziv",
     "date": "23 Apr 2026",
     "config_id": "zivpntunnel"
   },
   {
-    "name": "GOAT   FLASH POINTÃÂ¶ÃÂ¥",
+    "name": "GOAT   FLASH POINTÃÂÃÂ¶ÃÂÃÂ¥",
     "vpn": "HA Tunnel",
-    "filename": "GOAT _ FLASH POINTÃÂ¶ÃÂ¥.hat",
+    "filename": "GOAT _ FLASH POINTÃÂÃÂ¶ÃÂÃÂ¥.hat",
     "date": "23 Apr 2026",
     "config_id": "hatunnel"
   },
   {
-    "name": "Uluru ÃÂ MTN",
+    "name": "Uluru ÃÂÃÂ MTN",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru ÃÂ MTN.npvt",
+    "filename": "Uluru ÃÂÃÂ MTN.npvt",
     "date": "23 Apr 2026",
     "config_id": "npvtunnel"
   },
   {
-    "name": "Uluru ÃÂ MTN 1",
+    "name": "Uluru ÃÂÃÂ MTN 1",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru ÃÂ MTN_1.npvt",
+    "filename": "Uluru ÃÂÃÂ MTN_1.npvt",
     "date": "23 Apr 2026",
     "config_id": "npvtunnel"
   },
   {
-    "name": "Uluru ÃÂ MTN 2",
+    "name": "Uluru ÃÂÃÂ MTN 2",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru ÃÂ MTN_2.npvt",
+    "filename": "Uluru ÃÂÃÂ MTN_2.npvt",
     "date": "23 Apr 2026",
     "config_id": "npvtunnel"
-  },
-  {
-    "name": "--------------- 300------ ",
-    "vpn": "HA Tunnel",
-    "filename": "---------------_300------_.hat",
-    "date": "23 Apr 2026",
-    "config_id": "hatunnel"
   },
   {
     "name": "----VH-GSK MTN 2OOMB-VH----",
@@ -413,13 +399,6 @@
     "config_id": "npvtunnel"
   },
   {
-    "name": "KYLE XY MTN UNKNOWN LIMIT",
-    "vpn": "HA Tunnel",
-    "filename": "KYLE XY MTN UNKNOWN LIMIT.hat",
-    "date": "23 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
     "name": "Kick ASS V2RAY MTN 300 mb",
     "vpn": "HTTP Custom",
     "filename": "Kick ASS V2RAY MTN 300 mb.hc",
@@ -430,13 +409,6 @@
     "name": "MR SHADOW[]MTN 600MB ",
     "vpn": "HA Tunnel",
     "filename": "MR SHADOW[]MTN 600MB .hat",
-    "date": "23 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": "MR SHADOW[  ]MTN 600MB",
-    "vpn": "HA Tunnel",
-    "filename": "MR SHADOW[__]MTN 600MB.hat",
     "date": "23 Apr 2026",
     "config_id": "hatunnel"
   },
@@ -644,13 +616,6 @@
     "config_id": "hatunnel"
   },
   {
-    "name": " 3GB-MTN MOSHA   1",
-    "vpn": "HA Tunnel",
-    "filename": "_3GB-MTN MOSHA___1.hat",
-    "date": "23 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
     "name": " CELLC 1GB LOCATION BASE ",
     "vpn": "HTTP Injector",
     "filename": "_CELLC 1GB LOCATION BASE_.ehi",
@@ -719,13 +684,6 @@
     "filename": "_MTN 500MB DAILY BY PANTHER_(2).tls",
     "date": "23 Apr 2026",
     "config_id": "tlstunnel"
-  },
-  {
-    "name": " MTN 50MB CHAII  041842 1",
-    "vpn": "HA Tunnel",
-    "filename": "_MTN 50MB CHAII__041842_1.hat",
-    "date": "23 Apr 2026",
-    "config_id": "hatunnel"
   },
   {
     "name": " MTN 50MB ",
