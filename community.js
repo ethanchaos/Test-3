@@ -466,7 +466,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Set developer contact URLs (replace with actual links)
   const devLinks = {
-    whatsapp: "https://wa.me/qr/6ICCFY7TKDZ4C1",   // ← replace with actual number
+    whatsapp: "https://t.me/EthanChaoss",   // ← replace with actual number
     tiktok:   "https://www.tiktok.com/@ethanchaos",
     telegram: "https://t.me/EthanChaoss",
     facebook: "https://www.facebook.com/Mr.Heckar.01"
