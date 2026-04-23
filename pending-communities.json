@@ -103,20 +103,5 @@
       "whatsapp": "66"
     },
     "submittedAt": "2026-04-19T10:55:11.300Z"
-  },
-  {
-    "id": "req-1776635359124",
-    "name": "Cc",
-    "platform": "whatsapp-group",
-    "size": "5K to 10K",
-    "pic": "",
-    "href": "cc",
-    "status": "pending",
-    "activity": "",
-    "enabled": false,
-    "requester": {
-      "whatsapp": "88"
-    },
-    "submittedAt": "2026-04-19T21:49:19.124Z"
   }
 ]
