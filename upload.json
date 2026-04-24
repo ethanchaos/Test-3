@@ -1,5 +1,12 @@
 [
   {
+    "name": "   MTN 1GB DAILY      (1)",
+    "vpn": "TLS Tunnel",
+    "filename": "__ MTN 1GB DAILY ____ (1).tls",
+    "date": "24 Apr 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "300MB-DAILYIMTN-ZA 1",
     "vpn": "HTTP Injector",
     "filename": "300MB-DAILYIMTN-ZA_1.ehi",
