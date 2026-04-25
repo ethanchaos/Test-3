@@ -10,5 +10,17 @@
     "status": "active",
     "activity": "Active",
     "enabled": true
+  },
+  {
+    "id": "req-1777006579542",
+    "name": "MASTERS",
+    "description": "",
+    "platform": "whatsapp-channel",
+    "size": "1K to 5K",
+    "pic": "",
+    "href": "https://bit.ly/mastersappchannel",
+    "status": "active",
+    "activity": "Active",
+    "enabled": true
   }
 ]
