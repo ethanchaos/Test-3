@@ -58,22 +58,5 @@
       "whatsapp": "255"
     },
     "submittedAt": "2026-04-18T16:44:38.168Z"
-  },
-  {
-    "id": "req-1777006579542",
-    "name": "MASTERS",
-    "platform": "whatsapp-channel",
-    "size": "1K to 5K",
-    "pic": "",
-    "href": "https://bit.ly/mastersappchannel",
-    "status": "pending",
-    "activity": "",
-    "enabled": false,
-    "requester": {
-      "whatsapp": "+27692987836",
-      "facebook": "@MastersTechSolutions",
-      "telegram": "@MastersTechSolutions"
-    },
-    "submittedAt": "2026-04-24T04:56:19.542Z"
   }
 ]
