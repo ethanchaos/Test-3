@@ -1,5 +1,13 @@
 [
   {
+    "id": 74,
+    "title": " New TLS Tunnel Config Added",
+    "message": "A fresh TLS Tunnel configuration has just been added. Tap to download it now.",
+    "link": "https:\/\/vpnconfighub.netlify.app\/tls.html",
+    "date": "2026-04-26",
+    "priority": "high"
+  },
+  {
     "id": 73,
     "title": " New TLS Tunnel Config Added",
     "message": "A fresh TLS Tunnel configuration has just been added. Tap to download it now.",
