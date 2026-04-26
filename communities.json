@@ -22,5 +22,17 @@
     "status": "active",
     "activity": "Active",
     "enabled": true
+  },
+  {
+    "id": "req-1777160747650",
+    "name": "HA Tunnel Pro Official",
+    "description": "",
+    "platform": "whatsapp-group",
+    "size": "1K to 5K",
+    "pic": "pics/IMG-20260426-WA0038.jpg",
+    "href": "https://chat.whatsapp.com/Lkv4rfHtzSDIVGBJgAxpzA?mode=gi_t",
+    "status": "active",
+    "activity": "Active",
+    "enabled": true
   }
 ]
