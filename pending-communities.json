@@ -88,5 +88,20 @@
       "whatsapp": "2"
     },
     "submittedAt": "2026-04-26T08:07:19.751Z"
+  },
+  {
+    "id": "req-1777190955107",
+    "name": "Chaos Configurations",
+    "platform": "whatsapp-channel",
+    "size": "100 to 500",
+    "pic": "",
+    "href": "https://whatsapp.com/channel/0029VbAL2mRC6ZvhCR8jjI0G",
+    "status": "pending",
+    "activity": "",
+    "enabled": false,
+    "requester": {
+      "whatsapp": "1"
+    },
+    "submittedAt": "2026-04-26T08:09:15.107Z"
   }
 ]
