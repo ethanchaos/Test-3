@@ -70,5 +70,17 @@
     "status": "active",
     "activity": "Active",
     "enabled": true
+  },
+  {
+    "id": "req-1777191062338",
+    "name": "ULURU NET",
+    "description": "",
+    "platform": "telegram",
+    "size": "500 to 1K",
+    "pic": "pics/IMG-20260419-WA0073.jpg",
+    "href": "https://t.me/uluru_net",
+    "status": "active",
+    "activity": "Active",
+    "enabled": true
   }
 ]
