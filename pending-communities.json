@@ -60,21 +60,6 @@
     "submittedAt": "2026-04-18T16:44:38.168Z"
   },
   {
-    "id": "req-1777190839751",
-    "name": "MPR & CONFIG HUB PUBLIC GROUP",
-    "platform": "whatsapp-group",
-    "size": "100 to 500",
-    "pic": "",
-    "href": "https://chat.whatsapp.com/KqGgcDDj2kuLBZVa9AWQWY?mode=gi_t",
-    "status": "pending",
-    "activity": "",
-    "enabled": false,
-    "requester": {
-      "whatsapp": "2"
-    },
-    "submittedAt": "2026-04-26T08:07:19.751Z"
-  },
-  {
     "id": "req-1777191062338",
     "name": "ULURU NET",
     "platform": "telegram",
