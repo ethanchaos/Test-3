@@ -58,20 +58,5 @@
       "whatsapp": "255"
     },
     "submittedAt": "2026-04-18T16:44:38.168Z"
-  },
-  {
-    "id": "req-1777191062338",
-    "name": "ULURU NET",
-    "platform": "telegram",
-    "size": "500 to 1K",
-    "pic": "",
-    "href": "https://t.me/uluru_net",
-    "status": "pending",
-    "activity": "",
-    "enabled": false,
-    "requester": {
-      "handle": "Fd"
-    },
-    "submittedAt": "2026-04-26T08:11:02.338Z"
   }
 ]
