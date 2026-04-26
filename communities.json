@@ -34,5 +34,17 @@
     "status": "active",
     "activity": "Active",
     "enabled": true
+  },
+  {
+    "id": "req-1777190733185",
+    "name": "DE BLACK PANTHER",
+    "description": "",
+    "platform": "whatsapp-group",
+    "size": "500 to 1K",
+    "pic": "pics/IMG-20260419-WA0036(1).jpg",
+    "href": "https://chat.whatsapp.com/KSOhusYJRBMJKPsdX4jy2d?mode=gi_t",
+    "status": "active",
+    "activity": "Active",
+    "enabled": true
   }
 ]
