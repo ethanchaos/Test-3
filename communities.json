@@ -58,5 +58,17 @@
     "status": "active",
     "activity": "Active",
     "enabled": true
+  },
+  {
+    "id": "req-1777190839751",
+    "name": "MPR & CONFIG HUB PUBLIC GROUP",
+    "description": "",
+    "platform": "whatsapp-group",
+    "size": "100 to 500",
+    "pic": "pics/IMG-20260419-WA0036(1).jpg",
+    "href": "https://chat.whatsapp.com/KqGgcDDj2kuLBZVa9AWQWY?mode=gi_t",
+    "status": "active",
+    "activity": "Active",
+    "enabled": true
   }
 ]
