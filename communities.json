@@ -46,5 +46,17 @@
     "status": "active",
     "activity": "Active",
     "enabled": true
+  },
+  {
+    "id": "req-1777190955107",
+    "name": "Chaos Configurations",
+    "description": "",
+    "platform": "whatsapp-channel",
+    "size": "100 to 500",
+    "pic": "pics/IMG-20260412-WA0099.jpg",
+    "href": "https://whatsapp.com/channel/0029VbAL2mRC6ZvhCR8jjI0G",
+    "status": "active",
+    "activity": "Active",
+    "enabled": true
   }
 ]
