@@ -1,5 +1,12 @@
 [
   {
+    "name": "VODACOM SA UDP PLUG[YOUNG",
+    "vpn": "HTTP Custom",
+    "filename": "VODACOM SA UDP PLUG[YOUNG.hc",
+    "date": "27 Apr 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "Benathi   MTN300     1",
     "vpn": "Stark VPN",
     "filename": "Benathi___MTN300_____1.stk",
