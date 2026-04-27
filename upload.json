@@ -1,5 +1,12 @@
 [
   {
+    "name": "  500MB          1",
+    "vpn": "HA Tunnel",
+    "filename": "__500MB _____ ___1.hat",
+    "date": "27 Apr 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "UDP PLUG",
     "vpn": "HTTP Custom",
     "filename": "UDP PLUG.hc",
