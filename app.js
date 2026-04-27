@@ -483,76 +483,92 @@ function escapeHtml(str) {
 
 
 /* ════════════════════════════════════════════════
-   AD SYSTEM
-   Two formats, both once-per-session, no cancel:
-     1. Timer Ad  — fires after N seconds
-     2. Download Ad — fires after N downloads
-   Settings loaded from ad-settings.json
+   OFFLINE / LOCAL-HOST AD SYSTEM
+   - Works completely without internet
+   - Loads ad content from local offline-ads.json, falls back to built-in ads
+   - Modal with countdown, no external redirects
+   - Timer-based & download-based triggers (same as before)
    ════════════════════════════════════════════════ */
-(function initAdSystem() {
+(function initOfflineAdSystem() {
 
-    const SESSION_KEY_TIMER    = 'ch_timer_ad_done';
-    const SESSION_KEY_DOWNLOAD = 'ch_download_ad_done';
-    const SESSION_KEY_DL_COUNT = 'ch_download_count';
-    const SESSION_KEY_DL_THRESHOLD = 'ch_dl_threshold';
+    const SESSION_KEY_TIMER     = 'off_ad_timer';
+    const SESSION_KEY_DOWNLOAD  = 'off_ad_download';
+    const SESSION_KEY_DL_COUNT  = 'off_ad_dl_count';
+    const SESSION_KEY_DL_THRESH = 'off_ad_dl_thresh';
 
-    let adSettings = null;
-
-    async function loadAdSettings() {
-        try {
-            const r = await fetch('ad-settings.json?_t=' + Date.now());
-            if (!r.ok) throw new Error('HTTP ' + r.status);
-            adSettings = await r.json();
-        } catch (e) {
-            console.warn('[Ads] Could not load ad-settings.json, using defaults.', e);
-            adSettings = getDefaultSettings();
+    // Default ad content – used if offline-ads.json fails or is missing
+    const DEFAULT_ADS = [
+        {
+            title: "Support Our Free Project",
+            message: "Thank you for using our service! Please consider supporting us by checking out our local sponsor.",
+            image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%234f46e5'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='14' font-family='sans-serif'%3ELocal Ad%3C/text%3E%3C/svg%3E",
+            buttonLabel: "Continue (local ad)"
+        },
+        {
+            title: "Keep the Project Alive",
+            message: "Ads are the only way we keep this service free. This is a locally hosted ad — no tracking, just your support.",
+            image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%230ea5e9'/%3E%3Ctext x='50' y='56' text-anchor='middle' fill='white' font-size='12' font-family='sans-serif'%3EThanks!%3C/text%3E%3C/svg%3E",
+            buttonLabel: "Continue"
         }
-        if (adSettings.enabled) {
+    ];
+
+    let adConfig = null;
+
+    async function loadAdConfig() {
+        try {
+            const res = await fetch('offline-ads.json?_t=' + Date.now());
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            const data = await res.json();
+            // Ad config: { enabled: bool, timerAd: {enabled, seconds, waiting, ads: [...]}, downloadAd: {enabled, min, max, waiting, ads: [...]} }
+            // Each ad can have: title, message, image (URL/base64), buttonLabel
+            adConfig = data;
+        } catch (e) {
+            console.warn('[Offline Ads] Could not load offline-ads.json, using built-in ads.', e);
+            adConfig = {
+                enabled: true,
+                timerAd: {
+                    enabled: true,
+                    triggerAfterSeconds: 45,
+                    waitingPeriodSeconds: 5,
+                    ads: DEFAULT_ADS
+                },
+                downloadAd: {
+                    enabled: true,
+                    minDownloads: 2,
+                    maxDownloads: 4,
+                    waitingPeriodSeconds: 5,
+                    ads: DEFAULT_ADS
+                }
+            };
+        }
+        if (adConfig.enabled) {
             scheduleTimerAd();
         }
     }
 
-    function getDefaultSettings() {
-        return {
-            enabled: true,
-            timerAd: {
-                enabled: true,
-                triggerAfterSeconds: 50,
-                waitingPeriodSeconds: 5,
-                redirectUrl: 'https://your-ad-direct-link.com/timer-ad',
-                message: 'Support the creator by watching an ad to continue downloading.',
-                buttonLabel: 'Continue to Ad'
-            },
-            downloadAd: {
-                enabled: true,
-                minDownloads: 2,
-                maxDownloads: 4,
-                waitingPeriodSeconds: 5,
-                redirectUrl: 'https://your-ad-direct-link.com/download-ad',
-                message: "You've been downloading for free! Please support the creator by watching a short ad.",
-                buttonLabel: 'Watch Ad & Continue'
-            }
-        };
+    function getRandomAd(adsArray) {
+        if (!adsArray || adsArray.length === 0) return DEFAULT_ADS[0];
+        return adsArray[Math.floor(Math.random() * adsArray.length)];
     }
 
     /* ── Timer Ad ── */
     function scheduleTimerAd() {
-        const cfg = adSettings.timerAd;
+        const cfg = adConfig && adConfig.timerAd;
         if (!cfg || !cfg.enabled) return;
         if (sessionStorage.getItem(SESSION_KEY_TIMER)) return;
 
-        const delay = (cfg.triggerAfterSeconds || 50) * 1000;
+        const delay = (cfg.triggerAfterSeconds || 45) * 1000;
         setTimeout(() => {
             if (!sessionStorage.getItem(SESSION_KEY_TIMER)) {
-                showAdModal('timer');
+                showOfflineAdModal('timer');
             }
         }, delay);
     }
 
-    /* ── Download Ad hook ── */
-    window._adOnDownload = function () {
-        if (!adSettings || !adSettings.enabled) return;
-        const cfg = adSettings.downloadAd;
+    /* ── Download Ad hook (called by downloadFile) ── */
+    window._offlineAdOnDownload = function () {
+        if (!adConfig || !adConfig.enabled) return;
+        const cfg = adConfig.downloadAd;
         if (!cfg || !cfg.enabled) return;
         if (sessionStorage.getItem(SESSION_KEY_DOWNLOAD)) return;
 
@@ -560,36 +576,36 @@ function escapeHtml(str) {
         count += 1;
         sessionStorage.setItem(SESSION_KEY_DL_COUNT, count);
 
-        let threshold = parseInt(sessionStorage.getItem(SESSION_KEY_DL_THRESHOLD) || '0', 10);
+        let threshold = parseInt(sessionStorage.getItem(SESSION_KEY_DL_THRESH) || '0', 10);
         if (!threshold) {
             const min = cfg.minDownloads || 2;
             const max = cfg.maxDownloads || 4;
             threshold = Math.floor(Math.random() * (max - min + 1)) + min;
-            sessionStorage.setItem(SESSION_KEY_DL_THRESHOLD, threshold);
+            sessionStorage.setItem(SESSION_KEY_DL_THRESH, threshold);
         }
 
         if (count >= threshold) {
-            showAdModal('download');
+            showOfflineAdModal('download');
         }
     };
 
-    /* ── Modal ── */
-    function showAdModal(type) {
+    /* ── Modal for offline/local ads ── */
+    function showOfflineAdModal(type) {
         if (type === 'timer')    sessionStorage.setItem(SESSION_KEY_TIMER, '1');
         if (type === 'download') sessionStorage.setItem(SESSION_KEY_DOWNLOAD, '1');
 
-        const cfg         = type === 'timer' ? adSettings.timerAd : adSettings.downloadAd;
-        const waitSeconds = cfg.waitingPeriodSeconds || 5;
-        const redirectUrl = cfg.redirectUrl || 'https://google.com';
-        const message     = cfg.message || 'Please support the creator by watching an ad.';
-        const btnLabel    = cfg.buttonLabel || 'Watch Ad';
+        const cfg = type === 'timer' ? adConfig.timerAd : adConfig.downloadAd;
+        const adsArray = cfg && cfg.ads ? cfg.ads : DEFAULT_ADS;
+        const ad = getRandomAd(adsArray);
+        const waitSeconds = cfg ? (cfg.waitingPeriodSeconds || 5) : 5;
+        const btnLabel = ad.buttonLabel || 'Continue';
 
-        /* Inject styles once */
-        if (!document.getElementById('ch-ad-style')) {
+        // Inject styles once
+        if (!document.getElementById('off-ad-style')) {
             const style = document.createElement('style');
-            style.id = 'ch-ad-style';
+            style.id = 'off-ad-style';
             style.textContent = `
-                #ch-ad-overlay {
+                #off-ad-overlay {
                     position: fixed;
                     inset: 0;
                     z-index: 99999;
@@ -597,14 +613,14 @@ function escapeHtml(str) {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    animation: chFadeIn 0.35s ease;
+                    animation: offAdFadeIn 0.35s ease;
                     padding: 20px;
                 }
-                @keyframes chFadeIn {
+                @keyframes offAdFadeIn {
                     from { opacity: 0; }
                     to   { opacity: 1; }
                 }
-                #ch-ad-box {
+                #off-ad-box {
                     background: #ffffff;
                     border-radius: 18px;
                     padding: 32px 28px 28px;
@@ -612,47 +628,47 @@ function escapeHtml(str) {
                     width: 100%;
                     text-align: center;
                     box-shadow: 0 24px 60px rgba(0,0,0,0.45);
-                    animation: chSlideUp 0.4s cubic-bezier(0.34,1.56,0.64,1);
+                    animation: offAdSlideUp 0.4s cubic-bezier(0.34,1.56,0.64,1);
                 }
-                @keyframes chSlideUp {
+                @keyframes offAdSlideUp {
                     from { transform: translateY(40px) scale(0.95); opacity: 0; }
                     to   { transform: translateY(0) scale(1); opacity: 1; }
                 }
-                #ch-ad-icon {
-                    width: 64px; height: 64px;
-                    background: #1a1a1a;
-                    border-radius: 50%;
-                    display: flex; align-items: center; justify-content: center;
-                    margin: 0 auto 18px;
+                .off-ad-img {
+                    width: 100%;
+                    height: auto;
+                    max-height: 180px;
+                    object-fit: contain;
+                    border-radius: 12px;
+                    margin-bottom: 18px;
                 }
-                #ch-ad-icon i { color: #fff; font-size: 1.6rem; }
-                #ch-ad-title {
+                #off-ad-title {
                     font-family: 'Segoe UI', system-ui, sans-serif;
                     font-size: 1.2rem; font-weight: 700;
                     color: #1a1a1a; margin-bottom: 10px; line-height: 1.3;
                 }
-                #ch-ad-msg {
+                #off-ad-msg {
                     font-family: 'Segoe UI', system-ui, sans-serif;
                     font-size: 0.92rem; color: #555;
                     line-height: 1.6; margin-bottom: 24px;
                 }
-                #ch-ad-ring-wrap {
+                #off-ad-ring-wrap {
                     margin: 0 auto 22px;
                     width: 80px; height: 80px; position: relative;
                 }
-                #ch-ad-ring-svg { transform: rotate(-90deg); width: 80px; height: 80px; }
-                #ch-ad-ring-bg  { fill: none; stroke: #eeeeee; stroke-width: 6; }
-                #ch-ad-ring-fill {
+                #off-ad-ring-svg { transform: rotate(-90deg); width: 80px; height: 80px; }
+                #off-ad-ring-bg  { fill: none; stroke: #eeeeee; stroke-width: 6; }
+                #off-ad-ring-fill {
                     fill: none; stroke: #1a1a1a; stroke-width: 6;
                     stroke-linecap: round; transition: stroke-dashoffset 1s linear;
                 }
-                #ch-ad-ring-num {
+                #off-ad-ring-num {
                     position: absolute; inset: 0;
                     display: flex; align-items: center; justify-content: center;
                     font-family: 'Segoe UI', system-ui, sans-serif;
                     font-size: 1.6rem; font-weight: 700; color: #1a1a1a;
                 }
-                #ch-ad-btn {
+                #off-ad-btn {
                     display: inline-flex; align-items: center; justify-content: center;
                     gap: 8px; background: #1a1a1a; color: #fff;
                     border: none; border-radius: 10px;
@@ -661,10 +677,10 @@ function escapeHtml(str) {
                     font-size: 0.95rem; font-weight: 600;
                     cursor: pointer; transition: background 0.2s, transform 0.15s;
                 }
-                #ch-ad-btn:disabled { background: #cccccc; cursor: not-allowed; }
-                #ch-ad-btn:not(:disabled):hover { background: #000; transform: translateY(-1px); }
-                #ch-ad-btn:not(:disabled):active { transform: scale(0.97); }
-                #ch-ad-tagline {
+                #off-ad-btn:disabled { background: #cccccc; cursor: not-allowed; }
+                #off-ad-btn:not(:disabled):hover { background: #000; transform: translateY(-1px); }
+                #off-ad-btn:not(:disabled):active { transform: scale(0.97); }
+                #off-ad-tagline {
                     margin-top: 14px;
                     font-family: 'Segoe UI', system-ui, sans-serif;
                     font-size: 0.76rem; color: #aaa;
@@ -674,39 +690,37 @@ function escapeHtml(str) {
         }
 
         const circumference = 2 * Math.PI * 30;
-        const iconClass = type === 'timer' ? 'fas fa-clock' : 'fas fa-heart';
-        const titleText = type === 'timer' ? 'Support the Creator' : 'Keep the Downloads Free';
 
         const overlay = document.createElement('div');
-        overlay.id = 'ch-ad-overlay';
+        overlay.id = 'off-ad-overlay';
         overlay.innerHTML = `
-            <div id="ch-ad-box">
-                <div id="ch-ad-icon"><i class="${iconClass}"></i></div>
-                <div id="ch-ad-title">${titleText}</div>
-                <div id="ch-ad-msg">${message}</div>
-                <div id="ch-ad-ring-wrap">
-                    <svg id="ch-ad-ring-svg" viewBox="0 0 80 80">
-                        <circle id="ch-ad-ring-bg" cx="40" cy="40" r="30"/>
-                        <circle id="ch-ad-ring-fill" cx="40" cy="40" r="30"
+            <div id="off-ad-box">
+                ${ad.image ? `<img src="${ad.image}" class="off-ad-img" alt="ad">` : ''}
+                <div id="off-ad-title">${escapeHtml(ad.title)}</div>
+                <div id="off-ad-msg">${escapeHtml(ad.message)}</div>
+                <div id="off-ad-ring-wrap">
+                    <svg id="off-ad-ring-svg" viewBox="0 0 80 80">
+                        <circle id="off-ad-ring-bg" cx="40" cy="40" r="30"/>
+                        <circle id="off-ad-ring-fill" cx="40" cy="40" r="30"
                             stroke-dasharray="${circumference}"
                             stroke-dashoffset="0"/>
                     </svg>
-                    <div id="ch-ad-ring-num">${waitSeconds}</div>
+                    <div id="off-ad-ring-num">${waitSeconds}</div>
                 </div>
-                <button id="ch-ad-btn" disabled>
-                    <i class="fas fa-hourglass-half" id="ch-ad-btn-icon"></i>
-                    <span id="ch-ad-btn-label">Please wait… ${waitSeconds}s</span>
+                <button id="off-ad-btn" disabled>
+                    <i class="fas fa-hourglass-half" id="off-ad-btn-icon"></i>
+                    <span id="off-ad-btn-label">Please wait… ${waitSeconds}s</span>
                 </button>
-                <div id="ch-ad-tagline">Ads keep this service free for everyone ❤️</div>
+                <div id="off-ad-tagline">Offline ad — no tracking, just support ❤️</div>
             </div>
         `;
         document.body.appendChild(overlay);
 
-        const ring    = document.getElementById('ch-ad-ring-fill');
-        const numEl   = document.getElementById('ch-ad-ring-num');
-        const btn     = document.getElementById('ch-ad-btn');
-        const btnIcon = document.getElementById('ch-ad-btn-icon');
-        const btnLbl  = document.getElementById('ch-ad-btn-label');
+        const ring    = document.getElementById('off-ad-ring-fill');
+        const numEl   = document.getElementById('off-ad-ring-num');
+        const btn     = document.getElementById('off-ad-btn');
+        const btnIcon = document.getElementById('off-ad-btn-icon');
+        const btnLbl  = document.getElementById('off-ad-btn-label');
 
         ring.style.strokeDasharray  = circumference;
         ring.style.strokeDashoffset = '0';
@@ -721,7 +735,7 @@ function escapeHtml(str) {
 
             if (remaining <= 0) {
                 btn.disabled = false;
-                btnIcon.className = 'fas fa-external-link-alt';
+                btnIcon.className = 'fas fa-check';
                 btnLbl.textContent = btnLabel;
                 numEl.textContent = '✓';
                 ring.style.stroke = '#22c55e';
@@ -733,266 +747,34 @@ function escapeHtml(str) {
         setTimeout(tick, 1000);
 
         btn.addEventListener('click', () => {
-            if (btn.disabled) return;
+            // Close the modal — no redirect, just resume
             document.body.removeChild(overlay);
-            window.open(redirectUrl, '_blank');
         });
     }
 
+    // Hook into existing downloads – modify the downloadFile function to call our hook
+    // We need to patch the existing downloadFile to call _offlineAdOnDownload *after* the actual download logic?
+    // Actually we can call it from inside the existing downloadFile function.
+    // Since downloadFile is defined above, we can replace it with a wrapper that still does its job and calls the ad hook.
+    const originalDownloadFile = downloadFile;
+    window.downloadFile = async function(url, filename) {
+        // Call the original
+        await originalDownloadFile(url, filename);
+        // Trigger offline ad hook
+        if (typeof window._offlineAdOnDownload === 'function') {
+            window._offlineAdOnDownload();
+        }
+    };
+
+    // Load config when DOM is ready
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadAdSettings);
+        document.addEventListener('DOMContentLoaded', loadAdConfig);
     } else {
-        loadAdSettings();
+        loadAdConfig();
     }
 
 })();
 
-/* ── Download Logic ── */
-function downloadFile(url, filename) {
-    if (typeof window._adOnDownload === 'function') {
-        window._adOnDownload();
-    }
 
-    if (window.ReactNativeWebView) {
-        window.ReactNativeWebView.postMessage(
-            JSON.stringify({ type: 'DOWNLOAD_FILE', url, filename })
-        );
-        showDownloadFeedback(filename);
-        return;
-    }
-
-    if (window.Android && typeof window.Android.downloadFile === 'function') {
-        window.Android.downloadFile(url, filename);
-        showDownloadFeedback(filename);
-        return;
-    }
-
-    try {
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        if (typeof a.download !== 'undefined') {
-            a.click();
-            setTimeout(() => document.body.removeChild(a), 500);
-        } else {
-            window.open(url, '_blank');
-            if (a.parentNode) document.body.removeChild(a);
-        }
-        showDownloadFeedback(filename);
-    } catch (error) {
-        window.open(url, '_blank');
-        showDownloadFeedback(filename);
-    }
-}
-
-function showDownloadFeedback(filename) {
-    const existing = document.querySelector('.download-feedback');
-    if (existing) existing.remove();
-
-    const feedback = document.createElement('div');
-    feedback.className = 'download-feedback';
-    feedback.style.cssText = `
-        position: fixed; bottom: 100px; right: 20px;
-        background: var(--card-bg); color: var(--text-dark);
-        padding: 14px 20px; border-radius: 8px;
-        border: 1px solid var(--border-color);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        z-index: 9999; font-size: 14px; font-weight: 500;
-        animation: slideInRight 0.3s ease; max-width: 300px;
-    `;
-    feedback.innerHTML = `
-        <i class="fas fa-download" style="color:var(--text-dark);margin-right:10px;"></i>
-        Downloading: <span style="font-weight:600;">${escapeHtml(filename)}</span>
-    `;
-    document.body.appendChild(feedback);
-    setTimeout(() => {
-        feedback.style.animation = 'fadeOutRight 0.3s ease';
-        setTimeout(() => feedback.remove(), 300);
-    }, 3000);
-}
-
-function escapeHtml(str) {
-    return str.replace(/[&<>]/g, function(m) {
-        if (m === '&') return '&amp;';
-        if (m === '<') return '&lt;';
-        if (m === '>') return '&gt;';
-        return m;
-    });
-}
-
-/* ── Fetch & Render Engine ── */
-(function initFetchEngine() {
-    const loadingSpinner = document.getElementById('loadingSpinner');
-    const emptyState     = document.getElementById('emptyState');
-    const errorState     = document.getElementById('errorState');
-    const configList     = document.getElementById('configList');
-    const retryButton    = document.getElementById('retryButton');
-
-    if (!configList) return;
-
-    let configData = [], filteredData = [];
-
-    function showState(state) {
-        loadingSpinner.classList.add('hidden');
-        emptyState.classList.add('hidden');
-        errorState.classList.add('hidden');
-        configList.classList.add('hidden');
-        if      (state === 'loading') loadingSpinner.classList.remove('hidden');
-        else if (state === 'empty')   emptyState.classList.remove('hidden');
-        else if (state === 'error')   errorState.classList.remove('hidden');
-        else if (state === 'content') configList.classList.remove('hidden');
-    }
-
-    function normalizeVPN(s) { return s ? s.toLowerCase().trim() : ''; }
-
-    function isTargetVPN(item) {
-        if (!VPN_SEARCH_TERMS || VPN_SEARCH_TERMS.length === 0 || VPN_SEARCH_TERMS[0] === '*') return true;
-        const fields = [item.vpn, item.name, item.filename];
-        return fields.some(field => {
-            const norm = normalizeVPN(field);
-            return VPN_SEARCH_TERMS.some(term => norm.includes(term.toLowerCase()));
-        });
-    }
-
-    function parseDataJson(data) {
-        if (Array.isArray(data)) return data;
-        return Object.keys(data).map(k => {
-            const item = data[k];
-            return {
-                name: item.name || k, vpn: item.vpn || 'unknown',
-                filename: item.filename || k, url: item.url || null,
-                date: item.date || 'Unknown Date', size: item.size || ''
-            };
-        });
-    }
-
-    function addBust(url) {
-        return url + (url.includes('?') ? '&' : '?') + '_t=' + Date.now();
-    }
-
-    async function fetchWithTimeout(url, timeoutMs = 10000) {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
-        try {
-            const response = await fetch(addBust(url), { signal: controller.signal });
-            clearTimeout(timeoutId);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            return response.json();
-        } catch (err) {
-            clearTimeout(timeoutId);
-            if (err.name === 'AbortError') throw new Error(`Timeout after ${timeoutMs}ms`);
-            throw err;
-        }
-    }
-
-    async function fetchConfigData() {
-        showState('loading');
-        try {
-            const sources = Array.isArray(window.JSON_SOURCES)
-                ? window.JSON_SOURCES.filter(s => typeof s === 'string' && s.trim()) : [];
-            if (sources.length === 0) throw new Error('No sources defined in sources.js.');
-
-            const results = await Promise.allSettled(sources.map(url => fetchWithTimeout(url)));
-            configData = [];
-            results.forEach((result, idx) => {
-                if (result.status === 'fulfilled') configData.push(...parseDataJson(result.value));
-                else console.error(`[app.js] Failed: ${sources[idx]}:`, result.reason.message);
-            });
-
-            if (configData.length === 0) {
-                showState('empty');
-            } else {
-                filteredData = configData.filter(item => isTargetVPN(item));
-                renderConfigItems();
-            }
-        } catch (error) {
-            console.error('[app.js] Fetch error:', error.message);
-            showState('error');
-        }
-    }
-
-    function renderConfigItems() {
-        configList.innerHTML = '';
-        if (filteredData.length === 0) { showState('empty'); return; }
-
-        filteredData.forEach(item => {
-            const downloadUrl = item.url || item.filename;
-            const div = document.createElement('div');
-            div.className = 'config-item';
-            div.innerHTML = `
-                <div class="config-text">
-                    <h3>${escapeHtml(item.name || item.filename)}</h3>
-                    <div class="config-meta">
-                        <span class="config-badge">
-                            <i class="${VPN_ICON}"></i>${VPN_DISPLAY_NAME}
-                        </span>
-                        <span class="config-date">
-                            <i class="fas fa-calendar-alt"></i>${item.date}
-                        </span>
-                        ${item.size ? `<span class="config-date"><i class="fas fa-hdd"></i>${item.size}</span>` : ''}
-                    </div>
-                </div>
-                <div class="file-actions">
-                    <button class="download-btn"
-                            data-url="${escapeAttr(downloadUrl)}"
-                            data-filename="${escapeAttr(item.filename)}"
-                            title="Download ${escapeAttr(item.name || item.filename)}">
-                        <i class="fas fa-download"></i>
-                    </button>
-                </div>
-            `;
-            configList.appendChild(div);
-        });
-
-        configList.querySelectorAll('.download-btn').forEach(btn => {
-            btn.addEventListener('click', function (e) {
-                e.preventDefault();
-                downloadFile(this.dataset.url, this.dataset.filename);
-            });
-        });
-
-        showState('content');
-    }
-
-    function escapeAttr(str) {
-        return str.replace(/[&<>'"]/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            if (m === "'") return '&#39;';
-            if (m === '"') return '&quot;';
-            return m;
-        });
-    }
-
-    if (retryButton) retryButton.addEventListener('click', fetchConfigData);
-    document.addEventListener('DOMContentLoaded', fetchConfigData);
-})();
-
-
-/* ── Ads ── */
-(function initAds() {
-    const ads = [
-        function showVignette() {
-            const s = document.createElement('script');
-            s.dataset.zone = '10338417';
-            s.src = 'https://gizokraijaw.net/vignette.min.js';
-            document.body.appendChild(s);
-        },
-        function showInterstitial() {
-            const s = document.createElement('script');
-            s.dataset.zone = '10338434';
-            s.src = 'https://groleegni.net/vignette.min.js';
-            document.body.appendChild(s);
-        }
-    ];
-
-    function showRandomAd() {
-        if (ads.length) ads[Math.floor(Math.random() * ads.length)]();
-    }
-
-    setInterval(showRandomAd, 10000);
-    showRandomAd();
-})();
+/* ── OLD EXTERNAL ADS REMOVED ── */
+// The old ad block that loaded third‑party scripts is gone.
