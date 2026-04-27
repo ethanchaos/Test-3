@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN Weekly Lite 100MB",
+    "vpn": "Stark VPN",
+    "filename": "MTN Weekly Lite 100MB.stk",
+    "date": "27 Apr 2026",
+    "config_id": "starkvpn"
+  },
+  {
     "name": "VODACOM SA UDP PLUG[YOUNG",
     "vpn": "HTTP Custom",
     "filename": "VODACOM SA UDP PLUG[YOUNG.hc",
