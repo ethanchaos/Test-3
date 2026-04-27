@@ -1,66 +1,10 @@
 [
   {
-    "name": "AllNET-UDP VPS²",
-    "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPS².ziv",
-    "date": "27 Apr 2026",
-    "config_id": "zivpntunnel"
-  },
-  {
-    "name": "AllNET-UDP VPS¹",
-    "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPS¹.ziv",
-    "date": "27 Apr 2026",
-    "config_id": "zivpntunnel"
-  },
-  {
     "name": "Benathi   MTN300     1",
     "vpn": "Stark VPN",
     "filename": "Benathi___MTN300_____1.stk",
     "date": "27 Apr 2026",
     "config_id": "starkvpn"
-  },
-  {
-    "name": "GOAT   FLASH POINT¶¥",
-    "vpn": "HA Tunnel",
-    "filename": "GOAT _ FLASH POINT¶¥.hat",
-    "date": "27 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": "Uluru × MTN",
-    "vpn": "NPV Tunnel",
-    "filename": "Uluru × MTN.npvt",
-    "date": "27 Apr 2026",
-    "config_id": "npvtunnel"
-  },
-  {
-    "name": "Uluru × MTN 1",
-    "vpn": "NPV Tunnel",
-    "filename": "Uluru × MTN_1.npvt",
-    "date": "27 Apr 2026",
-    "config_id": "npvtunnel"
-  },
-  {
-    "name": "Uluru × MTN 2",
-    "vpn": "NPV Tunnel",
-    "filename": "Uluru × MTN_2.npvt",
-    "date": "27 Apr 2026",
-    "config_id": "npvtunnel"
-  },
-  {
-    "name": "            3                BY [          ]    ",
-    "vpn": "TLS Tunnel",
-    "filename": "__ _________3_______________ BY [____ _ ___] ___.tls",
-    "date": "27 Apr 2026",
-    "config_id": "tlstunnel"
-  },
-  {
-    "name": "  --Øwæmï tts ¹  mb  ---- 102759",
-    "vpn": "HA Tunnel",
-    "filename": "__--Øwæmï_tts_¹__mb__----_102759.hat",
-    "date": "27 Apr 2026",
-    "config_id": "hatunnel"
   },
   {
     "name": "  500MB         ",
@@ -74,13 +18,6 @@
     "vpn": "HA Tunnel",
     "filename": "300 mb per day mtn_2.hat",
     "date": "27 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": "MTN.200mb. young Ghost of free nett           1",
-    "vpn": "HA Tunnel",
-    "filename": "MTN.200mb. young Ghost of free nett __________1.hat",
-    "date": "26 Apr 2026",
     "config_id": "hatunnel"
   },
   {
@@ -672,13 +609,6 @@
     "config_id": "httpcustom"
   },
   {
-    "name": "  OTC 300MB  ",
-    "vpn": "HTTP Custom",
-    "filename": "__OTC 300MB__.hc",
-    "date": "23 Apr 2026",
-    "config_id": "httpcustom"
-  },
-  {
     "name": "  SHADOW FAST UDP  ",
     "vpn": "ZIV PN Tunnel",
     "filename": "__SHADOW FAST UDP__.ziv",
@@ -693,30 +623,9 @@
     "config_id": "tlstunnel"
   },
   {
-    "name": "  []   -500  []  ",
-    "vpn": "HTTP Custom",
-    "filename": "__[]___-500__[]__.hc",
-    "date": "23 Apr 2026",
-    "config_id": "httpcustom"
-  },
-  {
-    "name": "  []   -500  []   1",
-    "vpn": "HTTP Custom",
-    "filename": "__[]___-500__[]___1.hc",
-    "date": "23 Apr 2026",
-    "config_id": "httpcustom"
-  },
-  {
     "name": "    hatunel 1 MTN BY ONGUENE   ",
     "vpn": "HA Tunnel",
     "filename": "___ hatunel 1 MTN BY ONGUENE __.hat",
-    "date": "23 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": "        (     )      ....                           ",
-    "vpn": "HA Tunnel",
-    "filename": "______ _(_____) _____....____ ______________________.hat",
     "date": "23 Apr 2026",
     "config_id": "hatunnel"
   },
@@ -726,13 +635,6 @@
     "filename": "_______________ 300__ ____ _______.hat",
     "date": "23 Apr 2026",
     "config_id": "hatunnel"
-  },
-  {
-    "name": "sir",
-    "vpn": "NPV Tunnel",
-    "filename": "sir.npvt",
-    "date": "23 Apr 2026",
-    "config_id": "npvtunnel"
   },
   {
     "name": "version586",
