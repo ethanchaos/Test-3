@@ -76,6 +76,11 @@ function fixGitHubUrl(url) {
 }
 
 async function downloadFile(url, filename) {
+    // Fire download-ad hook first
+    if (typeof window._adOnDownload === 'function') {
+        window._adOnDownload();
+    }
+
     filename = sanitizeFilename(filename);
 
     // Fix GitHub blob URLs → raw so they actually serve the file
@@ -101,13 +106,11 @@ async function downloadFile(url, filename) {
         window.ReactNativeWebView.postMessage(
             JSON.stringify({ type: 'DOWNLOAD_FILE', url, filename })
         );
-        showDownloadFeedback(filename);
         return;
     }
 
     if (window.Android && typeof window.Android.downloadFile === 'function') {
         window.Android.downloadFile(url, filename);
-        showDownloadFeedback(filename);
         return;
     }
 
@@ -116,8 +119,6 @@ async function downloadFile(url, filename) {
     // work reliably in ALL browsers, even for cross-origin URLs (GitHub raw, etc).
     // The browser can no longer override the filename or force a .txt extension.
     try {
-        showDownloadFeedback(filename); // show feedback immediately so it feels snappy
-
         const response = await fetch(url);
         if (!response.ok) throw new Error('Network response was not ok: ' + response.status);
 
@@ -157,40 +158,6 @@ async function downloadFile(url, filename) {
             window.open(url, '_blank');
         }
     }
-}
-
-function showDownloadFeedback(filename) {
-    const existing = document.querySelector('.download-feedback');
-    if (existing) existing.remove();
-
-    const feedback = document.createElement('div');
-    feedback.className = 'download-feedback';
-    feedback.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: var(--card-bg);
-        color: var(--text-dark);
-        padding: 14px 20px;
-        border-radius: 8px;
-        border: 1px solid var(--border-color);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        z-index: 9999;
-        font-size: 14px;
-        font-weight: 500;
-        animation: slideInRight 0.3s ease;
-        max-width: 300px;
-    `;
-    feedback.innerHTML = `
-        <i class="fas fa-download" style="color:var(--text-dark); margin-right:10px;"></i>
-        Downloading: <span style="font-weight:600;">${escapeHtml(filename)}</span>
-    `;
-    document.body.appendChild(feedback);
-
-    setTimeout(() => {
-        feedback.style.animation = 'fadeOutRight 0.3s ease';
-        setTimeout(() => feedback.remove(), 300);
-    }, 3000);
 }
 
 // helper to escape HTML in filename
@@ -481,146 +448,143 @@ function escapeHtml(str) {
     document.head.appendChild(s);
 })();
 
-
 /* ════════════════════════════════════════════════
-   OFFLINE / LOCAL-HOST AD SYSTEM
-   - Works completely without internet
-   - Loads ad content from local offline-ads.json, falls back to built-in ads
-   - Modal with countdown, no external redirects
-   - Timer-based & download-based triggers (same as before)
+   AD SYSTEM
+   Two ad formats, both once-per-session:
+     1. Timer Ad  — fires after N seconds on page
+     2. Download Ad — fires after N downloads
+   Both show a countdown, then redirect to ad URL.
+   Settings are loaded from ad-settings.json.
    ════════════════════════════════════════════════ */
-(function initOfflineAdSystem() {
+(function initAdSystem() {
 
-    const SESSION_KEY_TIMER     = 'off_ad_timer';
-    const SESSION_KEY_DOWNLOAD  = 'off_ad_download';
-    const SESSION_KEY_DL_COUNT  = 'off_ad_dl_count';
-    const SESSION_KEY_DL_THRESH = 'off_ad_dl_thresh';
+    /* ── Session flags (reset on page reload) ── */
+    const SESSION_KEY_TIMER    = 'ch_timer_ad_done';
+    const SESSION_KEY_DOWNLOAD = 'ch_download_ad_done';
+    const SESSION_KEY_DL_COUNT = 'ch_download_count';
 
-    // Default ad content – used if offline-ads.json fails or is missing
-    const DEFAULT_ADS = [
-        {
-            title: "Support Our Free Project",
-            message: "Thank you for using our service! Please consider supporting us by checking out our local sponsor.",
-            image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%234f46e5'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='14' font-family='sans-serif'%3ELocal Ad%3C/text%3E%3C/svg%3E",
-            buttonLabel: "Continue (local ad)"
-        },
-        {
-            title: "Keep the Project Alive",
-            message: "Ads are the only way we keep this service free. This is a locally hosted ad — no tracking, just your support.",
-            image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%230ea5e9'/%3E%3Ctext x='50' y='56' text-anchor='middle' fill='white' font-size='12' font-family='sans-serif'%3EThanks!%3C/text%3E%3C/svg%3E",
-            buttonLabel: "Continue"
-        }
-    ];
+    let adSettings = null;
 
-    let adConfig = null;
-
-    async function loadAdConfig() {
+    /* ── Load settings from JSON ── */
+    async function loadAdSettings() {
         try {
-            const res = await fetch('offline-ads.json?_t=' + Date.now());
-            if (!res.ok) throw new Error('HTTP ' + res.status);
-            const data = await res.json();
-            // Ad config: { enabled: bool, timerAd: {enabled, seconds, waiting, ads: [...]}, downloadAd: {enabled, min, max, waiting, ads: [...]} }
-            // Each ad can have: title, message, image (URL/base64), buttonLabel
-            adConfig = data;
+            const r = await fetch('ad-settings.json?_t=' + Date.now());
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            adSettings = await r.json();
         } catch (e) {
-            console.warn('[Offline Ads] Could not load offline-ads.json, using built-in ads.', e);
-            adConfig = {
-                enabled: true,
-                timerAd: {
-                    enabled: true,
-                    triggerAfterSeconds: 45,
-                    waitingPeriodSeconds: 5,
-                    ads: DEFAULT_ADS
-                },
-                downloadAd: {
-                    enabled: true,
-                    minDownloads: 2,
-                    maxDownloads: 4,
-                    waitingPeriodSeconds: 5,
-                    ads: DEFAULT_ADS
-                }
-            };
+            console.warn('[Ads] Could not load ad-settings.json, using defaults.', e);
+            adSettings = getDefaultSettings();
         }
-        if (adConfig.enabled) {
+        if (adSettings.enabled) {
             scheduleTimerAd();
         }
     }
 
-    function getRandomAd(adsArray) {
-        if (!adsArray || adsArray.length === 0) return DEFAULT_ADS[0];
-        return adsArray[Math.floor(Math.random() * adsArray.length)];
+    function getDefaultSettings() {
+        return {
+            enabled: true,
+            timerAd: {
+                enabled: true,
+                triggerAfterSeconds: 50,
+                waitingPeriodSeconds: 5,
+                redirectUrl: 'https://gizokraijaw.net/vignette.min.js',
+                message: 'Support the creator by watching an ad to continue downloading.',
+                buttonLabel: 'Continue to Ad'
+            },
+            downloadAd: {
+                enabled: true,
+                minDownloads: 2,
+                maxDownloads: 4,
+                waitingPeriodSeconds: 5,
+                redirectUrl: 'https://groleegni.net/vignette.min.js',
+                message: "You've been downloading for free! Please support the creator by watching a short ad.",
+                buttonLabel: 'Watch Ad & Continue'
+            },
+            adZones: {
+                vignette: '10338417',
+                interstitial: '10338434'
+            }
+        };
     }
 
     /* ── Timer Ad ── */
     function scheduleTimerAd() {
-        const cfg = adConfig && adConfig.timerAd;
+        const cfg = adSettings.timerAd;
         if (!cfg || !cfg.enabled) return;
-        if (sessionStorage.getItem(SESSION_KEY_TIMER)) return;
+        if (sessionStorage.getItem(SESSION_KEY_TIMER)) return; // already shown this session
 
-        const delay = (cfg.triggerAfterSeconds || 45) * 1000;
+        const delay = (cfg.triggerAfterSeconds || 50) * 1000;
         setTimeout(() => {
             if (!sessionStorage.getItem(SESSION_KEY_TIMER)) {
-                showOfflineAdModal('timer');
+                showAdModal('timer');
             }
         }, delay);
     }
 
-    /* ── Download Ad hook (called by downloadFile) ── */
-    window._offlineAdOnDownload = function () {
-        if (!adConfig || !adConfig.enabled) return;
-        const cfg = adConfig.downloadAd;
+    /* ── Download Ad — called after each download ── */
+    window._adOnDownload = function () {
+        if (!adSettings || !adSettings.enabled) return;
+        const cfg = adSettings.downloadAd;
         if (!cfg || !cfg.enabled) return;
-        if (sessionStorage.getItem(SESSION_KEY_DOWNLOAD)) return;
+        if (sessionStorage.getItem(SESSION_KEY_DOWNLOAD)) return; // already shown this session
 
         let count = parseInt(sessionStorage.getItem(SESSION_KEY_DL_COUNT) || '0', 10);
         count += 1;
         sessionStorage.setItem(SESSION_KEY_DL_COUNT, count);
 
-        let threshold = parseInt(sessionStorage.getItem(SESSION_KEY_DL_THRESH) || '0', 10);
+        const min = cfg.minDownloads || 2;
+        const max = cfg.maxDownloads || 4;
+        /* Pick a random threshold between min and max once and store it */
+        const THRESHOLD_KEY = 'ch_dl_threshold';
+        let threshold = parseInt(sessionStorage.getItem(THRESHOLD_KEY) || '0', 10);
         if (!threshold) {
-            const min = cfg.minDownloads || 2;
-            const max = cfg.maxDownloads || 4;
             threshold = Math.floor(Math.random() * (max - min + 1)) + min;
-            sessionStorage.setItem(SESSION_KEY_DL_THRESH, threshold);
+            sessionStorage.setItem(THRESHOLD_KEY, threshold);
         }
 
         if (count >= threshold) {
-            showOfflineAdModal('download');
+            showAdModal('download');
         }
     };
 
-    /* ── Modal for offline/local ads ── */
-    function showOfflineAdModal(type) {
+    /* ════════════════════════════════════════════
+       MODAL BUILDER
+       type: 'timer' | 'download'
+    ════════════════════════════════════════════ */
+    function showAdModal(type) {
+        /* Mark as shown immediately so duplicate triggers don't stack */
         if (type === 'timer')    sessionStorage.setItem(SESSION_KEY_TIMER, '1');
         if (type === 'download') sessionStorage.setItem(SESSION_KEY_DOWNLOAD, '1');
 
-        const cfg = type === 'timer' ? adConfig.timerAd : adConfig.downloadAd;
-        const adsArray = cfg && cfg.ads ? cfg.ads : DEFAULT_ADS;
-        const ad = getRandomAd(adsArray);
-        const waitSeconds = cfg ? (cfg.waitingPeriodSeconds || 5) : 5;
-        const btnLabel = ad.buttonLabel || 'Continue';
+        const cfg = type === 'timer' ? adSettings.timerAd : adSettings.downloadAd;
+        const waitSeconds = cfg.waitingPeriodSeconds || 5;
+        const redirectUrl = cfg.redirectUrl || '#';
+        const message     = cfg.message || 'Please watch an ad to continue.';
+        const btnLabel    = cfg.buttonLabel || 'Watch Ad';
 
-        // Inject styles once
-        if (!document.getElementById('off-ad-style')) {
+        /* ── Inject modal CSS once ── */
+        if (!document.getElementById('ch-ad-style')) {
             const style = document.createElement('style');
-            style.id = 'off-ad-style';
+            style.id = 'ch-ad-style';
             style.textContent = `
-                #off-ad-overlay {
+                /* ── Ad Overlay ── */
+                #ch-ad-overlay {
                     position: fixed;
                     inset: 0;
                     z-index: 99999;
-                    background: rgba(0,0,0,0.82);
+                    background: rgba(0, 0, 0, 0.82);
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    animation: offAdFadeIn 0.35s ease;
+                    animation: chFadeIn 0.35s ease;
                     padding: 20px;
                 }
-                @keyframes offAdFadeIn {
+                @keyframes chFadeIn {
                     from { opacity: 0; }
                     to   { opacity: 1; }
                 }
-                #off-ad-box {
+
+                #ch-ad-box {
                     background: #ffffff;
                     border-radius: 18px;
                     padding: 32px 28px 28px;
@@ -628,99 +592,166 @@ function escapeHtml(str) {
                     width: 100%;
                     text-align: center;
                     box-shadow: 0 24px 60px rgba(0,0,0,0.45);
-                    animation: offAdSlideUp 0.4s cubic-bezier(0.34,1.56,0.64,1);
+                    position: relative;
+                    animation: chSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
                 }
-                @keyframes offAdSlideUp {
+                @keyframes chSlideUp {
                     from { transform: translateY(40px) scale(0.95); opacity: 0; }
-                    to   { transform: translateY(0) scale(1); opacity: 1; }
+                    to   { transform: translateY(0)    scale(1);    opacity: 1; }
                 }
-                .off-ad-img {
-                    width: 100%;
-                    height: auto;
-                    max-height: 180px;
-                    object-fit: contain;
-                    border-radius: 12px;
-                    margin-bottom: 18px;
+
+                #ch-ad-icon {
+                    width: 64px;
+                    height: 64px;
+                    background: #1a1a1a;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 0 auto 18px;
                 }
-                #off-ad-title {
+                #ch-ad-icon i {
+                    color: #fff;
+                    font-size: 1.6rem;
+                }
+
+                #ch-ad-title {
                     font-family: 'Segoe UI', system-ui, sans-serif;
-                    font-size: 1.2rem; font-weight: 700;
-                    color: #1a1a1a; margin-bottom: 10px; line-height: 1.3;
+                    font-size: 1.2rem;
+                    font-weight: 700;
+                    color: #1a1a1a;
+                    margin-bottom: 10px;
+                    line-height: 1.3;
                 }
-                #off-ad-msg {
+
+                #ch-ad-msg {
                     font-family: 'Segoe UI', system-ui, sans-serif;
-                    font-size: 0.92rem; color: #555;
-                    line-height: 1.6; margin-bottom: 24px;
+                    font-size: 0.92rem;
+                    color: #555;
+                    line-height: 1.6;
+                    margin-bottom: 24px;
                 }
-                #off-ad-ring-wrap {
+
+                /* ── Countdown ring ── */
+                #ch-ad-ring-wrap {
                     margin: 0 auto 22px;
-                    width: 80px; height: 80px; position: relative;
+                    width: 80px;
+                    height: 80px;
+                    position: relative;
                 }
-                #off-ad-ring-svg { transform: rotate(-90deg); width: 80px; height: 80px; }
-                #off-ad-ring-bg  { fill: none; stroke: #eeeeee; stroke-width: 6; }
-                #off-ad-ring-fill {
-                    fill: none; stroke: #1a1a1a; stroke-width: 6;
-                    stroke-linecap: round; transition: stroke-dashoffset 1s linear;
+                #ch-ad-ring-svg {
+                    transform: rotate(-90deg);
+                    width: 80px;
+                    height: 80px;
                 }
-                #off-ad-ring-num {
-                    position: absolute; inset: 0;
-                    display: flex; align-items: center; justify-content: center;
+                #ch-ad-ring-bg {
+                    fill: none;
+                    stroke: #eeeeee;
+                    stroke-width: 6;
+                }
+                #ch-ad-ring-fill {
+                    fill: none;
+                    stroke: #1a1a1a;
+                    stroke-width: 6;
+                    stroke-linecap: round;
+                    transition: stroke-dashoffset 1s linear;
+                }
+                #ch-ad-ring-num {
+                    position: absolute;
+                    inset: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     font-family: 'Segoe UI', system-ui, sans-serif;
-                    font-size: 1.6rem; font-weight: 700; color: #1a1a1a;
+                    font-size: 1.6rem;
+                    font-weight: 700;
+                    color: #1a1a1a;
                 }
-                #off-ad-btn {
-                    display: inline-flex; align-items: center; justify-content: center;
-                    gap: 8px; background: #1a1a1a; color: #fff;
-                    border: none; border-radius: 10px;
-                    padding: 14px 28px; width: 100%;
+
+                /* ── CTA Button ── */
+                #ch-ad-btn {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    background: #1a1a1a;
+                    color: #ffffff;
+                    border: none;
+                    border-radius: 10px;
+                    padding: 14px 28px;
                     font-family: 'Segoe UI', system-ui, sans-serif;
-                    font-size: 0.95rem; font-weight: 600;
-                    cursor: pointer; transition: background 0.2s, transform 0.15s;
+                    font-size: 0.95rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: background 0.2s ease, transform 0.15s ease;
+                    width: 100%;
+                    justify-content: center;
                 }
-                #off-ad-btn:disabled { background: #cccccc; cursor: not-allowed; }
-                #off-ad-btn:not(:disabled):hover { background: #000; transform: translateY(-1px); }
-                #off-ad-btn:not(:disabled):active { transform: scale(0.97); }
-                #off-ad-tagline {
+                #ch-ad-btn:disabled {
+                    background: #cccccc;
+                    cursor: not-allowed;
+                    transform: none;
+                }
+                #ch-ad-btn:not(:disabled):hover {
+                    background: #000000;
+                    transform: translateY(-1px);
+                }
+                #ch-ad-btn:not(:disabled):active {
+                    transform: scale(0.97);
+                }
+
+                #ch-ad-tagline {
                     margin-top: 14px;
                     font-family: 'Segoe UI', system-ui, sans-serif;
-                    font-size: 0.76rem; color: #aaa;
+                    font-size: 0.76rem;
+                    color: #aaa;
                 }
             `;
             document.head.appendChild(style);
         }
 
-        const circumference = 2 * Math.PI * 30;
-
+        /* ── Build modal ── */
         const overlay = document.createElement('div');
-        overlay.id = 'off-ad-overlay';
+        overlay.id = 'ch-ad-overlay';
+
+        const iconClass = type === 'timer' ? 'fas fa-clock' : 'fas fa-heart';
+        const titleText = type === 'timer'
+            ? 'Support the Creator'
+            : 'Keep the Downloads Free';
+
+        const circumference = 2 * Math.PI * 30; // r=30
+
         overlay.innerHTML = `
-            <div id="off-ad-box">
-                ${ad.image ? `<img src="${ad.image}" class="off-ad-img" alt="ad">` : ''}
-                <div id="off-ad-title">${escapeHtml(ad.title)}</div>
-                <div id="off-ad-msg">${escapeHtml(ad.message)}</div>
-                <div id="off-ad-ring-wrap">
-                    <svg id="off-ad-ring-svg" viewBox="0 0 80 80">
-                        <circle id="off-ad-ring-bg" cx="40" cy="40" r="30"/>
-                        <circle id="off-ad-ring-fill" cx="40" cy="40" r="30"
+            <div id="ch-ad-box">
+                <div id="ch-ad-icon"><i class="${iconClass}"></i></div>
+                <div id="ch-ad-title">${titleText}</div>
+                <div id="ch-ad-msg">${message}</div>
+
+                <div id="ch-ad-ring-wrap">
+                    <svg id="ch-ad-ring-svg" viewBox="0 0 80 80">
+                        <circle id="ch-ad-ring-bg" cx="40" cy="40" r="30"/>
+                        <circle id="ch-ad-ring-fill" cx="40" cy="40" r="30"
                             stroke-dasharray="${circumference}"
                             stroke-dashoffset="0"/>
                     </svg>
-                    <div id="off-ad-ring-num">${waitSeconds}</div>
+                    <div id="ch-ad-ring-num">${waitSeconds}</div>
                 </div>
-                <button id="off-ad-btn" disabled>
-                    <i class="fas fa-hourglass-half" id="off-ad-btn-icon"></i>
-                    <span id="off-ad-btn-label">Please wait… ${waitSeconds}s</span>
+
+                <button id="ch-ad-btn" disabled>
+                    <i class="fas fa-hourglass-half" id="ch-ad-btn-icon"></i>
+                    <span id="ch-ad-btn-label">Please wait… ${waitSeconds}s</span>
                 </button>
-                <div id="off-ad-tagline">Offline ad — no tracking, just support ❤️</div>
+                <div id="ch-ad-tagline">Ads keep this service free for everyone ❤️</div>
             </div>
         `;
+
         document.body.appendChild(overlay);
 
-        const ring    = document.getElementById('off-ad-ring-fill');
-        const numEl   = document.getElementById('off-ad-ring-num');
-        const btn     = document.getElementById('off-ad-btn');
-        const btnIcon = document.getElementById('off-ad-btn-icon');
-        const btnLbl  = document.getElementById('off-ad-btn-label');
+        /* ── Countdown logic ── */
+        const ring    = document.getElementById('ch-ad-ring-fill');
+        const numEl   = document.getElementById('ch-ad-ring-num');
+        const btn     = document.getElementById('ch-ad-btn');
+        const btnIcon = document.getElementById('ch-ad-btn-icon');
+        const btnLbl  = document.getElementById('ch-ad-btn-label');
 
         ring.style.strokeDasharray  = circumference;
         ring.style.strokeDashoffset = '0';
@@ -730,12 +761,16 @@ function escapeHtml(str) {
         function tick() {
             remaining--;
             numEl.textContent = remaining;
-            const offset = circumference * ((waitSeconds - remaining) / waitSeconds);
+
+            /* Countdown goes downward: offset increases as time passes */
+            const progress  = (waitSeconds - remaining) / waitSeconds; // 0 → 1
+            const offset    = circumference * progress;
             ring.style.strokeDashoffset = offset;
 
             if (remaining <= 0) {
+                /* Unlock button */
                 btn.disabled = false;
-                btnIcon.className = 'fas fa-check';
+                btnIcon.className = 'fas fa-external-link-alt';
                 btnLbl.textContent = btnLabel;
                 numEl.textContent = '✓';
                 ring.style.stroke = '#22c55e';
@@ -746,35 +781,20 @@ function escapeHtml(str) {
         }
         setTimeout(tick, 1000);
 
+        /* ── Button click → redirect ── */
         btn.addEventListener('click', () => {
-            // Close the modal — no redirect, just resume
+            if (btn.disabled) return;
             document.body.removeChild(overlay);
+            /* Open ad in new tab so user returns to site */
+            window.open(redirectUrl, '_blank');
         });
     }
 
-    // Hook into existing downloads – modify the downloadFile function to call our hook
-    // We need to patch the existing downloadFile to call _offlineAdOnDownload *after* the actual download logic?
-    // Actually we can call it from inside the existing downloadFile function.
-    // Since downloadFile is defined above, we can replace it with a wrapper that still does its job and calls the ad hook.
-    const originalDownloadFile = downloadFile;
-    window.downloadFile = async function(url, filename) {
-        // Call the original
-        await originalDownloadFile(url, filename);
-        // Trigger offline ad hook
-        if (typeof window._offlineAdOnDownload === 'function') {
-            window._offlineAdOnDownload();
-        }
-    };
-
-    // Load config when DOM is ready
+    /* ── Boot ── */
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadAdConfig);
+        document.addEventListener('DOMContentLoaded', loadAdSettings);
     } else {
-        loadAdConfig();
+        loadAdSettings();
     }
 
 })();
-
-
-/* ── OLD EXTERNAL ADS REMOVED ── */
-// The old ad block that loaded third‑party scripts is gone.
