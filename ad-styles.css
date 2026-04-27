@@ -1,0 +1,729 @@
+/* ============================================
+   AD SYSTEM — STYLES v2
+   Liquid glass video UI · Modern loading state
+   Clean app modal · Black divider line
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  --white:          #ffffff;
+  --off-white:      #f8f7f4;
+  --light-gray:     #e8e6e1;
+  --mid-gray:       #b0aca3;
+  --dark-gray:      #3a3835;
+  --charcoal:       #1c1a18;
+  --accent:         #ff5a1f;
+
+  /* Liquid glass recipe */
+  --glass-bg:       rgba(255, 255, 255, 0.15);
+  --glass-bg-heavy: rgba(255, 255, 255, 0.26);
+  --glass-border:   rgba(255, 255, 255, 0.42);
+  --glass-shadow:   0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.5);
+  --glass-blur:     saturate(200%) blur(20px);
+
+  --shadow-heavy:   0 20px 60px rgba(0,0,0,0.24);
+  --radius-md:      14px;
+  --radius-full:    9999px;
+
+  --font-main: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
+  --smooth:    cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ═══════════════════════════════════════════
+   OVERLAY
+═══════════════════════════════════════════ */
+#ad-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: #000;
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+#ad-overlay.ad-visible {
+  display: flex;
+  flex-direction: column;
+  animation: adFadeIn 0.4s var(--smooth) both;
+}
+
+@keyframes adFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ═══════════════════════════════════════════
+   VIDEO LAYER
+═══════════════════════════════════════════ */
+#ad-video-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+#ad-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #000;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#ad-video.playing {
+  opacity: 1;
+}
+
+/* ═══════════════════════════════════════════
+   LOADING STATE
+   Covers video until metadata + canplay ready
+═══════════════════════════════════════════ */
+#ad-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  background: #080808;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+#ad-loading.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Outer glass disk + spinning arc */
+.ad-loader-ring {
+  position: relative;
+  width: 68px;
+  height: 68px;
+}
+
+.ad-loader-ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.ad-loader-ring::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: rgba(255,255,255,0.95);
+  border-right-color: rgba(255,255,255,0.3);
+  animation: spinRing 0.85s linear infinite;
+}
+
+@keyframes spinRing {
+  to { transform: rotate(360deg); }
+}
+
+.ad-loader-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: dotPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { transform: translate(-50%,-50%) scale(1);   opacity: 0.9; }
+  50%       { transform: translate(-50%,-50%) scale(0.4); opacity: 0.2; }
+}
+
+.ad-loading-text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  animation: fadePulse 2s ease-in-out infinite;
+}
+
+@keyframes fadePulse {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 0.65; }
+}
+
+/* ═══════════════════════════════════════════
+   UNMUTE PROMPT PILL
+═══════════════════════════════════════════ */
+#ad-unmute-prompt {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 9999px;
+  padding: 10px 18px;
+  color: rgba(255, 255, 255, 0.92);
+  font-family: var(--font-main);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.45);
+}
+
+#ad-unmute-prompt.visible {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(-50%) translateY(0);
+  animation: unmutePulse 2s ease-in-out 0.5s 3;
+}
+
+@keyframes unmutePulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(0,0,0,0.45); }
+  50%       { box-shadow: 0 4px 20px rgba(0,0,0,0.45), 0 0 0 6px rgba(255,255,255,0.12); }
+}
+
+#ad-unmute-prompt svg {
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+/* ═══════════════════════════════════════════
+   PAUSE INDICATOR
+═══════════════════════════════════════════ */
+#ad-click-area {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  cursor: pointer;
+}
+
+#ad-pause-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%) scale(0.5);
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--glass-bg-heavy);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.28s var(--spring);
+  z-index: 20;
+}
+
+#ad-pause-indicator.show {
+  opacity: 1;
+  transform: translate(-50%,-50%) scale(1);
+}
+
+#ad-pause-indicator svg {
+  width: 26px;
+  height: 26px;
+  color: rgba(255,255,255,0.93);
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.4));
+}
+
+/* ═══════════════════════════════════════════
+   TOP BAR  —  liquid glass controls
+═══════════════════════════════════════════ */
+#ad-top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  padding: 18px 18px 44px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.52) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* AD label */
+#ad-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+}
+
+/* Right cluster */
+#ad-skip-area {
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Timer pill */
+#ad-timer-pill {
+  display: flex;
+  align-items: center;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  padding: 7px 15px;
+  box-shadow: var(--glass-shadow);
+}
+
+#ad-timer-text {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.92);
+  min-width: 20px;
+  text-align: center;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+/* Skip/Next button */
+#ad-skip-btn {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 9px 17px 9px 13px;
+  font-family: var(--font-main);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--charcoal);
+  cursor: pointer;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  box-shadow: 0 4px 22px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.8);
+  transition: transform 0.2s var(--spring), box-shadow 0.2s ease;
+}
+
+#ad-skip-btn.visible {
+  display: flex;
+  animation: skipReveal 0.38s var(--spring) both;
+}
+
+#ad-skip-btn:hover  { transform: scale(1.05); box-shadow: 0 6px 28px rgba(0,0,0,0.45); }
+#ad-skip-btn:active { transform: scale(0.96); }
+
+#ad-skip-btn svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+@keyframes skipReveal {
+  from { opacity: 0; transform: scale(0.6) translateX(14px); }
+  to   { opacity: 1; transform: scale(1)   translateX(0); }
+}
+
+/* ── Exit button (top-right, shown after modal closes) ── */
+#ad-exit-btn {
+  display: none;
+  pointer-events: all;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  box-shadow: var(--glass-shadow);
+  cursor: pointer;
+  transition: transform 0.22s var(--spring), background 0.15s ease;
+}
+
+#ad-exit-btn.visible {
+  display: flex;
+  animation: exitReveal 0.4s var(--spring) both;
+}
+
+#ad-exit-btn:hover  { background: var(--glass-bg-heavy); transform: scale(1.12) rotate(6deg); }
+#ad-exit-btn:active { transform: scale(0.9); }
+
+#ad-exit-btn svg {
+  width: 15px;
+  height: 15px;
+  color: rgba(255,255,255,0.9);
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4));
+}
+
+@keyframes exitReveal {
+  from { opacity: 0; transform: scale(0.4) rotate(-30deg); }
+  to   { opacity: 1; transform: scale(1)   rotate(0deg); }
+}
+
+/* ═══════════════════════════════════════════
+   PROGRESS BAR
+═══════════════════════════════════════════ */
+#ad-progress-track {
+  position: absolute;
+  bottom: 68px;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  padding: 0 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#ad-overlay:hover #ad-progress-track,
+#ad-overlay.show-controls #ad-progress-track {
+  opacity: 1;
+}
+
+#ad-progress-bg {
+  height: 3px;
+  background: rgba(255,255,255,0.18);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+#ad-progress-fill {
+  height: 100%;
+  background: rgba(255,255,255,0.9);
+  border-radius: var(--radius-full);
+  width: 0%;
+  transition: width 0.35s linear;
+  box-shadow: 0 0 8px rgba(255,255,255,0.45);
+}
+
+/* ═══════════════════════════════════════════
+   BOTTOM BAR  —  liquid glass mute
+═══════════════════════════════════════════ */
+#ad-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  padding: 10px 18px 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%);
+}
+
+#ad-mute-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  box-shadow: var(--glass-shadow);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.2s var(--spring), background 0.15s ease;
+}
+
+#ad-mute-btn:hover  { background: var(--glass-bg-heavy); transform: scale(1.1); }
+#ad-mute-btn:active { transform: scale(0.93); }
+
+#ad-mute-btn svg {
+  width: 19px;
+  height: 19px;
+  color: rgba(255,255,255,0.92);
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+}
+
+#ad-volume-bar {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+#ad-volume-bar.visible {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: all;
+}
+
+#ad-volume-track {
+  width: 76px;
+  height: 3px;
+  background: rgba(255,255,255,0.2);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+#ad-volume-fill {
+  height: 100%;
+  background: rgba(255,255,255,0.85);
+  border-radius: var(--radius-full);
+  width: 100%;
+  transition: width 0.1s ease;
+  box-shadow: 0 0 6px rgba(255,255,255,0.35);
+}
+
+/* ═══════════════════════════════════════════
+   PLAY STORE MODAL  —  untouched, stays clean
+═══════════════════════════════════════════ */
+#ad-playstore-modal {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+#ad-playstore-modal.open {
+  display: flex;
+  animation: modalSlideUp 0.42s var(--spring) both;
+}
+
+@keyframes modalSlideUp {
+  from { transform: translateY(110%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+#ad-playstore-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+#ad-playstore-sheet {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  background: var(--white);
+  border-radius: 26px 26px 0 0;
+  padding: 0 0 36px;
+  box-shadow: 0 -8px 60px rgba(0,0,0,0.28);
+  overflow: hidden;
+}
+
+/* Black divider line handle */
+#ad-sheet-handle {
+  display: flex;
+  justify-content: center;
+  padding: 14px 0 10px;
+}
+
+#ad-sheet-handle::after {
+  content: '';
+  width: 40px;
+  height: 2px;
+  background: #1c1a18;
+  border-radius: var(--radius-full);
+  opacity: 0.16;
+}
+
+/* Timer drain bar */
+#ad-close-timer-bar {
+  height: 2px;
+  background: var(--light-gray);
+  margin: 0 24px 20px;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+#ad-close-timer-fill {
+  height: 100%;
+  background: var(--charcoal);
+  border-radius: var(--radius-full);
+  width: 100%;
+  transition: width 1s linear;
+}
+
+/* App card */
+#ad-app-card { padding: 0 24px; }
+
+#ad-app-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+#ad-app-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  background: var(--light-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.09);
+  overflow: hidden;
+}
+
+#ad-app-icon img { width: 100%; height: 100%; object-fit: cover; }
+
+#ad-app-info { flex: 1; min-width: 0; }
+
+#ad-app-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--charcoal);
+  letter-spacing: -0.025em;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#ad-app-developer {
+  font-size: 12px;
+  color: var(--mid-gray);
+  margin-bottom: 7px;
+}
+
+#ad-app-rating { display: flex; align-items: center; gap: 5px; }
+
+#ad-app-stars { color: #f59e0b; font-size: 12px; letter-spacing: 1.5px; }
+
+#ad-app-rating-num {
+  font-size: 11px;
+  color: var(--mid-gray);
+  font-family: var(--font-mono);
+}
+
+#ad-app-screenshots {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  margin-bottom: 16px;
+  scrollbar-width: none;
+}
+#ad-app-screenshots::-webkit-scrollbar { display: none; }
+
+.ad-screenshot {
+  flex-shrink: 0;
+  width: 88px;
+  height: 148px;
+  background: var(--light-gray);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.ad-screenshot img { width: 100%; height: 100%; object-fit: cover; }
+
+#ad-app-description {
+  font-size: 13px;
+  color: #6b6763;
+  line-height: 1.65;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+#ad-app-cta-row { display: flex; align-items: center; gap: 12px; }
+
+#ad-install-btn {
+  flex: 1;
+  background: #01875f;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 14px 24px;
+  font-family: var(--font-main);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: filter 0.15s ease, transform 0.15s var(--spring);
+}
+#ad-install-btn:hover { filter: brightness(1.08); transform: scale(1.02); }
+
+#ad-close-modal-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background: var(--off-white);
+  border: 1.5px solid var(--light-gray);
+  border-radius: 50%;
+  cursor: pointer;
+  gap: 1px;
+  flex-shrink: 0;
+  transition: background 0.15s ease, transform 0.15s var(--spring), border-color 0.15s;
+}
+#ad-close-modal-btn:hover { background: var(--light-gray); border-color: var(--mid-gray); transform: scale(1.06); }
+
+#ad-close-modal-btn .close-countdown {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--charcoal);
+  line-height: 1;
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 480px) {
+  #ad-playstore-sheet { border-radius: 20px 20px 0 0; }
+  #ad-app-card { padding: 0 18px; }
+  #ad-app-icon { width: 60px; height: 60px; border-radius: 14px; font-size: 26px; }
+  #ad-app-name { font-size: 16px; }
+}
