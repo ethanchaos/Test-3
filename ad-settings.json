@@ -8,7 +8,7 @@
     "enabled": true,
     "triggerAfterSeconds": 50,
     "waitingPeriodSeconds": 5,
-    "redirectUrl": "https://your-ad-direct-link.com/timer-ad",
+    "redirectUrl": "https://omg10.com/4/10930927",
     "message": "Support the creator by watching an ad to continue downloading.",
     "buttonLabel": "Continue to Ad"
   },
@@ -16,10 +16,10 @@
   "downloadAd": {
     "_comment": "Shown after X downloads. No cancel button. Once per session.",
     "enabled": true,
-    "minDownloads": 2,
-    "maxDownloads": 4,
+    "minDownloads": 3,
+    "maxDownloads": 5,
     "waitingPeriodSeconds": 5,
-    "redirectUrl": "https://your-ad-direct-link.com/download-ad",
+    "redirectUrl": "https://omg10.com/4/10930927",
     "message": "You've been downloading for free! Please support the creator by watching a short ad.",
     "buttonLabel": "Watch Ad & Continue"
   }
