@@ -1,5 +1,12 @@
 [
   {
+    "name": "The kidmakingmoves 300 MB plug",
+    "vpn": "HA Tunnel",
+    "filename": "The kidmakingmoves 300 MB plug.hat",
+    "date": "27 Apr 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "MTN Weekly Lite 100MB",
     "vpn": "Stark VPN",
     "filename": "MTN Weekly Lite 100MB.stk",
