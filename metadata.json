@@ -16,8 +16,8 @@
     "count": 13
   },
   "npvtunnel": {
-    "last_updated": "2026-04-20 00:50:10",
-    "count": 0
+    "last_updated": "2026-04-27 11:08:00",
+    "count": 24
   },
   "opentunnel": {
     "last_updated": "2025-12-10 18:50:10",
@@ -38,10 +38,6 @@
   "linklayer": {
     "last_updated": "2025-12-12 13:10:15",
     "count": 0
-  },
-  "npvtunnel": {
-    "last_updated": "2026-04-26 09:06:06",
-    "count": 21
   },
   "unknown": {
     "last_updated": "2025-12-18 01:08:02",
