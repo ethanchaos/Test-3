@@ -6,7 +6,7 @@
   "timerAd": {
     "_comment": "Shown after X seconds on page. No cancel button. Once per session.",
     "enabled": true,
-    "triggerAfterSeconds": 50,
+    "triggerAfterSeconds": 30,
     "waitingPeriodSeconds": 5,
     "redirectUrl": "https://omg10.com/4/10930927",
     "message": "Support the creator by watching an ad to continue downloading.",
@@ -16,8 +16,8 @@
   "downloadAd": {
     "_comment": "Shown after X downloads. No cancel button. Once per session.",
     "enabled": true,
-    "minDownloads": 3,
-    "maxDownloads": 5,
+    "minDownloads": 2,
+    "maxDownloads": 3,
     "waitingPeriodSeconds": 5,
     "redirectUrl": "https://omg10.com/4/10931602",
     "message": "You've been downloading for free! Please support the creator by watching a short ad.",
