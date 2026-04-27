@@ -14,13 +14,6 @@
     "config_id": "hatunnel"
   },
   {
-    "name": "300 mb per day mtn 2",
-    "vpn": "HA Tunnel",
-    "filename": "300 mb per day mtn_2.hat",
-    "date": "27 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
     "name": "THOMAS SHELBY  ",
     "vpn": "NPV Tunnel",
     "filename": "THOMAS SHELBY _.npvt",
@@ -126,23 +119,9 @@
     "config_id": "hatunnel"
   },
   {
-    "name": "                              ",
-    "vpn": "HA Tunnel",
-    "filename": "___ _______ _______ ____ _____.hat",
-    "date": "23 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
     "name": "300mb   MTN     by young Ghost     ",
     "vpn": "HA Tunnel",
     "filename": "300mb   MTN     by young Ghost ____.hat",
-    "date": "23 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": "         Young Ghost.mtn.60mb   ",
-    "vpn": "HA Tunnel",
-    "filename": "_________Young Ghost.mtn.60mb __.hat",
     "date": "23 Apr 2026",
     "config_id": "hatunnel"
   },
@@ -376,13 +355,6 @@
     "filename": "MTN POSSIBLE 500MB.ehi",
     "date": "23 Apr 2026",
     "config_id": "httpinjector"
-  },
-  {
-    "name": "MTN.CO.ZA ",
-    "vpn": "HA Tunnel",
-    "filename": "MTN.CO.ZA .hat",
-    "date": "23 Apr 2026",
-    "config_id": "hatunnel"
   },
   {
     "name": "MTN 300 MB V2RAY",
@@ -621,20 +593,6 @@
     "filename": "__Theboy166 ___[mtn Premium 500MB].tls",
     "date": "23 Apr 2026",
     "config_id": "tlstunnel"
-  },
-  {
-    "name": "    hatunel 1 MTN BY ONGUENE   ",
-    "vpn": "HA Tunnel",
-    "filename": "___ hatunel 1 MTN BY ONGUENE __.hat",
-    "date": "23 Apr 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": "                300               ",
-    "vpn": "HA Tunnel",
-    "filename": "_______________ 300__ ____ _______.hat",
-    "date": "23 Apr 2026",
-    "config_id": "hatunnel"
   },
   {
     "name": "version586",
