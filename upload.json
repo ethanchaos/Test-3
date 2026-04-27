@@ -1,5 +1,12 @@
 [
   {
+    "name": "UDP PLUG",
+    "vpn": "HTTP Custom",
+    "filename": "UDP PLUG.hc",
+    "date": "27 Apr 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "The kidmakingmoves 300 MB plug",
     "vpn": "HA Tunnel",
     "filename": "The kidmakingmoves 300 MB plug.hat",
