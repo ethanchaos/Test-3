@@ -1,0 +1,26 @@
+{
+  "_comment": "Confighub Ad Settings — edit redirectUrl to your actual direct link ad URLs",
+
+  "enabled": true,
+
+  "timerAd": {
+    "_comment": "Shown after X seconds on page. No cancel button. Once per session.",
+    "enabled": true,
+    "triggerAfterSeconds": 50,
+    "waitingPeriodSeconds": 5,
+    "redirectUrl": "https://your-ad-direct-link.com/timer-ad",
+    "message": "Support the creator by watching an ad to continue downloading.",
+    "buttonLabel": "Continue to Ad"
+  },
+
+  "downloadAd": {
+    "_comment": "Shown after X downloads. No cancel button. Once per session.",
+    "enabled": true,
+    "minDownloads": 2,
+    "maxDownloads": 4,
+    "waitingPeriodSeconds": 5,
+    "redirectUrl": "https://your-ad-direct-link.com/download-ad",
+    "message": "You've been downloading for free! Please support the creator by watching a short ad.",
+    "buttonLabel": "Watch Ad & Continue"
+  }
+}
