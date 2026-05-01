@@ -1,5 +1,13 @@
 [
   {
+    "id": 85,
+    "title": " New HTTP Custom Config Added",
+    "message": "A fresh HTTP Custom configuration has just been added. Tap to download it now.",
+    "link": "https:\/\/vpnconfighub.netlify.app\/hc.html",
+    "date": "2026-05-01",
+    "priority": "high"
+  },
+  {
     "id": 84,
     "title": " New ZIV PN Tunnel Config Added",
     "message": "A fresh ZIV PN Tunnel configuration has just been added. Tap to download it now.",
