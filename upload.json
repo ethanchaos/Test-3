@@ -1,5 +1,12 @@
 [
   {
+    "name": "cha sv",
+    "vpn": "HA Tunnel",
+    "filename": "cha sv.hat",
+    "date": "8 May 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "version595",
     "vpn": "Lets VPN GO",
     "filename": "version595.js",
