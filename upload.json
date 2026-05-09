@@ -1,5 +1,12 @@
 [
   {
+    "name": "[  50         ][            ][           ]",
+    "vpn": "HA Tunnel",
+    "filename": "[__50_________][________ ___][___________].hat",
+    "date": "9 May 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "VODACOM [UDP] UNLIMITED BY GHOSTNET   ---- 2",
     "vpn": "HTTP Custom",
     "filename": "VODACOM_[UDP]_UNLIMITED_BY_GHOSTNET___----_2.hc",
