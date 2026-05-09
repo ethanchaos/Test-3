@@ -1,5 +1,13 @@
 [
   {
+    "id": 90,
+    "title": "New HTTP Injector Config Added",
+    "message": "A fresh HTTP Injector configuration has just been added. Tap to download it now.",
+    "link": "https://vpnconfighub.netlify.app/ehi.html",
+    "date": "2026-05-09",
+    "priority": "high"
+  },
+  {
     "id": 89,
     "title": "New HA Tunnel Config Added",
     "message": "A fresh HA Tunnel configuration has just been added. Tap to download it now.",
