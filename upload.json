@@ -1,5 +1,12 @@
 [
   {
+    "name": "  MTN 15MB DAILY  ",
+    "vpn": "HTTP Injector",
+    "filename": "__MTN 15MB DAILY__.ehi",
+    "date": "9 May 2026",
+    "config_id": "httpinjector"
+  },
+  {
     "name": "MTN SA UNKNOWN LIMIT NPV TUNNEL FILE 2 1",
     "vpn": "NPV Tunnel",
     "filename": "MTN SA UNKNOWN LIMIT NPV TUNNEL FILE_2_1.npvt",
