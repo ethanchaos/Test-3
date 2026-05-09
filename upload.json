@@ -1,5 +1,12 @@
 [
   {
+    "name": "  MTN 50MB DAILY  ",
+    "vpn": "HTTP Injector",
+    "filename": "__MTN 50MB DAILY__.ehi",
+    "date": "9 May 2026",
+    "config_id": "httpinjector"
+  },
+  {
     "name": "  MTN 15MB DAILY  ",
     "vpn": "HTTP Custom",
     "filename": "__MTN 15MB DAILY__.hc",
