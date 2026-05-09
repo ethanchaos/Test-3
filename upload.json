@@ -1,5 +1,12 @@
 [
   {
+    "name": "  MTN 50MB DAILY   1",
+    "vpn": "HTTP Custom",
+    "filename": "__MTN 50MB DAILY___1.hc",
+    "date": "9 May 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "  MTN 300MB FASF  1",
     "vpn": "NPV Tunnel",
     "filename": "__MTN 300MB FASF__1.npvt",
