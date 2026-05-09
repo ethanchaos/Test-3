@@ -1,5 +1,12 @@
 [
   {
+    "name": "VODACOM [UDP] UNLIMITED BY GHOSTNET   ---- 2",
+    "vpn": "HTTP Custom",
+    "filename": "VODACOM_[UDP]_UNLIMITED_BY_GHOSTNET___----_2.hc",
+    "date": "9 May 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "500 MB DAILY plug Theboy 1",
     "vpn": "HTTP Custom",
     "filename": "500 MB DAILY plug Theboy_1.hc",
