@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN Weekly Lite 100MB 1",
+    "vpn": "Stark VPN",
+    "filename": "MTN Weekly Lite 100MB_1.stk",
+    "date": "9 May 2026",
+    "config_id": "starkvpn"
+  },
+  {
     "name": "VODACOM [UDP] UNLIMITED BY GHOSTNET   ----",
     "vpn": "HTTP Custom",
     "filename": "VODACOM_[UDP]_UNLIMITED_BY_GHOSTNET___----.hc",
