@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VPS Hosting — Host Your Own VPN on DigitalOcean & Vultr | Chaos Configurations</title>
+<meta name="description" content="Complete guide to hosting your own VPN server on a VPS. DigitalOcean and Vultr walkthroughs, server setup, OpenVPN installation, and security hardening.">
+<link rel="stylesheet" href="blogcss.css">
+</head>
+<body>
+<nav id="main-nav"></nav>
+<div id="mobile-menu" class="mobile-menu"></div>
+<div class="page-wrapper">
+
+<div class="breadcrumb"><a href="blog-home.html">Home</a> <span>›</span> VPS & Hosting</div>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="hero-badge">Self-Hosting Guide</div>
+    <h1>VPS & Self-Hosted VPN</h1>
+    <p class="lead">Why self-hosting your VPN is the gold standard for privacy — and how to do it step by step on DigitalOcean or Vultr. From spinning up a droplet to connecting your first client in under an hour.</p>
+    <div class="page-meta">
+      <span>💰 High-value skill</span>
+      <span>⏱️ ~1 hour setup</span>
+      <span>🏷️ Intermediate</span>
+    </div>
+  </div>
+</div>
+
+<div class="content-section">
+  <div class="layout-sidebar">
+    <div class="article-body">
+
+      <h2 id="why-self-host">Why Self-Host Your VPN?</h2>
+      <p>Commercial VPN providers have improved dramatically in recent years, and many offer legitimate privacy protections. But there are compelling reasons why anyone serious about network privacy should consider running their own VPN server on a Virtual Private Server (VPS).</p>
+
+      <p><strong>Complete control over your data.</strong> When you use a commercial VPN, you're trusting the provider's no-logs policy. But you have no way to verify it. They could be logging your traffic and handing it to authorities under legal compulsion — and you'd never know. When you run your own server, <em>you</em> control what gets logged (ideally, nothing).</p>
+
+      <p><strong>A fresh, unlisted IP address.</strong> Commercial VPN providers' IP ranges are well-known and actively blacklisted by streaming services, websites, and carrier DPI systems. A freshly provisioned VPS has an IP address that isn't pre-categorized as VPN traffic — significantly improving both access and reliability.</p>
+
+      <p><strong>Full configuration control.</strong> You choose the protocol, the cipher suite, the port, the DNS server, the routing rules. You can configure your server exactly as needed for your specific use case — something commercial providers with generic configurations can't offer.</p>
+
+      <p><strong>Cost efficiency at scale.</strong> For a single user, a commercial VPN may be cheaper. For a family or small team sharing a server, a $5/month VPS beats most commercial VPN pricing while offering better privacy.</p>
+
+      <h2 id="what-is-vps">What Is a VPS?</h2>
+      <p>A <strong>Virtual Private Server (VPS)</strong> is a virtual machine that runs on shared physical hardware in a data center. Unlike shared hosting (where many customers share the same software environment), a VPS gives you your own isolated OS instance with dedicated resources — a specified amount of CPU, RAM, and storage that's guaranteed to be available to you.</p>
+
+      <p>From your perspective, a VPS looks and behaves exactly like a dedicated server. You get root/admin access. You can install any software. You configure it however you like. The "virtual" part just means it's running as a VM on physical hardware that also hosts other VPS instances — but those instances are isolated from yours.</p>
+
+      <p>For a VPN server, you need very modest resources. A $4–6/month VPS with 512MB–1GB RAM and 1 shared vCPU is perfectly adequate for a personal or small-family VPN server running OpenVPN or WireGuard.</p>
+
+      <h2 id="choosing-provider">Choosing a VPS Provider</h2>
+
+      <h3>DigitalOcean</h3>
+      <p>DigitalOcean is one of the most developer-friendly VPS providers available. Its product is called "Droplets" — clean, simple virtual machines that can be provisioned in seconds. DigitalOcean has an excellent UI, good documentation, and data centers in New York, San Francisco, Amsterdam, Singapore, London, Frankfurt, Toronto, Bangalore, and Sydney — giving you good options for choosing a server location that minimizes latency or maximizes geographic utility.</p>
+      <p>Pricing starts at <strong>$4/month</strong> for a basic Droplet (512MB RAM, 1 vCPU, 10GB SSD, 500GB transfer). For most personal VPN use, this is entirely sufficient.</p>
+      <p>DigitalOcean also offers a $200 free credit for new accounts — meaning you can run a VPN server for free for several months while you learn the system.</p>
+
+      <h3>Vultr</h3>
+      <p>Vultr is a strong competitor to DigitalOcean with slightly lower base pricing and an extensive global network of data centers — 32 locations as of 2026, including locations in Africa (Johannesburg) and South America that DigitalOcean doesn't cover. For users in regions where latency to DigitalOcean's nearest datacenter is high, Vultr's geographic coverage can make a significant difference.</p>
+      <p>Vultr's "Cloud Compute" instances start at <strong>$2.50/month</strong> (512MB RAM, 1 vCPU, 10GB SSD, 500GB bandwidth). Their interface is clean and the API is well-documented.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Provider</th><th>Starting Price</th><th>Locations</th><th>Best For</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>DigitalOcean</td><td>$4/month</td><td>14 regions</td><td>Beginners, documentation quality</td></tr>
+            <tr><td>Vultr</td><td>$2.50/month</td><td>32 regions</td><td>Geographic coverage, price</td></tr>
+            <tr><td>Linode/Akamai</td><td>$5/month</td><td>12 regions</td><td>Performance, stability</td></tr>
+            <tr><td>Hetzner</td><td>€3.79/month</td><td>5 regions (EU)</td><td>European privacy, price</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="server-setup">Setting Up Your VPS Server</h2>
+      <p>This guide uses Ubuntu 22.04 LTS — the most widely used Linux distribution for VPS deployments and the one with the most comprehensive documentation and community support.</p>
+
+      <h3>Step 1: Create Your Server</h3>
+      <p>Log in to DigitalOcean or Vultr and create a new server instance:</p>
+      <ul>
+        <li><strong>OS:</strong> Ubuntu 22.04 LTS</li>
+        <li><strong>Size:</strong> Smallest available ($4–6/month) is sufficient</li>
+        <li><strong>Region:</strong> Choose the closest to you for lowest latency, or a specific country for geographic reasons</li>
+        <li><strong>Authentication:</strong> SSH key (more secure) or password. If using password, make it very strong.</li>
+      </ul>
+
+      <h3>Step 2: Connect to Your Server</h3>
+      <pre data-lang="Terminal"><code><span class="code-gray"># Connect via SSH (replace with your server's IP)</span>
+ssh root@<span class="code-yellow">YOUR_SERVER_IP</span>
+
+<span class="code-gray"># You'll see something like:</span>
+<span class="code-green">Welcome to Ubuntu 22.04.3 LTS</span>
+root@your-server:~#</code></pre>
+
+      <h3>Step 3: Update the System</h3>
+      <pre data-lang="bash"><code><span class="code-gray"># Always update first</span>
+apt update && apt upgrade -y
+
+<span class="code-gray"># Install essential tools</span>
+apt install -y ufw curl wget nano fail2ban</code></pre>
+
+      <h3>Step 4: Basic Security Hardening</h3>
+      <pre data-lang="bash"><code><span class="code-gray"># Configure firewall</span>
+ufw allow OpenSSH
+ufw allow <span class="code-yellow">443</span>/tcp    <span class="code-gray"># VPN port</span>
+ufw allow <span class="code-yellow">1194</span>/udp   <span class="code-gray"># OpenVPN default UDP port</span>
+ufw enable
+
+<span class="code-gray"># Disable root SSH password login (use keys only)</span>
+sed -i 's/PermitRootLogin yes/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
+systemctl restart ssh</code></pre>
+
+      <h2 id="install-openvpn">Installing OpenVPN</h2>
+      <p>The easiest way to install a production-ready OpenVPN server is using the <strong>angristan OpenVPN install script</strong> — a widely trusted, open-source automated installer that handles certificate generation, configuration, and service setup.</p>
+
+      <pre data-lang="bash"><code><span class="code-gray"># Download the installer</span>
+curl -O https://raw.githubusercontent.com/angristan/openvpn-install/master/openvpn-install.sh
+
+<span class="code-gray"># Make it executable</span>
+chmod +x openvpn-install.sh
+
+<span class="code-gray"># Run the installer</span>
+bash openvpn-install.sh</code></pre>
+
+      <p>The script will ask you several questions:</p>
+      <ul>
+        <li><strong>IP address:</strong> It auto-detects your server's public IP. Confirm it.</li>
+        <li><strong>Port:</strong> Default is 1194 UDP. Change to 443 TCP if you need firewall bypass.</li>
+        <li><strong>DNS:</strong> Choose a privacy-respecting DNS server (Cloudflare 1.1.1.1 or AdGuard)</li>
+        <li><strong>Client name:</strong> Name for your first client configuration (e.g., "myphone")</li>
+      </ul>
+
+      <p>After completion, the script generates a <code>.ovpn</code> file in your home directory. This is the configuration file you transfer to your phone or computer to connect.</p>
+
+      <pre data-lang="bash"><code><span class="code-gray"># Transfer the .ovpn file to your local machine</span>
+<span class="code-gray"># Run this on your LOCAL machine (not the server):</span>
+scp root@<span class="code-yellow">YOUR_SERVER_IP</span>:~/client.ovpn ./client.ovpn
+
+<span class="code-gray"># Or for Android, use any SFTP app to download it</span>
+<span class="code-gray"># Then import into OpenVPN for Android</span></code></pre>
+
+      <h2 id="wireguard">Installing WireGuard (Faster Alternative)</h2>
+      <p>For users who don't need the firewall-bypass capabilities of OpenVPN-over-TCP and just want maximum speed, WireGuard is the better choice:</p>
+
+      <pre data-lang="bash"><code><span class="code-gray"># WireGuard installer (also by angristan)</span>
+curl -O https://raw.githubusercontent.com/angristan/wireguard-install/master/wireguard-install.sh
+chmod +x wireguard-install.sh
+bash wireguard-install.sh</code></pre>
+
+      <p>WireGuard generates a QR code at the end of installation — scan it with the WireGuard Android app to configure your phone instantly.</p>
+
+      <h2 id="ssh-server">Setting Up an SSH Server for HA Tunnel / HTTP Injector</h2>
+      <p>If you want to use your VPS as the SSH server for HA Tunnel Plus or HTTP Injector configs, you don't need to install additional software — Ubuntu has OpenSSH Server included. You just need to configure it correctly.</p>
+
+      <pre data-lang="bash"><code><span class="code-gray"># Check SSH is running</span>
+systemctl status ssh
+
+<span class="code-gray"># Create a dedicated VPN user (don't use root for tunnel clients)</span>
+adduser vpnuser
+passwd vpnuser
+
+<span class="code-gray"># Optionally allow SSH on port 443 as well as 22</span>
+echo "Port 22" >> /etc/ssh/sshd_config
+echo "Port 443" >> /etc/ssh/sshd_config
+systemctl restart ssh
+ufw allow <span class="code-yellow">22</span>/tcp
+ufw allow <span class="code-yellow">443</span>/tcp</code></pre>
+
+      <p>Your SSH server details for HTTP Injector / HA Tunnel Plus configs will be:</p>
+      <ul>
+        <li><strong>Server:</strong> Your VPS IP address</li>
+        <li><strong>Port:</strong> 22 or 443 (whichever you've opened)</li>
+        <li><strong>Username:</strong> vpnuser (or root, though this is less recommended)</li>
+        <li><strong>Password:</strong> The password you set</li>
+      </ul>
+
+      <div class="info-box green">
+        <div class="icon">✅</div>
+        <div>
+          <h4>You're Done</h4>
+          <p>You now have a self-hosted VPN server. Use the <a href="blog-setup-guides.html">Setup Guides</a> to connect your Android device, or import your .ovpn file directly into OpenVPN for Android. Welcome to full network ownership.</p>
+        </div>
+      </div>
+
+      <h2 id="monitoring">Monitoring Your Server</h2>
+      <p>Once your server is running, basic monitoring is important to know it's healthy and hasn't been compromised.</p>
+
+      <pre data-lang="bash"><code><span class="code-gray"># Check connected OpenVPN clients</span>
+cat /var/log/openvpn/status.log
+
+<span class="code-gray"># Check server resource usage</span>
+htop
+
+<span class="code-gray"># Check for failed SSH login attempts (intrusion detection)</span>
+fail2ban-client status sshd
+
+<span class="code-gray"># Check bandwidth usage (install vnstat first)</span>
+apt install vnstat
+vnstat -d   <span class="code-gray"># Daily stats</span>
+vnstat -m   <span class="code-gray"># Monthly stats</span></code></pre>
+
+    </div>
+
+    <aside class="sidebar">
+      <div class="sidebar-widget">
+        <h4>In This Guide</h4>
+        <ul class="toc-list">
+          <li><a href="#why-self-host">Why Self-Host?</a></li>
+          <li><a href="#what-is-vps">What Is a VPS?</a></li>
+          <li><a href="#choosing-provider">Choosing a Provider</a></li>
+          <li><a href="#server-setup">Server Setup</a></li>
+          <li><a href="#install-openvpn">Install OpenVPN</a></li>
+          <li><a href="#wireguard">Install WireGuard</a></li>
+          <li><a href="#ssh-server">SSH Server Setup</a></li>
+          <li><a href="#monitoring">Monitoring</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-widget">
+        <h4>Estimated Costs</h4>
+        <div style="font-size:0.85rem;display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;justify-content:space-between;"><span>DigitalOcean Basic</span><span class="tag tag-green">$4/mo</span></div>
+          <div style="display:flex;justify-content:space-between;"><span>Vultr Basic</span><span class="tag tag-green">$2.50/mo</span></div>
+          <div style="display:flex;justify-content:space-between;"><span>Hetzner (EU)</span><span class="tag tag-green">€3.79/mo</span></div>
+          <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-style:italic;color:var(--text-light)">New user credits often available</div>
+        </div>
+      </div>
+      <div class="sidebar-widget">
+        <h4>Related</h4>
+        <ul class="toc-list">
+          <li><a href="blog-setup-guides.html">App Setup Guides</a></li>
+          <li><a href="blog-vpn-basics.html">VPN Basics</a></li>
+          <li><a href="blog-free-vs-paid.html">Free vs Paid VPNs</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
+
+</div>
+  <script>(function(s){s.dataset.zone='10925473',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <script src="https://quge5.com/88/tag.min.js" data-zone="237688" async data-cfasync="false"></script>
+<footer id="main-footer"></footer>
+<script src="blognav.js"></script>
+<script>buildNav('VPN Basics'); buildFooter();</script>
+</body>
+</html>

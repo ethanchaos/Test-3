@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNI in Filtering & Censorship — How ISPs Block HTTPS Sites | Chaos Configurations</title>
+<meta name="description" content="How Server Name Indication is used by ISPs, governments, and firewalls to block HTTPS websites — and what tools and techniques exist to counter SNI-based filtering.">
+<link rel="stylesheet" href="blogcss.css">
+</head>
+<body>
+<nav id="main-nav"></nav>
+<div id="mobile-menu" class="mobile-menu"></div>
+<div class="page-wrapper">
+<div class="breadcrumb"><a href="blog-home.html">Home</a> <span>›</span> <a href="blog-sni-explained.html">SNI</a> <span>›</span> SNI Filtering</div>
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="hero-badge">Advanced Research</div>
+    <h1>How SNI Is Used to Filter & Block Traffic</h1>
+    <p class="lead">SNI-based filtering is how modern censorship systems block HTTPS websites without decrypting your traffic. Here's the full technical picture — how it works, where it's deployed, and what countermeasures exist.</p>
+    <div class="page-meta"><span>📖 ~6,500 words</span><span>⏱️ 26 min read</span><span>🏷️ Advanced · Research</span></div>
+  </div>
+</div>
+<div class="content-section">
+  <div class="layout-sidebar">
+    <div class="article-body">
+
+      <h2 id="why-sni-filtering">Why SNI Filtering Exists</h2>
+      <p>Before HTTPS became universal, internet filtering was relatively straightforward: HTTP requests were plaintext, so a firewall could read the destination URL directly and apply filtering rules. Blocking <code>http://example.com/blocked-page</code> was as simple as matching the URL in the packet data.</p>
+      <p>The global push to HTTPS changed this. By 2023, over 95% of web traffic was HTTPS — encrypted at the TLS layer. The content of requests became unreadable to network observers. This threatened to make content-based filtering impossible.</p>
+      <p>SNI provided the solution — or rather, the loophole that preserved filtering capability in the HTTPS era. Because the SNI field in the TLS Client Hello is sent before encryption is established, it remains visible to any observer on the network path. A filtering system that reads SNI can identify the destination domain of any HTTPS connection — and apply blocking rules based on that domain — without ever decrypting the traffic.</p>
+
+      <h2 id="how-sni-filtering-works">How SNI Filtering Works — The Technical Pipeline</h2>
+      <p>SNI-based filtering is typically implemented as part of a Deep Packet Inspection (DPI) system deployed at strategic points in the network — typically at IXPs (Internet Exchange Points), at major backbone routers, or at ISP border routers where international traffic enters and leaves the network.</p>
+
+      <ol>
+        <li><strong>Packet capture:</strong> Network hardware with DPI capabilities examines packets in real time as they flow through the network.</li>
+        <li><strong>TLS handshake detection:</strong> The DPI system identifies packets that are part of TLS handshakes — specifically looking for the Client Hello message (identified by its record type byte and handshake type byte).</li>
+        <li><strong>SNI extraction:</strong> The system parses the TLS extension list in the Client Hello to find the SNI extension (extension type 0x0000) and extracts the hostname.</li>
+        <li><strong>Blocklist lookup:</strong> The extracted hostname is checked against a blocklist of forbidden domains.</li>
+        <li><strong>Action:</strong> If the domain is blocked, the system either drops the packets (connection timeout for the user), sends a TCP RST (connection reset), or redirects to a block page.</li>
+      </ol>
+
+      <pre data-lang="TLS Client Hello (simplified)"><code><span class="code-gray">Record Layer:
+  Type: Handshake (22)
+  Version: TLS 1.0 (for compatibility)
+  
+Handshake:
+  Type: ClientHello (1)
+  
+Extensions:
+  server_name (type=0):         <span class="code-red">← THIS IS VISIBLE IN PLAINTEXT</span>
+    HostName: "blocked-site.com"
+  supported_versions: TLS 1.3, TLS 1.2
+  supported_groups: x25519, P-256
+  signature_algorithms: ecdsa_secp256r1_sha256
+  ...</span></code></pre>
+
+      <h2 id="where-deployed">Where SNI Filtering Is Deployed</h2>
+
+      <h3>China — Great Firewall</h3>
+      <p>China's Great Firewall has used SNI filtering since at least 2012, making it one of the earliest large-scale deployments. The GFW's SNI filtering system is notable for its sophistication: it doesn't just match exact domain names but can also match subdomains and apply filtering based on more complex rules. The GFW also combines SNI filtering with active probing — when it detects a potentially blocked connection, it probes the server to verify it's running a blocked service before committing to a block.</p>
+
+      <h3>Russia</h3>
+      <p>Russia's TSPU (Technical Means for Countering Threats) system, deployed under the "sovereign internet" law of 2019, includes SNI-based filtering capabilities. The system is managed by Roskomnadzor and can be updated centrally to add domains to the block list. Russia's SNI filtering is notably less consistent than China's — enforcement varies by ISP and region.</p>
+
+      <h3>Iran</h3>
+      <p>Iran operates one of the most aggressive SNI filtering systems outside China. During periods of political unrest (most notably the 2022 Mahsa Amini protests), Iran's filtering system was used to block Instagram, WhatsApp, and other platforms at the SNI level while keeping connectivity to other services intact.</p>
+
+      <h3>Corporate and Educational Firewalls</h3>
+      <p>SNI filtering is not exclusively a government tool. Many corporate firewall products (Palo Alto, Cisco, Fortinet, Check Point) implement SNI-based filtering as a core feature for content policy enforcement. School networks routinely use SNI filtering to block social media, gaming sites, and other non-educational content. These systems are built on exactly the same technical principles as state-level censorship — the difference is who controls the block list and for what purpose.</p>
+
+      <h2 id="detection-tools">SNI Filtering Detection Tools</h2>
+      <p>Several tools and platforms can help identify whether SNI filtering is in use on a given network:</p>
+
+      <ul>
+        <li><strong>OONI Probe</strong> — Includes tests specifically for SNI-based blocking. The OONI "SNI blocking" test sends TLS Client Hello packets with specific SNI values to test servers and measures whether the connections are blocked. Results are published in OONI Explorer.</li>
+        <li><strong>Netalyzr</strong> — Network analysis tool that can detect various forms of traffic interference including SNI filtering.</li>
+        <li><strong>Chaos SNI Finder</strong> — Ethan Chaos's tool, which among other functions tests which SNI values successfully pass through a given network — effectively mapping which domains are blocked at the SNI level and which aren't.</li>
+      </ul>
+
+      <h2 id="countermeasures">Countermeasures Against SNI Filtering</h2>
+
+      <h3>Encrypted Client Hello (ECH)</h3>
+      <p>The most promising technical countermeasure is <strong>Encrypted Client Hello (ECH)</strong>, which encrypts the entire Client Hello message — including the SNI field — making it unreadable to network observers. With ECH deployed, SNI-based filtering becomes technically impossible without blocking all HTTPS traffic.</p>
+      <p>ECH is defined in RFC 9849 and is increasingly deployed: Cloudflare supports it for all domains on their CDN, Firefox enables it by default with DoH, and Chrome has supported it since version 117. The challenge is that ECH requires HTTPS DNS records (to distribute the public key used for encryption), and many DNS providers don't yet support these records.</p>
+      <p>In response to ECH adoption, some filtering systems have started blocking connections where ECH is detected — effectively requiring traffic to use plaintext SNI or be dropped. This is the same pattern we saw with ESNI and represents the ongoing arms race between privacy technology and filtering infrastructure.</p>
+
+      <h3>SNI Padding / Null SNI</h3>
+      <p>Some circumvention tools experiment with sending a null or empty SNI field, or padding the SNI with extra characters. Some filtering systems only match on complete, valid SNI values and ignore malformed or empty ones. This is a fragile technique — sophisticated filters handle these cases — but it can work against less careful implementations.</p>
+
+      <h3>VPN and Tunneling</h3>
+      <p>The most reliable countermeasure is using a VPN or tunnel that wraps your traffic before the outer connection's SNI is visible. If your VPN connection itself uses an SNI value that isn't blocked (or uses ECH, or spoofs a whitelisted SNI), the blocking system only sees the VPN connection's outer SNI — not the SNI of the sites you're actually accessing through the tunnel.</p>
+
+      <h3>ESNI (Deprecated but Instructive)</h3>
+      <p>Before ECH, Encrypted SNI (ESNI) was deployed by Cloudflare as an experimental solution. It encrypted just the SNI extension while leaving the rest of the Client Hello visible. Several countries (China, Russia) responded by blocking all traffic with the ESNI extension — an example of blocking the privacy mechanism itself rather than its content. ECH was designed to be more resistant to this kind of blocking by making it harder to distinguish ECH traffic from regular TLS traffic.</p>
+
+      <h2 id="sni-config-design">Designing Configs That Work Around SNI Filtering</h2>
+      <p>For config builders working in environments with SNI filtering, the key design principles are:</p>
+
+      <ol>
+        <li><strong>Use an SNI value that isn't blocked.</strong> The outer SNI (the one the filtering system sees) must be a domain that isn't on the block list. This is why zero-rated domains are often used as SNI values in carrier configs — they're typically whitelisted rather than blocked.</li>
+        <li><strong>Ensure the actual traffic is encrypted and tunneled.</strong> The filtering system should never see the SNI of the sites you're actually trying to access — those connections happen inside the tunnel, where the outer network can't inspect them.</li>
+        <li><strong>Test, iterate, and update.</strong> Block lists and filtering rules change constantly. A config that works today may not work tomorrow. This is why community-maintained config hubs like the Chaos Configurations Config Hub are valuable — they provide continuously updated resources.</li>
+        <li><strong>Consider ECH where available.</strong> Where ECH is supported by both the server and the network, it provides the most robust protection against SNI-based filtering.</li>
+      </ol>
+
+      <div class="feature-highlight">
+        <h3>Find Working SNI Hosts</h3>
+        <p>Use the Chaos SNI Finder to discover which SNI values work on your network — essential for building and maintaining effective configs in filtered environments.</p>
+        <a href="blog-tools.html#sni-finder" class="btn btn-outline">Chaos SNI Finder →</a>
+        <a href="blog-sni-explained.html" class="btn btn-outline" style="margin-left:10px">SNI Basics →</a>
+      </div>
+
+    </div>
+    <aside class="sidebar">
+      <div class="sidebar-widget">
+        <h4>In This Guide</h4>
+        <ul class="toc-list">
+          <li><a href="#why-sni-filtering">Why SNI Filtering Exists</a></li>
+          <li><a href="#how-sni-filtering-works">Technical Pipeline</a></li>
+          <li><a href="#where-deployed">Where It's Deployed</a></li>
+          <li><a href="#detection-tools">Detection Tools</a></li>
+          <li><a href="#countermeasures">Countermeasures</a></li>
+          <li><a href="#sni-config-design">Config Design Principles</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-widget">
+        <h4>Related</h4>
+        <ul class="toc-list">
+          <li><a href="blog-sni-explained.html">How SNI Works</a></li>
+          <li><a href="blog-network-restrictions.html">Network Restrictions</a></li>
+          <li><a href="blog-tools.html">Chaos SNI Finder</a></li>
+          <li><a href="blog-vpn-tunneling.html">VPN Tunneling</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
+</div>
+  
+<footer id="main-footer"></footer>
+<script src="blognav.js"></script>
+<script>buildNav('SNI'); buildFooter();</script>
+</body>
+</html>

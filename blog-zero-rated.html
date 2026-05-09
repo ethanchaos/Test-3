@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zero-Rated Sites — What They Are & Why They're Being Blocked | Chaos Configurations</title>
+<meta name="description" content="A complete explanation of zero-rating — what it is, how it works, why mobile carriers offer it, and why regulators and ISPs are increasingly shutting it down.">
+<link rel="stylesheet" href="blogcss.css">
+</head>
+<body>
+<nav id="main-nav"></nav>
+<div id="mobile-menu" class="mobile-menu"></div>
+<div class="page-wrapper">
+
+<div class="breadcrumb"><a href="blog-home.html">Home</a> <span>›</span> Zero-Rated Sites</div>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="hero-badge">Policy & Technology</div>
+    <h1>Zero-Rated Sites & How They're Being Blocked</h1>
+    <p class="lead">Zero-rating is one of the most consequential — and most misunderstood — aspects of mobile internet access in the developing world. This is the complete picture: what it is, how it works technically, who benefits, who loses, and why it's increasingly under attack.</p>
+    <div class="page-meta">
+      <span>📖 ~6,500 words</span>
+      <span>⏱️ 26 min read</span>
+      <span>🏷️ Policy · Technical</span>
+    </div>
+  </div>
+</div>
+
+<div class="content-section">
+  <div class="layout-sidebar">
+    <div class="article-body">
+
+      <h2 id="what-is-zero-rating">What Is Zero-Rating?</h2>
+      <p><strong>Zero-rating</strong> is a practice by mobile carriers where access to specific websites, apps, or services is provided without counting against a user's data allowance. The traffic is "zero-rated" — it costs the user zero data to access those services.</p>
+
+      <p>The concept emerged as a commercial practice in the early 2010s, driven by two converging forces: the explosive growth of mobile internet in developing markets where data was expensive, and the recognition by major tech companies and carriers that they could both benefit from preferential access arrangements.</p>
+
+      <p>The most well-known zero-rating programs include:</p>
+
+      <ul>
+        <li><strong>Facebook Free Basics</strong> — Meta's (formerly Facebook's) program offering free access to a limited set of websites, including Facebook, in partnership with mobile carriers in developing countries. At its peak, it was available in over 60 countries.</li>
+        <li><strong>Wikipedia Zero</strong> — Wikimedia Foundation's partnership with carriers to allow free access to Wikipedia in over 60 countries. Discontinued in 2018 as HTTPS adoption made the zero-rating mechanism more complex.</li>
+        <li><strong>YouTube Free Zone</strong> — Google's partnerships with carriers in various markets to allow free YouTube streaming, typically at reduced quality.</li>
+        <li><strong>Carrier-specific programs</strong> — Many carriers offer their own zero-rated services — their own music apps, video platforms, news services — that don't count against data limits.</li>
+        <li><strong>Social media bundles</strong> — Particularly common in Africa and Southeast Asia, where carriers offer "social media packs" giving free access to WhatsApp, Facebook, Twitter/X, and Instagram without data charges.</li>
+      </ul>
+
+      <h2 id="how-it-works-technically">How Zero-Rating Works Technically</h2>
+      <p>Understanding zero-rating requires understanding how mobile carriers bill for data. When your phone connects to a mobile network, all data traffic passes through the carrier's infrastructure. The carrier's billing systems track how much data each subscriber uses and deduct it from their allowance.</p>
+
+      <p>Zero-rating works by inserting a traffic classification and billing exception into this infrastructure. Here's the technical pipeline:</p>
+
+      <ol>
+        <li><strong>Traffic classification:</strong> As data flows through the carrier's network, specialized hardware (typically Deep Packet Inspection systems) inspects each connection to determine its destination. For HTTP traffic, this is straightforward — the destination domain is in the headers. For HTTPS, the SNI field in the TLS handshake reveals the destination domain.</li>
+        <li><strong>Policy application:</strong> If the destination matches a zero-rated domain on the carrier's whitelist, the traffic is tagged as "zero-rated" in the packet flow.</li>
+        <li><strong>Billing bypass:</strong> The billing system reads the zero-rated tag and does not deduct this traffic from the subscriber's data allowance.</li>
+      </ol>
+
+      <p>The whitelist of zero-rated domains is maintained by the carrier and can be updated at any time. It typically includes specific IP address ranges and domain names associated with the zero-rated service.</p>
+
+      <h3>The SNI Connection</h3>
+      <p>The move from HTTP to HTTPS across the internet created a challenge for zero-rating: how do you identify which HTTPS traffic is going to a zero-rated domain when the content is encrypted?</p>
+
+      <p>The answer — as covered in detail in our <a href="blog-sni-explained.html">SNI explainer</a> — is Server Name Indication. The SNI field in the TLS Client Hello message reveals the destination domain before the encrypted session is established, allowing carrier DPI systems to classify HTTPS traffic for zero-rating purposes.</p>
+
+      <p>This is why SNI is so central to the free-net config ecosystem: if you can make your tunnel traffic look like it's going to a zero-rated domain (by using that domain's name as the SNI value), the carrier's billing system may classify your traffic as zero-rated — even if it's actually going to your VPN server.</p>
+
+      <h2 id="net-neutrality">Zero-Rating and Net Neutrality</h2>
+      <p><strong>Net neutrality</strong> is the principle that internet service providers should treat all internet traffic equally — not discriminating based on source, destination, or content type. Zero-rating is, by definition, a departure from net neutrality: it treats traffic to certain destinations differently than traffic to others.</p>
+
+      <p>This creates a fundamental tension. On one hand, zero-rating provides real benefits to users who can't afford regular data access — free Wikipedia is better than no Wikipedia. On the other hand, it gives carriers and large tech companies enormous power to shape which parts of the internet people access. If Facebook is free but a local news site costs data, people will use Facebook more and local news less. If a carrier's own video service is zero-rated but YouTube costs data, users will gravitate toward the carrier's service regardless of quality.</p>
+
+      <p>The net neutrality debate around zero-rating has played out differently in different regions:</p>
+
+      <h3>India: The Free Basics Battle</h3>
+      <p>The most consequential battle over zero-rating was fought in India in 2015–2016. Meta's Free Basics program was initially embraced by Indian carriers and was on track to become a major service in the world's second-largest internet market. But it faced fierce opposition from Indian civil society, technologists, and the startup ecosystem, who argued that:</p>
+      <ul>
+        <li>Free Basics gave Facebook the power to act as a gatekeeper to the internet for millions of users</li>
+        <li>The limited set of pre-approved services created a "walled garden" internet that undermined competition and innovation</li>
+        <li>Users who only accessed Free Basics might not even understand they were using a restricted subset of the internet</li>
+        <li>Zero-rating benefited established global tech companies at the expense of local Indian startups and content creators</li>
+      </ul>
+      <p>In February 2016, the Telecom Regulatory Authority of India (TRAI) issued regulations prohibiting discriminatory pricing for data services — effectively banning zero-rating in India. It was a landmark decision that influenced regulatory thinking globally.</p>
+
+      <h3>European Union</h3>
+      <p>The EU's net neutrality regulations (Body of European Regulators for Electronic Communications — BEREC guidelines) technically prohibit zero-rating that has a negative impact on competition or consumer choice, but have allowed some forms of zero-rating where they can be shown to benefit consumers without distorting competition. Enforcement has been inconsistent across member states.</p>
+
+      <h3>United States</h3>
+      <p>The US has had a complex and politically contested approach to net neutrality. Under the Obama administration's 2015 Open Internet Order, zero-rating was scrutinized but not outright banned. Under the Trump administration's 2017 Restoring Internet Freedom Order, net neutrality rules were rolled back. The debate continues, with different states taking different approaches.</p>
+
+      <h3>Africa and Developing Markets</h3>
+      <p>In many African countries and other developing markets, regulatory frameworks around zero-rating are either absent or unenforced. Carriers have considerable freedom to offer zero-rated services, and many actively do so as a competitive strategy. The zero-rating ecosystem in these markets is more varied and more dynamic than in regulated Western markets.</p>
+
+      <h2 id="why-being-blocked">Why Zero-Rating Is Being Blocked and Restricted</h2>
+      <p>The phrase "zero-rated sites are being blocked" refers to several different but related phenomena. Understanding what's actually happening requires distinguishing between them.</p>
+
+      <h3>1. Carriers Closing SNI Loopholes</h3>
+      <p>The most direct sense in which zero-rating is "being blocked" for free-net users is that carriers are increasingly closing the technical loopholes that allowed SNI-based tunnel configs to exploit zero-rating whitelists.</p>
+
+      <p>Early zero-rating implementations were relatively simple: they checked the SNI field against a whitelist and applied billing exceptions accordingly. If you spoofed the SNI to match a whitelisted domain, the billing system was fooled.</p>
+
+      <p>Carriers have progressively hardened these systems in several ways:</p>
+      <ul>
+        <li><strong>Destination IP verification:</strong> In addition to checking SNI, the carrier now verifies that the actual destination IP address belongs to the zero-rated service's infrastructure. Sending traffic to a random VPS while using Facebook's SNI will be detected and charged normally.</li>
+        <li><strong>Certificate verification:</strong> Some carriers inspect the server certificate presented during the TLS handshake to verify it actually belongs to the zero-rated domain.</li>
+        <li><strong>Traffic pattern analysis:</strong> Even if the initial connection looks like a zero-rated service, the traffic pattern of a VPN tunnel (continuous bidirectional flows, specific packet sizes) is detectable as anomalous compared to normal social media usage.</li>
+        <li><strong>Encrypted Client Hello (ECH) responses:</strong> As ECH adoption grows, the SNI field becomes encrypted, potentially breaking both the zero-rating mechanism itself and the SNI spoofing techniques that exploit it. Carriers are developing alternative classification methods.</li>
+      </ul>
+
+      <h3>2. Regulatory Restrictions on Zero-Rating</h3>
+      <p>In countries with strong net neutrality rules, carriers are increasingly restricted from offering zero-rating in forms that discriminate between services. This doesn't "block" zero-rated sites per se — it means carriers aren't allowed to offer zero-rating in the first place, or can only offer it in limited, non-discriminatory forms.</p>
+
+      <h3>3. Termination of Major Zero-Rating Programs</h3>
+      <p>Several major zero-rating initiatives have been discontinued, reducing the availability of zero-rated access:</p>
+      <ul>
+        <li><strong>Wikipedia Zero (2018)</strong> — Wikimedia ended the program, citing the increasing complexity of maintaining it as HTTPS adoption grew and the philosophical concern that it created a two-tier internet.</li>
+        <li><strong>Facebook Free Basics</strong> — After the India ban, several other countries followed with restrictions or bans. The program has contracted significantly from its peak.</li>
+        <li><strong>Various carrier programs</strong> — Economic pressures and regulatory scrutiny have led many carriers to restructure or end specific zero-rating programs.</li>
+      </ul>
+
+      <h2 id="impact">Real-World Impact on Users</h2>
+      <p>For users in developing countries who relied on zero-rated access, the closing of loopholes and the contraction of zero-rating programs has real consequences. When a working HTTP Injector config stops working because the carrier has tightened its SNI verification, that user loses their free internet access — potentially completely, depending on their economic situation.</p>
+
+      <p>This is why the constant work of maintaining, testing, and sharing updated configs is important. The technical landscape changes continuously as carriers and users engage in a cat-and-mouse dynamic. A config that worked last month may not work today, and the community's collective knowledge about what works now is the resource that keeps free access available for users who need it.</p>
+
+      <blockquote>
+        <p>"Access to the internet is increasingly recognized as a basic right. Zero-rating, for all its flaws, has been a mechanism for extending that access to people who couldn't otherwise afford it. As it's rolled back, we need better alternatives — and the technical community has a responsibility to build them."</p>
+        <cite>— Ethan Chaos, Chaos Configurations</cite>
+      </blockquote>
+
+      <h2 id="alternatives">Alternatives to Zero-Rating for Affordable Access</h2>
+      <p>As traditional zero-rating becomes less available, other approaches to affordable internet access are being explored:</p>
+
+      <ul>
+        <li><strong>Community networks:</strong> Locally owned and operated wireless networks that provide low-cost connectivity in underserved areas. Examples include Zenzeleni Networks in South Africa and various mesh network projects.</li>
+        <li><strong>Satellite internet:</strong> Starlink and other LEO satellite providers are expanding global coverage. Costs are still high but declining, and rural areas that could never get affordable terrestrial internet are now getting coverage.</li>
+        <li><strong>Subsidized data plans:</strong> Government programs in various countries subsidize internet access for low-income households.</li>
+        <li><strong>Offline-first content:</strong> Services like Kiwix that make Wikipedia and other educational content available offline, eliminating the need for continuous data access.</li>
+        <li><strong>Mesh networking:</strong> Local mesh networks (using Wi-Fi or LoRa radio) can provide connectivity within communities at very low cost, connecting to the internet through a single shared connection point.</li>
+      </ul>
+
+      <div class="feature-highlight">
+        <h3>Understanding the Bigger Picture</h3>
+        <p>Zero-rating is one piece of the much larger story of internet inequality and digital access. Read the full analysis on our Digital Access & Internet Inequality page.</p>
+        <a href="blog-digital-access.html" class="btn btn-outline">Digital Access Deep Dive →</a>
+      </div>
+
+    </div>
+
+    <aside class="sidebar">
+      <div class="sidebar-widget">
+        <h4>In This Guide</h4>
+        <ul class="toc-list">
+          <li><a href="#what-is-zero-rating">What Is Zero-Rating?</a></li>
+          <li><a href="#how-it-works-technically">How It Works</a></li>
+          <li><a href="#net-neutrality">Net Neutrality</a></li>
+          <li><a href="#why-being-blocked">Why It's Being Blocked</a></li>
+          <li><a href="#impact">Real-World Impact</a></li>
+          <li><a href="#alternatives">Alternatives</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-widget">
+        <h4>Related</h4>
+        <ul class="toc-list">
+          <li><a href="blog-digital-access.html">Internet Inequality</a></li>
+          <li><a href="blog-sni-explained.html">How SNI Works</a></li>
+          <li><a href="blog-network-restrictions.html">Network Restrictions</a></li>
+          <li><a href="https://vpnconfighub.netlify.app/" target="_blank" rel="noopener">Config Hub</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
+
+</div>
+  
+  <script>(function(s){s.dataset.zone='10925473',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <script src="https://quge5.com/88/tag.min.js" data-zone="237688" async data-cfasync="false"></script>
+<footer id="main-footer"></footer>
+<script src="blognav.js"></script>
+<script>buildNav('Freenet'); buildFooter();</script>
+</body>
+</html>

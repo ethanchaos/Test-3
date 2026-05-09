@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setup Guides — HTTP Injector, HA Tunnel Plus, OpenVPN | Chaos Configurations</title>
+<meta name="description" content="Step-by-step VPN setup guides for HTTP Injector, HA Tunnel Plus, and OpenVPN. Complete installation and configuration walkthroughs for Android users.">
+<link rel="stylesheet" href="blogcss.css">
+</head>
+<body>
+<nav id="main-nav"></nav>
+<div id="mobile-menu" class="mobile-menu"></div>
+<div class="page-wrapper">
+
+<div class="breadcrumb"><a href="blog-home.html">Home</a> <span>›</span> Setup Guides</div>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="hero-badge">Step-by-Step Guides</div>
+    <h1>VPN Setup Guides</h1>
+    <p class="lead">Complete installation and configuration walkthroughs for the three most important VPN tools in the free-net ecosystem — HTTP Injector, HA Tunnel Plus, and OpenVPN. Written clearly, with screenshots and explanations at every step.</p>
+    <div class="page-meta">
+      <span>📱 Android-focused</span>
+      <span>⚙️ 3 Apps Covered</span>
+      <span>🏷️ Beginner-friendly</span>
+    </div>
+  </div>
+</div>
+
+<div class="content-section">
+
+  <!-- App selector -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:48px;">
+    <a href="#http-injector" class="card card-link" style="border-color:var(--accent)">
+      <div class="card-icon">💉</div>
+      <h3>HTTP Injector</h3>
+      <p>The most flexible VPN tunneling app. Custom payloads, SSH support, SSL tunneling, and config import.</p>
+      <div style="margin-top:12px"><span class="tag tag-blue">Go to guide →</span></div>
+    </a>
+    <a href="#ha-tunnel" class="card card-link">
+      <div class="card-icon card-icon green">🚇</div>
+      <h3>HA Tunnel Plus</h3>
+      <p>SSH-based tunneling app with a clean UI. Popular in African and Asian markets. Fast setup, reliable connections.</p>
+      <div style="margin-top:12px"><span class="tag tag-green">Go to guide →</span></div>
+    </a>
+    <a href="#openvpn" class="card card-link">
+      <div class="card-icon card-icon purple">🌐</div>
+      <h3>OpenVPN</h3>
+      <p>The industry-standard open-source VPN. Works with self-hosted servers. Maximum flexibility and security.</p>
+      <div style="margin-top:12px"><span class="tag tag-orange">Go to guide →</span></div>
+    </a>
+  </div>
+
+  <!-- HTTP INJECTOR -->
+  <div id="http-injector">
+    <span class="section-label">Guide 01</span>
+    <h2>HTTP Injector — Complete Setup Guide</h2>
+    <p class="lead">HTTP Injector is an Android app that creates a VPN tunnel using SSH, SSL, or proxy protocols with custom HTTP header injection. It's the most powerful tool for carrier-bypass configurations because of its deep payload customization.</p>
+
+    <h3>What You'll Need</h3>
+    <ul>
+      <li>Android device (Android 5.0 or higher)</li>
+      <li>HTTP Injector app (free on Google Play Store)</li>
+      <li>A config file (.ehi format) — get one from the <a href="https://vpnconfighub.netlify.app/" target="_blank" rel="noopener">Config Hub</a></li>
+      <li>Or: an SSH server and its connection details (if building a config from scratch)</li>
+    </ul>
+
+    <h3>Method 1: Importing a Config File</h3>
+    <p>This is the fastest way to get connected. If you have a .ehi config file from the Config Hub:</p>
+
+    <ol class="step-list">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Download the config file</h4>
+          <p>Download the .ehi file from the Config Hub to your device's storage. Note where it's saved.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Open HTTP Injector</h4>
+          <p>Launch the app. You'll see the main connection screen with a large connect button.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Import the config</h4>
+          <p>Tap the menu icon (three lines, top left) → <strong>Import Config</strong>. Navigate to where you saved the .ehi file and select it.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Review settings</h4>
+          <p>After import, review the loaded settings: SSH server, port, payload. You should not need to change anything if the config is current.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h4>Connect</h4>
+          <p>Tap the large power button. Accept the VPN permission request if prompted. The app will attempt to connect — watch the logs for success or error messages.</p>
+        </div>
+      </li>
+    </ol>
+
+    <h3>Method 2: Manual Configuration (SSH Mode)</h3>
+    <p>For advanced users who want to build a config from scratch using their own SSH server:</p>
+
+    <ol class="step-list">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Open SSH Settings</h4>
+          <p>In the HTTP Injector main screen, tap <strong>SSH Settings</strong>. Enable SSH mode by toggling it on.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Enter Server Details</h4>
+          <p>Enter your SSH server's IP address or hostname in the <strong>Server</strong> field. Enter the port (22, 80, or 443 depending on your server setup). Enter your SSH username and password.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Configure the Payload</h4>
+          <p>The payload is the custom HTTP header that tells the carrier proxy where to route your connection. A basic CONNECT payload looks like:</p>
+          <pre data-lang="Payload"><code>CONNECT [host_port] HTTP/1.1[crlf]Host: bug.carrier.com[crlf]X-Online-Host: bug.carrier.com[crlf][crlf]</code></pre>
+          <p>Replace <code>bug.carrier.com</code> with a working SNI/bug host for your carrier. Use the <a href="blog-tools.html#sni-finder">Chaos SNI Finder</a> to discover one.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Set Remote Proxy</h4>
+          <p>If your carrier routes through a proxy server, enter that proxy's IP and port in the <strong>Remote Proxy</strong> field. This is carrier-specific.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h4>Save and Test</h4>
+          <p>Save your configuration. Tap connect and monitor the log output. A successful connection will show "SSH tunnel established" and then assign a local IP. Test browsing to verify.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="info-box yellow">
+      <div class="icon">💡</div>
+      <div>
+        <h4>Troubleshooting HTTP Injector</h4>
+        <p><strong>Connection timeout:</strong> The payload or proxy host isn't working. Try a different payload pattern or SNI host.<br>
+        <strong>SSH auth failed:</strong> Wrong username/password or the server is blocking your IP. Try a different server.<br>
+        <strong>Connected but no internet:</strong> DNS issue. Enable "DNS over tunnel" in settings.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- HA TUNNEL PLUS -->
+  <div id="ha-tunnel">
+    <span class="section-label">Guide 02</span>
+    <h2>HA Tunnel Plus — Complete Setup Guide</h2>
+    <p class="lead">HA Tunnel Plus creates SSH tunnels with a simpler interface than HTTP Injector. It supports SSH over WebSocket, making it effective in environments where direct SSH is blocked but HTTPS WebSocket traffic is allowed.</p>
+
+    <h3>What You'll Need</h3>
+    <ul>
+      <li>Android device</li>
+      <li>HA Tunnel Plus app (free — available via APK or official site)</li>
+      <li>A .hat config file — from the <a href="https://vpnconfighub.netlify.app/" target="_blank" rel="noopener">Config Hub</a></li>
+    </ul>
+
+    <ol class="step-list">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Install HA Tunnel Plus</h4>
+          <p>Download and install the app. If installing via APK, enable "Install from unknown sources" in your Android security settings temporarily.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Import Config File</h4>
+          <p>On the main screen, tap the <strong>+</strong> button or <strong>Import</strong> option. Select your .hat file. The config loads automatically with all settings pre-filled.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Verify Connection Type</h4>
+          <p>Check that the connection type (SSH Direct, SSH over WebSocket, or SSH over SSL) matches what your config requires. This is shown in the config details screen.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Connect</h4>
+          <p>Tap the connect toggle. Grant VPN permissions when prompted. HA Tunnel will show connection progress and then display connected status with a green indicator.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- OPENVPN -->
+  <div id="openvpn">
+    <span class="section-label">Guide 03</span>
+    <h2>OpenVPN — Complete Setup Guide</h2>
+    <p class="lead">OpenVPN is the most widely used open-source VPN protocol. It requires a server (either self-hosted on a VPS or provided by a service) and a .ovpn configuration file. It offers the best combination of security, compatibility, and flexibility.</p>
+
+    <h3>What You'll Need</h3>
+    <ul>
+      <li>Android device</li>
+      <li>OpenVPN for Android app (open-source, on Google Play)</li>
+      <li>A .ovpn configuration file — from your server or the <a href="https://vpnconfighub.netlify.app/" target="_blank" rel="noopener">Config Hub</a></li>
+      <li>Optional: your own VPS — see the <a href="blog-vps-hosting.html">VPS Hosting guide</a></li>
+    </ul>
+
+    <ol class="step-list">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Install OpenVPN for Android</h4>
+          <p>Install the app from Google Play. Use "OpenVPN for Android" by Arne Schwabe — the open-source version, not commercial alternatives.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Import your .ovpn file</h4>
+          <p>Tap the folder icon in the top right. Select your .ovpn file. The app imports all settings including certificates embedded in the file.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Connect</h4>
+          <p>Tap the imported profile name to connect. Grant VPN permissions. OpenVPN will show a detailed connection log — look for "Initialization Sequence Completed" to confirm success.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Verify your IP</h4>
+          <p>Visit a site like <code>whatismyip.com</code> to confirm your IP address has changed to the VPN server's IP. If it shows your real IP, something is wrong with the routing.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="feature-highlight">
+      <h3>Want to Host Your Own OpenVPN Server?</h3>
+      <p>Self-hosting gives you complete control — no logs, no third-party trust required, and a fresh IP that isn't blacklisted. Our VPS hosting guide walks you through the entire process on DigitalOcean or Vultr.</p>
+      <a href="blog-vps-hosting.html" class="btn btn-outline">VPS Hosting Guide →</a>
+    </div>
+  </div>
+
+</div>
+</div>
+  <script>(function(s){s.dataset.zone='10925473',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <script src="https://quge5.com/88/tag.min.js" data-zone="237688" async data-cfasync="false"></script>
+<footer id="main-footer"></footer>
+<script src="blognav.js"></script>
+<script>buildNav('Guides'); buildFooter();</script>
+</body>
+</html>

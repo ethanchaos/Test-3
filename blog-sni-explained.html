@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How SNI Works — Server Name Indication Explained | Chaos Configurations</title>
+<meta name="description" content="A deep technical explanation of Server Name Indication (SNI) — what it is, how it works in the TLS handshake, why it's visible, and how it's used in VPN configs and the Chaos SNI Finder tool.">
+<link rel="stylesheet" href="blogcss.css">
+</head>
+<body>
+<nav id="main-nav"></nav>
+<div id="mobile-menu" class="mobile-menu"></div>
+<div class="page-wrapper">
+
+<div class="breadcrumb"><a href="blog-home.html">Home</a> <span>›</span> <a href="blog-sni-explained.html">SNI Explained</a></div>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="hero-badge">Technical Deep Dive</div>
+    <h1>How SNI Works</h1>
+    <p class="lead">Server Name Indication is one of the most important — and least understood — pieces of modern internet infrastructure. It's how HTTPS servers know which certificate to serve, and it's also how ISPs, governments, and firewalls know which sites you're connecting to, even over encrypted connections.</p>
+    <div class="page-meta">
+      <span>📖 ~6,000 words</span>
+      <span>⏱️ 25 min read</span>
+      <span>🏷️ Intermediate · Advanced</span>
+    </div>
+  </div>
+</div>
+
+<div class="content-section">
+  <div class="layout-sidebar">
+    <div class="article-body">
+
+      <h2 id="the-problem">The Problem SNI Solves</h2>
+      <p>To understand why Server Name Indication (SNI) exists, you first need to understand a fundamental challenge in web hosting: <strong>multiple websites sharing a single IP address</strong>.</p>
+
+      <p>In the early days of the web, every website needed its own dedicated IP address if it wanted to support HTTPS. This worked fine when there were relatively few websites, but as the internet scaled, it became impractical. IPv4 addresses — the most widely used addressing scheme — are limited, and the pool of available addresses was exhausted years ago. Requiring a dedicated IP address for every HTTPS website would have been catastrophically expensive and wasteful.</p>
+
+      <p>For regular HTTP (unencrypted) websites, the problem was solved easily: the browser includes the domain name in the HTTP <code>Host</code> header, which the server reads to figure out which website to serve. A single server can host thousands of websites at one IP address because it reads the Host header in each request to know which one to respond with.</p>
+
+      <p>But HTTPS made this harder. HTTPS encrypts the HTTP request — including the Host header — inside a TLS connection. And here's the catch: <strong>the TLS handshake happens before the HTTP conversation begins</strong>. Before the server can read the Host header (to know which website you want), it has to complete the TLS handshake — but to complete the handshake, it needs to present a certificate. To present the right certificate, it needs to know which website you're connecting to. This is a chicken-and-egg problem.</p>
+
+      <div class="info-box yellow">
+        <div class="icon">⚡</div>
+        <div>
+          <h4>The Core Paradox</h4>
+          <p>Without SNI: The server can't know which certificate to serve until it reads the Host header. But it can't read the Host header until it completes the TLS handshake. And it can't complete the TLS handshake without serving a certificate. Classic deadlock.</p>
+        </div>
+      </div>
+
+      <p>The solution — Server Name Indication — was published in RFC 3546 in June 2003. SNI adds the requested domain name as an extension to the TLS <strong>Client Hello</strong> message — the very first message in the TLS handshake, sent before any encryption is established. The server reads the SNI field, selects the appropriate certificate, and the handshake proceeds normally.</p>
+
+      <h2 id="tls-handshake">SNI in the TLS Handshake — Step by Step</h2>
+      <p>The TLS handshake is the process by which two parties establish a secure encrypted connection. Here is exactly how it works, with SNI included:</p>
+
+      <ol>
+        <li>
+          <strong>Client Hello (includes SNI)</strong><br>
+          Your browser sends the initial Client Hello message. This message includes:
+          <ul>
+            <li>The TLS version(s) it supports</li>
+            <li>A list of cipher suites it supports (encryption algorithms)</li>
+            <li>A randomly generated number (client random)</li>
+            <li><strong>The SNI extension — the hostname of the site you're connecting to</strong></li>
+          </ul>
+          At this point, <em>no encryption has been established yet</em>. The Client Hello — including the SNI field — is sent in <strong>plaintext</strong> over the network. This is the critical vulnerability that makes SNI-based filtering possible.
+        </li>
+        <li>
+          <strong>Server Hello + Certificate</strong><br>
+          The server reads the SNI field, selects the correct SSL/TLS certificate for that domain, and responds with its Server Hello message including the selected certificate.
+        </li>
+        <li>
+          <strong>Certificate Verification</strong><br>
+          Your browser verifies that the certificate is valid — signed by a trusted Certificate Authority, not expired, and matching the domain name.
+        </li>
+        <li>
+          <strong>Key Exchange</strong><br>
+          Both sides perform a cryptographic key exchange (using ECDHE or similar) to establish a shared session key without transmitting it over the network.
+        </li>
+        <li>
+          <strong>Encrypted Session Begins</strong><br>
+          From this point on, all communication is encrypted with the shared session key. The HTTP request (including the Host header) is now sent encrypted inside the established TLS session.
+        </li>
+      </ol>
+
+      <pre data-lang="TLS Flow"><code><span class="code-blue">Client</span>                              <span class="code-green">Server</span>
+
+  │──── ClientHello ──────────────────────►│
+  │     (SNI: "example.com" in plaintext)  │
+  │                                        │
+  │◄─── ServerHello + Certificate ─────────│
+  │     (Certificate for example.com)      │
+  │                                        │
+  │──── Key Exchange ──────────────────────►│
+  │◄─── Key Exchange ───────────────────────│
+  │                                        │
+  │════ ENCRYPTED SESSION ESTABLISHED ═════│
+  │                                        │
+  │──── HTTP Request (encrypted) ──────────►│
+  │     "GET / HTTP/1.1"                   │
+  │     "Host: example.com"                │</code></pre>
+
+      <h2 id="why-plaintext">Why SNI Is Sent in Plaintext — and Why This Matters</h2>
+      <p>The fact that SNI is sent in plaintext before encryption is established was not an oversight — it was a necessary design choice at the time. The server needs to know which certificate to present before it can establish encryption, and there was no mechanism in TLS 1.2 and earlier to encrypt the handshake itself.</p>
+
+      <p>This means that <strong>anyone who can observe your network traffic can see which domains you're connecting to</strong>, even when you're using HTTPS. This includes:</p>
+      <ul>
+        <li>Your Internet Service Provider (ISP)</li>
+        <li>Network administrators at your workplace or school</li>
+        <li>Government surveillance systems monitoring internet traffic</li>
+        <li>Anyone running a packet sniffer on the same network as you (e.g., on a public Wi-Fi hotspot)</li>
+      </ul>
+
+      <p>They can't see <em>what</em> you're doing on those sites — the content of your HTTP requests and responses is encrypted. But they can see <em>which</em> domains you're connecting to and when. For many privacy and censorship scenarios, this is enough information to be problematic.</p>
+
+      <div class="info-box red">
+        <div class="icon">⚠️</div>
+        <div>
+          <h4>Real-World Impact</h4>
+          <p>China's Great Firewall, Russia's TSPU system, and corporate content filters all use SNI inspection to block HTTPS websites without needing to decrypt traffic. Just reading the SNI field in the Client Hello is sufficient to identify and block connections to targeted domains.</p>
+        </div>
+      </div>
+
+      <h2 id="sni-in-vpn">SNI in VPN Configurations — Why It's Used</h2>
+      <p>SNI plays a fascinating and counterintuitive role in VPN configurations, particularly in the type of carrier-bypass configs used with apps like HTTP Injector. Understanding this requires thinking about how carrier firewalls work.</p>
+
+      <p>Many mobile carriers — particularly in developing markets — implement billing and access control at the network level. When you run out of data, they don't just cut off your connection entirely — they implement rules that block most traffic while allowing certain "free" or zero-rated domains to pass through. These zero-rated domains are whitelisted at the carrier level.</p>
+
+      <p>When your device makes an HTTPS connection to a zero-rated domain, the carrier's network sees the SNI field in the Client Hello and recognizes the domain as whitelisted — so it allows the connection to proceed without deducting from your data balance.</p>
+
+      <p>This is where the cleverness of SNI-based VPN configs comes in. A properly crafted HTTP Injector or HA Tunnel Plus configuration can use an SNI value that matches a whitelisted domain while actually routing traffic to a different server (the VPN server). The carrier's firewall sees the SNI and thinks the connection is going to a whitelisted domain — so it allows it. The actual traffic, however, is going somewhere else entirely.</p>
+
+      <p>This technique is called <strong>SNI spoofing</strong> or <strong>SNI manipulation</strong>. It works because the SNI field, while plaintext, is typically only used by the carrier for the whitelist check — not for verifying the final destination of the traffic.</p>
+
+      <p>Note: The effectiveness of SNI-based configs varies significantly by carrier and region, and as carriers become more sophisticated in their DPI implementations, SNI spoofing alone may not be sufficient. More advanced configs combine SNI manipulation with additional header injection and routing tricks.</p>
+
+      <h2 id="chaos-sni-finder">The Chaos SNI Finder Tool</h2>
+      <p>The <strong>Chaos SNI Finder</strong> is a tool developed by Ethan Chaos specifically to address a practical challenge in building and maintaining VPN configs: finding SNI hosts that work for a given carrier or network environment.</p>
+
+      <p>The problem is that not all SNI values work equally well for all carriers. A zero-rated domain that works as an SNI bypass point for one carrier in one country may not work at all for a different carrier — or may stop working if the carrier updates its rules. Finding reliable SNI hosts requires testing: checking which domains are whitelisted, how strictly they're validated, and which ones produce stable, fast connections when used as SNI values.</p>
+
+      <h3>What the Tool Does</h3>
+      <p>Chaos SNI Finder automates the process of discovering and testing SNI hosts. It works by:</p>
+      <ol>
+        <li><strong>Testing a list of candidate domains</strong> against the current network to see which ones are reachable without data</li>
+        <li><strong>Analyzing the network response</strong> to each domain to determine if it's genuinely zero-rated or just accessible through the paid data connection</li>
+        <li><strong>Ranking working SNI hosts</strong> by latency, reliability, and connection quality</li>
+        <li><strong>Generating ready-to-use configuration parameters</strong> for HTTP Injector and HA Tunnel Plus</li>
+      </ol>
+
+      <p>The tool is designed to be used in the context of a specific carrier and region — the results are not universally applicable. This is by design: the nature of carrier zero-rating means that what works on one network is specific to that network's whitelist.</p>
+
+      <h3>Use Cases</h3>
+      <ul>
+        <li><strong>Building new configs:</strong> When creating a new HTTP Injector or HA Tunnel Plus config for a specific carrier, Chaos SNI Finder helps identify the best SNI hosts to use.</li>
+        <li><strong>Troubleshooting broken configs:</strong> If a previously working config stops working, the tool can quickly identify whether the SNI host is still effective or needs to be updated.</li>
+        <li><strong>Research and analysis:</strong> Understanding which domains are zero-rated on a given network is valuable information for researchers studying carrier policies and network access.</li>
+        <li><strong>Educational purposes:</strong> The tool makes the mechanics of SNI-based access visible and testable, helping users understand how the underlying technology works.</li>
+      </ul>
+
+      <p>You can find the Chaos SNI Finder on our <a href="blog-tools.html">Tools & Downloads page</a>.</p>
+
+      <h2 id="ech">Encrypted Client Hello — The Future of SNI Privacy</h2>
+      <p>The networking community has long recognized that plaintext SNI is a significant privacy vulnerability. The solution — <strong>Encrypted Client Hello (ECH)</strong> — has been in development for several years and was formally published as RFC 9849 in March 2026.</p>
+
+      <p>ECH works by encrypting the entire Client Hello message — including the SNI extension — using a public key that the client obtains via DNS before making the connection. With ECH, anyone monitoring your network traffic sees an encrypted Client Hello with a generic "outer" server name (typically the CDN or DNS provider), but the actual target domain is hidden inside the encrypted payload.</p>
+
+      <h3>How ECH Changes the Picture</h3>
+      <p>ECH fundamentally breaks SNI-based content filtering. If the SNI field is encrypted, firewalls and ISPs can no longer use it to identify which domain you're connecting to. This has significant implications:</p>
+      <ul>
+        <li><strong>For privacy:</strong> ECH is a major improvement. Your ISP and network observers can no longer see which HTTPS domains you're visiting.</li>
+        <li><strong>For censorship circumvention:</strong> SNI-based blocking becomes ineffective. Censors would have to block all HTTPS traffic to a CDN (causing massive collateral damage) or switch to other filtering methods.</li>
+        <li><strong>For content filtering tools:</strong> Enterprise and school network filters that rely on SNI inspection will need to adapt — likely by requiring traffic to pass through explicit proxies or using DNS-based filtering instead.</li>
+        <li><strong>For carrier-based zero-rating configs:</strong> SNI spoofing techniques will become less reliable as networks upgrade to ECH-aware infrastructure. New approaches will be needed.</li>
+      </ul>
+
+      <p>ECH is currently supported in Firefox (with DoH enabled), Chrome (in recent versions), and Cloudflare's network. Adoption is growing but not yet universal. The transition to ECH represents a significant shift in the privacy and censorship landscape — and it's something we're tracking closely at Chaos Configurations.</p>
+
+      <h2 id="domain-fronting">Domain Fronting — A Related Technique</h2>
+      <p><strong>Domain fronting</strong> is a technique that exploits the distinction between the SNI field (which the carrier/firewall sees) and the HTTP Host header (which the actual server sees, after TLS decryption). The idea is to put a benign, whitelisted domain in the SNI field while putting the actual target domain in the encrypted HTTP Host header.</p>
+
+      <p>For domain fronting to work, both the fronting domain (the one in SNI) and the target domain must be hosted on the same CDN or server infrastructure. If they're on the same CDN, the CDN's edge servers accept the connection (seeing the whitelisted SNI), then route the request to the actual backend server based on the Host header.</p>
+
+      <p>Domain fronting was used for censorship circumvention by tools like Signal and Tor's meek transport. It became less viable when major CDN providers (Google, Amazon AWS, Cloudflare) updated their configurations to reject connections where the SNI domain doesn't match the HTTP Host header. But it remains conceptually important for understanding the relationship between SNI and routing.</p>
+
+      <h2 id="esni-blocking">ESNI and Government Blocking</h2>
+      <p>The predecessor to ECH was <strong>Encrypted SNI (ESNI)</strong>, which was an experimental protocol that encrypted just the SNI field (rather than the entire Client Hello). ESNI was deployed by Cloudflare and supported in Firefox from 2018 to 2021.</p>
+
+      <p>Interestingly, some governments chose to block ESNI traffic entirely rather than adapt their filtering systems. China's Great Firewall began blocking ESNI traffic in August 2020. Russian ISPs started blocking it in October 2020. The rationale was straightforward: if you can't see the SNI, you can't filter by domain name — so block the encryption protocol itself to force connections to use plaintext SNI.</p>
+
+      <p>This represents a recurring pattern in the censorship-circumvention arms race: as privacy-enhancing technologies improve, censors respond by blocking the privacy enhancement rather than its contents. The same dynamic played out with Tor (blocked in many countries), VPNs (blocked in China, Russia, UAE), and ESNI. ECH will face the same challenge.</p>
+
+      <div class="feature-highlight">
+        <h3>Use the Chaos SNI Finder</h3>
+        <p>Ready to find working SNI hosts for your carrier? The Chaos SNI Finder tool automates the discovery process and helps you build configs that actually work in your network environment.</p>
+        <a href="blog-tools.html#sni-finder" class="btn btn-outline">Get Chaos SNI Finder →</a>
+      </div>
+
+    </div>
+
+    <aside class="sidebar">
+      <div class="sidebar-widget">
+        <h4>In This Guide</h4>
+        <ul class="toc-list">
+          <li><a href="#the-problem">The Problem SNI Solves</a></li>
+          <li><a href="#tls-handshake">TLS Handshake with SNI</a></li>
+          <li><a href="#why-plaintext">Why SNI Is Plaintext</a></li>
+          <li><a href="#sni-in-vpn">SNI in VPN Configs</a></li>
+          <li><a href="#chaos-sni-finder">Chaos SNI Finder</a></li>
+          <li><a href="#ech">Encrypted Client Hello</a></li>
+          <li><a href="#domain-fronting">Domain Fronting</a></li>
+          <li><a href="#esni-blocking">ESNI & Blocking</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-widget">
+        <h4>Related Pages</h4>
+        <ul class="toc-list">
+          <li><a href="blog-sni-filtering.html">SNI in Filtering & Censorship</a></li>
+          <li><a href="blog-tools.html">Chaos SNI Finder Tool</a></li>
+          <li><a href="blog-vpn-tunneling.html">VPN Tunneling Deep Dive</a></li>
+          <li><a href="blog-zero-rated.html">Zero-Rated Sites</a></li>
+          <li><a href="blog-network-restrictions.html">Network Restrictions</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-widget">
+        <h4>Key Terms</h4>
+        <div style="display:flex;flex-direction:column;gap:8px;font-size:0.82rem;">
+          <div><strong>SNI</strong> — Server Name Indication</div>
+          <div><strong>ECH</strong> — Encrypted Client Hello</div>
+          <div><strong>ESNI</strong> — Encrypted SNI (deprecated)</div>
+          <div><strong>TLS</strong> — Transport Layer Security</div>
+          <div><strong>DPI</strong> — Deep Packet Inspection</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+</div>
+  <script>(function(s){s.dataset.zone='10925473',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <script src="https://quge5.com/88/tag.min.js" data-zone="237688" async data-cfasync="false"></script>
+<footer id="main-footer"></footer>
+<script src="blognav.js"></script>
+<script>buildNav('SNI'); buildFooter();</script>
+</body>
+</html>

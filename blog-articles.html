@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog & Articles — VPN, Networking & Free Internet Research | Chaos Configurations</title>
+<meta name="description" content="In-depth articles on VPN technology, SNI, Freenet, network restrictions, digital access, and free net research from Chaos Configurations by Ethan Chaos.">
+<link rel="stylesheet" href="blogcss.css">
+</head>
+<body>
+<nav id="main-nav"></nav>
+<div id="mobile-menu" class="mobile-menu"></div>
+<div class="page-wrapper">
+<div class="breadcrumb"><a href="blog-home.html">Home</a> <span>›</span> Blog</div>
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="hero-badge">Knowledge Base</div>
+    <h1>Blog & Research Articles</h1>
+    <p class="lead">Deep-dive articles on VPN technology, SNI mechanics, Freenet history, network restrictions, digital access inequality, and practical networking guides. Written by Ethan Chaos and the Chaos Configurations community.</p>
+  </div>
+</div>
+<div class="content-section">
+
+  <!-- FEATURED -->
+  <span class="section-label">Featured Articles</span>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;margin-bottom:48px;">
+
+    <a href="blog-freenet-history.html" class="card card-link" style="grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:32px;padding:36px;align-items:center;">
+      <div>
+        <span class="tag tag-green" style="margin-bottom:14px;display:inline-flex;">History · Foundational</span>
+        <h2 style="margin-top:0;font-size:1.8rem;">The Discovery of Free Net Technology</h2>
+        <p>The complete origin story of Freenet — from Ian Clarke's 1999 thesis at the University of Edinburgh to a global movement for censorship-resistant, open-access internet. How one student's idea changed the course of internet freedom technology.</p>
+        <span class="tag tag-blue" style="margin-top:14px;display:inline-flex;">Read Article →</span>
+      </div>
+      <div style="background:var(--light-gray);border-radius:var(--radius);padding:28px;font-family:var(--font-mono);font-size:0.82rem;color:var(--text-mid);">
+        <div style="margin-bottom:8px;color:var(--accent);font-weight:600;">Timeline Highlights</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <div>1995 → Edinburgh University</div>
+          <div>1999 → Thesis published</div>
+          <div>2000 → Freenet v0.1 released</div>
+          <div>2008 → Darknet mode (v0.7)</div>
+          <div>2023 → Renamed Hyphanet</div>
+          <div>2026 → New Freenet + River</div>
+        </div>
+      </div>
+    </a>
+
+    <a href="blog-ethan-researcher.html" class="card card-link">
+      <span class="tag tag-blue" style="margin-bottom:12px;display:inline-flex;">Profile · Research</span>
+      <h3>Ethan Chaos: Network Researcher & Free Net Builder</h3>
+      <p>A detailed look at Ethan Chaos's research methodology, tools, and contributions to free net technology — including the development of Chaos SNI Finder.</p>
+      <span style="font-size:0.82rem;color:var(--accent);margin-top:14px;display:block;">Read Profile →</span>
+    </a>
+
+    <a href="blog-sni-explained.html" class="card card-link">
+      <span class="tag tag-orange" style="margin-bottom:12px;display:inline-flex;">Technical · Advanced</span>
+      <h3>How SNI Works — Server Name Indication Deep Dive</h3>
+      <p>The complete technical explanation of SNI — why it exists, how it's used in VPN configs, and what Encrypted Client Hello means for the future of internet privacy.</p>
+      <span style="font-size:0.82rem;color:var(--accent);margin-top:14px;display:block;">Read Article →</span>
+    </a>
+  </div>
+
+  <!-- ALL ARTICLES -->
+  <span class="section-label">All Articles</span>
+  <div style="display:flex;gap:10px;margin:20px 0 28px;flex-wrap:wrap;">
+    <button onclick="filterPosts('all')" id="pbtn-all" class="btn btn-primary" style="font-size:0.82rem;padding:7px 16px;">All</button>
+    <button onclick="filterPosts('technical')" id="pbtn-technical" class="btn btn-ghost" style="font-size:0.82rem;padding:7px 16px;">Technical</button>
+    <button onclick="filterPosts('history')" id="pbtn-history" class="btn btn-ghost" style="font-size:0.82rem;padding:7px 16px;">History</button>
+    <button onclick="filterPosts('policy')" id="pbtn-policy" class="btn btn-ghost" style="font-size:0.82rem;padding:7px 16px;">Policy</button>
+    <button onclick="filterPosts('guides')" id="pbtn-guides" class="btn btn-ghost" style="font-size:0.82rem;padding:7px 16px;">Guides</button>
+    <button onclick="filterPosts('research')" id="pbtn-research" class="btn btn-ghost" style="font-size:0.82rem;padding:7px 16px;">Research</button>
+  </div>
+
+  <div id="posts-grid" style="display:flex;flex-direction:column;gap:1px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+
+    <a href="blog-freenet-history.html" class="post-row" data-cat="history" style="display:flex;gap:24px;align-items:center;padding:20px 24px;background:white;text-decoration:none;transition:background 0.15s;">
+      <div style="flex-shrink:0;width:90px;"><span class="tag tag-green">History</span></div>
+      <div style="flex:1;">
+        <div style="font-weight:600;color:var(--text-dark);margin-bottom:4px;">The Discovery of Free Net Technology</div>
+        <div style="font-size:0.85rem;color:var(--text-light);">Ian Clarke, Freenet, and the origin story of censorship-resistant networking</div>
+      </div>
+      <div style="font-size:0.78rem;color:var(--text-light);font-family:var(--font-mono);flex-shrink:0;">~8,500 words</div>
+    </a>
+
+    <a href="blog-freenet.html" class="post-row" data-cat="history" style="display:flex;gap:24px;align-items:center;padding:20px 24px;background:var(--off-white);text-decoration:none;transition:background 0.15s;">
+      <div style="flex-shrink:0;width:90px;"><span class="tag tag-green">History</span></div>
+      <div style="flex:1;">
+        <div style="font-weight:600;color:var(--text-dark);margin-bottom:4px;">Freenet & Free Net Technology Explained</div>
+        <div style="font-size:0.85rem;color:var(--text-light);">What Freenet is, how it works, and why it matters for internet freedom</div>
+      </div>
+      <div style="font-size:0.78rem;color:var(--text-light);font-family:var(--font-mono);flex-shrink:0;">~7,000 words</div>
+    </a>
+
+    <a href="blog-sni-explained.html" class="post-row" data-cat="technical" style="display:flex;gap:24px;align-items:center;padding:20px 24px;background:white;text-decoration:none;transition:background 0.15s;">
+      <div style="flex-shrink:0;width:90px;"><span class="tag tag-orange">Technical</span></div>
+      <div style="flex:1;">
+        <div style="font-weight:600;color:var(--text-dark);margin-bottom:4px;">How SNI Works — Server Name Indication Deep Dive</div>
+        <div style="font-size:0.85rem;color:var(--text-light);">TLS handshake, SNI visibility, Chaos SNI Finder, and Encrypted Client Hello</div>
+      </div>
+      <div style="font-size:0.78rem;color:var(--text-light);font-family:var(--font-mono);flex-shrink:0;">~6,000 words</div>
+    </a>
+
+    <a href="blog-sni-filtering.html" class="post-row" data-cat="technical" style="display:flex;gap:24px;align-items:center;padding:20px 24px;background:var(--off-white);text-decoration:none;transition:background 0.15s;">
+      <div style="flex-shrink:0;width:90px;"><span class="tag tag-orange">Technical</span></div>
+      <div style="flex:1;">
+        <div style="font-weight:600;color:var(--text-dark);margin-bottom:4px;">How SNI Is Used to Filter & Block Traffic</div>
+        <div style="font-size:0.85rem;color:var(--text-light);">SNI-based censorship — the Great Firewall, ISP blocking, and ECH countermeasures</div>
+      </div>
+      <div style="font-size:0.78rem;color:var(--text-light);font-family:var(--font-mono);flex-shrink:0;">~6,500 words</div>
+    </a>
+
+    <a href="blog-vpn-basics.html" class="post-row" data-cat="guides" style="display:flex;gap:24px;align-items:center;padding:20px 24px;background:white;text-decoration:none;transition:background 0.15s;">
+      <div style="flex-shrink:0;width:90px;"><span class="tag tag-blue">Guide</span></div>
+      <div style="flex:1;">
+        <div style="font-weight:600;color:var(--text-dark);margin-bottom:4px;">VPN Basics: The Complete Guide</div>
+        <div style="font-size:0.85rem;color:var(--text-light);">Encryption, tunneling, TCP vs UDP, DNS leaks, kill switches — everything</div>
+      </div>
+      <div style="font-size:0.78rem;color:var(--text-light);font-family:var(--font-mono);flex-shrink:0;">~5,500 words</div>
+    </a>
+
+    <a href="blog-vpn-tunneling.html" class="post-row" data-cat="technical" style="display:flex;gap:24px;align-items:center;padding:20px 24px;background:var(--off-white);text-decoration:none;transition:background 0.15s;">
+      <div style="flex-shrink:0;width:90px;"><span class="tag tag-orange">Technical</span></div>
+      <div style="flex:1;">
+        <div style="font-weight:600;color:var(--text-dark);margin-bottom:4px;">VPN Tunneling Deep Dive</div>
+        <div style="font-size:0.85rem;color:var(--text-light);">HTTP, SSL/TLS, SSH, and WebSocket tunneling — how it all works at the protocol level</div>
+      </div>
+      <div style="font-size:0.78rem;color:var(--text-light);font-family:var(--font-mono);flex-shrink:0;">~7,500 words</div>
+    </a>
+
+    <a href="blog-zero-rated.html" class="post-row" data-cat="policy" style="display:flex;gap:24px;align-items:center;padding:20px 24px;background:white;text-decoration:none;transition:background 0.15s;">
+      <div style="flex-shrink:0;width:90px;"><span class="tag tag-blue">Policy</span></div>
+      <div style="flex:1;">
+        <div style="font-weight:600;color:var(--text-dark);margin-bottom:4px;">Zero-Rated Sites & How They're Being Blocked</div>
+        <div style="font-size:0.85rem;color:var(--text-light);">What zero-rating is, how it works technically, and why it's disappearing</div>
+      </div>
+      <div style="font-size:0.78rem;color:var(--text-light);font-family:var(--font-mono);flex-shrink:0;">~6,500 words</div>
+    </a>
+
+    <a href="blog-network-restrictions.html" class="post-row" data-cat="research" style="display:flex;gap:24px;align-items:center;padding:20px 24px;background:var(--off-white);text-decoration:none;transition:background 0.15s;">
+      <div style="flex-shrink:0;width:90px;"><span class="tag tag-orange">Research</span></div>
+      <div style="flex:1;">
+        <div style="font-weight:600;color:var(--text-dark);margin-bottom:4px;">How ISPs & Governments Restrict the Internet</div>
+        <div style="font-size:0.85rem;color:var(--text-light);">DNS blocking, IP blocking, DPI, BGP manipulation, throttling — the complete picture</div>
+      </div>
+      <div style="font-size:0.78rem;color:var(--text-light);font-family:var(--font-mono);flex-shrink:0;">~7,000 words</div>
+    </a>
+
+    <a href="blog-digital-access.html" class="post-row" data-cat="policy" style="display:flex;gap:24px;align-items:center;padding:20px 24px;background:white;text-decoration:none;transition:background 0.15s;">
+      <div style="flex-shrink:0;width:90px;"><span class="tag tag-blue">Policy</span></div>
+      <div style="flex:1;">
+        <div style="font-weight:600;color:var(--text-dark);margin-bottom:4px;">Digital Access & Internet Inequality</div>
+        <div style="font-size:0.85rem;color:var(--text-light);">Why configs matter — the digital divide, data costs, and the mobile-only internet</div>
+      </div>
+      <div style="font-size:0.78rem;color:var(--text-light);font-family:var(--font-mono);flex-shrink:0;">~6,000 words</div>
+    </a>
+
+    <a href="blog-free-vs-paid.html" class="post-row" data-cat="guides" style="display:flex;gap:24px;align-items:center;padding:20px 24px;background:var(--off-white);text-decoration:none;transition:background 0.15s;">
+      <div style="flex-shrink:0;width:90px;"><span class="tag tag-blue">Guide</span></div>
+      <div style="flex:1;">
+        <div style="font-weight:600;color:var(--text-dark);margin-bottom:4px;">Free vs Paid VPNs — Risks & Comparisons</div>
+        <div style="font-size:0.85rem;color:var(--text-light);">The real risks of free VPNs, what to look for in paid options, and when to self-host</div>
+      </div>
+      <div style="font-size:0.78rem;color:var(--text-light);font-family:var(--font-mono);flex-shrink:0;">~5,500 words</div>
+    </a>
+
+    <a href="blog-vps-hosting.html" class="post-row" data-cat="guides" style="display:flex;gap:24px;align-items:center;padding:20px 24px;background:white;text-decoration:none;transition:background 0.15s;">
+      <div style="flex-shrink:0;width:90px;"><span class="tag tag-blue">Guide</span></div>
+      <div style="flex:1;">
+        <div style="font-weight:600;color:var(--text-dark);margin-bottom:4px;">VPS & Self-Hosted VPN — Complete Guide</div>
+        <div style="font-size:0.85rem;color:var(--text-light);">DigitalOcean + Vultr setup, OpenVPN install, WireGuard config, SSH server</div>
+      </div>
+      <div style="font-size:0.78rem;color:var(--text-light);font-family:var(--font-mono);flex-shrink:0;">~6,000 words</div>
+    </a>
+
+    <a href="blog-ethan-researcher.html" class="post-row" data-cat="research" style="display:flex;gap:24px;align-items:center;padding:20px 24px;background:var(--off-white);text-decoration:none;transition:background 0.15s;">
+      <div style="flex-shrink:0;width:90px;"><span class="tag tag-orange">Research</span></div>
+      <div style="flex:1;">
+        <div style="font-weight:600;color:var(--text-dark);margin-bottom:4px;">Ethan Chaos: Network Researcher & Free Net Builder</div>
+        <div style="font-size:0.85rem;color:var(--text-light);">Research methodology, SNI Finder development, and contributions to free net technology</div>
+      </div>
+      <div style="font-size:0.78rem;color:var(--text-light);font-family:var(--font-mono);flex-shrink:0;">~7,000 words</div>
+    </a>
+
+  </div>
+
+</div>
+</div>
+<footer id="main-footer"></footer>
+<script src="blognav.js"></script>
+<script>
+buildNav('Blog'); buildFooter();
+document.querySelectorAll('.post-row').forEach(r => {
+  r.addEventListener('mouseenter', () => r.style.background = 'var(--accent-light)');
+  r.addEventListener('mouseleave', e => {
+    const rows = document.querySelectorAll('.post-row');
+    rows.forEach((row, i) => row.style.background = i % 2 === 0 ? 'white' : 'var(--off-white)');
+  });
+});
+function filterPosts(cat) {
+  document.querySelectorAll('[id^="pbtn-"]').forEach(b => { b.className = 'btn btn-ghost'; b.style.fontSize='0.82rem'; b.style.padding='7px 16px'; });
+  const ab = document.getElementById('pbtn-' + cat);
+  if (ab) { ab.className = 'btn btn-primary'; ab.style.fontSize='0.82rem'; ab.style.padding='7px 16px'; }
+  let alt = false;
+  document.querySelectorAll('.post-row').forEach(r => {
+    const show = cat === 'all' || r.dataset.cat === cat;
+    r.style.display = show ? 'flex' : 'none';
+    if (show) { r.style.background = alt ? 'var(--off-white)' : 'white'; alt = !alt; }
+  });
+}
+</script>
+  <script>(function(s){s.dataset.zone='10925473',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <script src="https://quge5.com/88/tag.min.js" data-zone="237688" async data-cfasync="false"></script>
+</body>
+</html>

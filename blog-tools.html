@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tools & Downloads — Chaos SNI Finder & VPN Resources | Chaos Configurations</title>
+<meta name="description" content="Download Chaos SNI Finder, recommended VPN apps, config tools, and networking utilities from Chaos Configurations by Ethan Chaos.">
+<link rel="stylesheet" href="blogcss.css">
+</head>
+<body>
+<nav id="main-nav"></nav>
+<div id="mobile-menu" class="mobile-menu"></div>
+<div class="page-wrapper">
+<div class="breadcrumb"><a href="blog-home.html">Home</a> <span>›</span> Tools & Downloads</div>
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="hero-badge">Chaos Configurations · Tools</div>
+    <h1>Tools & Downloads</h1>
+    <p class="lead">Every tool on this page is free to use. The Chaos SNI Finder is built and maintained by Ethan Chaos. All recommended apps are open-source or have strong track records in the networking community.</p>
+    <div class="page-meta"><span>🔧 Chaos SNI Finder</span><span>📱 Recommended Apps</span><span>⚙️ Config Files</span></div>
+  </div>
+</div>
+<div class="content-section">
+
+  <!-- CHAOS SNI FINDER -->
+  <div id="sni-finder" style="background:linear-gradient(135deg,#f0f4ff,#e8fff8);border:1px solid var(--border);border-radius:var(--radius);padding:40px;margin-bottom:48px;">
+    <div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;">
+      <div style="flex:1;min-width:260px;">
+        <span class="hero-badge" style="margin-bottom:16px;display:inline-flex;">⭐ Featured Tool</span>
+        <h2 style="margin-top:0">Chaos SNI Finder</h2>
+        <p class="lead">The flagship tool from Ethan Chaos. Automatically discovers and tests SNI hosts that work on your current carrier network — producing ranked results ready for use in HTTP Injector and HA Tunnel Plus configs.</p>
+        <ul style="margin:0 0 24px 20px;">
+          <li>Automated SNI host discovery &amp; testing</li>
+          <li>Ranks results by latency and reliability</li>
+          <li>Generates ready-to-use config parameters</li>
+          <li>Works with HTTP Injector &amp; HA Tunnel Plus</li>
+          <li>Carrier-specific — adapts to your network</li>
+        </ul>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="blog-sni-explained.html" class="btn btn-primary">📖 How SNI Works</a>
+          <a href="blog-contact.html" class="btn btn-outline">Get Access →</a>
+        </div>
+      </div>
+      <div style="width:260px;flex-shrink:0;">
+        <div style="background:var(--text-dark);border-radius:var(--radius);padding:24px;font-family:var(--font-mono);font-size:0.82rem;color:#e6edf3;line-height:1.8;">
+          <div style="color:#8b949e;margin-bottom:12px;"># Chaos SNI Finder v2.1</div>
+          <div><span style="color:#56d364">✓</span> Testing facebook.com ... <span style="color:#ffa198">blocked</span></div>
+          <div><span style="color:#56d364">✓</span> Testing zero.mtn.com ... <span style="color:#56d364">pass</span></div>
+          <div><span style="color:#56d364">✓</span> Testing free.airtel.net ... <span style="color:#56d364">pass</span></div>
+          <div><span style="color:#56d364">✓</span> Testing wikipedia.org ... <span style="color:#56d364">pass</span></div>
+          <div style="margin-top:12px;color:#79c0ff">── Results (3 found) ──</div>
+          <div>1. zero.mtn.com — 42ms</div>
+          <div>2. free.airtel.net — 67ms</div>
+          <div>3. wikipedia.org — 89ms</div>
+          <div style="margin-top:12px;color:#56d364">Config params saved →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECOMMENDED APPS -->
+  <span class="section-label">Recommended Apps</span>
+  <h2>Essential Free Net Applications</h2>
+  <p class="lead">These are the apps that the Chaos Configurations ecosystem is built around. All free to download. All with strong communities and regular updates.</p>
+
+  <div class="cards-grid" style="margin-top:28px;">
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+        <div class="card-icon">💉</div>
+        <span class="tag tag-green">Android</span>
+      </div>
+      <h3>HTTP Injector</h3>
+      <p>The most powerful carrier-bypass tunneling app. Supports SSH, SSL, and custom HTTP payload injection. Import .ehi config files from the Config Hub.</p>
+      <div style="margin:16px 0;padding:14px;background:var(--off-white);border-radius:var(--radius-sm);font-size:0.85rem;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="color:var(--text-light)">Developer</span><span>evozi</span></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="color:var(--text-light)">Platform</span><span>Android</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-light)">Config format</span><span>.ehi</span></div>
+      </div>
+      <a href="setup-guides.html#http-injector" class="btn btn-outline" style="width:100%;justify-content:center;font-size:0.85rem;">Setup Guide →</a>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+        <div class="card-icon card-icon green">🚇</div>
+        <span class="tag tag-green">Android</span>
+      </div>
+      <h3>HA Tunnel Plus</h3>
+      <p>SSH tunneling app with a clean interface. Supports direct SSH, SSH over WebSocket, and SSH over SSL. Widely used across Africa and Southeast Asia.</p>
+      <div style="margin:16px 0;padding:14px;background:var(--off-white);border-radius:var(--radius-sm);font-size:0.85rem;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="color:var(--text-light)">Developer</span><span>HA Tunnel</span></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="color:var(--text-light)">Platform</span><span>Android</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-light)">Config format</span><span>.hat</span></div>
+      </div>
+      <a href="setup-guides.html#ha-tunnel" class="btn btn-outline" style="width:100%;justify-content:center;font-size:0.85rem;">Setup Guide →</a>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+        <div class="card-icon card-icon purple">🌐</div>
+        <span class="tag tag-blue">Multi-platform</span>
+      </div>
+      <h3>OpenVPN for Android</h3>
+      <p>Open-source OpenVPN client by Arne Schwabe. The most trusted Android VPN client. Imports .ovpn files from self-hosted servers or the Config Hub.</p>
+      <div style="margin:16px 0;padding:14px;background:var(--off-white);border-radius:var(--radius-sm);font-size:0.85rem;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="color:var(--text-light)">Developer</span><span>Arne Schwabe</span></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="color:var(--text-light)">License</span><span>Open Source (GPL)</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-light)">Config format</span><span>.ovpn</span></div>
+      </div>
+      <a href="setup-guides.html#openvpn" class="btn btn-outline" style="width:100%;justify-content:center;font-size:0.85rem;">Setup Guide →</a>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+        <div class="card-icon">⚡</div>
+        <span class="tag tag-blue">Multi-platform</span>
+      </div>
+      <h3>WireGuard</h3>
+      <p>The modern, fast VPN protocol. Open source, minimal codebase, built into the Linux kernel. Best for users with their own VPS who want maximum speed.</p>
+      <div style="margin:16px 0;padding:14px;background:var(--off-white);border-radius:var(--radius-sm);font-size:0.85rem;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="color:var(--text-light)">Developer</span><span>Jason A. Donenfeld</span></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="color:var(--text-light)">License</span><span>Open Source (GPL)</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-light)">Setup</span><span>QR code or .conf file</span></div>
+      </div>
+      <a href="vps-hosting.html#wireguard" class="btn btn-outline" style="width:100%;justify-content:center;font-size:0.85rem;">Setup Guide →</a>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+        <div class="card-icon card-icon orange">🧅</div>
+        <span class="tag tag-orange">Multi-platform</span>
+      </div>
+      <h3>Tor Browser</h3>
+      <p>The Onion Router — strong anonymity through multi-hop encrypted routing. Best for high-privacy needs where speed is secondary. Free, open source.</p>
+      <div style="margin:16px 0;padding:14px;background:var(--off-white);border-radius:var(--radius-sm);font-size:0.85rem;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="color:var(--text-light)">Developer</span><span>Tor Project (nonprofit)</span></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="color:var(--text-light)">License</span><span>Open Source</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-light)">Use case</span><span>Anonymity</span></div>
+      </div>
+      <a href="freenet.html#freenet-vs-tor" class="btn btn-outline" style="width:100%;justify-content:center;font-size:0.85rem;">Tor vs Freenet →</a>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+        <div class="card-icon card-icon green">🔒</div>
+        <span class="tag tag-blue">Multi-platform</span>
+      </div>
+      <h3>Proton VPN</h3>
+      <p>The most trusted commercial free VPN tier. No data cap on free tier. Swiss-based, independently audited, open source clients. Best free commercial VPN.</p>
+      <div style="margin:16px 0;padding:14px;background:var(--off-white);border-radius:var(--radius-sm);font-size:0.85rem;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="color:var(--text-light)">Jurisdiction</span><span>Switzerland</span></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="color:var(--text-light)">Free tier</span><span>Yes — no data cap</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-light)">Audited</span><span>✅ Yes</span></div>
+      </div>
+      <a href="blog-free-vs-paid.html" class="btn btn-outline" style="width:100%;justify-content:center;font-size:0.85rem;">Free vs Paid Guide →</a>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- REFERENCE GUIDES -->
+  <span class="section-label">Reference Material</span>
+  <h2>Useful Networking References</h2>
+  <div class="cards-grid" style="margin-top:24px;">
+    <a href="blog-vpn-basics.html" class="card card-link">
+      <div class="card-icon">📗</div>
+      <h3>VPN Basics Guide</h3>
+      <p>Complete beginner-to-advanced explanation of how VPNs, encryption, and tunneling work.</p>
+    </a>
+    <a href="blog-sni-explained.html" class="card card-link">
+      <div class="card-icon">📘</div>
+      <h3>SNI Technical Reference</h3>
+      <p>How Server Name Indication works in TLS — the complete technical explanation.</p>
+    </a>
+    <a href="blog-vpn-tunneling.html" class="card card-link">
+      <div class="card-icon">📙</div>
+      <h3>Tunneling Protocol Reference</h3>
+      <p>HTTP, SSL, SSH, and WebSocket tunneling — deep-dive technical reference.</p>
+    </a>
+    <a href="blog-vps-hosting.html" class="card card-link">
+      <div class="card-icon">📕</div>
+      <h3>VPS Hosting Guide</h3>
+      <p>Complete server setup guide for DigitalOcean and Vultr — self-host your VPN.</p>
+    </a>
+  </div>
+
+</div>
+</div>
+  <script>(function(s){s.dataset.zone='10925473',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <script src="https://quge5.com/88/tag.min.js" data-zone="237688" async data-cfasync="false"></script>
+<footer id="main-footer"></footer>
+<script src="blognav.js"></script>
+<script>buildNav('Tools'); buildFooter();</script>
+</body>
+</html>

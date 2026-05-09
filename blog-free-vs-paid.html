@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free vs Paid VPNs — Risks, Comparisons & What to Use | Chaos Configurations</title>
+<meta name="description" content="A complete comparison of free and paid VPN services — privacy risks, speed, logging policies, use cases, and when to self-host instead.">
+<link rel="stylesheet" href="blogcss.css">
+</head>
+<body>
+<nav id="main-nav"></nav>
+<div id="mobile-menu" class="mobile-menu"></div>
+<div class="page-wrapper">
+<div class="breadcrumb"><a href="blog-home.html">Home</a> <span>›</span> Free vs Paid VPNs</div>
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="hero-badge">Comparison Guide</div>
+    <h1>Free vs Paid VPNs</h1>
+    <p class="lead">Not all VPNs are equal — and "free" often means you're the product. A complete breakdown of the privacy risks, performance trade-offs, and use cases for free VPNs, paid VPNs, and the best option of all: self-hosting.</p>
+    <div class="page-meta"><span>📖 ~5,500 words</span><span>⏱️ 22 min read</span><span>🏷️ Beginner · Intermediate</span></div>
+  </div>
+</div>
+<div class="content-section">
+  <div class="layout-sidebar">
+    <div class="article-body">
+
+      <h2 id="the-core-problem">The Core Problem With Free VPNs</h2>
+      <p>Running a VPN service costs real money. Servers cost money. Bandwidth costs money. Staff to maintain the infrastructure costs money. When a company offers a VPN for free, the legitimate question is: how are they paying for it?</p>
+      <p>The uncomfortable answer, in many cases, is: <strong>they're monetizing your data</strong>. The exact mechanism varies — some sell anonymized usage data to advertisers, some inject ads into your traffic, some sell aggregated data to data brokers, and some have been caught doing much worse. In 2021, a single developer created 7 different VPN apps with 1.5 million collective downloads that were secretly routing traffic through a residential proxy network — effectively using their users' devices and connections as exit nodes for other people's traffic without consent.</p>
+      <p>There have been documented cases of free VPN providers:</p>
+      <ul>
+        <li>Logging and selling user browsing data to third parties</li>
+        <li>Injecting tracking cookies and ads into unencrypted HTTP traffic</li>
+        <li>Including malware or adware in their applications</li>
+        <li>Selling user bandwidth as part of a residential proxy service</li>
+        <li>Cooperating with government requests for user data — despite claiming no-logs policies</li>
+        <li>Leaking user data through DNS leaks, WebRTC leaks, or protocol failures</li>
+      </ul>
+      <p>This doesn't mean every free VPN is malicious — but it means the risk is real and significant enough that using any free VPN requires careful due diligence.</p>
+
+      <h2 id="exceptions">The Legitimate Free VPNs</h2>
+      <p>There are genuinely free VPNs with legitimate funding models and strong track records:</p>
+
+      <h3>Proton VPN Free</h3>
+      <p>Proton VPN's free tier is funded by paying subscribers on the premium tier — a classic freemium model. The free tier has no data cap (unlike most free VPNs), is based in Switzerland (strong privacy jurisdiction), has been independently audited, and has the same no-logs policy as the paid tier. The limitations are: speeds are slower than paid, only 3 server locations are available, and you can't use the service on multiple devices simultaneously. For a basic, trustworthy free VPN, Proton VPN Free is the best option.</p>
+
+      <h3>Windscribe Free</h3>
+      <p>Windscribe offers 10GB/month free with no required registration (using an email allows more data). It's based in Canada, has been reasonably transparent about its architecture, and has a good reputation in the security community. The 10GB limit is a significant constraint for heavy users but adequate for light privacy use.</p>
+
+      <h3>Tor</h3>
+      <p>Tor Browser (using the Tor network) is free, open-source, and operated by a nonprofit. It provides strong anonymity — stronger than most paid VPNs for the threat model it's designed for. The trade-offs: it's significantly slower than any VPN, not all traffic types work well through Tor, and some websites block Tor exit node IPs.</p>
+
+      <h2 id="paid-vpns">Paid VPN Providers — What to Look For</h2>
+      <p>Paid VPN services range from genuinely privacy-protective to barely better than their free counterparts. Here's what separates the good from the bad:</p>
+
+      <h3>Jurisdiction</h3>
+      <p>Where a VPN company is incorporated matters because it determines which laws apply to them and which legal demands they must comply with. The most privacy-friendly jurisdictions include Switzerland, Iceland, the British Virgin Islands, and Panama — countries with strong privacy laws and limited legal cooperation with major surveillance-alliance countries (Five Eyes: US, UK, Canada, Australia, New Zealand; Fourteen Eyes adds more countries).</p>
+      <p>A VPN registered in the US is subject to US law — including gag orders that may prevent them from disclosing that they've received a government request for user data.</p>
+
+      <h3>No-Logs Policy — The Audit Test</h3>
+      <p>Every paid VPN claims to have a no-logs policy. The claim is meaningless without verification. The best VPN providers have their no-logs claims independently audited by respected cybersecurity firms (Cure53, SEC Consult, Deloitte). Some have also had their no-logs policies verified in practice: when law enforcement seized their servers and found nothing useful, that's the strongest possible evidence that the no-logs policy is real.</p>
+      <p>ExpressVPN's servers were seized by Turkish authorities in 2017. The servers contained no logs — consistent with their claimed architecture. Mullvad VPN's offices were raided by Swedish police in 2023. Again, no data was obtained. These real-world tests are more valuable than any audit.</p>
+
+      <h3>Open Source Clients</h3>
+      <p>Open source VPN clients can be reviewed by independent security researchers. Closed-source clients require trusting the company's claims about what their software does. For high-stakes privacy use, open-source clients are strongly preferred. Mullvad, ProtonVPN, and Windscribe all offer open-source clients.</p>
+
+      <h3>Kill Switch</h3>
+      <p>As discussed in our <a href="blog-vpn-basics.html">VPN Basics guide</a>, a reliable kill switch is essential. Verify that any VPN you consider has a kill switch feature and that it actually works — some "kill switch" implementations are unreliable.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Provider</th><th>Price/mo</th><th>Jurisdiction</th><th>Audited</th><th>Open Source</th><th>Kill Switch</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Mullvad</td><td>€5 flat</td><td>Sweden</td><td>✅ Yes</td><td>✅ Yes</td><td>✅ Yes</td></tr>
+            <tr><td>ProtonVPN</td><td>$4–10</td><td>Switzerland</td><td>✅ Yes</td><td>✅ Yes</td><td>✅ Yes</td></tr>
+            <tr><td>IVPN</td><td>$6–10</td><td>Gibraltar</td><td>✅ Yes</td><td>✅ Yes</td><td>✅ Yes</td></tr>
+            <tr><td>ExpressVPN</td><td>$8–13</td><td>BVI</td><td>✅ Yes</td><td>❌ No</td><td>✅ Yes</td></tr>
+            <tr><td>NordVPN</td><td>$3–5</td><td>Panama</td><td>✅ Yes</td><td>❌ No</td><td>✅ Yes</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="self-hosting">Self-Hosting: The Best Option</h2>
+      <p>For users who are technically inclined and serious about privacy, self-hosting a VPN on your own VPS is the gold standard. You're not trusting any third party with your traffic — you control the server, the software, and the logs (ideally: there are none).</p>
+      <p>The main trade-off is that your VPS provider can see your server's traffic metadata — but since you choose the provider, you can select one with strong privacy practices, and you're not sharing an IP range with thousands of other VPN users (which makes your IP more identifiable as VPN traffic to blocking systems).</p>
+      <p>Full guide: <a href="blog-vps-hosting.html">VPS & Self-Hosted VPN →</a></p>
+
+      <div class="compare-grid">
+        <div class="compare-box pros">
+          <h4>✓ When Free VPNs Are OK</h4>
+          <ul>
+            <li>Proton VPN Free or Windscribe Free — trusted providers</li>
+            <li>Low-stakes use: basic geographic unblocking</li>
+            <li>Short-term, light usage</li>
+            <li>Tor for strong anonymity needs</li>
+            <li>You've read audits and understand the risks</li>
+          </ul>
+        </div>
+        <div class="compare-box cons">
+          <h4>✕ Avoid Free VPNs When...</h4>
+          <ul>
+            <li>You're doing sensitive work or activism</li>
+            <li>The provider is unknown / unaudited</li>
+            <li>It's asking for unnecessary permissions</li>
+            <li>It has an unusually high user rating with no reviews</li>
+            <li>You're in a country with active state surveillance</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 id="speed-privacy">Speed, Privacy & the Real Trade-Off</h2>
+      <p>Every VPN adds some overhead — the encryption and routing through an additional server takes time. The key variables are:</p>
+      <ul>
+        <li><strong>Server distance:</strong> Connecting to a server close to you minimizes latency. Connecting across the world adds significant ping.</li>
+        <li><strong>Server load:</strong> Overloaded servers (common with free tiers that have limited server options) are slow regardless of distance.</li>
+        <li><strong>Protocol:</strong> WireGuard is significantly faster than OpenVPN; both are faster than SSH tunnels or SSL-wrapped connections.</li>
+        <li><strong>Encryption strength:</strong> AES-256 is computationally intensive; ChaCha20 (used by WireGuard) is faster on mobile hardware. For most users the difference is negligible on modern hardware.</li>
+      </ul>
+      <p>For the free-net use case — where the goal is accessing the internet at all, not maximizing speed — these performance factors are secondary. A connection that works, even slowly, is infinitely better than no connection.</p>
+
+      <div class="info-box blue">
+        <div class="icon">💡</div>
+        <div>
+          <h4>The Chaos Configurations Approach</h4>
+          <p>Rather than recommending specific commercial VPN products, Chaos Configurations focuses on the tools and knowledge needed to use VPN technology effectively — whether through tested configs, self-hosted infrastructure, or SSH-based tunneling. The goal is understanding, not dependence on any single service.</p>
+        </div>
+      </div>
+
+    </div>
+    <aside class="sidebar">
+      <div class="sidebar-widget">
+        <h4>In This Guide</h4>
+        <ul class="toc-list">
+          <li><a href="#the-core-problem">The Free VPN Problem</a></li>
+          <li><a href="#exceptions">Legitimate Free VPNs</a></li>
+          <li><a href="#paid-vpns">Paid VPN Guide</a></li>
+          <li><a href="#self-hosting">Self-Hosting</a></li>
+          <li><a href="#speed-privacy">Speed & Trade-offs</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-widget">
+        <h4>Related</h4>
+        <ul class="toc-list">
+          <li><a href="blog-vpn-basics.html">VPN Basics</a></li>
+          <li><a href="blog-vps-hosting.html">Self-Host Your VPN</a></li>
+          <li><a href="https://vpnconfighub.netlify.app/" target="_blank" rel="noopener">Config Hub</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
+</div>
+  <script>(function(s){s.dataset.zone='10925473',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <script src="https://quge5.com/88/tag.min.js" data-zone="237688" async data-cfasync="false"></script>
+<footer id="main-footer"></footer>
+<script src="blognav.js"></script>
+<script>buildNav('VPN Basics'); buildFooter();</script>
+</body>
+</html>

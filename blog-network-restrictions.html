@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Restrictions — How ISPs & Governments Block the Internet | Chaos Configurations</title>
+<meta name="description" content="How firewalls, ISP throttling, DNS poisoning, deep packet inspection, and BGP manipulation are used to restrict internet access. A technical and policy deep dive.">
+<link rel="stylesheet" href="blogcss.css">
+</head>
+<body>
+<nav id="main-nav"></nav>
+<div id="mobile-menu" class="mobile-menu"></div>
+<div class="page-wrapper">
+<div class="breadcrumb"><a href="blog-home.html">Home</a> <span>›</span> Network Restrictions</div>
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="hero-badge">Research & Analysis</div>
+    <h1>How Networks Restrict Internet Access</h1>
+    <p class="lead">Firewalls, DNS poisoning, deep packet inspection, BGP hijacking, ISP throttling — how censorship and restriction works at the network level, and what it means for users trying to navigate it.</p>
+    <div class="page-meta"><span>📖 ~7,000 words</span><span>⏱️ 28 min read</span><span>🏷️ Technical · Research</span></div>
+  </div>
+</div>
+<div class="content-section">
+  <div class="layout-sidebar">
+    <div class="article-body">
+
+      <h2 id="overview">The Anatomy of Internet Restriction</h2>
+      <p>Internet restriction is not a single technology or a single policy — it's a layered system of technical and legal mechanisms applied at different levels of the network stack. Understanding how restriction works is the first step toward understanding how to navigate it, advocate against it, or build systems that are resistant to it.</p>
+      <p>Restrictions can be applied at multiple layers: the physical infrastructure layer (controlling who has physical access to cables and routing equipment), the network layer (IP routing and BGP), the transport layer (blocking specific ports and protocols), the application layer (filtering based on content or destination), and the DNS layer (manipulating domain name resolution). Each layer requires different techniques to implement and different countermeasures to bypass.</p>
+
+      <h2 id="dns-blocking">DNS-Based Blocking</h2>
+      <p><strong>DNS blocking</strong> is the most common and simplest form of internet restriction. Because most internet users rely on their ISP's DNS servers to resolve domain names, an ISP that wants to block a website simply needs to modify its DNS responses to return incorrect information for the blocked domain.</p>
+      <p>There are two main variants:</p>
+      <ul>
+        <li><strong>DNS null routing</strong> — The ISP returns no result (NXDOMAIN) for blocked domains, making them appear not to exist.</li>
+        <li><strong>DNS poisoning/spoofing</strong> — The ISP returns a false IP address (often pointing to a block page) instead of the real one.</li>
+      </ul>
+      <p>DNS blocking is trivially easy to bypass: simply configure your device to use a different DNS server. Public resolvers like Cloudflare (1.1.1.1), Google (8.8.8.8), and Quad9 (9.9.9.9) are commonly used. DNS over HTTPS (DoH) and DNS over TLS (DoT) encrypt DNS queries, preventing ISPs from reading or modifying them even if they can observe the traffic.</p>
+      <p>Because DNS blocking is so easily bypassed, it's primarily used for compliance purposes (demonstrating that "something has been done") or against unsophisticated users. Serious censorship systems layer it with more effective techniques.</p>
+
+      <h2 id="ip-blocking">IP Address Blocking</h2>
+      <p>IP blocking is the next step up: instead of (or in addition to) blocking DNS resolution, the ISP configures its network equipment to drop all traffic destined for specific IP addresses or IP ranges.</p>
+      <p>IP blocking is more effective than DNS blocking but has significant collateral damage potential. Many websites share IP addresses — particularly those hosted on CDNs like Cloudflare, Akamai, or AWS. Blocking the IP address of one site on Cloudflare might block hundreds or thousands of other sites that share the same infrastructure.</p>
+      <p>IP blocking can be bypassed by using a proxy or VPN — the traffic goes to the VPN server's IP rather than the blocked IP. This is one of the core use cases for VPN technology.</p>
+
+      <h2 id="dpi">Deep Packet Inspection (DPI)</h2>
+      <p><strong>Deep Packet Inspection</strong> is the most powerful and sophisticated network restriction tool available to ISPs and governments. Unlike simpler filtering methods that only look at IP headers (source, destination, port), DPI inspects the actual content of network packets — including the payload data.</p>
+      <p>Modern DPI systems can:</p>
+      <ul>
+        <li><strong>Identify application protocols</strong> regardless of port — detect that traffic on port 443 is actually VPN traffic rather than HTTPS, even if the VPN is using SSL</li>
+        <li><strong>Read SNI fields</strong> in TLS handshakes to identify HTTPS destination domains</li>
+        <li><strong>Fingerprint specific VPN protocols</strong> — OpenVPN, WireGuard, and other protocols have characteristic patterns in their handshakes and packet structures</li>
+        <li><strong>Detect obfuscated traffic</strong> using statistical analysis — even well-obfuscated traffic has entropy characteristics that differ from genuine random data or HTTP traffic</li>
+        <li><strong>Implement traffic shaping</strong> — selectively throttling specific traffic types without blocking them entirely</li>
+      </ul>
+      <p>China's Great Firewall is the most sophisticated DPI-based censorship system in the world. It can identify and block most known VPN and circumvention protocols, including obfsproxy, Shadowsocks (in older configurations), and other tools — often within days of new circumvention tools being deployed. The GFW team actively monitors circumvention tool repositories and updates its detection within days of new releases.</p>
+
+      <h3>DPI Hardware</h3>
+      <p>The hardware used for national-scale DPI is supplied by a small number of specialized vendors. Products from companies like Sandvine and Huawei have been found deployed in censorship infrastructure in multiple countries, including Egypt, Turkey, and Bahrain. The existence of a commercial market for censorship infrastructure — sold to governments as "network management" tools — is one of the less-discussed aspects of global internet restriction.</p>
+
+      <h2 id="throttling">ISP Throttling</h2>
+      <p><strong>Throttling</strong> is the practice of deliberately slowing down specific types of traffic rather than blocking it entirely. From a carrier's perspective, throttling has several advantages over outright blocking: it's harder to document and prove, it affects usability without creating the obvious "this site is blocked" user experience, and it allows carriers to claim they're not blocking anything.</p>
+      <p>Common throttling targets include:</p>
+      <ul>
+        <li>Video streaming (particularly competitors to the carrier's own video service)</li>
+        <li>Peer-to-peer traffic (BitTorrent and similar protocols)</li>
+        <li>VPN traffic (slowing it enough to make it impractical without technically blocking it)</li>
+        <li>Specific websites or services that the carrier has a commercial incentive to disadvantage</li>
+      </ul>
+      <p>Throttling is one of the strongest arguments for net neutrality regulation — it's a form of discrimination that is difficult for end users to detect and extremely difficult to prove without sophisticated testing tools.</p>
+
+      <h2 id="bgp">BGP Manipulation</h2>
+      <p><strong>Border Gateway Protocol (BGP)</strong> is the routing protocol that manages how traffic flows between the major networks (Autonomous Systems) that make up the internet. BGP is essentially the internet's GPS — it determines the path that packets take from one part of the internet to another.</p>
+      <p>BGP manipulation allows governments or carriers to redirect internet traffic at the routing level — either blocking it entirely by dropping routes or redirecting it through inspection infrastructure. The most drastic form is a complete internet shutdown: a government orders all ISPs to withdraw their BGP routes, effectively disconnecting the country from the global internet.</p>
+      <p>Internet shutdowns have become increasingly common as a tool of political control, particularly during elections, protests, or civil unrest. According to Access Now's Shutdown Tracker, there were over 180 internet shutdowns globally in 2022 alone — in countries including India, Ethiopia, Iran, Russia, Sudan, and Ukraine.</p>
+
+      <h2 id="great-firewall">The Great Firewall of China — A Case Study</h2>
+      <p>China's internet censorship system — known as the "Great Firewall" — is the most extensive and technically sophisticated censorship infrastructure in the world. Understanding it provides insight into what is technically possible at the extreme end of state-level internet control.</p>
+      <p>The GFW combines all of the techniques described above into a multi-layer system:</p>
+      <ol>
+        <li><strong>DNS poisoning</strong> for blocked domains at the resolver level</li>
+        <li><strong>IP blocking</strong> of known blocked service IP ranges</li>
+        <li><strong>DPI-based protocol detection</strong> identifying and blocking VPN protocols, Tor, and circumvention tools</li>
+        <li><strong>SNI-based HTTPS filtering</strong> blocking HTTPS connections to blocked domains</li>
+        <li><strong>Active probing</strong> — when the GFW detects a potentially circumventing connection, it actively probes the server to verify it's a circumvention tool and updates its block list accordingly</li>
+        <li><strong>BGP routing manipulation</strong> for complete control over international traffic routing</li>
+      </ol>
+      <p>The GFW is not static — it's actively maintained by a team that monitors and updates it continuously. New circumvention techniques are typically detected and blocked within days to weeks of widespread deployment. This is what makes the censorship circumvention landscape in China particularly challenging.</p>
+
+      <h2 id="isp-throttling-africa">Carrier Restrictions in Africa and Developing Markets</h2>
+      <p>While China's GFW represents state-level political censorship, the network restrictions most directly relevant to the Chaos Configurations community are typically carrier-level commercial restrictions in developing markets.</p>
+      <p>In many African and Asian countries, mobile carriers implement restrictions that are driven not by government censorship but by commercial interests:</p>
+      <ul>
+        <li><strong>Blocking of VOIP services</strong> (WhatsApp calls, Skype, FaceTime) to protect revenue from traditional voice calls</li>
+        <li><strong>Throttling of streaming services</strong> that compete with carrier-offered video products</li>
+        <li><strong>Blocking of VPN services</strong> to prevent users from bypassing data billing</li>
+        <li><strong>Carrier-grade NAT (CGNAT)</strong> that breaks certain VPN protocols and peer-to-peer applications</li>
+      </ul>
+      <p>These restrictions are less technically sophisticated than the GFW but still represent significant barriers. Understanding the specific restriction methods in use — port blocking, DPI, or simply billing-based access control — is necessary for building effective configurations to navigate them.</p>
+
+      <div class="info-box blue">
+        <div class="icon">🔬</div>
+        <div>
+          <h4>Research Note</h4>
+          <p>Ethan Chaos's work on Chaos Configurations is directly informed by analysis of how different carriers implement restrictions — understanding the specific methods used is what makes it possible to build configs that actually work in specific environments, rather than generic configs that may or may not function depending on the network.</p>
+        </div>
+      </div>
+
+      <h2 id="measurement">Measuring Censorship</h2>
+      <p>Documenting and measuring internet censorship requires specialized tools. Several organizations have built infrastructure for this:</p>
+      <ul>
+        <li><strong>OONI (Open Observatory of Network Interference)</strong> — A global platform for measuring internet censorship. OONI Probe runs tests from volunteer devices around the world and publishes the results. Their data reveals which sites are blocked in which countries and by which ISPs.</li>
+        <li><strong>Censored Planet</strong> — A University of Michigan project that continuously measures internet censorship from thousands of vantage points globally using remote measurement techniques that don't require local volunteers.</li>
+        <li><strong>NetBlocks</strong> — Monitors real-time internet disruptions, particularly complete shutdowns or major outages.</li>
+        <li><strong>IODA (Internet Outage Detection and Analysis)</strong> — Real-time monitoring of internet outages at the country and ISP level.</li>
+      </ul>
+      <p>These measurement platforms provide the empirical foundation for understanding the global censorship landscape — and for targeting circumvention efforts where they're most needed.</p>
+
+    </div>
+    <aside class="sidebar">
+      <div class="sidebar-widget">
+        <h4>In This Guide</h4>
+        <ul class="toc-list">
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#dns-blocking">DNS Blocking</a></li>
+          <li><a href="#ip-blocking">IP Blocking</a></li>
+          <li><a href="#dpi">Deep Packet Inspection</a></li>
+          <li><a href="#throttling">ISP Throttling</a></li>
+          <li><a href="#bgp">BGP Manipulation</a></li>
+          <li><a href="#great-firewall">Great Firewall (China)</a></li>
+          <li><a href="#measurement">Measuring Censorship</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-widget">
+        <h4>Related</h4>
+        <ul class="toc-list">
+          <li><a href="blog-zero-rated.html">Zero-Rated Sites</a></li>
+          <li><a href="blog-digital-access.html">Digital Access</a></li>
+          <li><a href="blog-sni-filtering.html">SNI Filtering</a></li>
+          <li><a href="blog-freenet.html">Freenet</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
+</div>
+  
+  <script>(function(s){s.dataset.zone='10925473',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <script src="https://quge5.com/88/tag.min.js" data-zone="237688" async data-cfasync="false"></script>
+<footer id="main-footer"></footer>
+<script src="blognav.js"></script>
+<script>buildNav('Freenet'); buildFooter();</script>
+</body>
+</html>

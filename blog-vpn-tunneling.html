@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VPN Tunneling Deep Dive — HTTP, SSL, SSH Explained | Chaos Configurations</title>
+<meta name="description" content="A deep technical dive into VPN tunneling protocols — HTTP tunneling, SSL/TLS tunneling, SSH tunneling, and how traffic routing works across different environments.">
+<link rel="stylesheet" href="blogcss.css">
+</head>
+<body>
+<nav id="main-nav"></nav>
+<div id="mobile-menu" class="mobile-menu"></div>
+<div class="page-wrapper">
+
+<div class="breadcrumb"><a href="blog-home.html">Home</a> <span>›</span> VPN Tunneling</div>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="hero-badge">Advanced Technical</div>
+    <h1>VPN Tunneling Deep Dive</h1>
+    <p class="lead">How HTTP, SSL, and SSH tunneling work at the protocol level — and how traffic is routed, encapsulated, and disguised to traverse restricted networks. The most complete explanation of VPN tunneling mechanics on the web.</p>
+    <div class="page-meta">
+      <span>📖 ~7,500 words</span>
+      <span>⏱️ 30 min read</span>
+      <span>🏷️ Advanced</span>
+    </div>
+  </div>
+</div>
+
+<div class="content-section">
+  <div class="layout-sidebar">
+    <div class="article-body">
+
+      <h2 id="what-is-tunneling">What Is Tunneling?</h2>
+      <p>A <strong>network tunnel</strong> is a communication pathway created by encapsulating one network protocol inside another. The outer protocol carries the inner protocol's data as its payload — the same way a physical tunnel allows a road to pass through a mountain. From the outside, you see the mountain (the outer protocol). Inside the tunnel, there's a road (your actual traffic).</p>
+
+      <p>Tunneling is fundamental to how VPNs work. When you connect to a VPN, all of your network traffic — HTTP requests, DNS queries, video streams, everything — is encapsulated inside the VPN protocol's packets. The VPN server unwraps those packets, forwards the original traffic to its destination, receives the response, re-encapsulates it, and sends it back to you.</p>
+
+      <p>But tunneling goes beyond basic VPNs. In the world of network restriction circumvention, tunneling is used not just to encrypt traffic but to <strong>disguise what type of traffic it is</strong>. A tunnel that makes VPN traffic look like ordinary HTTPS browsing is far harder to detect and block than one that uses obvious VPN signatures.</p>
+
+      <h2 id="http-tunneling">HTTP Tunneling</h2>
+      <p>HTTP tunneling is the technique of sending non-HTTP traffic through an HTTP connection. The most common method uses the HTTP <code>CONNECT</code> method, which was originally designed to allow HTTP proxies to relay HTTPS connections.</p>
+
+      <h3>The HTTP CONNECT Method</h3>
+      <p>Here's how HTTP CONNECT works in its normal use: when your browser wants to make an HTTPS connection through an HTTP proxy, it can't just send the encrypted HTTPS request to the proxy (the proxy wouldn't know what to do with it). Instead, it first sends an HTTP CONNECT request to the proxy:</p>
+
+      <pre data-lang="HTTP"><code><span class="code-blue">CONNECT</span> target-server.com:<span class="code-yellow">443</span> HTTP/1.1
+<span class="code-green">Host:</span> target-server.com:443
+<span class="code-green">Proxy-Authorization:</span> Basic base64encoded_credentials</code></pre>
+
+      <p>The proxy, if it allows this connection, responds with:</p>
+
+      <pre data-lang="HTTP"><code>HTTP/1.1 <span class="code-green">200</span> Connection Established</code></pre>
+
+      <p>From this point, the TCP connection between the browser and the proxy is now a raw tunnel to <code>target-server.com:443</code>. The browser sends its HTTPS Client Hello, which passes through the proxy to the target server, and the TLS handshake proceeds normally. The proxy just relays bytes without reading them.</p>
+
+      <h3>How HTTP Injector Uses This</h3>
+      <p>HTTP Injector leverages HTTP CONNECT tunneling combined with custom header injection to route traffic through restricted carrier networks. The core technique works like this:</p>
+
+      <ol>
+        <li>The app establishes a local VPN interface on your Android device, capturing all outbound traffic</li>
+        <li>It modifies the captured HTTP/HTTPS requests by injecting custom headers that the carrier's proxy server will interpret in a specific way</li>
+        <li>The modified requests are sent to a proxy server (often a misconfigured or open carrier proxy) that the carrier network allows access to without deducting data</li>
+        <li>The proxy forwards the traffic to the actual destination (your VPN server or the target website)</li>
+        <li>Responses come back through the same chain in reverse</li>
+      </ol>
+
+      <p>The specific headers injected depend on the carrier and configuration. Common injection patterns include adding <code>X-Online-Host</code> or <code>X-Forward-For</code> headers that reference a whitelisted domain, making the proxy believe the request is destined for a zero-rated service.</p>
+
+      <h3>Custom Injection Headers — The Technical Detail</h3>
+      <p>Different carriers and proxy configurations respond to different headers. Here are some of the most commonly effective injection patterns:</p>
+
+      <pre data-lang="HTTP Injection Config"><code><span class="code-gray"># Pattern 1: Host Header Replacement</span>
+<span class="code-blue">CONNECT</span> bug.carrier.com:443 HTTP/1.1
+<span class="code-green">Host:</span> bug.carrier.com
+<span class="code-green">X-Online-Host:</span> bug.carrier.com
+<span class="code-green">X-Forward-For:</span> bug.carrier.com
+
+<span class="code-gray"># Pattern 2: Real Request Host Hidden</span>
+<span class="code-blue">GET</span> http://bug.carrier.com/ HTTP/1.1
+<span class="code-green">Host:</span> bug.carrier.com
+<span class="code-green">Upgrade:</span> websocket
+<span class="code-green">Connection:</span> Upgrade
+
+<span class="code-gray"># Pattern 3: Payload Injection</span>
+<span class="code-blue">CONNECT</span> [host_port] HTTP/1.1
+<span class="code-green">Host:</span> [bug_host]
+<span class="code-green">User-Agent:</span> [custom_agent]</code></pre>
+
+      <p>The effectiveness of any given pattern depends entirely on the carrier's proxy configuration. Finding working patterns requires testing — which is why tools like the Chaos SNI Finder are valuable, and why the Chaos Configurations community shares tested, working configs.</p>
+
+      <h2 id="ssl-tunneling">SSL/TLS Tunneling</h2>
+      <p>SSL/TLS tunneling wraps VPN or proxy traffic inside a standard TLS connection, making it appear to any observer as normal encrypted HTTPS traffic. This is a powerful obfuscation technique because HTTPS traffic is ubiquitous — blocking all TLS traffic to port 443 would break the entire modern web.</p>
+
+      <h3>Stunnel</h3>
+      <p><strong>Stunnel</strong> is the most widely used tool for SSL tunneling. It acts as a TLS wrapper — sitting between a client and a server, encrypting the connection with TLS so that the actual protocol being carried (which might be OpenVPN, SOCKS5, or anything else) is hidden inside what looks like HTTPS.</p>
+
+      <p>A typical Stunnel setup for wrapping OpenVPN looks like this:</p>
+
+      <pre data-lang="Stunnel Config (Server)"><code><span class="code-gray"># /etc/stunnel/stunnel.conf on the VPN server</span>
+
+<span class="code-green">cert</span> = /etc/ssl/certs/stunnel.pem
+<span class="code-green">key</span> = /etc/ssl/private/stunnel.key
+<span class="code-green">pid</span> = /var/run/stunnel.pid
+
+[openvpn]
+<span class="code-blue">accept</span>  = 443
+<span class="code-blue">connect</span> = 1194
+<span class="code-green">TIMEOUTclose</span> = 0</code></pre>
+
+      <pre data-lang="Stunnel Config (Client)"><code><span class="code-gray"># /etc/stunnel/stunnel.conf on the client</span>
+
+<span class="code-green">client</span> = yes
+<span class="code-green">pid</span> = /var/run/stunnel.pid
+
+[openvpn]
+<span class="code-blue">accept</span>  = 127.0.0.1:1194
+<span class="code-blue">connect</span> = your-server.com:443</code></pre>
+
+      <p>With this setup, the OpenVPN client connects to <code>127.0.0.1:1194</code> (the local Stunnel client). Stunnel wraps the connection in TLS and sends it to port 443 on the server. The server-side Stunnel unwraps the TLS and forwards it to the local OpenVPN daemon on port 1194. The result: OpenVPN traffic that is indistinguishable from HTTPS to any network observer.</p>
+
+      <h3>TLS Fingerprinting — The Arms Race Continues</h3>
+      <p>Sophisticated censorship systems have developed the ability to fingerprint TLS connections — identifying not just that traffic is TLS, but <em>what kind of software</em> created the TLS connection. Specific implementations leave subtle characteristics in their TLS Client Hello messages: the specific cipher suites listed, the extensions included, their order, the values of various fields.</p>
+
+      <p>A Stunnel-wrapped OpenVPN connection will have a different TLS fingerprint than a Chrome browser making a real HTTPS request. Systems like China's Great Firewall can detect this mismatch and block the connection even though it's technically valid TLS on port 443.</p>
+
+      <p>The response from the circumvention community has been tools that <strong>mimic browser TLS fingerprints</strong> — making their connections look exactly like a Chrome or Firefox connection, down to the specific cipher suite ordering and extension values. This cat-and-mouse game between fingerprinting and fingerprint evasion is one of the most technically sophisticated areas of censorship circumvention research.</p>
+
+      <h2 id="ssh-tunneling">SSH Tunneling</h2>
+      <p>SSH (Secure Shell) tunneling routes TCP traffic through an encrypted SSH connection. Because SSH is a widely used, legitimate protocol — millions of developers use it daily to manage remote servers — SSH traffic is generally less likely to be blocked than obvious VPN protocols.</p>
+
+      <h3>Local Port Forwarding</h3>
+      <p>The simplest form of SSH tunneling is <strong>local port forwarding</strong>. This forwards a local port through the SSH connection to a destination reachable from the SSH server:</p>
+
+      <pre data-lang="SSH"><code><span class="code-gray"># Forward local port 8080 to remote server port 80</span>
+ssh -L <span class="code-yellow">8080</span>:target-website.com:<span class="code-yellow">80</span> user@your-ssh-server.com
+
+<span class="code-gray"># Now connect your browser to localhost:8080</span>
+<span class="code-gray"># Traffic is tunneled through the SSH server to target-website.com</span></code></pre>
+
+      <h3>Dynamic Port Forwarding — SOCKS Proxy</h3>
+      <p><strong>Dynamic port forwarding</strong> creates a full SOCKS proxy through the SSH connection, allowing any application to route all its traffic through the SSH tunnel:</p>
+
+      <pre data-lang="SSH"><code><span class="code-gray"># Create SOCKS5 proxy on local port 1080</span>
+ssh -D <span class="code-yellow">1080</span> -C -q -N user@your-ssh-server.com
+
+<span class="code-gray"># Configure your browser or system proxy:</span>
+<span class="code-gray"># SOCKS5 proxy: 127.0.0.1:1080</span></code></pre>
+
+      <p>With dynamic forwarding, your browser connects to the local SOCKS proxy, which routes all requests through the SSH tunnel to the SSH server, which then forwards them to their destinations. This is the basic architecture of how HA Tunnel Plus works — it creates an SSH tunnel to a remote server and routes your device's traffic through it.</p>
+
+      <h3>SSH over Non-Standard Ports</h3>
+      <p>SSH runs on port 22 by default. In restricted environments, port 22 may be blocked. However, SSH can run on any port — and running it on port 443 is a common technique to make it harder to block. The downside is that port 443 is expected to carry TLS traffic, and SSH's protocol signature is different from TLS. A DPI system can detect that port 443 traffic is SSH and block it specifically.</p>
+
+      <p>More sophisticated approaches combine SSH with obfuscation layers — there are patched versions of OpenSSH with obfuscation support, as well as tools like <code>obfsproxy</code> that can wrap SSH traffic in obfuscated protocols.</p>
+
+      <h2 id="websocket-tunneling">WebSocket Tunneling</h2>
+      <p>WebSockets provide a persistent, full-duplex communication channel over a single TCP connection, initiated with an HTTP/HTTPS upgrade request. Because WebSocket traffic uses the standard HTTP/HTTPS infrastructure and ports, it passes through most firewalls without restriction.</p>
+
+      <p>Many modern circumvention tools — including V2Ray with WebSocket transport — use WebSocket tunneling. The connection begins as a normal HTTPS request (with proper TLS encryption and a valid SNI), upgrades to WebSocket, and then carries arbitrary traffic over the persistent WebSocket connection. To any network observer, it looks like a persistent HTTPS connection to a legitimate-looking domain.</p>
+
+      <pre data-lang="V2Ray WebSocket Config"><code>{
+  "<span class="code-green">outbounds</span>": [{
+    "<span class="code-blue">protocol</span>": "vmess",
+    "<span class="code-blue">settings</span>": {
+      "<span class="code-yellow">vnext</span>": [{
+        "<span class="code-green">address</span>": "your-server.com",
+        "<span class="code-green">port</span>": <span class="code-yellow">443</span>,
+        "<span class="code-green">users</span>": [{"<span class="code-blue">id</span>": "uuid-here"}]
+      }]
+    },
+    "<span class="code-blue">streamSettings</span>": {
+      "<span class="code-green">network</span>": "ws",
+      "<span class="code-green">security</span>": "tls",
+      "<span class="code-green">wsSettings</span>": {
+        "<span class="code-blue">path</span>": "/your-path"
+      }
+    }
+  }]
+}</code></pre>
+
+      <h2 id="traffic-routing">How Traffic Routing Works in Practice</h2>
+      <p>Understanding tunneling requires understanding how traffic routing actually works at the OS level. When your device establishes a VPN connection, the VPN client creates a <strong>virtual network interface</strong> — a software-defined network adapter that appears to the operating system like a real network interface.</p>
+
+      <p>The VPN client then modifies the system's <strong>routing table</strong> to direct all outbound traffic through this virtual interface. The routing table is the OS's map of where to send traffic: for any given destination IP range, which physical or virtual interface should handle it, and what the next hop (gateway) should be.</p>
+
+      <p>A typical routing table before VPN connection might look like:</p>
+
+      <pre data-lang="Routing Table"><code>Destination     Gateway         Interface
+0.0.0.0/0       192.168.1.1     eth0      <span class="code-gray"># Default route - all traffic to router</span>
+192.168.1.0/24  0.0.0.0         eth0      <span class="code-gray"># Local network</span></code></pre>
+
+      <p>After VPN connection:</p>
+
+      <pre data-lang="Routing Table (VPN Active)"><code>Destination     Gateway         Interface
+0.0.0.0/0       10.8.0.1        tun0      <span class="code-gray"># All traffic through VPN tunnel</span>
+vpn-server-ip   192.168.1.1     eth0      <span class="code-gray"># VPN server itself via real interface</span>
+192.168.1.0/24  0.0.0.0         eth0      <span class="code-gray"># Local network still direct</span></code></pre>
+
+      <p>The VPN server IP needs a direct route (not through the VPN) to avoid a routing loop — the VPN tunnel traffic itself can't go through the VPN. Everything else goes through the virtual interface, where it's encapsulated and encrypted before being sent to the VPN server.</p>
+
+      <div class="feature-highlight">
+        <h3>Apply This Knowledge</h3>
+        <p>Understanding tunneling mechanics lets you debug configs, understand why certain setups work in specific environments, and build your own configurations from scratch. Check the Config Hub for ready-made configs, or the Setup Guides for step-by-step walkthroughs.</p>
+        <a href="https://vpnconfighub.netlify.app/" target="_blank" rel="noopener" class="btn btn-outline">Config Hub →</a>
+        <a href="blog-setup-guides.html" class="btn btn-outline" style="margin-left:10px">Setup Guides →</a>
+      </div>
+
+    </div>
+
+    <aside class="sidebar">
+      <div class="sidebar-widget">
+        <h4>In This Guide</h4>
+        <ul class="toc-list">
+          <li><a href="#what-is-tunneling">What Is Tunneling?</a></li>
+          <li><a href="#http-tunneling">HTTP Tunneling</a></li>
+          <li><a href="#ssl-tunneling">SSL/TLS Tunneling</a></li>
+          <li><a href="#ssh-tunneling">SSH Tunneling</a></li>
+          <li><a href="#websocket-tunneling">WebSocket Tunneling</a></li>
+          <li><a href="#traffic-routing">Traffic Routing</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-widget">
+        <h4>Related</h4>
+        <ul class="toc-list">
+          <li><a href="blog-vpn-basics.html">VPN Basics</a></li>
+          <li><a href="blog-sni-explained.html">How SNI Works</a></li>
+          <li><a href="blog-setup-guides.html">Setup Guides</a></li>
+          <li><a href="https://vpnconfighub.netlify.app/" target="_blank" rel="noopener">Config Hub</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
+
+</div>
+  <script>(function(s){s.dataset.zone='10925473',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <script src="https://quge5.com/88/tag.min.js" data-zone="237688" async data-cfasync="false"></script>
+<footer id="main-footer"></footer>
+<script src="blognav.js"></script>
+<script>buildNav('VPN Basics'); buildFooter();</script>
+</body>
+</html>

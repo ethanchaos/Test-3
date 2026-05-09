@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethan Chaos — Projects, Tools & Work | Chaos Configurations</title>
+<meta name="description" content="A detailed look at the projects, tools, and platforms built by Ethan Chaos — Chaos Configurations, VPN Config Hub, Chaos SNI Finder, and ongoing development work.">
+<link rel="stylesheet" href="blogcss.css">
+</head>
+<body>
+<nav id="main-nav"></nav>
+<div id="mobile-menu" class="mobile-menu"></div>
+<div class="page-wrapper">
+<div class="breadcrumb"><a href="blog-home.html">Home</a> <span>›</span> <a href="blog-about.html">About</a> <span>›</span> Projects & Work</div>
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="hero-badge">Projects & Work</div>
+    <h1>Ethan Chaos: Projects & Work</h1>
+    <p class="lead">A complete overview of the platforms, tools, and ongoing work built by Ethan Chaos — from the flagship Chaos Configurations site to the Chaos SNI Finder tool and beyond.</p>
+    <div class="page-meta">
+      <span>📖 ~5,500 words</span>
+      <span>⏱️ 22 min read</span>
+      <span>🏷️ Projects · Development</span>
+    </div>
+  </div>
+</div>
+<div class="content-section">
+  <div class="layout-sidebar">
+    <div class="article-body">
+
+      <h2 id="overview">Project Overview</h2>
+      <p>Ethan Chaos operates across two primary platforms — <strong>Chaos Configurations</strong> and <strong>VPN Config Hub</strong> — plus a growing suite of tools designed to support the practical free-net workflow. Each project serves a distinct purpose in the broader ecosystem he's building, and together they cover the full spectrum from educational content to practical tooling to hands-on infrastructure.</p>
+
+      <p>What distinguishes Ethan's portfolio from similar projects in the networking space is the combination of depth and accessibility. Most networking resources are either highly technical (written for engineers and assuming significant prior knowledge) or extremely simplified (written for non-technical users and sacrificing accuracy for accessibility). Ethan's work occupies the middle ground: technically rigorous enough to be useful for serious users, accessible enough to be approachable for motivated beginners.</p>
+
+      <h2 id="chaos-configurations">Project 1: Chaos Configurations</h2>
+      <p><strong>Chaos Configurations</strong> is the flagship platform — the comprehensive knowledge and tooling hub that encompasses everything from beginner VPN guides to advanced protocol analysis. The site you're reading right now is Chaos Configurations.</p>
+
+      <h3>What It Is</h3>
+      <p>Chaos Configurations is a static web platform built for performance and accessibility. The design philosophy prioritizes speed on constrained connections, clean presentation of technical content, and a user experience that doesn't require JavaScript-heavy frameworks to function. It is built with plain HTML, CSS, and minimal JavaScript — intentionally lightweight so it loads fast on mobile connections with limited bandwidth, which is the primary access method for a significant portion of its audience.</p>
+
+      <h3>Content Architecture</h3>
+      <p>The site is organized around several content pillars:</p>
+      <ul>
+        <li><strong>Educational Guides:</strong> Deep-dive explanations of VPN technology, tunneling protocols, SNI mechanics, Freenet, and network restrictions — written to build genuine understanding, not just surface-level familiarity.</li>
+        <li><strong>Config Hub:</strong> A library of tested, categorized VPN configuration files for HTTP Injector, HA Tunnel Plus, and OpenVPN — the practical resource for users who need working configs without necessarily building them from scratch.</li>
+        <li><strong>Setup Guides:</strong> Step-by-step installation and configuration walkthroughs for the major free-net applications — accessible to beginners, complete enough to be useful for experienced users troubleshooting specific issues.</li>
+        <li><strong>Research Articles:</strong> Longer-form analysis pieces covering the policy, history, and technical landscape of internet freedom technology — including pieces on zero-rating, digital access inequality, and the history of Freenet.</li>
+        <li><strong>Tools:</strong> The Chaos SNI Finder and other networking utilities, presented with full documentation and usage guides.</li>
+      </ul>
+
+      <h3>Technical Stack</h3>
+      <p>Chaos Configurations is built as a static site — no server-side rendering, no database, no complex backend. This choice is deliberate and reflects several priorities:</p>
+      <ul>
+        <li><strong>Performance:</strong> Static sites load faster than dynamic ones. For users on slow or expensive mobile connections, every kilobyte matters.</li>
+        <li><strong>Reliability:</strong> Static sites have no backend to crash. The site is as reliable as the hosting infrastructure it runs on — and static hosting is extremely reliable.</li>
+        <li><strong>Deployability:</strong> A static site can be deployed on Netlify, Cloudflare Pages, GitHub Pages, or virtually any web host — with zero configuration overhead and no server management required.</li>
+        <li><strong>Security:</strong> No backend means no database injection attacks, no server-side vulnerabilities, no authentication systems to compromise.</li>
+      </ul>
+      <p>The frontend is built with a design system using Google Fonts (Space Grotesk for body text, JetBrains Mono for code, Playfair Display for headings), a custom CSS framework, and a minimal JavaScript navigation system. The result is a site that looks professional and modern while remaining extremely lightweight.</p>
+
+      <h2 id="vpn-config-hub">Project 2: VPN Config Hub</h2>
+      <p><strong>VPN Config Hub</strong> (<code>vpnconfighub.netlify.app</code>) is a more focused, reference-oriented platform — designed as a clean, organized library of VPN resources rather than a full educational hub. Where Chaos Configurations spans the full spectrum from beginner education to advanced research, VPN Config Hub is designed for a user who already knows roughly what they need and wants to find it quickly.</p>
+
+      <h3>What Makes It Different</h3>
+      <p>VPN Config Hub's value proposition is clarity and organization. The site is structured as a navigable reference library: configs are categorized by protocol and app, guides are organized by task, and the navigation is designed to get users to what they need in as few clicks as possible.</p>
+      <p>It also serves as the external-facing deployment target for Ethan's Android app (ConfigHub — <code>com.example.confighub</code>), which loads the VPN Config Hub site in a WebView with native Android performance optimizations including hardware acceleration, WebView pre-initialization, Chrome Custom Tabs warmup, and skeleton loading screens.</p>
+
+      <h3>The Android App Connection</h3>
+      <p>The ConfigHub Android app is built around a WebView that loads the VPN Config Hub site, creating a native-app experience around the web content. The app is developed using AndroidIDE — an on-device Android development environment — and targets a wide range of Android devices (minSdk 21, compileSdk 34) to ensure maximum compatibility with older devices in developing markets where the latest hardware isn't universal.</p>
+      <p>Key app features include hardware-accelerated rendering for smooth scrolling, WebView pre-initialization for fast startup times, Chrome Custom Tabs warmup for improved link-opening performance, skeleton loading screens to improve perceived performance, and a custom error screen replacing Android's default WebView error page.</p>
+
+      <h2 id="chaos-sni-finder">Project 3: Chaos SNI Finder</h2>
+      <p>The <strong>Chaos SNI Finder</strong> is a specialized networking tool that automates the discovery and testing of SNI (Server Name Indication) hosts that work as effective bug hosts in carrier-bypass VPN configurations. It is Ethan Chaos's most technically distinctive contribution to the free-net ecosystem.</p>
+
+      <h3>The Problem It Solves</h3>
+      <p>Building a working HTTP Injector or HA Tunnel Plus configuration for a specific carrier requires knowing which SNI value to use as the "bug host" — the domain that the carrier's network recognizes as zero-rated or whitelisted and therefore allows traffic through without data charges. Finding this value manually is a time-consuming trial-and-error process: you have to test candidate domains one by one, observe the network response, and determine whether each one is genuinely zero-rated or just accessible because you have active data.</p>
+      <p>Chaos SNI Finder automates this process systematically. It tests candidate domains against the current network, distinguishes between "zero-rated" and "accessible via data," ranks working hosts by performance, and generates ready-to-use configuration parameters. What would take hours of manual testing is done in minutes.</p>
+
+      <h3>How It Works</h3>
+      <p>The tool operates through a multi-stage pipeline:</p>
+      <ol>
+        <li><strong>Candidate generation:</strong> Builds a test list from known zero-rated domains, CDN infrastructure domains, government and educational domains, and previous discovery results.</li>
+        <li><strong>Zero-rating detection:</strong> Tests each candidate by attempting TLS connections with the candidate domain as the SNI value, comparing network behavior with and without active data balance to isolate genuinely zero-rated responses.</li>
+        <li><strong>Tunnel viability testing:</strong> Tests whether candidates that pass zero-rating detection can actually function as SNI values in SSH and SSL tunnel configurations — not all zero-rated domains are suitable as bug hosts due to carrier proxy validation behavior.</li>
+        <li><strong>Performance benchmarking:</strong> Measures latency and throughput for viable hosts to rank them by practical usability.</li>
+        <li><strong>Config output:</strong> Generates ready-to-use payload and SNI parameters for HTTP Injector (.ehi) and HA Tunnel Plus (.hat) configuration files.</li>
+      </ol>
+
+      <h3>Impact</h3>
+      <p>The Chaos SNI Finder has meaningfully reduced the barrier to building and maintaining working free-net configurations. Before the tool, finding a working SNI host required either having inside knowledge of carrier networks or spending significant time on manual testing. With the tool, any user can run a systematic discovery process and get actionable results in minutes — regardless of their prior knowledge of how SNI works or how carrier networks are configured.</p>
+
+      <h2 id="server-infrastructure">Infrastructure Work</h2>
+      <p>Behind the visible platforms and tools, Ethan Chaos maintains a body of server infrastructure work — the VPS deployments, configuration management, and server optimization work that underpins the practical server-side recommendations on Chaos Configurations.</p>
+      <p>This work includes maintained OpenVPN and WireGuard server configurations optimized for performance in developing-market network conditions, SSH server configurations for use as backend servers for HTTP Injector and HA Tunnel Plus deployments, network performance tuning (TCP buffer sizing, BBR congestion control, MTU optimization), and security hardening configurations for VPS instances on DigitalOcean and Vultr.</p>
+      <p>These configurations form the basis of the server-side setup guides on Chaos Configurations — they're not theoretical recommendations but battle-tested configurations that have been deployed and validated against real network conditions.</p>
+
+      <h2 id="ongoing-development">Ongoing Development</h2>
+      <p>Ethan Chaos continues to develop all three primary projects — Chaos Configurations, VPN Config Hub, and the Chaos SNI Finder — with updates driven by two sources: changes in the technical landscape (new carrier configurations, protocol updates, changes in filtering behavior) and community feedback (user-reported config failures, requests for coverage of new carriers or regions).</p>
+      <p>The development cadence reflects the nature of the domain: free-net technology is not a solved problem but a continuously evolving one. The carrier-bypass techniques that work today may be patched tomorrow. The SNI filtering systems that are cutting-edge today will be superseded by ECH-aware systems in the next few years. Staying current requires ongoing investment in research and tool maintenance — and that's the commitment Ethan has made.</p>
+
+      <div class="info-box green">
+        <div class="icon">🔗</div>
+        <div>
+          <h4>Explore the Work</h4>
+          <p>Browse the <a href="https://vpnconfighub.netlify.app/" target="_blank" rel="noopener">Config Hub</a> for current configurations, use the <a href="blog-tools.html#sni-finder">Chaos SNI Finder</a> for your carrier, and read the <a href="blog-ethan-researcher.html">Research Profile</a> for a deeper look at the methodology behind it all.</p>
+        </div>
+      </div>
+
+    </div>
+    <aside class="sidebar">
+      <div class="sidebar-widget">
+        <h4>In This Article</h4>
+        <ul class="toc-list">
+          <li><a href="#overview">Project Overview</a></li>
+          <li><a href="#chaos-configurations">Chaos Configurations</a></li>
+          <li><a href="#vpn-config-hub">VPN Config Hub</a></li>
+          <li><a href="#chaos-sni-finder">Chaos SNI Finder</a></li>
+          <li><a href="#server-infrastructure">Infrastructure Work</a></li>
+          <li><a href="#ongoing-development">Ongoing Development</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-widget">
+        <h4>All Ethan Chaos Pages</h4>
+        <ul class="toc-list">
+          <li><a href="blog-about.html">About Ethan Chaos</a></li>
+          <li><a href="blog-ethan-researcher.html">Research Profile</a></li>
+          <li><a href="blog-ethan-vision.html">Vision & Mission</a></li>
+          <li><a href="blog-contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-widget">
+        <h4>Quick Access</h4>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <a href="https://vpnconfighub.netlify.app/" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content:center;font-size:0.85rem;">⚙️ Config Hub</a>
+          <a href="blog-tools.html#sni-finder" class="btn btn-outline" style="justify-content:center;font-size:0.85rem;">🔍 SNI Finder</a>
+          <a href="blog-vps-hosting.html" class="btn btn-ghost" style="justify-content:center;font-size:0.85rem;">🖥️ VPS Guide</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+</div>
+  <script>(function(s){s.dataset.zone='10925473',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <script src="https://quge5.com/88/tag.min.js" data-zone="237688" async data-cfasync="false"></script>
+<footer id="main-footer"></footer>
+<script src="blognav.js"></script>
+<script>buildNav('About'); buildFooter();</script>
+</body>
+</html>
