@@ -349,8 +349,8 @@ header {
     margin-bottom: 15px;
     gap: 1.5rem;
     width: 100%;
-    transition: var(--transition);
-    animation: slideIn 0.3s ease;
+    transition: all 0.08s ease-out;
+    animation: slideIn 0.15s ease-out;
 }
 
 .config-item:last-child { margin-bottom: 0; }
