@@ -1,5 +1,12 @@
 [
   {
+    "name": "ha tunnel 100MB",
+    "vpn": "HA Tunnel",
+    "filename": "ha tunnel_100MB.hat",
+    "date": "11 May 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "Mabhengu 60MB",
     "vpn": "HA Tunnel",
     "filename": "Mabhengu_60MB.hat",
