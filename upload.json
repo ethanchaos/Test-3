@@ -1,5 +1,12 @@
 [
   {
+    "name": "Limpopo 300MB MTN daily plug by CONFIGHUB. 1 1",
+    "vpn": "TLS Tunnel",
+    "filename": "Limpopo 300MB MTN daily plug by CONFIGHUB._1_1.tls",
+    "date": "14 May 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "ha tunnel 100MB",
     "vpn": "HA Tunnel",
     "filename": "ha tunnel_100MB.hat",
