@@ -1,5 +1,12 @@
 [
   {
+    "name": "Telkom x VodaCom-SA",
+    "vpn": "HTTP Custom",
+    "filename": "Telkom_x_VodaCom-SA.hc",
+    "date": "14 May 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "VODACOM-SA & TELKOM UNLIMITED--------",
     "vpn": "HTTP Custom",
     "filename": "VODACOM-SA_&_TELKOM_UNLIMITED--------.hc",
