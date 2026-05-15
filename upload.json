@@ -1,5 +1,12 @@
 [
   {
+    "name": "version606",
+    "vpn": "Lets VPN GO",
+    "filename": "version606.js",
+    "date": "15 May 2026",
+    "config_id": "letsvpngo"
+  },
+  {
     "name": "Telkom x VodaCom-SA",
     "vpn": "HTTP Custom",
     "filename": "Telkom_x_VodaCom-SA.hc",
