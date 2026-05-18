@@ -1,5 +1,12 @@
 [
   {
+    "name": "MRDIEHARDHUB",
+    "vpn": "NPV Tunnel",
+    "filename": "MRDIEHARDHUB.npvt",
+    "date": "18 May 2026",
+    "config_id": "npvtunnel"
+  },
+  {
     "name": "Chaoshub 500Mb daily plug ",
     "vpn": "TLS Tunnel",
     "filename": "Chaoshub 500Mb daily plug .tls",
