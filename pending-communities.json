@@ -75,5 +75,22 @@
       "telegram": "Leonardo Ramirez"
     },
     "submittedAt": "2026-05-15T06:41:42.864Z"
+  },
+  {
+    "id": "req-1779129730293",
+    "name": "MRDIEHARD FREENET",
+    "platform": "whatsapp-channel",
+    "size": "1K to 5K",
+    "pic": "",
+    "href": "https://whatsapp.com/channel/0029Vb7CzeG17EmuIkFvo01q",
+    "status": "pending",
+    "activity": "",
+    "enabled": false,
+    "requester": {
+      "whatsapp": "0673542262",
+      "facebook": "Mrdiehard",
+      "telegram": "@mrdiehardLof"
+    },
+    "submittedAt": "2026-05-18T18:42:10.293Z"
   }
 ]
