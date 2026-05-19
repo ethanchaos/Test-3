@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN 500MB VPS ZAR",
+    "vpn": "HTTP Custom",
+    "filename": "MTN 500MB VPS ZAR.hc",
+    "date": "19 May 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "MTN 500MB ZA VLESS",
     "vpn": "Dark Tunnel",
     "filename": "MTN 500MB ZA VLESS.dark",
