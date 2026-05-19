@@ -1,5 +1,12 @@
 [
   {
+    "name": " shadow Rain-tel fast udp  ",
+    "vpn": "ZIV PN Tunnel",
+    "filename": "_shadow Rain-tel fast udp__.ziv",
+    "date": "19 May 2026",
+    "config_id": "zivpntunnel"
+  },
+  {
     "name": "Telkom , Rain , Vodacom UDP",
     "vpn": "ZIV PN Tunnel",
     "filename": "Telkom , Rain , Vodacom UDP.ziv",
