@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN DAILY 500 MB",
+    "vpn": "TLS Tunnel",
+    "filename": "MTN DAILY 500 MB.tls",
+    "date": "21 May 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "New UDP Fast As FCK",
     "vpn": "HTTP Custom",
     "filename": "New UDP Fast As FCK.hc",
