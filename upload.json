@@ -1,5 +1,12 @@
 [
   {
+    "name": "version620",
+    "vpn": "Lets VPN GO",
+    "filename": "version620.js",
+    "date": "23 May 2026",
+    "config_id": "letsvpngo"
+  },
+  {
     "name": "MTN DAILY 500 MB",
     "vpn": "TLS Tunnel",
     "filename": "MTN DAILY 500 MB.tls",
