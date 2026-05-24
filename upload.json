@@ -1,5 +1,12 @@
 [
   {
+    "name": "[SHADOW TEE]-[MTN 500MB]",
+    "vpn": "HTTP Custom",
+    "filename": "[SHADOW TEE]-[MTN 500MB].hc",
+    "date": "24 May 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "MTN 100MB    FAST",
     "vpn": "HA Tunnel",
     "filename": "MTN 100MB __ FAST.hat",
