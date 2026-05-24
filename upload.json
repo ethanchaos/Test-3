@@ -1,5 +1,12 @@
 [
   {
+    "name": "MTN 100MB    FAST",
+    "vpn": "HA Tunnel",
+    "filename": "MTN 100MB __ FAST.hat",
+    "date": "24 May 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "500MB BY WARH ",
     "vpn": "HA Tunnel",
     "filename": "500MB BY WARH_.hat",
