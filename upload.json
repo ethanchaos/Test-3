@@ -1,5 +1,12 @@
 [
   {
+    "name": "500MB BY WARH ",
+    "vpn": "HA Tunnel",
+    "filename": "500MB BY WARH_.hat",
+    "date": "24 May 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "version621",
     "vpn": "Lets VPN GO",
     "filename": "version621.js",
