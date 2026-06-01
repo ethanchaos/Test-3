@@ -1,5 +1,12 @@
 [
   {
+    "name": "version622",
+    "vpn": "Lets VPN GO",
+    "filename": "version622.js",
+    "date": "1 Jun 2026",
+    "config_id": "letsvpngo"
+  },
+  {
     "name": "TXC MTN PLUG ",
     "vpn": "HTTP Custom",
     "filename": "TXC MTN PLUG_.hc",
