@@ -1,5 +1,12 @@
 [
   {
+    "name": "[  ]                       ",
+    "vpn": "HA Tunnel",
+    "filename": "[__]____ ____ ______ ______.hat",
+    "date": "2 Jun 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "[  ][  ] liquid",
     "vpn": "HA Tunnel",
     "filename": "[__][__] liquid.hat",
