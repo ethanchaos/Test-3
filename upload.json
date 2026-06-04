@@ -1,6 +1,13 @@
 [
   {
     "name": "THE CRONIC MTN 500",
+    "vpn": "TLS Tunnel",
+    "filename": "THE CRONIC MTN 500.tls",
+    "date": "4 Jun 2026",
+    "config_id": "tlstunnel"
+  },
+  {
+    "name": "THE CRONIC MTN 500",
     "vpn": "HA Tunnel",
     "filename": "THE CRONIC MTN 500.hat",
     "date": "4 Jun 2026",
