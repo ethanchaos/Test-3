@@ -1,5 +1,12 @@
 [
   {
+    "name": "THE CRONIC MTN 500",
+    "vpn": "HTTP Injector",
+    "filename": "THE CRONIC MTN 500.ehi",
+    "date": "4 Jun 2026",
+    "config_id": "httpinjector"
+  },
+  {
     "name": "1GB MTN DAILY BY PANTHER 1",
     "vpn": "TLS Tunnel",
     "filename": "1GB_MTN_DAILY_BY_PANTHER_1.tls",
