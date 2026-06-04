@@ -1,5 +1,12 @@
 [
   {
+    "name": "THE CRONIC MTN 500MBS",
+    "vpn": "HTTP Custom",
+    "filename": "THE CRONIC MTN 500MBS.hc",
+    "date": "4 Jun 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "THE CRONIC MTN 500",
     "vpn": "TLS Tunnel",
     "filename": "THE CRONIC MTN 500.tls",
