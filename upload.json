@@ -1,5 +1,12 @@
 [
   {
+    "name": "test.php",
+    "vpn": "HTTP Injector",
+    "filename": "test.php.ehi",
+    "date": "8 Jun 2026",
+    "config_id": "httpinjector"
+  },
+  {
     "name": "MTN 10GB MONTHLY BY       MUKH THWA      ",
     "vpn": "NPV Tunnel",
     "filename": "MTN 10GB MONTHLY BY ______MUKH_THWA______.npvt",
@@ -196,16 +203,16 @@
     "config_id": "zivpntunnel"
   },
   {
-    "name": "AllNET-UDP VPS²",
+    "name": "AllNET-UDP VPSÂ²",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPS².ziv",
+    "filename": "AllNET-UDP VPSÂ².ziv",
     "date": "03 Jun 2026",
     "config_id": "zivpntunnel"
   },
   {
-    "name": "AllNET-UDP VPS¹",
+    "name": "AllNET-UDP VPSÂ¹",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPS¹.ziv",
+    "filename": "AllNET-UDP VPSÂ¹.ziv",
     "date": "03 Jun 2026",
     "config_id": "zivpntunnel"
   },
@@ -294,9 +301,9 @@
     "config_id": "httpcustom"
   },
   {
-    "name": "GOAT   FLASH POINT¶¥",
+    "name": "GOAT   FLASH POINTÂ¶Â¥",
     "vpn": "HA Tunnel",
-    "filename": "GOAT _ FLASH POINT¶¥.hat",
+    "filename": "GOAT _ FLASH POINTÂ¶Â¥.hat",
     "date": "03 Jun 2026",
     "config_id": "hatunnel"
   },
@@ -714,23 +721,23 @@
     "config_id": "zivpntunnel"
   },
   {
-    "name": "Uluru × MTN",
+    "name": "Uluru Ã MTN",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru × MTN.npvt",
+    "filename": "Uluru Ã MTN.npvt",
     "date": "03 Jun 2026",
     "config_id": "npvtunnel"
   },
   {
-    "name": "Uluru × MTN 1",
+    "name": "Uluru Ã MTN 1",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru × MTN_1.npvt",
+    "filename": "Uluru Ã MTN_1.npvt",
     "date": "03 Jun 2026",
     "config_id": "npvtunnel"
   },
   {
-    "name": "Uluru × MTN 2",
+    "name": "Uluru Ã MTN 2",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru × MTN_2.npvt",
+    "filename": "Uluru Ã MTN_2.npvt",
     "date": "03 Jun 2026",
     "config_id": "npvtunnel"
   },
@@ -959,9 +966,9 @@
     "config_id": "httpcustom"
   },
   {
-    "name": "  --Øwæmï tts ¹  mb  ---- 102759",
+    "name": "  --ÃwÃ¦mÃ¯ tts Â¹  mb  ---- 102759",
     "vpn": "HA Tunnel",
-    "filename": "__--Øwæmï_tts_¹__mb__----_102759.hat",
+    "filename": "__--ÃwÃ¦mÃ¯_tts_Â¹__mb__----_102759.hat",
     "date": "03 Jun 2026",
     "config_id": "hatunnel"
   },
@@ -1127,9 +1134,9 @@
     "config_id": "zivpntunnel"
   },
   {
-    "name": "                        -1",
+    "name": " Â  Â  Â     Â  Â  Â  Â  Â  Â  Â  -1",
     "vpn": "HA Tunnel",
-    "filename": "_ _ _ __ _ _ _ _ _ _ _ _-1.hat",
+    "filename": "_Â _Â _Â __ _Â _Â _Â _Â _Â _Â _Â _-1.hat",
     "date": "03 Jun 2026",
     "config_id": "hatunnel"
   },
