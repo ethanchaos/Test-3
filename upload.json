@@ -1,5 +1,68 @@
 [
   {
+    "name": "AllNET-UDP VPS²",
+    "vpn": "ZIV PN Tunnel",
+    "filename": "AllNET-UDP VPS².ziv",
+    "date": "10 Jun 2026",
+    "config_id": "zivpntunnel"
+  },
+  {
+    "name": "AllNET-UDP VPS¹",
+    "vpn": "ZIV PN Tunnel",
+    "filename": "AllNET-UDP VPS¹.ziv",
+    "date": "10 Jun 2026",
+    "config_id": "zivpntunnel"
+  },
+  {
+    "name": "GOAT   FLASH POINT¶¥",
+    "vpn": "HA Tunnel",
+    "filename": "GOAT _ FLASH POINT¶¥.hat",
+    "date": "10 Jun 2026",
+    "config_id": "hatunnel"
+  },
+  {
+    "name": "RsaMtn500mb (1)",
+    "vpn": "TLS Tunnel",
+    "filename": "RsaMtn500mb (1).tls",
+    "date": "10 Jun 2026",
+    "config_id": "tlstunnel"
+  },
+  {
+    "name": "Uluru × MTN",
+    "vpn": "NPV Tunnel",
+    "filename": "Uluru × MTN.npvt",
+    "date": "10 Jun 2026",
+    "config_id": "npvtunnel"
+  },
+  {
+    "name": "Uluru × MTN 1",
+    "vpn": "NPV Tunnel",
+    "filename": "Uluru × MTN_1.npvt",
+    "date": "10 Jun 2026",
+    "config_id": "npvtunnel"
+  },
+  {
+    "name": "Uluru × MTN 2",
+    "vpn": "NPV Tunnel",
+    "filename": "Uluru × MTN_2.npvt",
+    "date": "10 Jun 2026",
+    "config_id": "npvtunnel"
+  },
+  {
+    "name": "  --Øwæmï tts ¹  mb  ---- 102759",
+    "vpn": "HA Tunnel",
+    "filename": "__--Øwæmï_tts_¹__mb__----_102759.hat",
+    "date": "10 Jun 2026",
+    "config_id": "hatunnel"
+  },
+  {
+    "name": "                        -1",
+    "vpn": "HA Tunnel",
+    "filename": "_ _ _ __ _ _ _ _ _ _ _ _-1.hat",
+    "date": "10 Jun 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "version623",
     "vpn": "Lets VPN GO",
     "filename": "version623.js",
@@ -147,20 +210,6 @@
     "config_id": "zivpntunnel"
   },
   {
-    "name": "AllNET-UDP VPSÃÂÃÂÃÂÃÂ²",
-    "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPSÃÂÃÂÃÂÃÂ².ziv",
-    "date": "03 Jun 2026",
-    "config_id": "zivpntunnel"
-  },
-  {
-    "name": "AllNET-UDP VPSÃÂÃÂÃÂÃÂ¹",
-    "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPSÃÂÃÂÃÂÃÂ¹.ziv",
-    "date": "03 Jun 2026",
-    "config_id": "zivpntunnel"
-  },
-  {
     "name": "Benathi MTN300    ",
     "vpn": "Stark VPN",
     "filename": "Benathi_MTN300____.stk",
@@ -199,13 +248,6 @@
     "name": "Darksocket MTN SA 60 MB",
     "vpn": "HA Tunnel",
     "filename": "Darksocket MTN SA 60 MB.hat",
-    "date": "03 Jun 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": "GOAT   FLASH POINTÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂ¥",
-    "vpn": "HA Tunnel",
-    "filename": "GOAT _ FLASH POINTÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂ¥.hat",
     "date": "03 Jun 2026",
     "config_id": "hatunnel"
   },
@@ -448,27 +490,6 @@
     "config_id": "zivpntunnel"
   },
   {
-    "name": "Uluru ÃÂÃÂÃÂÃÂ MTN",
-    "vpn": "NPV Tunnel",
-    "filename": "Uluru ÃÂÃÂÃÂÃÂ MTN.npvt",
-    "date": "03 Jun 2026",
-    "config_id": "npvtunnel"
-  },
-  {
-    "name": "Uluru ÃÂÃÂÃÂÃÂ MTN 1",
-    "vpn": "NPV Tunnel",
-    "filename": "Uluru ÃÂÃÂÃÂÃÂ MTN_1.npvt",
-    "date": "03 Jun 2026",
-    "config_id": "npvtunnel"
-  },
-  {
-    "name": "Uluru ÃÂÃÂÃÂÃÂ MTN 2",
-    "vpn": "NPV Tunnel",
-    "filename": "Uluru ÃÂÃÂÃÂÃÂ MTN_2.npvt",
-    "date": "03 Jun 2026",
-    "config_id": "npvtunnel"
-  },
-  {
     "name": "ZA MTN 500MB (DAILY) INDONESIA SSH",
     "vpn": "Unknown",
     "filename": "ZA MTN 500MB (DAILY) INDONESIA SSH.jez",
@@ -574,13 +595,6 @@
     "config_id": "httpinjector"
   },
   {
-    "name": "  --ÃÂÃÂÃÂÃÂwÃÂÃÂÃÂÃÂ¦mÃÂÃÂÃÂÃÂ¯ tts ÃÂÃÂÃÂÃÂ¹  mb  ---- 102759",
-    "vpn": "HA Tunnel",
-    "filename": "__--ÃÂÃÂÃÂÃÂwÃÂÃÂÃÂÃÂ¦mÃÂÃÂÃÂÃÂ¯_tts_ÃÂÃÂÃÂÃÂ¹__mb__----_102759.hat",
-    "date": "03 Jun 2026",
-    "config_id": "hatunnel"
-  },
-  {
     "name": "  MTN 15MB DAILY  ",
     "vpn": "HTTP Injector",
     "filename": "__MTN 15MB DAILY__.ehi",
@@ -656,13 +670,6 @@
     "filename": "_shadow Rain-tel fast udp__.ziv",
     "date": "03 Jun 2026",
     "config_id": "zivpntunnel"
-  },
-  {
-    "name": " ÃÂÃÂÃÂÃÂ  ÃÂÃÂÃÂÃÂ  ÃÂÃÂÃÂÃÂ     ÃÂÃÂÃÂÃÂ  ÃÂÃÂÃÂÃÂ  ÃÂÃÂÃÂÃÂ  ÃÂÃÂÃÂÃÂ  ÃÂÃÂÃÂÃÂ  ÃÂÃÂÃÂÃÂ  ÃÂÃÂÃÂÃÂ  -1",
-    "vpn": "HA Tunnel",
-    "filename": "_ÃÂÃÂÃÂÃÂ _ÃÂÃÂÃÂÃÂ _ÃÂÃÂÃÂÃÂ __ _ÃÂÃÂÃÂÃÂ _ÃÂÃÂÃÂÃÂ _ÃÂÃÂÃÂÃÂ _ÃÂÃÂÃÂÃÂ _ÃÂÃÂÃÂÃÂ _ÃÂÃÂÃÂÃÂ _ÃÂÃÂÃÂÃÂ _-1.hat",
-    "date": "03 Jun 2026",
-    "config_id": "hatunnel"
   },
   {
     "name": "version586",
