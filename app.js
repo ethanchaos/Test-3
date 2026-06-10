@@ -13,7 +13,9 @@
             and ad system.
    Requires: sources.js (sets window.JSON_SOURCES)
    ════════════════════════════════════════════════ */
-
+if (!localStorage.getItem('dvx_session')) {
+    window.location.replace('https://chaosconfigurations.co.za/login');
+}
 
 /* ── Boot MainActivity (addon/plugin controller) ── */
 const _maScript = document.createElement('script');
