@@ -3,7 +3,9 @@
    Loads links.json + cards.json, builds all dynamic UI,
    then fetches live metadata from GitHub.
    ============================================================ */
-
+if (!localStorage.getItem('dvx_session')) {
+    window.location.replace('https://chaosconfigurations.co.za/login');
+}
 /* ── Boot MainActivty (addon/plugin controller) ── */
 const _maScript = document.createElement('script');
 _maScript.src = 'mainactivity.js';
