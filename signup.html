@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="white">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up — ConfigHub &amp; Deovex</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="dvex.css">
+    <style>
+        body { padding-bottom: 40px; }
+
+        .auth-wrap {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 0 16px 40px;
+        }
+
+        /* ── Page slider ── */
+        .pages-clip {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .pages-track {
+            display: flex;
+            transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .page-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* ── Card ── */
+        .auth-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px 28px;
+            box-shadow: var(--shadow-card), var(--shadow-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue), var(--accent-cyan));
+            background-size: 200% 100%;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0%   { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* ── Step dots ── */
+        .step-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .step-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--border-color);
+            transition: var(--transition);
+        }
+
+        .step-dot.active {
+            background: var(--accent-cyan);
+            width: 22px;
+            border-radius: 4px;
+        }
+
+        /* ── Fields ── */
+        .field-group { margin-bottom: 16px; }
+
+        .field-label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: .78rem;
+            font-weight: 600;
+            color: var(--text-medium);
+            margin-bottom: 7px;
+            font-family: var(--font-display);
+            letter-spacing: .04em;
+            text-transform: uppercase;
+        }
+
+        .field-label i { color: var(--accent-cyan); font-size: .75rem; width: 14px; text-align: center; }
+        .field-required { color: var(--accent-cyan); }
+        .field-optional {
+            color: var(--text-light);
+            font-size: .68rem;
+            font-family: var(--font-body);
+            text-transform: none;
+            letter-spacing: 0;
+            font-weight: 400;
+            margin-left: auto;
+        }
+
+        .input-wrap { position: relative; }
+
+        .input-icon {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: .82rem;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .input-wrap:focus-within .input-icon { color: var(--accent-cyan); }
+
+        .auth-input,
+        .auth-select {
+            width: 100%;
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px 14px 12px 40px;
+            color: var(--text-dark);
+            font-size: .93rem;
+            font-family: var(--font-body);
+            transition: var(--transition);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .auth-select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 38px;
+        }
+
+        /* password toggle */
+        .pw-toggle {
+            position: absolute;
+            right: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-light);
+            font-size: .82rem;
+            padding: 4px;
+            transition: var(--transition);
+        }
+        .pw-toggle:hover { color: var(--text-medium); }
+
+        .auth-input::placeholder { color: var(--text-light); font-size: .88rem; }
+
+        .auth-input:focus,
+        .auth-select:focus {
+            border-color: var(--border-active);
+            background: var(--card-bg);
+            box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+        }
+
+        .auth-select option { color: var(--text-dark); background: var(--card-bg); }
+
+        /* ── Dividers ── */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0 14px;
+        }
+
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .section-divider span {
+            font-size: .7rem;
+            color: var(--text-light);
+            font-family: var(--font-display);
+            letter-spacing: .06em;
+            white-space: nowrap;
+        }
+
+        /* ── Info note ── */
+        .social-note {
+            font-size: .8rem;
+            color: var(--text-light);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            background: rgba(0,0,0,0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px 12px;
+        }
+
+        .social-note i { color: var(--accent-cyan); margin-top: 2px; flex-shrink: 0; }
+
+        /* ── Errors ── */
+        .field-error {
+            font-size: .78rem;
+            color: var(--error-red);
+            margin-top: 5px;
+            display: none;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .field-error.show { display: flex; }
+
+        .form-msg {
+            border-radius: 10px;
+            padding: 12px 14px;
+            font-size: .85rem;
+            margin-bottom: 18px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            animation: fadeIn .3s ease;
+        }
+
+        .form-msg.show { display: flex; }
+
+        .form-msg.error {
+            background: rgba(211,47,47,0.06);
+            border: 1px solid rgba(211,47,47,0.22);
+            color: var(--error-red);
+        }
+
+        /* ── Buttons ── */
+        .auth-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            padding: 14px;
+            font-family: var(--font-display);
+            font-size: .95rem;
+            font-weight: 700;
+            letter-spacing: .06em;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .auth-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
+        .auth-btn:active { transform: scale(.98); }
+        .auth-btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+        .btn-spinner {
+            display: none;
+            width: 16px; height: 16px;
+            border: 2px solid rgba(255,255,255,.4);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin .7s linear infinite;
+        }
+
+        .auth-btn.loading .btn-spinner { display: block; }
+        .auth-btn.loading .btn-text    { display: none; }
+
+        /* next button (outline style) */
+        .next-btn {
+            width: 100%;
+            background: transparent;
+            color: var(--text-dark);
+            border: 1.5px solid var(--border-active);
+            border-radius: 10px;
+            padding: 13px;
+            font-family: var(--font-display);
+            font-size: .95rem;
+            font-weight: 700;
+            letter-spacing: .06em;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .next-btn:hover {
+            background: var(--accent-glow);
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        .next-btn:active { transform: scale(.98); }
+
+        /* ── Footer link ── */
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: .85rem;
+            color: var(--text-light);
+        }
+
+        .auth-footer a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .auth-footer a:hover { opacity: .75; }
+
+        /* ════════════════════════════════
+           PAGE 2 — Welcome / confirmation
+           ════════════════════════════════ */
+        .welcome-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 8px 0 4px;
+        }
+
+        .welcome-icon {
+            width: 80px; height: 80px;
+            background: rgba(0,0,0,0.04);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .welcome-icon i { font-size: 2.2rem; color: var(--accent-cyan); }
+
+        .welcome-body h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            letter-spacing: .02em;
+        }
+
+        .welcome-body .welcome-sub {
+            color: var(--text-light);
+            font-size: .9rem;
+            max-width: 300px;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        /* capability pills */
+        .cap-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 28px;
+            text-align: left;
+        }
+
+        .cap-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px 14px;
+            transition: var(--transition);
+        }
+
+        .cap-item:hover {
+            border-color: var(--border-active);
+            background: var(--card-hover);
+        }
+
+        .cap-icon {
+            width: 34px; height: 34px;
+            background: var(--accent-glow);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .cap-icon i { color: var(--accent-cyan); font-size: .95rem; }
+
+        .cap-text strong {
+            display: block;
+            font-size: .88rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-family: var(--font-display);
+            letter-spacing: .02em;
+        }
+
+        .cap-text span {
+            font-size: .78rem;
+            color: var(--text-light);
+        }
+
+        /* ── Animations ── */
+        @keyframes fadeIn    { from{opacity:0}          to{opacity:1} }
+        @keyframes fadeInUp  { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes spin      { to{transform:rotate(360deg)} }
+
+        @media (max-width: 480px) { .auth-card { padding: 24px 18px; } }
+    </style>
+</head>
+<body>
+
+<header id="mainHeader">
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <i class="fas fa-shield-alt"></i>
+            <div class="logo-text">ConfigHub <span class="logo-amp">&amp;</span> Deovex</div>
+        </a>
+        <div class="nav-container">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="index.html"><i class="fas fa-house"></i> Home</a>
+                <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <a href="https://whatsapp.com/channel/0029VbAL2mRC6ZvhCR8jjI0G" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a>
+                <a href="https://t.me/EthanChaoss" target="_blank"><i class="fab fa-telegram"></i> Contact Dav</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<section class="content-section">
+    <div class="auth-wrap">
+
+        <!-- Dynamic header -->
+        <div class="section-header" id="pageHeader">
+            <h1 id="pageTitle"><i class="fas fa-user-plus"></i> Create Account</h1>
+            <p id="pageSubtitle">Join to access VPN configurations</p>
+        </div>
+
+        <div class="auth-card">
+
+            <!-- Step indicator -->
+            <div class="step-dots">
+                <div class="step-dot active" id="dot1"></div>
+                <div class="step-dot"        id="dot2"></div>
+            </div>
+
+            <!-- ════════════ PAGES TRACK ════════════ -->
+            <div class="pages-clip">
+                <div class="pages-track" id="pagesTrack">
+
+                    <!-- ── PAGE 1: Sign-up form ── -->
+                    <div class="page-slide" id="page1">
+
+                        <div class="form-msg error" id="formError">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span id="formErrorMsg">Something went wrong.</span>
+                        </div>
+
+                        <!-- Username -->
+                        <div class="field-group">
+                            <div class="field-label">
+                                <i class="fas fa-user"></i> Username <span class="field-required">*</span>
+                            </div>
+                            <div class="input-wrap">
+                                <i class="input-icon fas fa-at"></i>
+                                <input type="text" id="username" class="auth-input"
+                                       placeholder="your_username"
+                                       autocomplete="username"
+                                       autocapitalize="none">
+                            </div>
+                            <div class="field-error" id="usernameError">
+                                <i class="fas fa-circle-xmark"></i> <span></span>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="field-group">
+                            <div class="field-label">
+                                <i class="fas fa-lock"></i> Password <span class="field-required">*</span>
+                            </div>
+                            <div class="input-wrap">
+                                <i class="input-icon fas fa-key"></i>
+                                <input type="password" id="password" class="auth-input"
+                                       placeholder="min. 6 characters"
+                                       autocomplete="new-password"
+                                       style="padding-right:42px;">
+                                <button class="pw-toggle" id="pwToggle" type="button" tabindex="-1" aria-label="Show password">
+                                    <i class="fas fa-eye" id="pwIcon"></i>
+                                </button>
+                            </div>
+                            <div class="field-error" id="passwordError">
+                                <i class="fas fa-circle-xmark"></i> <span></span>
+                            </div>
+                        </div>
+
+                     
+
+                        <!-- Province -->
+                        <div class="field-group">
+                            <div class="field-label">
+                                <i class="fas fa-map-marker-alt"></i> Province <span class="field-required">*</span>
+                            </div>
+                            <div class="input-wrap">
+                                <i class="input-icon fas fa-map-marker-alt"></i>
+                                <select id="province" class="auth-select">
+                                    <option value="">— Select your province —</option>
+                                    <option value="EC">Eastern Cape</option>
+                                    <option value="FS">Free State</option>
+                                    <option value="GP">Gauteng</option>
+                                    <option value="KZN">KwaZulu-Natal</option>
+                                    <option value="LP">Limpopo</option>
+                                    <option value="MP">Mpumalanga</option>
+                                    <option value="NC">Northern Cape</option>
+                                    <option value="NW">North West</option>
+                                    <option value="WC">Western Cape</option>
+                                </select>
+                            </div>
+                            <div class="field-error" id="provinceError">
+                                <i class="fas fa-circle-xmark"></i> <span>Please select your province</span>
+                            </div>
+                        </div>
+
+                        <!-- Contact -->
+                        <div class="section-divider"><span>CONTACT — AT LEAST ONE REQUIRED</span></div>
+                        <div class="social-note">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Fill at least one field so we can reach you.</span>
+                        </div>
+
+                           <!-- Email -->
+                        <div class="field-group">
+                            <div class="field-label">
+                                <i class="fas fa-envelope"></i> Email
+                                <span class="field-optional">optional</span>
+                            </div>
+                            <div class="input-wrap">
+                                <i class="input-icon fas fa-envelope"></i>
+                                <input type="email" id="email" class="auth-input"
+                                       placeholder="you@example.com"
+                                       autocomplete="email">
+                            </div>
+                        </div>
+                        
+                        <div class="field-group">
+                            <div class="field-label"><i class="fab fa-whatsapp"></i> WhatsApp Number</div>
+                            <div class="input-wrap">
+                                <i class="input-icon fas fa-phone"></i>
+                                <input type="tel" id="whatsapp" class="auth-input" placeholder="+27 71 234 5678">
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <div class="field-label"><i class="fab fa-telegram"></i> Telegram Username</div>
+                            <div class="input-wrap">
+                                <i class="input-icon fas fa-paper-plane"></i>
+                                <input type="text" id="telegram" class="auth-input"
+                                       placeholder="@yourusername" autocapitalize="none">
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <div class="field-label"><i class="fab fa-facebook"></i> Facebook</div>
+                            <div class="input-wrap">
+                                <i class="input-icon fab fa-facebook-f"></i>
+                                <input type="text" id="facebook" class="auth-input"
+                                       placeholder="username or profile link" autocapitalize="none">
+                            </div>
+                        </div>
+
+                        <div class="field-error" id="socialError" style="margin-top:-8px;margin-bottom:10px;">
+                            <i class="fas fa-circle-xmark"></i> <span>Fill at least one contact field</span>
+                        </div>
+
+                        <button class="auth-btn" id="signupBtn" type="button">
+                            <div class="btn-spinner"></div>
+                            <span class="btn-text"><i class="fas fa-user-plus"></i>&nbsp; CREATE ACCOUNT</span>
+                        </button>
+
+                        <div class="auth-footer">
+                            Already have an account? <a href="login.html">Log in</a>
+                        </div>
+
+                    </div><!-- /page1 -->
+
+                    <!-- ── PAGE 2: Welcome / confirmation ── -->
+                    <div class="page-slide" id="page2">
+                        <div class="welcome-body">
+
+                            <div class="welcome-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+
+                            <h2>You're signed in!</h2>
+                            <p class="welcome-sub">
+                                Account created successfully. You can now download and share files on ConfigHub &amp; Deovex.
+                            </p>
+
+                            <div class="cap-list">
+                                <div class="cap-item">
+                                    <div class="cap-icon"><i class="fas fa-download"></i></div>
+                                    <div class="cap-text">
+                                        <strong>Download Configs</strong>
+                                        <span>Access and save VPN configuration files</span>
+                                    </div>
+                                </div>
+                                <div class="cap-item">
+                                    <div class="cap-icon"><i class="fas fa-share-nodes"></i></div>
+                                    <div class="cap-text">
+                                        <strong>Share Files</strong>
+                                        <span>Share configs directly with others</span>
+                                    </div>
+                                </div>
+                                <div class="cap-item">
+                                    <div class="cap-icon"><i class="fas fa-bell"></i></div>
+                                    <div class="cap-text">
+                                        <strong>Get Updates</strong>
+                                        <span>Stay notified when new configs drop</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="next-btn" id="nextBtn" type="button">
+                                Continue to Home &nbsp;<i class="fas fa-arrow-right"></i>
+                            </button>
+
+                        </div>
+                    </div><!-- /page2 -->
+
+                </div><!-- /pages-track -->
+            </div><!-- /pages-clip -->
+
+        </div><!-- /auth-card -->
+    </div>
+</section>
+
+<script src="deovex-pp.js"></script>
+<script src="https://jade-marshmallow-7c18d3.netlify.app/deovex-auth.js"></script>
+<script>
+(function () {
+
+    /* ── Nav toggle ── */
+    const navToggle = document.getElementById('navToggle');
+    const dropMenu  = document.getElementById('dropdownMenu');
+    if (navToggle && dropMenu) {
+        navToggle.addEventListener('click', function () {
+            this.classList.toggle('active');
+            dropMenu.classList.toggle('active');
+        });
+        document.addEventListener('click', function (e) {
+            if (!navToggle.contains(e.target) && !dropMenu.contains(e.target)) {
+                navToggle.classList.remove('active');
+                dropMenu.classList.remove('active');
+            }
+        });
+    }
+
+    /* ── Password toggle ── */
+    const pwInput  = document.getElementById('password');
+    const pwToggle = document.getElementById('pwToggle');
+    const pwIcon   = document.getElementById('pwIcon');
+    pwToggle.addEventListener('click', function () {
+        const show = pwInput.type === 'password';
+        pwInput.type  = show ? 'text' : 'password';
+        pwIcon.className = show ? 'fas fa-eye-slash' : 'fas fa-eye';
+    });
+
+    /* ── Helpers ── */
+    function gv(id) { return document.getElementById(id).value.trim(); }
+
+    function showErr(id, msg) {
+        const el = document.getElementById(id);
+        const sp = el.querySelector('span');
+        if (sp && msg) sp.textContent = msg;
+        el.classList.add('show');
+    }
+
+    function clearErrors() {
+        ['usernameError','passwordError','provinceError','socialError','formError']
+            .forEach(function (id) { document.getElementById(id).classList.remove('show'); });
+    }
+
+    /* ── Slide to page 2 ── */
+    function goToPage2() {
+        document.getElementById('pagesTrack').style.transform = 'translateX(-100%)';
+        document.getElementById('dot1').classList.remove('active');
+        document.getElementById('dot2').classList.add('active');
+        document.getElementById('pageTitle').innerHTML    = '<i class="fas fa-circle-check"></i> Welcome';
+        document.getElementById('pageSubtitle').textContent = 'Your account is ready to go';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ── Sign-up submit ── */
+    document.getElementById('signupBtn').addEventListener('click', async function () {
+        clearErrors();
+        const btn = this;
+
+        const username = gv('username');
+        const password = gv('password');
+        const email    = gv('email');
+        const province = gv('province');
+        const whatsapp = gv('whatsapp');
+        const telegram = gv('telegram');
+        const facebook = gv('facebook');
+
+        let ok = true;
+
+        if (!username || username.length < 3) {
+            showErr('usernameError', 'At least 3 characters required');
+            ok = false;
+        }
+        if (!password || password.length < 6) {
+            showErr('passwordError', 'At least 6 characters required');
+            ok = false;
+        }
+        if (!province) {
+            showErr('provinceError', 'Please select your province');
+            ok = false;
+        }
+        if (!whatsapp && !telegram && !facebook) {
+            showErr('socialError', 'Fill at least one contact field');
+            ok = false;
+        }
+
+        if (!ok) return;
+
+        btn.classList.add('loading');
+        btn.disabled = true;
+
+        try {
+            const result = await DeovexAuth.signup({
+                username : username,
+                password : password,
+                email    : email    || null,
+                province : province,
+                whatsapp : whatsapp || null,
+                telegram : telegram || null,
+                facebook : facebook || null
+            });
+
+            if (!result.ok) {
+                document.getElementById('formErrorMsg').textContent = result.message || 'Signup failed.';
+                document.getElementById('formError').classList.add('show');
+                btn.classList.remove('loading');
+                btn.disabled = false;
+                return;
+            }
+
+            goToPage2();
+
+        } catch (err) {
+            document.getElementById('formErrorMsg').textContent = err.message || 'Signup failed. Please try again.';
+            document.getElementById('formError').classList.add('show');
+            btn.classList.remove('loading');
+            btn.disabled = false;
+        }
+    });
+
+    /* ── Next / Continue button ── */
+    document.getElementById('nextBtn').addEventListener('click', function () {
+        window.location.href = DeovexAuth.getNextUrl();
+    });
+
+})();
+</script>
+</body>
+</html>
