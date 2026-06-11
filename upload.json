@@ -1,5 +1,12 @@
 [
   {
+    "name": "Telkom rain and Vodacom Za udp",
+    "vpn": "HTTP Custom",
+    "filename": "Telkom rain and Vodacom Za udp.hc",
+    "date": "11 Jun 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "MTN LIMITED ECHOEYES",
     "vpn": "TLS Tunnel",
     "filename": "MTN LIMITED ECHOEYES.tls",
@@ -7,23 +14,23 @@
     "config_id": "tlstunnel"
   },
   {
-    "name": "AllNET-UDP VPSÂ²",
+    "name": "AllNET-UDP VPSÃÂ²",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPSÂ².ziv",
+    "filename": "AllNET-UDP VPSÃÂ².ziv",
     "date": "10 Jun 2026",
     "config_id": "zivpntunnel"
   },
   {
-    "name": "AllNET-UDP VPSÂ¹",
+    "name": "AllNET-UDP VPSÃÂ¹",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPSÂ¹.ziv",
+    "filename": "AllNET-UDP VPSÃÂ¹.ziv",
     "date": "10 Jun 2026",
     "config_id": "zivpntunnel"
   },
   {
-    "name": "GOAT   FLASH POINTÂ¶Â¥",
+    "name": "GOAT   FLASH POINTÃÂ¶ÃÂ¥",
     "vpn": "HA Tunnel",
-    "filename": "GOAT _ FLASH POINTÂ¶Â¥.hat",
+    "filename": "GOAT _ FLASH POINTÃÂ¶ÃÂ¥.hat",
     "date": "10 Jun 2026",
     "config_id": "hatunnel"
   },
@@ -35,37 +42,37 @@
     "config_id": "tlstunnel"
   },
   {
-    "name": "Uluru Ã MTN",
+    "name": "Uluru ÃÂ MTN",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru Ã MTN.npvt",
+    "filename": "Uluru ÃÂ MTN.npvt",
     "date": "10 Jun 2026",
     "config_id": "npvtunnel"
   },
   {
-    "name": "Uluru Ã MTN 1",
+    "name": "Uluru ÃÂ MTN 1",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru Ã MTN_1.npvt",
+    "filename": "Uluru ÃÂ MTN_1.npvt",
     "date": "10 Jun 2026",
     "config_id": "npvtunnel"
   },
   {
-    "name": "Uluru Ã MTN 2",
+    "name": "Uluru ÃÂ MTN 2",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru Ã MTN_2.npvt",
+    "filename": "Uluru ÃÂ MTN_2.npvt",
     "date": "10 Jun 2026",
     "config_id": "npvtunnel"
   },
   {
-    "name": "  --ÃwÃ¦mÃ¯ tts Â¹  mb  ---- 102759",
+    "name": "  --ÃÂwÃÂ¦mÃÂ¯ tts ÃÂ¹  mb  ---- 102759",
     "vpn": "HA Tunnel",
-    "filename": "__--ÃwÃ¦mÃ¯_tts_Â¹__mb__----_102759.hat",
+    "filename": "__--ÃÂwÃÂ¦mÃÂ¯_tts_ÃÂ¹__mb__----_102759.hat",
     "date": "10 Jun 2026",
     "config_id": "hatunnel"
   },
   {
-    "name": " Â  Â  Â     Â  Â  Â  Â  Â  Â  Â  -1",
+    "name": " ÃÂ  ÃÂ  ÃÂ     ÃÂ  ÃÂ  ÃÂ  ÃÂ  ÃÂ  ÃÂ  ÃÂ  -1",
     "vpn": "HA Tunnel",
-    "filename": "_Â _Â _Â __ _Â _Â _Â _Â _Â _Â _Â _-1.hat",
+    "filename": "_ÃÂ _ÃÂ _ÃÂ __ _ÃÂ _ÃÂ _ÃÂ _ÃÂ _ÃÂ _ÃÂ _ÃÂ _-1.hat",
     "date": "10 Jun 2026",
     "config_id": "hatunnel"
   },
