@@ -1,5 +1,13 @@
 [
   {
+    "id": 140,
+    "title": "New Files Added",
+    "message": "New files for TLS Tunnel and HTTP Custom have been added recently. Tap to explore them.",
+    "link": "https://vpnconfighub.netlify.app/index.html",
+    "date": "2026-06-11",
+    "priority": "high"
+  },
+  {
     "id": 139,
     "title": " Multiple Config Update",
     "message": "6 new configuration files across 4 different VPN apps have been uploaded. Visit the site to browse all the latest additions.",
