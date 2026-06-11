@@ -198,5 +198,13 @@
     "telegram": "config",
     "facebook": "config",
     "createdAt": "2026-06-11T03:06:24.853Z"
+  },
+  "me_you": {
+    "province": "KZN",
+    "email": null,
+    "whatsapp": "27604082966",
+    "telegram": "me_you",
+    "facebook": "me_you",
+    "createdAt": "2026-06-11T04:26:42.879Z"
   }
 }
