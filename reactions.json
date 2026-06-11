@@ -106,5 +106,14 @@
     "sad": 0,
     "ugh": 0,
     "nope": 0
+  },
+  "__MTN 50MB DAILY__.hc": {
+    "total": 1,
+    "love": 0,
+    "great": 0,
+    "happy": 0,
+    "sad": 0,
+    "ugh": 0,
+    "nope": 1
   }
 }
