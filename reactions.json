@@ -113,7 +113,7 @@
     "great": 0,
     "happy": 0,
     "sad": 0,
-    "ugh": 0,
-    "nope": 1
+    "ugh": 1,
+    "nope": 0
   }
 }
