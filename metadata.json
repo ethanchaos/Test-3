@@ -1,7 +1,7 @@
 {
   "httpcustom": {
-    "last_updated": "2026-06-11 06:15:52",
-    "count": 10
+    "last_updated": "2026-06-11 20:37:58",
+    "count": 11
   },
   "hatunnel": {
     "last_updated": "2026-06-10 16:38:35",
@@ -24,8 +24,8 @@
     "count": 0
   },
   "tlstunnel": {
-    "last_updated": "2026-06-11 06:15:52",
-    "count": 8
+    "last_updated": "2026-06-11 20:37:58",
+    "count": 10
   },
   "zivpntunnel": {
     "last_updated": "2026-06-11 06:15:52",
