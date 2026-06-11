@@ -182,5 +182,13 @@
     "telegram": "Mahlatsi",
     "facebook": null,
     "createdAt": "2026-06-11T02:40:02.812Z"
+  },
+  "tharollo": {
+    "province": "MP",
+    "email": null,
+    "whatsapp": "0799906488",
+    "telegram": null,
+    "facebook": null,
+    "createdAt": "2026-06-11T02:41:21.628Z"
   }
 }
