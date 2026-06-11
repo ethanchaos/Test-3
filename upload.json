@@ -1,5 +1,12 @@
 [
   {
+    "name": "[  ] LiQuId                     ",
+    "vpn": "HA Tunnel",
+    "filename": "[__] LiQuId _ _ ____ ____ ______.hat",
+    "date": "11 Jun 2026",
+    "config_id": "hatunnel"
+  },
+  {
     "name": "MTN 500MB ",
     "vpn": "TLS Tunnel",
     "filename": "MTN 500MB .tls",
