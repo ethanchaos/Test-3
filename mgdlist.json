@@ -190,5 +190,13 @@
     "telegram": null,
     "facebook": null,
     "createdAt": "2026-06-11T02:41:21.628Z"
+  },
+  "wolf": {
+    "province": "KZN",
+    "email": null,
+    "whatsapp": "0835298842",
+    "telegram": "config",
+    "facebook": "config",
+    "createdAt": "2026-06-11T03:06:24.853Z"
   }
 }
