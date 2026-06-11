@@ -174,5 +174,13 @@
     "telegram": null,
     "facebook": null,
     "createdAt": "2026-06-10T22:29:46.181Z"
+  },
+  "mahlatsi": {
+    "province": "GP",
+    "email": "mahlatsithomas923@gmail.com",
+    "whatsapp": null,
+    "telegram": "Mahlatsi",
+    "facebook": null,
+    "createdAt": "2026-06-11T02:40:02.812Z"
   }
 }
