@@ -254,5 +254,13 @@
     "telegram": null,
     "facebook": null,
     "createdAt": "2026-06-11T05:09:39.897Z"
+  },
+  "jembox": {
+    "province": "NC",
+    "email": "jembox27@gmail.com",
+    "whatsapp": "665630439",
+    "telegram": "jeromeolifant",
+    "facebook": null,
+    "createdAt": "2026-06-11T05:25:29.700Z"
   }
 }
