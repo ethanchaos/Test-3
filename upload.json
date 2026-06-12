@@ -1,5 +1,17 @@
 [
   {
+    "name": " MTN DAILY PLUG  1",
+    "vpn": "TLS Tunnel",
+    "filename": "_MTN DAILY PLUG__1.tls",
+    "date": "13 Jun 2026",
+    "config_id": "tlstunnel",
+    "locations": [
+      "Gauteng",
+      "Eastern Cape",
+      "Limpopo"
+    ]
+  },
+  {
     "name": "Gaming test",
     "vpn": "HTTP Custom",
     "filename": "Gaming test.hc",
