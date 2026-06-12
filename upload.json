@@ -1,5 +1,16 @@
 [
   {
+    "name": "South Africa MTN 500MB Daily 1",
+    "vpn": "HTTP Custom",
+    "filename": "South Africa MTN 500MB Daily_1.hc",
+    "date": "12 Jun 2026",
+    "config_id": "httpcustom",
+    "expires_at": "2026-06-12T21:12:00",
+    "locations": [
+      "Limpopo"
+    ]
+  },
+  {
     "name": "Germany VIP UDP PLUG",
     "vpn": "ZIV PN Tunnel",
     "filename": "Germany VIP UDP PLUG.ziv",
