@@ -1,5 +1,12 @@
 [
   {
+    "name": "South Africa MTN 500MB Daily 4",
+    "vpn": "HTTP Custom",
+    "filename": "South Africa MTN 500MB Daily_4.hc",
+    "date": "13 Jun 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "Chaoshub 500Mb daily plug  1",
     "vpn": "TLS Tunnel",
     "filename": "Chaoshub 500Mb daily plug _1.tls",
