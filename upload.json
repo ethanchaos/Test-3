@@ -1,5 +1,19 @@
 [
   {
+    "name": "Chaoshub 500Mb daily plug  1",
+    "vpn": "TLS Tunnel",
+    "filename": "Chaoshub 500Mb daily plug _1.tls",
+    "date": "12 Jun 2026",
+    "config_id": "tlstunnel",
+    "expires_at": "2026-06-12T00:32:00",
+    "locations": [
+      "Gauteng",
+      "KwaZulu-Natal",
+      "Limpopo",
+      "Free State"
+    ]
+  },
+  {
     "name": "[  ] LiQuId 1",
     "vpn": "HA Tunnel",
     "filename": "[__] LiQuId_1.hat",
