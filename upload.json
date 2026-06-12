@@ -1,5 +1,12 @@
 [
   {
+    "name": "500 MB DAILY PLUG",
+    "vpn": "HTTP Custom",
+    "filename": "500 MB DAILY PLUG.hc",
+    "date": "13 Jun 2026",
+    "config_id": "httpcustom"
+  },
+  {
     "name": "Mtn",
     "vpn": "HTTP Custom",
     "filename": "Mtn.hc",
