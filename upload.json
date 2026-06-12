@@ -1,5 +1,17 @@
 [
   {
+    "name": "Gaming test",
+    "vpn": "HTTP Custom",
+    "filename": "Gaming test.hc",
+    "date": "13 Jun 2026",
+    "config_id": "httpcustom",
+    "locations": [
+      "Gauteng",
+      "Eastern Cape",
+      "Limpopo"
+    ]
+  },
+  {
     "name": "UDP PLUG",
     "vpn": "ZIV PN Tunnel",
     "filename": "UDP PLUG.ziv",
