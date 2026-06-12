@@ -5,7 +5,7 @@
 window.AdConfig = {
 
   /* TIMING */
-  triggerDelay: 20,
+  triggerDelay: 100,
 
   /* VIDEO ADS */
   videos: [
