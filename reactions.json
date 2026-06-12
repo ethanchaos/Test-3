@@ -115,5 +115,14 @@
     "sad": 0,
     "ugh": 1,
     "nope": 0
+  },
+  "MTN 500MB .tls": {
+    "total": 1,
+    "love": 0,
+    "great": 1,
+    "happy": 0,
+    "sad": 0,
+    "ugh": 0,
+    "nope": 0
   }
 }
