@@ -1,5 +1,16 @@
 [
   {
+    "name": "[  ] LiQuId 1",
+    "vpn": "HA Tunnel",
+    "filename": "[__] LiQuId_1.hat",
+    "date": "12 Jun 2026",
+    "config_id": "hatunnel",
+    "expires_at": "2026-06-12T21:11:00",
+    "locations": [
+      "Northern Cape"
+    ]
+  },
+  {
     "name": "South Africa MTN 500MB Daily 3",
     "vpn": "HTTP Custom",
     "filename": "South Africa MTN 500MB Daily_3.hc",
