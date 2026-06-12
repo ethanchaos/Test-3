@@ -1,5 +1,12 @@
 [
   {
+    "name": "Germany VIP UDP PLUG",
+    "vpn": "ZIV PN Tunnel",
+    "filename": "Germany VIP UDP PLUG.ziv",
+    "date": "12 Jun 2026",
+    "config_id": "zivpntunnel"
+  },
+  {
     "name": "[  ] LiQuId",
     "vpn": "HA Tunnel",
     "filename": "[__] LiQuId.hat",
