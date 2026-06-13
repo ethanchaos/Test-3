@@ -1,5 +1,13 @@
 [
   {
+    "name": "Poland premium UDP by mrfwewords",
+    "vpn": "ZIV PN Tunnel",
+    "filename": "Poland premium UDP by mrfwewords.ziv",
+    "date": "13 Jun 2026",
+    "config_id": "zivpntunnel",
+    "expires_at": "2026-06-16T20:47:00"
+  },
+  {
     "name": "MTN 500MB PER DAY",
     "vpn": "TLS Tunnel",
     "filename": "MTN 500MB PER DAY.tls",
