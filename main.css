@@ -1,24 +1,9 @@
 /* ============================================================
-   ConfigHub — Shared Stylesheet (White Theme)
+   ConfigHub — main.css
+   Theme-aware stylesheet aligned with styles.css (deovex.css).
+   Relies on CSS variables set by styles.css / the data-theme
+   attribute on <html>. Import styles.css BEFORE this file.
    ============================================================ */
-
-:root {
-    --primary-bg:    #f8f9fa;
-    --secondary-bg:  #ffffff;
-    --card-bg:       #ffffff;
-    --text-dark:     #1a1a1a;
-    --text-medium:   #333333;
-    --text-light:    #555555;
-    --accent-gray:   #8c8c8c;
-    --accent-dark:   #1a1a1a;
-    --border-color:  #e0e0e0;
-    --border-light:  #f0f0f0;
-    --shadow-light:  rgba(0, 0, 0, 0.04);
-    --shadow-medium: rgba(0, 0, 0, 0.08);
-    --transition:    all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --error-red:     #d32f2f;
-    --success-green: #388e3c;
-}
 
 /* ── Reset ── */
 * {
@@ -28,16 +13,21 @@
 }
 
 /* ── Body ── */
+/* Background grid + radial accents are already applied by styles.css.
+   We only override what is specific to the main page layout. */
 body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: linear-gradient(135deg, #f5f5f5 0%, #f8f9fa 100%);
+    font-family: var(--font-body);
+    background-color: var(--primary-bg);
     color: var(--text-medium);
     line-height: 1.6;
     scroll-behavior: smooth;
     min-height: 100vh;
-    padding: 0;
-    padding-top: 60px;
-    padding-bottom: 90px; /* room for bottom nav */
+    padding-top: 64px;      /* matches styles.css header height */
+    padding-bottom: 90px;
+    background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 40px 40px;
 }
 
 /* Safe-area top bar */
@@ -48,11 +38,11 @@ body::before {
     left: 0;
     right: 0;
     height: env(safe-area-inset-top);
-    background: rgba(255, 255, 255, 0.98);
+    background: var(--secondary-bg);
     z-index: 9999;
 }
 
-/* Subtle background texture */
+/* Radial accent overlay */
 body::after {
     content: '';
     position: fixed;
@@ -61,8 +51,8 @@ body::after {
     width: 100%;
     height: 100%;
     background-image:
-        radial-gradient(circle at 10% 20%, rgba(0, 0, 0, 0.02) 0%, transparent 20%),
-        radial-gradient(circle at 90% 80%, rgba(0, 0, 0, 0.02) 0%, transparent 20%);
+        radial-gradient(circle at 10% 20%, var(--radial-cyan) 0%, transparent 30%),
+        radial-gradient(circle at 90% 80%, var(--radial-blue) 0%, transparent 25%);
     pointer-events: none;
     z-index: -1;
 }
@@ -73,19 +63,20 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: var(--header-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border-color);
     z-index: 1000;
-    box-shadow: 0 1px 4px var(--shadow-light);
+    box-shadow: 0 1px 0 var(--header-glow);
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 15px;
+    padding: 0 16px;
+    height: 64px;
 }
 
 /* ── Logo ── */
@@ -97,19 +88,27 @@ header {
 }
 
 .logo i {
-    color: var(--accent-dark);
-    font-size: 1.8rem;
-    transition: transform 0.3s ease;
+    color: var(--accent-cyan);
+    font-size: 1.5rem;
+    transition: var(--transition);
+    filter: drop-shadow(0 0 6px var(--accent-cyan));
 }
 
 .logo:hover i {
-    transform: rotate(360deg);
+    transform: rotate(20deg) scale(1.1);
+    filter: drop-shadow(0 0 10px var(--accent-cyan));
 }
 
 .logo-text {
-    font-size: 1.3rem;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
     font-weight: 700;
     color: var(--text-dark);
+    letter-spacing: 0.03em;
+}
+
+.logo-amp {
+    color: var(--accent-cyan);
 }
 
 /* ── Hamburger toggle ── */
@@ -117,8 +116,8 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 28px;
-    height: 20px;
+    width: 26px;
+    height: 18px;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -129,28 +128,36 @@ header {
     display: block;
     height: 2px;
     width: 100%;
-    background: var(--accent-dark);
+    background: var(--text-dark);
     border-radius: 2px;
     transition: var(--transition);
 }
 
-.nav-toggle.active span:nth-child(1) { transform: rotate(45deg)  translate(5px, 5px); }
+.nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+    background: var(--accent-cyan);
+}
+
 .nav-toggle.active span:nth-child(2) { opacity: 0; }
-.nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+.nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+    background: var(--accent-cyan);
+}
 
 /* ── Dropdown ── */
 .dropdown-menu {
     position: absolute;
     top: 100%;
     right: 15px;
-    background: var(--card-bg);
+    background: var(--dropdown-bg);
     border-radius: 10px;
-    box-shadow: 0 4px 16px var(--shadow-medium);
-    padding: 8px 0;
-    width: 185px;
+    box-shadow: 0 8px 32px var(--shadow-medium), 0 0 0 1px var(--accent-glow);
+    padding: 6px 0;
+    width: 200px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
+    transform: translateY(-8px);
     transition: var(--transition);
     border: 1px solid var(--border-color);
     z-index: 999;
@@ -166,10 +173,12 @@ header {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 12px 15px;
+    padding: 12px 16px;
     color: var(--text-medium);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 500;
     transition: var(--transition);
     border-bottom: 1px solid var(--border-light);
 }
@@ -177,15 +186,22 @@ header {
 .dropdown-menu a:last-child { border-bottom: none; }
 
 .dropdown-menu a:hover {
-    background: rgba(0, 0, 0, 0.04);
+    background: var(--card-hover);
     color: var(--text-dark);
     padding-left: 20px;
+}
+
+.dropdown-menu a i {
+    color: var(--accent-cyan);
+    font-size: 0.85rem;
+    width: 16px;
+    text-align: center;
 }
 
 /* ── Content wrapper ── */
 .content-section {
     background: transparent;
-    min-height: calc(100vh - 60px);
+    min-height: calc(100vh - 64px);
     padding: 15px 0;
     position: relative;
 }
@@ -208,20 +224,23 @@ header {
     transform: translateX(-50%);
     width: 60px;
     height: 2px;
-    background: var(--accent-dark);
+    background: var(--accent-cyan);
 }
 
 .post-hero h1,
 .section-header h1 {
+    font-family: var(--font-display);
     font-size: 2rem;
     font-weight: 700;
     color: var(--text-dark);
     line-height: 1.2;
     margin-bottom: 0.5rem;
+    letter-spacing: 0.03em;
 }
 
 .post-hero p,
 .section-header p {
+    font-family: var(--font-body);
     color: var(--text-light);
     font-size: 0.95rem;
     max-width: 600px;
@@ -233,15 +252,18 @@ header {
 .main-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px 2rem;
+    padding: 0 16px 2rem;
 }
 
 /* ── Cards title ── */
 .cards-title {
-    font-size: 1.4rem;
+    font-family: var(--font-display);
+    font-size: 0.82rem;
     font-weight: 700;
     color: var(--text-dark);
-    margin-bottom: 1.5rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
     position: relative;
     display: inline-block;
 }
@@ -249,14 +271,14 @@ header {
 .cards-title::after {
     content: '';
     position: absolute;
-    bottom: -8px;
+    bottom: -6px;
     left: 0;
-    width: 50px;
+    width: 40px;
     height: 2px;
-    background: var(--accent-dark);
+    background: var(--accent-cyan);
 }
 
-/* ── Mods grid (2-col fixed, scales up) ── */
+/* ── Mods grid ── */
 .mods-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -265,12 +287,12 @@ header {
     width: 100%;
 }
 
-/* ── Mod card ── (card style UNCHANGED, only colours updated) */
+/* ── Mod card ── */
 .mod-item {
     background: var(--card-bg);
-    border-radius: 10px;
-    padding: 12px;
-    box-shadow: 0 2px 8px var(--shadow-light);
+    border-radius: 16px;
+    padding: 14px 12px;
+    box-shadow: var(--shadow-card);
     cursor: pointer;
     transition: var(--transition);
     text-align: center;
@@ -280,103 +302,100 @@ header {
     text-decoration: none;
     color: var(--text-medium);
     display: block;
+    overflow: hidden;
 }
 
 .mod-item:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px var(--shadow-medium);
-    border-color: var(--accent-gray);
-    background: #fafafa;
+    box-shadow: var(--shadow-glow);
+    border-color: var(--border-active);
+    background: var(--card-hover);
 }
 
 .mod-item img {
     width: 56px;
     height: 56px;
-    border-radius: 10px;
+    border-radius: 12px;
     margin-bottom: 10px;
-    background: rgba(0, 0, 0, 0.04);
+    background: var(--accent-glow);
     object-fit: cover;
     border: 1px solid var(--border-color);
 }
 
 .mod-name {
-    font-weight: 600;
-    font-size: 0.85rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.82rem;
     margin: 0 0 6px;
     color: var(--text-dark);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    letter-spacing: 0.02em;
 }
 
 .mod-meta {
-    font-size: 0.7rem;
+    font-family: var(--font-body);
+    font-size: 0.68rem;
     color: var(--text-light);
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 /* ── Status dots ── */
 .status-light {
     position: absolute;
-    top: 8px;
-    right: 8px;
+    top: 10px;
+    right: 10px;
     width: 8px;
     height: 8px;
     border-radius: 50%;
 }
 
-.green  { background: var(--success-green); box-shadow: 0 0 6px var(--success-green); }
-.yellow { background: #f59e0b;              box-shadow: 0 0 6px #f59e0b; }
+.status-light.online  { background: var(--success-green); box-shadow: 0 0 5px var(--success-green); }
+.status-light.offline { background: var(--error-red);     box-shadow: 0 0 5px var(--error-red); }
+.status-light.unknown { background: var(--accent-gray);   box-shadow: 0 0 5px var(--accent-gray); }
 
-/* ── Config list (used in app pages) ── */
-.config-list {
-    background: transparent;
-    border-radius: 0;
-    overflow: visible;
-    box-shadow: none;
-    border: none;
-    width: 100%;
-}
-
+/* ── Config list items ── */
 .config-item {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    border: 1px solid var(--border-color);
+    gap: 16px;
+    padding: 16px;
     background: var(--card-bg);
-    border-radius: 10px;
-    margin-bottom: 15px;
-    gap: 1.5rem;
-    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    margin-bottom: 10px;
     transition: var(--transition);
-    animation: slideIn 0.3s ease;
+    cursor: pointer;
+    box-shadow: var(--shadow-card);
 }
 
 .config-item:last-child { margin-bottom: 0; }
 
 .config-item:hover {
-    background: #fafafa;
+    background: var(--card-hover);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px var(--shadow-light);
-    border-color: var(--border-light);
+    box-shadow: var(--shadow-glow);
+    border-color: var(--border-active);
 }
 
 .config-text { flex: 1; min-width: 0; }
 
 .config-text h3 {
-    margin: 0 0 8px;
+    font-family: var(--font-display);
+    margin: 0 0 6px;
     color: var(--text-dark);
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 0.95rem;
+    font-weight: 700;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    letter-spacing: 0.02em;
 }
 
 .config-meta {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -384,32 +403,35 @@ header {
 .config-badge {
     display: inline-flex;
     align-items: center;
-    background: rgba(0, 0, 0, 0.06);
+    background: var(--accent-glow);
     color: var(--text-dark);
-    padding: 4px 12px;
-    border-radius: 16px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    gap: 6px;
+    border: 1px solid var(--border-light);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    gap: 5px;
 }
 
-.config-badge i { font-size: 0.8rem; color: var(--text-light); }
+.config-badge i { font-size: 0.7rem; color: var(--accent-cyan); }
 
 .config-date {
+    font-family: var(--font-body);
     color: var(--text-light);
-    font-size: 0.85rem;
+    font-size: 0.72rem;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
 }
 
 /* ── Download button ── */
 .file-actions { display: flex; gap: 10px; flex-shrink: 0; }
 
 .download-btn {
-    background: rgba(0, 0, 0, 0.04);
+    background: var(--accent-glow);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 12px 16px;
     cursor: pointer;
     transition: var(--transition);
@@ -423,17 +445,20 @@ header {
 
 .download-btn i {
     color: var(--text-dark);
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     transition: var(--transition);
 }
 
 .download-btn:hover {
-    background: rgba(0, 0, 0, 0.08);
-    border-color: var(--accent-gray);
+    background: var(--card-hover);
+    border-color: var(--border-active);
     transform: scale(1.05);
+    box-shadow: var(--shadow-glow);
 }
 
-/* ── States ── */
+.download-btn:hover i { color: var(--accent-cyan); }
+
+/* ── Empty / Error states ── */
 .empty-state,
 .error-state {
     display: flex;
@@ -443,21 +468,62 @@ header {
     text-align: center;
     padding: 4rem 2rem;
     background: var(--card-bg);
-    border-radius: 10px;
-    box-shadow: 0 2px 8px var(--shadow-light);
+    border-radius: 16px;
+    box-shadow: var(--shadow-card);
     border: 1px solid var(--border-color);
     margin: 2rem 0;
     width: 100%;
 }
 
-.empty-state i { font-size: 3rem; color: var(--accent-gray); margin-bottom: 1.5rem; opacity: 0.5; }
-.empty-state h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-dark); font-weight: 600; }
-.empty-state p  { color: var(--text-light); max-width: 500px; line-height: 1.6; }
+.empty-state i {
+    font-size: 3rem;
+    color: var(--accent-gray);
+    margin-bottom: 1.5rem;
+    opacity: 0.5;
+}
 
-.error-state i  { font-size: 3rem; color: var(--error-red); margin-bottom: 1.5rem; opacity: 0.8; }
-.error-state h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-dark); font-weight: 600; }
-.error-state p  { color: var(--text-light); max-width: 500px; line-height: 1.6; }
+.empty-state h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-dark);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
 
+.empty-state p {
+    font-family: var(--font-body);
+    color: var(--text-light);
+    max-width: 500px;
+    line-height: 1.6;
+    font-size: 0.9rem;
+}
+
+.error-state i {
+    font-size: 3rem;
+    color: var(--error-red);
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+}
+
+.error-state h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-dark);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+.error-state p {
+    font-family: var(--font-body);
+    color: var(--text-light);
+    max-width: 500px;
+    line-height: 1.6;
+    font-size: 0.9rem;
+}
+
+/* ── Loading spinner ── */
 .loading-spinner {
     display: flex;
     justify-content: center;
@@ -476,37 +542,47 @@ header {
 #retryButton {
     margin-top: 1rem;
     background: var(--text-dark);
-    color: #ffffff;
+    color: var(--secondary-bg);
     border: none;
     padding: 10px 24px;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: 500;
-    font-size: 0.9rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
     transition: var(--transition);
 }
 
-#retryButton:hover { background: #000000; transform: translateY(-1px); }
+#retryButton:hover {
+    background: var(--accent-cyan);
+    color: var(--secondary-bg);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-glow);
+}
 
 /* ── Footer ── */
 .footer {
     text-align: center;
     padding: 1.5rem 15px;
     margin-top: 1rem;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-light);
     color: var(--text-light);
-    font-size: 0.8rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
 }
 
 .footer p { margin-bottom: 5px; }
 
 /* ── Animations ── */
-@keyframes fadeIn    { from { opacity: 0; } to { opacity: 1; } }
-@keyframes spin      { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-@keyframes slideIn   { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
-@keyframes fadeInUp  { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn       { from { opacity: 0; } to { opacity: 1; } }
+@keyframes spin         { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes slideIn      { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes fadeInUp     { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 @keyframes fadeOutRight { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(100%); } }
+@keyframes skelAnim     { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
 /* ── Utility ── */
 .hidden { display: none !important; }
@@ -521,7 +597,7 @@ header {
     padding-bottom: calc(12px + env(safe-area-inset-bottom));
     z-index: 1000;
     pointer-events: none;
-    background: linear-gradient(to top, #f8f9fa 60%, transparent);
+    background: linear-gradient(to top, var(--nav-fade-bg) 60%, transparent);
 }
 
 .bottom-nav {
@@ -530,15 +606,15 @@ header {
     max-width: 480px;
     margin: 0 auto;
     height: 62px;
-    background: rgba(255, 255, 255, 0.97);
+    background: var(--nav-pill-bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-radius: 22px;
-    border: 1px solid rgba(0, 0, 0, 0.07);
+    border: 1px solid var(--nav-pill-border);
     box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.10),
-        0 2px 8px rgba(0, 0, 0, 0.06),
-        0 0 0 0.5px rgba(255,255,255,0.8) inset;
+        0 8px 32px var(--shadow-medium),
+        0 2px 8px var(--shadow-light),
+        0 0 0 0.5px rgba(255, 255, 255, 0.08) inset;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -555,9 +631,9 @@ header {
     gap: 3px;
     flex: 1;
     text-decoration: none;
-    color: #aaaaaa;
+    color: var(--accent-gray);
     font-size: 0.6rem;
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-family: var(--font-body);
     font-weight: 600;
     letter-spacing: 0.03em;
     padding: 8px 0;
@@ -567,11 +643,14 @@ header {
     border-radius: 14px;
 }
 
-.bottom-nav-item i { font-size: 1.15rem; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+.bottom-nav-item i {
+    font-size: 1.15rem;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-.bottom-nav-item.active          { color: var(--text-dark); }
-.bottom-nav-item.active i        { transform: translateY(-1px); }
-.bottom-nav-item.active .nav-icon-wrap { background: rgba(0, 0, 0, 0.07); }
+.bottom-nav-item.active            { color: var(--text-dark); }
+.bottom-nav-item.active i          { transform: translateY(-1px); }
+.bottom-nav-item.active .nav-icon-wrap { background: var(--accent-glow); }
 
 .nav-icon-wrap {
     width: 36px;
@@ -583,9 +662,9 @@ header {
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.bottom-nav-item:hover .nav-icon-wrap { background: rgba(0, 0, 0, 0.05); }
-.bottom-nav-item:hover               { color: var(--text-dark); }
-.bottom-nav-item:active              { transform: scale(0.92); }
+.bottom-nav-item:hover .nav-icon-wrap { background: var(--accent-glow); }
+.bottom-nav-item:hover                 { color: var(--text-dark); }
+.bottom-nav-item:active                { transform: scale(0.92); }
 
 /* Upload FAB */
 .bottom-nav-upload {
@@ -597,27 +676,34 @@ header {
 .upload-fab {
     width: 52px;
     height: 52px;
-    background: #1a1a1a;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
     border-radius: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.28), 0 2px 6px rgba(0,0,0,0.16);
+    box-shadow:
+        0 6px 20px var(--accent-glow),
+        0 2px 6px var(--shadow-light);
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid rgba(255,255,255,0.12);
+    border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-.upload-fab i { font-size: 1.2rem; color: #ffffff; transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+.upload-fab i {
+    font-size: 1.2rem;
+    color: var(--fab-icon-color);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
 .bottom-nav-upload:hover .upload-fab {
-    background: #000000;
     transform: translateY(-4px) scale(1.06);
-    box-shadow: 0 10px 28px rgba(0,0,0,0.32), 0 4px 10px rgba(0,0,0,0.18);
+    box-shadow:
+        0 10px 28px var(--accent-glow),
+        0 4px 10px var(--shadow-light);
     border-radius: 20px;
 }
 
 .bottom-nav-upload:hover .upload-fab i { transform: translateY(-1px); }
-.bottom-nav-upload span { color: var(--text-dark); font-weight: 700; }
+.bottom-nav-upload span                 { color: var(--accent-cyan); font-weight: 700; }
 .bottom-nav-upload:active .upload-fab  { transform: scale(0.94); }
 
 /* ── Responsive ── */
@@ -633,40 +719,40 @@ header {
     .mods-grid  { gap: 8px; }
     .mod-item   { padding: 10px; }
     .mod-item img { width: 48px; height: 48px; }
-    .mod-name   { font-size: 0.8rem; }
-    .post-hero h1 { font-size: 1.6rem; }
+    .mod-name   { font-size: 0.75rem; }
+    .post-hero h1, .section-header h1 { font-size: 1.5rem; }
 }
 
 @media (max-width: 480px) {
-    .main-container { padding: 0 15px; }
+    .main-container { padding: 0 12px; }
     .section-header h1 { font-size: 1.6rem; }
     .config-item    { padding: 14px; flex-wrap: wrap; }
-    .config-text h3 { font-size: 1rem; }
+    .config-text h3 { font-size: 0.9rem; }
     .empty-state, .error-state { padding: 2rem 1rem; }
     .empty-state i, .error-state i { font-size: 2.5rem; }
-    .empty-state h3, .error-state h3 { font-size: 1.3rem; }
-    .config-badge   { font-size: 0.8rem; padding: 4px 10px; }
-    .config-date    { font-size: 0.8rem; }
+    .empty-state h3, .error-state h3 { font-size: 1.2rem; }
+    .config-badge   { font-size: 0.7rem; padding: 3px 8px; }
+    .config-date    { font-size: 0.7rem; }
     .download-btn   { padding: 10px; }
 }
 
 @media (max-width: 768px) {
-    .config-item  { flex-direction: row; align-items: center; gap: 1rem; padding: 16px; }
+    .config-item  { flex-direction: row; align-items: center; gap: 1rem; padding: 15px 14px; }
     .file-actions { width: auto; justify-content: flex-end; }
-    .config-meta  { flex-direction: row; align-items: center; gap: 10px; }
+    .config-meta  { flex-direction: row; align-items: center; gap: 8px; }
     .section-header h1 { font-size: 1.8rem; }
-    .navbar { padding: 12px; }
+    .navbar { padding: 0 12px; }
 }
 
 @media (min-width: 768px) {
-    .mods-grid   { grid-template-columns: repeat(3, 1fr); gap: 15px; }
-    .mod-item    { padding: 15px; }
+    .mods-grid    { grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .mod-item     { padding: 16px; }
     .mod-item img { width: 64px; height: 64px; }
-    .post-hero h1 { font-size: 2.5rem; }
+    .post-hero h1, .section-header h1 { font-size: 2.5rem; }
 }
 
 @media (min-width: 1024px) {
-    .mods-grid   { grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .mods-grid    { grid-template-columns: repeat(4, 1fr); gap: 20px; }
     .container, .main-container { max-width: 1200px; margin: 0 auto; }
     .section-header h1 { font-size: 2.4rem; }
 }
