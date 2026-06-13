@@ -1,5 +1,12 @@
 [
   {
+    "name": "ZET FLASH    500MB",
+    "vpn": "TLS Tunnel",
+    "filename": "ZET FLASH __ 500MB.tls",
+    "date": "13 Jun 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "Toxiic 500mbs [RST]",
     "vpn": "TLS Tunnel",
     "filename": "Toxiic 500mbs [RST].tls",
