@@ -62,12 +62,17 @@
       "type": "regular"
     },
     {
-      "id": "community",
-      "label": "Community",
-      "href": "community.html",
+      "id": "settings",
+      "label": "settings",
+      "href": "settings.html",
       "external": true,
-      "icon": "fas fa-users",
+      "icon": "fas fa-sliders-h",
       "type": "regular"
     }
   ]
 }
+
+
+
+
+
