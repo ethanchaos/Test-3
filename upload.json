@@ -1,5 +1,15 @@
 [
   {
+    "name": " MTN DAILY PLUG  2",
+    "vpn": "TLS Tunnel",
+    "filename": "_MTN DAILY PLUG__2.tls",
+    "date": "13 Jun 2026",
+    "config_id": "tlstunnel",
+    "locations": [
+      "Limpopo"
+    ]
+  },
+  {
     "name": "  MTN 15MB DAILY  ",
     "vpn": "HTTP Custom",
     "filename": "__MTN 15MB DAILY__.hc",
