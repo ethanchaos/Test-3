@@ -1238,7 +1238,7 @@ function escapeHtml(str) {
             enabled: true,
             timerAd: {
                 enabled: true,
-                triggerAfterSeconds: 120,
+                triggerAfterSeconds: 30,
                 waitingPeriodSeconds: 5,
                 redirectUrl: 'https://gizokraijaw.net/vignette.min.js',
                 message: 'Support the creator by watching an ad to continue downloading.',
