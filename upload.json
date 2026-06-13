@@ -1,5 +1,12 @@
 [
   {
+    "name": "Toxiic 500mbs [RST]",
+    "vpn": "TLS Tunnel",
+    "filename": "Toxiic 500mbs [RST].tls",
+    "date": "13 Jun 2026",
+    "config_id": "tlstunnel"
+  },
+  {
     "name": "black chyldd 1gb daily",
     "vpn": "NPV Tunnel",
     "filename": "black chyldd 1gb daily.npvt",
