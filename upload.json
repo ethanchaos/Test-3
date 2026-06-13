@@ -1,5 +1,12 @@
 [
   {
+    "name": "black chyldd 1gb daily",
+    "vpn": "NPV Tunnel",
+    "filename": "black chyldd 1gb daily.npvt",
+    "date": "13 Jun 2026",
+    "config_id": "npvtunnel"
+  },
+  {
     "name": "ULURU X MTN ",
     "vpn": "HTTP Custom",
     "filename": "ULURU X MTN .hc",
