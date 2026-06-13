@@ -1238,7 +1238,7 @@ function escapeHtml(str) {
             enabled: true,
             timerAd: {
                 enabled: true,
-                triggerAfterSeconds: 30,
+                triggerAfterSeconds: 80,
                 waitingPeriodSeconds: 5,
                 redirectUrl: 'https://gizokraijaw.net/vignette.min.js',
                 message: 'Support the creator by watching an ad to continue downloading.',
@@ -1246,8 +1246,8 @@ function escapeHtml(str) {
             },
             downloadAd: {
                 enabled: true,
-                minDownloads: 2,
-                maxDownloads: 3,
+                minDownloads: 0,
+                maxDownloads: 1,
                 waitingPeriodSeconds: 5,
                 redirectUrl: 'https://groleegni.net/vignette.min.js',
                 message: "You've been downloading for free! Please support the creator by watching a short ad.",
