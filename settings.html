@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="white">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Account settings and preferences for ConfigHub">
+    <title>Settings — ConfigHub &amp; Deovex</title>
+
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3619aaa99b9349adac8b88ba436e2db6"}'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        body { padding-bottom: 100px; }
+
+        .settings-wrap {
+            width: 100%;
+            max-width: 540px;
+            margin: 0 auto;
+            padding: 0 16px 40px;
+        }
+
+        /* ── Cards ── */
+        .settings-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 18px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .settings-card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 20px 14px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .settings-card-header .hdr-icon {
+            width: 32px; height: 32px;
+            background: var(--accent-glow);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .settings-card-header .hdr-icon i {
+            color: var(--accent-cyan);
+            font-size: 0.85rem;
+        }
+
+        .settings-card-header h2 {
+            font-family: var(--font-display);
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        /* ── Profile hero ── */
+        .profile-hero {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 20px 18px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .profile-avatar {
+            width: 58px; height: 58px;
+            background: var(--accent-glow);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .profile-avatar i { font-size: 1.6rem; color: var(--accent-cyan); }
+
+        .profile-hero-text h3 {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0 0 3px;
+            letter-spacing: 0.02em;
+        }
+
+        .profile-hero-text .hero-sub {
+            font-family: var(--font-body);
+            font-size: 0.78rem;
+            color: var(--text-light);
+            display: block;
+        }
+
+        .member-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--accent-glow);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3px 10px;
+            font-family: var(--font-body);
+            font-size: 0.72rem;
+            color: var(--text-light);
+            margin-top: 6px;
+        }
+
+        .member-chip i { font-size: 0.62rem; }
+
+        /* ── Info rows ── */
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 13px 20px;
+            border-bottom: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        .info-row:last-child { border-bottom: none; }
+        .info-row:hover { background: var(--card-hover); }
+
+        .info-row-icon {
+            width: 34px; height: 34px;
+            background: var(--accent-glow);
+            border-radius: 9px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .info-row-icon i { font-size: 0.8rem; color: var(--accent-cyan); }
+
+        .info-row-content { flex: 1; min-width: 0; }
+
+        .info-row-label {
+            font-family: var(--font-display);
+            font-size: 0.67rem;
+            font-weight: 600;
+            color: var(--text-light);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+
+        .info-row-value {
+            font-family: var(--font-body);
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .info-row-value.empty {
+            color: var(--text-light);
+            font-style: italic;
+            font-size: 0.8rem;
+        }
+
+        .row-edit-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-light);
+            padding: 6px 11px;
+            font-size: 0.74rem;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 600;
+            transition: var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .row-edit-btn:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+        .row-edit-btn:active { transform: scale(0.95); }
+
+        /* ── Skeleton loader ── */
+        .skel {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--border-light) 25%, var(--card-hover) 50%, var(--border-light) 75%);
+            background-size: 200% 100%;
+            animation: skelAnim 1.4s infinite;
+            border-radius: 5px;
+            height: 13px;
+        }
+
+        @keyframes skelAnim {
+            0%   { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* ── Toggle rows ── */
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: var(--transition);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .toggle-row:last-child { border-bottom: none; }
+        .toggle-row:hover { background: var(--card-hover); }
+        .toggle-row.no-interact { cursor: default; }
+        .toggle-row.no-interact:hover { background: transparent; }
+
+        .toggle-row-icon {
+            width: 34px; height: 34px;
+            background: var(--accent-glow);
+            border-radius: 9px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .toggle-row-icon i { font-size: 0.8rem; color: var(--accent-cyan); }
+
+        .toggle-row-text { flex: 1; }
+
+        .toggle-row-text strong {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 0.87rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            letter-spacing: 0.02em;
+            margin-bottom: 2px;
+        }
+
+        .toggle-row-text small {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            color: var(--text-light);
+            line-height: 1.45;
+        }
+
+        /* iOS toggle */
+        .dvx-toggle { position: relative; width: 46px; height: 26px; flex-shrink: 0; }
+        .dvx-toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+
+        .dvx-toggle-track {
+            position: absolute;
+            inset: 0;
+            border-radius: 13px;
+            background: var(--border-color);
+            transition: background 0.28s ease;
+            cursor: pointer;
+        }
+
+        .dvx-toggle-track::after {
+            content: '';
+            position: absolute;
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: #fff;
+            top: 3px; left: 3px;
+            transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.22);
+        }
+
+        .dvx-toggle input:checked + .dvx-toggle-track { background: #1a1a1a; }
+        .dvx-toggle input:checked + .dvx-toggle-track::after { transform: translateX(20px); }
+
+        /* ── Filtration note row ── */
+        .filter-note-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 20px;
+            background: var(--accent-glow);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .filter-note-row i { color: var(--accent-cyan); font-size: 0.8rem; flex-shrink: 0; }
+
+        .filter-note-row span {
+            font-family: var(--font-body);
+            font-size: 0.78rem;
+            color: var(--text-medium);
+            line-height: 1.4;
+        }
+
+        .filter-note-row span b { font-weight: 600; color: var(--text-dark); }
+
+        /* ── Account status ── */
+        .status-dot {
+            display: inline-block;
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--success-green);
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+
+        /* ── Danger ── */
+        .danger-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            margin: 16px 20px;
+            width: calc(100% - 40px);
+            background: transparent;
+            border: 1.5px solid rgba(211,47,47,0.35);
+            border-radius: 10px;
+            color: var(--error-red);
+            padding: 13px;
+            font-family: var(--font-display);
+            font-size: 0.87rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .danger-btn:hover { background: rgba(211,47,47,0.06); border-color: var(--error-red); }
+        .danger-btn:active { transform: scale(0.98); }
+
+        /* ════════════════════════════════
+           EDIT BOTTOM SHEET
+        ════════════════════════════════ */
+        #editOverlay {
+            display: none;
+            position: fixed; inset: 0; z-index: 9999;
+            background: rgba(0,0,0,0.52);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        #editOverlay.active { display: flex; animation: stFadeIn 0.22s ease; }
+
+        @keyframes stFadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        #editSheet {
+            width: 100%; max-width: 540px;
+            background: var(--card-bg);
+            border-radius: 22px 22px 0 0;
+            border: 1px solid var(--border-color);
+            border-bottom: none;
+            padding: 0 0 28px;
+            box-shadow: 0 -8px 40px rgba(0,0,0,0.14);
+            animation: stSlideUp 0.3s cubic-bezier(0.34,1.2,0.64,1);
+            overflow: hidden;
+        }
+
+        @keyframes stSlideUp {
+            from { transform: translateY(100%); opacity: 0.4; }
+            to   { transform: translateY(0);    opacity: 1; }
+        }
+
+        .sheet-handle {
+            width: 38px; height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+            margin: 14px auto 0;
+        }
+
+        .sheet-header {
+            padding: 14px 20px 12px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .sheet-eyebrow {
+            font-family: var(--font-display);
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: var(--text-light);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+
+        .sheet-field-name {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .sheet-body { padding: 18px 20px 0; }
+
+        .sheet-input, .sheet-select {
+            width: 100%;
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px 14px;
+            color: var(--text-dark);
+            font-size: 0.92rem;
+            font-family: var(--font-body);
+            outline: none;
+            transition: var(--transition);
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .sheet-input:focus, .sheet-select:focus {
+            border-color: var(--border-active);
+            box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+        }
+
+        .sheet-select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 38px;
+        }
+
+        .sheet-msg {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            padding: 8px 12px;
+            border-radius: 8px;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-body);
+        }
+
+        .sheet-msg.show  { display: flex; }
+        .sheet-msg.error   { background: rgba(211,47,47,0.07); color: var(--error-red);    border: 1px solid rgba(211,47,47,0.2); }
+        .sheet-msg.success { background: rgba(56,142,60,0.07);  color: var(--success-green); border: 1px solid rgba(56,142,60,0.2); }
+
+        .sheet-actions {
+            display: flex;
+            gap: 10px;
+            padding: 16px 20px 0;
+        }
+
+        .sheet-save, .sheet-cancel {
+            flex: 1;
+            padding: 13px;
+            border-radius: 10px;
+            font-family: var(--font-display);
+            font-size: 0.87rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .sheet-save {
+            background: var(--text-dark);
+            color: #fff;
+        }
+
+        .sheet-save:hover:not(:disabled) { opacity: 0.82; transform: translateY(-1px); }
+        .sheet-save:active:not(:disabled) { transform: scale(0.97); }
+        .sheet-save:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+        .sheet-cancel {
+            background: transparent;
+            color: var(--text-medium);
+            border: 1px solid var(--border-color);
+        }
+
+        .sheet-cancel:hover { border-color: var(--border-active); color: var(--text-dark); }
+
+        .sheet-spinner {
+            display: none;
+            width: 15px; height: 15px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+
+        .sheet-save.loading .sheet-spinner { display: block; }
+        .sheet-save.loading .sheet-label   { display: none; }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── Toast ── */
+        #dvx-toast {
+            position: fixed;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%) translateY(16px);
+            background: #1a1a1a;
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 0.84rem;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 30px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            z-index: 99999;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.22);
+        }
+
+        #dvx-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 460px) { .sheet-actions { flex-direction: column; } }
+    </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header id="mainHeader">
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <i class="fas fa-shield-alt"></i>
+            <div class="logo-text">ConfigHub <span class="logo-amp">&amp;</span> Deovex</div>
+        </a>
+        <div class="nav-container">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="index.html"><i class="fas fa-house"></i> Home</a>
+                <a href="uploader.html"><i class="fas fa-cloud-upload-alt"></i> Uploader</a>
+                <a href="https://whatsapp.com/channel/0029VbAL2mRC6ZvhCR8jjI0G" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a>
+                <a href="https://www.tiktok.com/@ethanchaos" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+                <a href="https://t.me/EthanChaoss" target="_blank"><i class="fab fa-telegram"></i> Contact Dav</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- ── Page ── -->
+<section class="content-section">
+    <div class="settings-wrap">
+
+        <div class="section-header">
+            <h1><i class="fas fa-sliders-h"></i> Settings</h1>
+            <p>Manage your account and preferences</p>
+        </div>
+
+        <!-- ══════════════════════════════════════
+             PROFILE CARD
+        ══════════════════════════════════════ -->
+        <div class="settings-card">
+            <div class="settings-card-header">
+                <div class="hdr-icon"><i class="fas fa-user"></i></div>
+                <h2>Your Profile</h2>
+            </div>
+
+            <div class="profile-hero">
+                <div class="profile-avatar"><i class="fas fa-user-circle"></i></div>
+                <div class="profile-hero-text">
+                    <h3 id="heroUsername"><span class="skel" style="width:110px;"></span></h3>
+                    <span class="hero-sub" id="heroSub">Loading…</span>
+                    <div id="heroChip" style="display:none;">
+                        <span class="member-chip">
+                            <i class="fas fa-calendar-check"></i>
+                            <span id="memberDate">—</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Username (read-only) -->
+            <div class="info-row">
+                <div class="info-row-icon"><i class="fas fa-at"></i></div>
+                <div class="info-row-content">
+                    <div class="info-row-label">Username</div>
+                    <div class="info-row-value" id="rowUsername"><span class="skel" style="width:90px;"></span></div>
+                </div>
+            </div>
+
+            <!-- Province -->
+            <div class="info-row">
+                <div class="info-row-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="info-row-content">
+                    <div class="info-row-label">Province</div>
+                    <div class="info-row-value" id="rowProvince"><span class="skel" style="width:120px;"></span></div>
+                </div>
+                <button class="row-edit-btn" data-field="province"><i class="fas fa-pencil"></i> Edit</button>
+            </div>
+
+            <!-- Email -->
+            <div class="info-row">
+                <div class="info-row-icon"><i class="fas fa-envelope"></i></div>
+                <div class="info-row-content">
+                    <div class="info-row-label">Email</div>
+                    <div class="info-row-value" id="rowEmail"><span class="skel" style="width:140px;"></span></div>
+                </div>
+                <button class="row-edit-btn" data-field="email"><i class="fas fa-pencil"></i> Edit</button>
+            </div>
+
+            <!-- WhatsApp -->
+            <div class="info-row">
+                <div class="info-row-icon"><i class="fab fa-whatsapp"></i></div>
+                <div class="info-row-content">
+                    <div class="info-row-label">WhatsApp</div>
+                    <div class="info-row-value" id="rowWhatsapp"><span class="skel" style="width:110px;"></span></div>
+                </div>
+                <button class="row-edit-btn" data-field="whatsapp"><i class="fas fa-pencil"></i> Edit</button>
+            </div>
+
+            <!-- Telegram -->
+            <div class="info-row">
+                <div class="info-row-icon"><i class="fab fa-telegram"></i></div>
+                <div class="info-row-content">
+                    <div class="info-row-label">Telegram</div>
+                    <div class="info-row-value" id="rowTelegram"><span class="skel" style="width:100px;"></span></div>
+                </div>
+                <button class="row-edit-btn" data-field="telegram"><i class="fas fa-pencil"></i> Edit</button>
+            </div>
+
+            <!-- Facebook -->
+            <div class="info-row">
+                <div class="info-row-icon"><i class="fab fa-facebook-f"></i></div>
+                <div class="info-row-content">
+                    <div class="info-row-label">Facebook</div>
+                    <div class="info-row-value" id="rowFacebook"><span class="skel" style="width:130px;"></span></div>
+                </div>
+                <button class="row-edit-btn" data-field="facebook"><i class="fas fa-pencil"></i> Edit</button>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════
+             FILTRATION CARD
+        ══════════════════════════════════════ -->
+        <div class="settings-card">
+            <div class="settings-card-header">
+                <div class="hdr-icon"><i class="fas fa-filter"></i></div>
+                <h2>Filtration</h2>
+            </div>
+
+            <!-- Location toggle -->
+            <label class="toggle-row" for="locationToggle">
+                <div class="toggle-row-icon"><i class="fas fa-map-pin"></i></div>
+                <div class="toggle-row-text">
+                    <strong>Location-based Configs</strong>
+                    <small>Only show configs available for your province. Turn off to see all configs.</small>
+                </div>
+                <div class="dvx-toggle">
+                    <input type="checkbox" id="locationToggle">
+                    <div class="dvx-toggle-track"></div>
+                </div>
+            </label>
+
+            <!-- Filtering by note -->
+            <div class="filter-note-row" id="filterNoteRow">
+                <i class="fas fa-circle-info"></i>
+                <span id="filterNoteText">—</span>
+            </div>
+
+            <!-- Expiry — locked -->
+            <div class="toggle-row no-interact">
+                <div class="toggle-row-icon"><i class="fas fa-clock"></i></div>
+                <div class="toggle-row-text">
+                    <strong>Expired Configs Hidden</strong>
+                    <small>Files past their expiry date are always hidden automatically. This cannot be disabled.</small>
+                </div>
+                <i class="fas fa-lock" style="color:var(--text-light);font-size:0.78rem;flex-shrink:0;"></i>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════
+             ACCOUNT CARD
+        ══════════════════════════════════════ -->
+        <div class="settings-card">
+            <div class="settings-card-header">
+                <div class="hdr-icon"><i class="fas fa-shield-alt"></i></div>
+                <h2>Account</h2>
+            </div>
+
+            <div class="info-row" style="cursor:default;">
+                <div class="info-row-icon"><i class="fas fa-circle-check"></i></div>
+                <div class="info-row-content">
+                    <div class="info-row-label">Status</div>
+                    <div class="info-row-value" style="font-size:0.84rem;">
+                        <span class="status-dot"></span>Active
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-row" style="cursor:default;">
+                <div class="info-row-icon"><i class="fas fa-clock-rotate-left"></i></div>
+                <div class="info-row-content">
+                    <div class="info-row-label">Last Login</div>
+                    <div class="info-row-value" id="rowLastLogin" style="font-size:0.84rem;">—</div>
+                </div>
+            </div>
+
+            <button class="danger-btn" id="logoutBtn">
+                <i class="fas fa-right-from-bracket"></i> Log Out
+            </button>
+        </div>
+
+    </div>
+</section>
+
+<!-- ── Bottom Nav ── -->
+<div class="bottom-nav-wrapper">
+    <nav class="bottom-nav" id="bottomNav">
+        <a href="index.html" class="bottom-nav-item" data-nav="home">
+            <div class="nav-icon-wrap"><i class="fas fa-home"></i></div>
+            <span>Home</span>
+        </a>
+        <a href="News.html" class="bottom-nav-item" data-nav="news">
+            <div class="nav-icon-wrap"><i class="fas fa-newspaper"></i></div>
+            <span>News</span>
+        </a>
+        <a href="uploader.html" class="bottom-nav-item bottom-nav-upload" data-nav="upload">
+            <div class="upload-fab"><i class="fas fa-arrow-up"></i></div>
+            <span>Upload</span>
+        </a>
+        <a href="apps.html" class="bottom-nav-item" data-nav="apps">
+            <div class="nav-icon-wrap"><i class="fas fa-mobile-alt"></i></div>
+            <span>Apps</span>
+        </a>
+        <a href="settings.html" class="bottom-nav-item active" data-nav="settings">
+            <div class="nav-icon-wrap"><i class="fas fa-sliders-h"></i></div>
+            <span>Settings</span>
+        </a>
+    </nav>
+</div>
+
+<!-- ── Edit bottom sheet ── -->
+<div id="editOverlay">
+    <div id="editSheet">
+        <div class="sheet-handle"></div>
+        <div class="sheet-header">
+            <div class="sheet-eyebrow">Editing</div>
+            <div class="sheet-field-name" id="sheetFieldName">—</div>
+        </div>
+        <div class="sheet-body">
+            <div id="sheetInputWrap"></div>
+            <div class="sheet-msg" id="sheetMsg"></div>
+        </div>
+        <div class="sheet-actions">
+            <button class="sheet-save" id="sheetSaveBtn">
+                <div class="sheet-spinner"></div>
+                <span class="sheet-label"><i class="fas fa-check"></i> Save</span>
+            </button>
+            <button class="sheet-cancel" id="sheetCancelBtn">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- ── Toast ── -->
+<div id="dvx-toast"></div>
+
+<!-- Supabase SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<!-- Auth engine -->
+<script src="deovex-auth.js"></script>
+
+<script>
+(function () {
+    'use strict';
+
+    /* ── Guard ── */
+    if (!localStorage.getItem('dvx_session')) {
+        window.location.replace('https://chaosconfigurations.co.za/login');
+        return;
+    }
+
+    /* ════════════════════════════════════════════════
+       PROVINCE MAP
+    ════════════════════════════════════════════════ */
+    const PROVINCE_CODES = {
+        'EC'  : 'Eastern Cape',
+        'FS'  : 'Free State',
+        'GP'  : 'Gauteng',
+        'KZN' : 'KwaZulu-Natal',
+        'LP'  : 'Limpopo',
+        'MP'  : 'Mpumalanga',
+        'NC'  : 'Northern Cape',
+        'NW'  : 'North West',
+        'WC'  : 'Western Cape'
+    };
+
+    function provinceLabel(code) {
+        if (!code) return null;
+        /* Try direct code */
+        if (PROVINCE_CODES[code.toUpperCase()]) return PROVINCE_CODES[code.toUpperCase()];
+        /* Try matching against full names (in case full name was stored) */
+        const match = Object.values(PROVINCE_CODES).find(function (v) {
+            return v.toLowerCase() === code.trim().toLowerCase();
+        });
+        return match || code;
+    }
+
+    /* ════════════════════════════════════════════════
+       SUPABASE CLIENT
+    ════════════════════════════════════════════════ */
+    const SUPABASE_URL = 'https://omrwedjwdxijrxtnnuta.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_2q9UhmHCJY3EpmfhDOSFIg_agcz9uYX';
+
+    const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    /* ════════════════════════════════════════════════
+       SESSION + STATE
+    ════════════════════════════════════════════════ */
+    const SESSION_KEY  = 'dvx_session';
+    const CACHE_KEY    = 'dvx_profile_cache';
+    const FILTER_KEY   = 'filtration_location_enabled';
+
+    function getSession() {
+        try { return JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); }
+        catch (e) { return null; }
+    }
+
+    const session  = getSession();
+    const username = session ? session.username : null;
+
+    let profile = null;   /* loaded from Supabase profiles table */
+
+    /* ════════════════════════════════════════════════
+       TOAST
+    ════════════════════════════════════════════════ */
+    function toast(msg) {
+        const el = document.getElementById('dvx-toast');
+        el.textContent = msg;
+        el.classList.add('show');
+        setTimeout(function () { el.classList.remove('show'); }, 2800);
+    }
+
+    /* ════════════════════════════════════════════════
+       RENDER PROFILE
+    ════════════════════════════════════════════════ */
+    function renderProfile(p) {
+        profile = p;
+
+        /* Hero */
+        document.getElementById('heroUsername').textContent = username || '—';
+
+        const subEl = document.getElementById('heroSub');
+        subEl.textContent = p.email || p.whatsapp || p.telegram || 'No contact on file';
+        subEl.classList.toggle('empty', !p.email && !p.whatsapp && !p.telegram);
+
+        if (p.created_at) {
+            const d = new Date(p.created_at);
+            document.getElementById('memberDate').textContent =
+                'Member since ' + d.toLocaleDateString('en-ZA', { year:'numeric', month:'long', day:'numeric' });
+            document.getElementById('heroChip').style.display = '';
+        }
+
+        /* Rows */
+        setRow('rowUsername', username,                   false);
+        setRow('rowProvince', provinceLabel(p.province),  true);
+        setRow('rowEmail',    p.email,                    true);
+        setRow('rowWhatsapp', p.whatsapp,                 true);
+        setRow('rowTelegram', p.telegram,                 true);
+        setRow('rowFacebook', p.facebook,                 true);
+
+        /* Last login */
+        if (session && session.loggedInAt) {
+            const d = new Date(session.loggedInAt);
+            document.getElementById('rowLastLogin').textContent =
+                d.toLocaleString('en-ZA', { dateStyle:'medium', timeStyle:'short' });
+        }
+
+        /* Cache for filtration.js */
+        localStorage.setItem(CACHE_KEY, JSON.stringify(p));
+
+        /* Update filter note */
+        updateFilterNote();
+    }
+
+    function setRow(id, value, nullable) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (value) {
+            el.textContent = value;
+            el.classList.remove('empty');
+        } else {
+            el.textContent = nullable ? 'Not provided' : '—';
+            el.classList.add('empty');
+        }
+    }
+
+    /* ════════════════════════════════════════════════
+       LOAD PROFILE FROM SUPABASE
+    ════════════════════════════════════════════════ */
+    async function loadProfile() {
+        try {
+            const { data, error } = await _sb
+                .from('profiles')
+                .select('*')
+                .eq('username', username)
+                .maybeSingle();
+
+            if (error) throw error;
+
+            if (!data) {
+                /* Profile row missing — show username only */
+                renderProfile({});
+                return;
+            }
+
+            renderProfile(data);
+
+        } catch (err) {
+            console.error('[settings] loadProfile error:', err);
+            document.getElementById('heroUsername').textContent = username || '—';
+            document.getElementById('heroSub').textContent = 'Could not load profile. Check connection.';
+            document.getElementById('heroSub').classList.add('empty');
+        }
+    }
+
+    /* ════════════════════════════════════════════════
+       EDIT SHEET CONFIG
+    ════════════════════════════════════════════════ */
+    const FIELDS = {
+        province: { label: 'Province',          type: 'select'                                   },
+        email   : { label: 'Email Address',     type: 'input', inputType: 'email',  ph: 'you@example.com'      },
+        whatsapp: { label: 'WhatsApp Number',   type: 'input', inputType: 'tel',    ph: '+27 71 234 5678'       },
+        telegram: { label: 'Telegram Username', type: 'input', inputType: 'text',   ph: '@yourusername'         },
+        facebook: { label: 'Facebook',          type: 'input', inputType: 'text',   ph: 'username or profile link' }
+    };
+
+    let activeField = null;
+
+    function openSheet(field) {
+        if (!profile) { toast('Profile still loading…'); return; }
+        const cfg = FIELDS[field];
+        if (!cfg) return;
+
+        activeField = field;
+        document.getElementById('sheetFieldName').textContent = cfg.label;
+        document.getElementById('sheetMsg').className = 'sheet-msg';
+        document.getElementById('sheetMsg').innerHTML = '';
+        document.getElementById('sheetSaveBtn').classList.remove('loading');
+        document.getElementById('sheetSaveBtn').disabled = false;
+
+        const wrap = document.getElementById('sheetInputWrap');
+        wrap.innerHTML = '';
+
+        if (cfg.type === 'select') {
+            const sel = document.createElement('select');
+            sel.className = 'sheet-select';
+            sel.id = 'sheetInput';
+
+            const blank = document.createElement('option');
+            blank.value = ''; blank.textContent = '— Select province —';
+            sel.appendChild(blank);
+
+            Object.keys(PROVINCE_CODES).forEach(function (code) {
+                const opt = document.createElement('option');
+                opt.value = code;
+                opt.textContent = PROVINCE_CODES[code];
+                /* Select current value — handle both code and full-name stored */
+                const cur = (profile[field] || '').trim().toUpperCase();
+                const curFull = provinceLabel(profile[field] || '');
+                if (code === cur || PROVINCE_CODES[code] === curFull) opt.selected = true;
+                sel.appendChild(opt);
+            });
+
+            wrap.appendChild(sel);
+        } else {
+            const inp = document.createElement('input');
+            inp.type  = cfg.inputType || 'text';
+            inp.className = 'sheet-input';
+            inp.id = 'sheetInput';
+            inp.placeholder = cfg.ph || '';
+            inp.value = profile[field] || '';
+            inp.autocapitalize = 'none';
+            wrap.appendChild(inp);
+            setTimeout(function () { inp.focus(); }, 130);
+        }
+
+        document.getElementById('editOverlay').classList.add('active');
+    }
+
+    function closeSheet() {
+        document.getElementById('editOverlay').classList.remove('active');
+        activeField = null;
+    }
+
+    async function saveSheet() {
+        if (!activeField) return;
+        const inp     = document.getElementById('sheetInput');
+        const val     = inp ? inp.value.trim() : '';
+        const saveBtn = document.getElementById('sheetSaveBtn');
+        const msgEl   = document.getElementById('sheetMsg');
+
+        msgEl.className = 'sheet-msg';
+        msgEl.innerHTML = '';
+        saveBtn.classList.add('loading');
+        saveBtn.disabled = true;
+
+        try {
+            const updatePayload = {};
+            updatePayload[activeField] = val || null;
+
+            const { error } = await _sb
+                .from('profiles')
+                .update(updatePayload)
+                .eq('username', username);
+
+            if (error) throw error;
+
+            /* Update local state */
+            profile[activeField] = val || null;
+            localStorage.setItem(CACHE_KEY, JSON.stringify(profile));
+
+            renderProfile(profile);
+            closeSheet();
+            toast(FIELDS[activeField].label + ' updated ✓');
+
+        } catch (err) {
+            console.error('[settings] saveSheet error:', err);
+            msgEl.className = 'sheet-msg error show';
+            msgEl.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' +
+                              (err.message || 'Save failed. Please try again.');
+        } finally {
+            saveBtn.classList.remove('loading');
+            saveBtn.disabled = false;
+        }
+    }
+
+    /* ════════════════════════════════════════════════
+       FILTRATION TOGGLE
+    ════════════════════════════════════════════════ */
+    function updateFilterNote() {
+        const p       = profile || {};
+        const label   = provinceLabel(p.province);
+        const enabled = localStorage.getItem(FILTER_KEY) !== 'false';
+        const el      = document.getElementById('filterNoteText');
+
+        if (!label) {
+            el.innerHTML = 'No province set — <b>all configs are shown</b>. Edit your province above to enable filtering.';
+        } else if (enabled) {
+            el.innerHTML = 'Filtering by <b>' + label + '</b> — only configs for your province are shown.';
+        } else {
+            el.innerHTML = 'Filter is <b>off</b> — all configs are shown regardless of province.';
+        }
+    }
+
+    function initFilterToggle() {
+        const toggle  = document.getElementById('locationToggle');
+        toggle.checked = localStorage.getItem(FILTER_KEY) !== 'false';
+
+        toggle.addEventListener('change', function () {
+            localStorage.setItem(FILTER_KEY, this.checked ? 'true' : 'false');
+            updateFilterNote();
+            toast(this.checked
+                ? 'Location filtering enabled'
+                : 'Location filtering disabled — showing all configs');
+        });
+    }
+
+    /* ════════════════════════════════════════════════
+       NAV TOGGLE
+    ════════════════════════════════════════════════ */
+    (function () {
+        const navToggle    = document.getElementById('navToggle');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        if (!navToggle || !dropdownMenu) return;
+        navToggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            navToggle.classList.toggle('active');
+            dropdownMenu.classList.toggle('active');
+        });
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.nav-container') && !e.target.closest('.dropdown-menu')) {
+                navToggle.classList.remove('active');
+                dropdownMenu.classList.remove('active');
+            }
+        });
+    })();
+
+    /* ════════════════════════════════════════════════
+       LOGOUT
+    ════════════════════════════════════════════════ */
+    document.getElementById('logoutBtn').addEventListener('click', async function () {
+        localStorage.removeItem(SESSION_KEY);
+        localStorage.removeItem(CACHE_KEY);
+        try { await _sb.auth.signOut(); } catch (e) {}
+        window.location.href = 'https://chaosconfigurations.co.za/login';
+    });
+
+    /* ════════════════════════════════════════════════
+       EDIT SHEET LISTENERS
+    ════════════════════════════════════════════════ */
+    document.querySelectorAll('.row-edit-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () { openSheet(this.dataset.field); });
+    });
+
+    document.getElementById('sheetSaveBtn').addEventListener('click', saveSheet);
+    document.getElementById('sheetCancelBtn').addEventListener('click', closeSheet);
+
+    document.getElementById('editOverlay').addEventListener('click', function (e) {
+        if (e.target === this) closeSheet();
+    });
+
+    /* Swipe-down to dismiss */
+    const sheet = document.getElementById('editSheet');
+    let swipeY  = 0;
+    sheet.addEventListener('touchstart', function (e) { swipeY = e.touches[0].clientY; }, { passive: true });
+    sheet.addEventListener('touchmove',  function (e) {
+        const d = e.touches[0].clientY - swipeY;
+        if (d > 0) sheet.style.transform = 'translateY(' + d + 'px)';
+    }, { passive: true });
+    sheet.addEventListener('touchend',   function (e) {
+        const d = e.changedTouches[0].clientY - swipeY;
+        if (d > 80) { sheet.style.transition = 'transform 0.2s ease'; sheet.style.transform = 'translateY(110%)'; setTimeout(closeSheet, 200); }
+        else { sheet.style.transform = ''; }
+    });
+
+    /* ════════════════════════════════════════════════
+       BOOT
+    ════════════════════════════════════════════════ */
+    initFilterToggle();
+    loadProfile();
+
+})();
+</script>
+</body>
+</html>
