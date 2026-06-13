@@ -1,5 +1,13 @@
 [
   {
+    "name": "ZA DAILY UDP PLUG ",
+    "vpn": "HTTP Custom",
+    "filename": "ZA DAILY UDP PLUG .hc",
+    "date": "13 Jun 2026",
+    "config_id": "httpcustom",
+    "expires_at": "2026-06-15T18:26:00"
+  },
+  {
     "name": "ZA MTN 500MB ",
     "vpn": "NPV Tunnel",
     "filename": "ZA MTN 500MB .npvt",
