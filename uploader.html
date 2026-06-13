@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta name="monetag" content="e4cb37169b7974dc002901d6469ba1ff">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Confighub — VPN File Uploader</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "3619aaa99b9349adac8b88ba436e2db6"}'></script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GL0YEB7LF6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GL0YEB7LF6');
+  </script>
+
+  <style>
+/* ════════════════════════════════════════════════
+   UPLOADER — White Deovex Theme
+   ════════════════════════════════════════════════ */
+
+/* ── CSS Variables (light mode — black / white / gray only) ── */
+:root {
+  --bg:            #ffffff;
+  --bg-2:          #f5f5f5;
+  --card:          #ffffff;
+  --card-2:        #f9f9f9;
+  --border:        rgba(0,0,0,0.10);
+  --border-bright: rgba(0,0,0,0.28);
+  --cyan:          #1a1a1a;
+  --blue:          #444444;
+  --text:          #111111;
+  --text-mid:      #555555;
+  --text-dim:      #aaaaaa;
+  --success:       #1a9e6a;
+  --warn:          #d97706;
+  --error:         #dc2626;
+  --vpngo:         #555555;
+  --grid-line:     rgba(0,0,0,0.04);
+  --glow-cyan:     rgba(0,0,0,0.08);
+  --glow-blue:     rgba(0,0,0,0.06);
+  --transition:    all 0.22s cubic-bezier(0.4,0,0.2,1);
+  --font-display:  'Oxanium', sans-serif;
+  --font-body:     'DM Sans', sans-serif;
+  --radius:        14px;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+/* ── Body + grid background ── */
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 44px 44px;
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  padding-top: 66px;
+  padding-bottom: 110px;
+  scroll-behavior: smooth;
+}
+
+/* subtle ambient glow */
+body::after {
+  content: '';
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background-image: none;
+  pointer-events: none; z-index: 0;
+}
+
+/* ── Header ── */
+header {
+  position: fixed; top: 0; left: 0; width: 100%;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+}
+
+.navbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 18px; height: 66px;
+}
+
+.logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.logo i {
+  color: var(--text); font-size:1.5rem;
+  filter: none;
+  transition: var(--transition);
+}
+.logo:hover i { transform: rotate(18deg) scale(1.1); filter: none; }
+.logo-text { font-family:var(--font-display); font-size:1.15rem; font-weight:700; color:var(--text); letter-spacing:.04em; }
+.logo-text span { color:var(--text-mid); }
+
+/* hamburger */
+.nav-toggle {
+  display:flex; flex-direction:column; justify-content:space-between;
+  width:26px; height:18px; background:none; border:none; cursor:pointer; padding:0;
+}
+.nav-toggle span {
+  display:block; height:2px; width:100%;
+  background: var(--text-mid); border-radius:2px; transition:var(--transition);
+}
+.nav-toggle.active span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+.nav-toggle.active span:nth-child(2) { opacity:0; }
+.nav-toggle.active span:nth-child(3) { transform:rotate(-45deg) translate(6px,-6px); }
+
+.nav-container { position:relative; }
+
+.dropdown-menu {
+  position:absolute; top:calc(100% + 8px); right:0;
+  background: var(--card);
+  border:1px solid var(--border); border-radius:16px;
+  padding:6px 0; width:210px;
+  opacity:0; visibility:hidden; transform:translateY(-8px);
+  transition:var(--transition); z-index:999;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.55), 0 0 0 1px var(--border);
+}
+.dropdown-menu.active { opacity:1; visibility:visible; transform:translateY(0); }
+.dropdown-menu a {
+  display:flex; align-items:center; gap:12px;
+  padding:10px 18px; color:var(--text-mid); text-decoration:none;
+  font-size:.9rem; transition:var(--transition);
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.dropdown-menu a:last-child { border-bottom:none; }
+.dropdown-menu a:hover { background:rgba(0,0,0,0.04); color:var(--text-mid); padding-left:22px; }
+.dropdown-menu a i { width:16px; color:var(--text-mid); font-size:.82rem; }
+
+/* ── Page Title ── */
+.page-title {
+  text-align:center; padding:1.6rem 16px 1rem;
+  position:relative; z-index:1;
+}
+.page-title-icon {
+  width:54px; height:54px;
+  background: linear-gradient(135deg, #222, #555);
+  border-radius:16px;
+  display:inline-flex; align-items:center; justify-content:center;
+  margin-bottom:.8rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+.page-title-icon i { color:#fff; font-size:1.4rem; }
+.page-title h1 {
+  font-family:var(--font-display); font-size:1.85rem; font-weight:700;
+  color:var(--text); margin-bottom:.35rem; letter-spacing:-.02em;
+}
+.page-title h1 span { color:var(--text-mid); }
+.page-title p { color:var(--text-mid); font-size:.88rem; max-width:340px; margin:0 auto; }
+
+/* ── Main Container ── */
+.main-container { max-width:700px; margin:0 auto; padding:0 16px 2rem; position:relative; z-index:1; }
+
+/* ── Cards ── */
+.upload-section, .vpn-info {
+  background: var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:1.5rem;
+  margin-bottom:1.5rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+  transition:var(--transition);
+  position:relative; overflow:hidden;
+}
+
+/* top accent shimmer */
+.upload-section::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:2px;
+  background: linear-gradient(90deg, #222, #888, #222);
+  background-size:200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+@keyframes shimmer { 0%{background-position:200% 0;} 100%{background-position:-200% 0;} }
+
+.upload-section.uploading { border-color:var(--border-bright); box-shadow:0 0 24px var(--glow-cyan); }
+
+/* ── Section header ── */
+.section-header { margin-bottom:1.2rem; }
+.section-header h2 {
+  font-family:var(--font-display); font-size:1.2rem; font-weight:700;
+  color:var(--text); letter-spacing:.02em;
+  border-left:3px solid var(--text); padding-left:12px;
+}
+
+/* ── Upload Drop Zone ── */
+.upload-area {
+  border:2px dashed var(--border);
+  border-radius:12px; padding:2rem 1rem;
+  text-align:center; transition:var(--transition);
+  margin-bottom:1.2rem; position:relative;
+  background: rgba(0,0,0,0.01);
+  cursor:pointer;
+}
+.upload-area:hover, .upload-area.active {
+  border-color:var(--text);
+  background: rgba(0,0,0,0.03);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+.upload-area i { font-size:2.5rem; color:var(--text-mid); margin-bottom:.8rem; display:block; transition:var(--transition); }
+.upload-area.active i { animation:pulse 1.5s infinite; }
+@keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.12);} }
+.upload-area h3 { font-family:var(--font-display); font-size:1.05rem; margin-bottom:.4rem; color:var(--text); }
+.upload-area p { color:var(--text-mid); font-size:.8rem; line-height:1.5; margin-bottom:1.2rem; }
+
+.file-input { display:none; }
+
+/* ── Button group ── */
+.button-group { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:1rem; }
+
+/* ── Buttons (base) ── */
+.upload-btn {
+  background: linear-gradient(135deg, #222222, #444444);
+  color:#ffffff; border:none; border-radius:25px;
+  padding:.65rem 1.4rem; font-weight:700; cursor:pointer;
+  transition:var(--transition); display:inline-flex;
+  align-items:center; gap:6px; font-size:.88rem;
+  font-family:var(--font-display); letter-spacing:.03em;
+  position:relative; overflow:hidden; white-space:nowrap;
+}
+.upload-btn::before {
+  content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);
+  transition:left .5s ease;
+}
+.upload-btn:hover::before { left:100%; }
+.upload-btn:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(0,0,0,0.18); }
+.upload-btn:disabled {
+  background: var(--card-2,#131827); color:var(--text-dim);
+  border:1px solid var(--border); cursor:not-allowed;
+  transform:none; box-shadow:none;
+}
+.upload-btn:disabled::before { display:none; }
+
+.btn-ghost {
+  background:transparent; color:var(--text);
+  border:1.5px solid var(--border-bright);
+}
+.btn-ghost:hover { background:rgba(0,0,0,0.05); transform:translateY(-2px); box-shadow:0 4px 14px rgba(0,0,0,0.08); color:var(--text); }
+
+.btn-danger {
+  background:transparent; color:var(--error);
+  border:1.5px solid rgba(255,79,106,.35);
+}
+.btn-danger:hover { background:rgba(255,79,106,.1); transform:translateY(-2px); box-shadow:0 4px 14px rgba(255,79,106,.2); color:var(--error); }
+
+/* ── Upload CTA row (Advanced toggle + Delete + Upload) ── */
+.upload-cta-row {
+  display:flex; align-items:center; gap:10px;
+  margin-top:1rem; flex-wrap:wrap;
+}
+.upload-cta-row .upload-btn#uploadBtn { flex:1; justify-content:center; }
+
+/* ── Advanced config toggle ── */
+.adv-toggle-wrap {
+  display:flex; align-items:center; gap:8px;
+  background:rgba(0,0,0,0.03);
+  border:1px solid var(--border);
+  border-radius:25px; padding:.5rem 1rem;
+  cursor:pointer; transition:var(--transition);
+  user-select:none; white-space:nowrap;
+}
+.adv-toggle-wrap:hover { border-color:var(--border-bright); background:rgba(0,0,0,0.06); }
+.adv-toggle-wrap.on { border-color:var(--text); box-shadow:0 0 0 2px rgba(0,0,0,0.08); }
+.adv-toggle-wrap .adv-label {
+  font-family:var(--font-display); font-size:.8rem;
+  font-weight:700; color:var(--text-mid); letter-spacing:.03em;
+  transition:var(--transition);
+}
+.adv-toggle-wrap.on .adv-label { color:var(--text); }
+/* switch */
+.adv-switch {
+  width:38px; height:20px; border-radius:10px;
+  background:var(--text-dim); position:relative; flex-shrink:0;
+  transition:background .22s;
+}
+.adv-switch::after {
+  content:''; position:absolute;
+  top:3px; left:3px; width:14px; height:14px;
+  border-radius:50%; background:#fff;
+  transition:transform .22s;
+}
+.adv-toggle-wrap.on .adv-switch { background:var(--text); }
+.adv-toggle-wrap.on .adv-switch::after { transform:translateX(18px); }
+
+/* ── Delete selected button ── */
+#deleteSelectedBtn {
+  display:none;
+}
+#deleteSelectedBtn.visible { display:inline-flex; }
+
+/* ── Selected Files List ── */
+.selected-files { margin-top:1.2rem; text-align:left; }
+.selected-files-header {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:.8rem;
+}
+.selected-files-header h4 {
+  font-family:var(--font-display); font-size:.92rem; font-weight:700;
+  color:var(--text); letter-spacing:.02em;
+}
+.select-all-wrap {
+  display:none; align-items:center; gap:6px;
+  font-size:.78rem; color:var(--text-mid); cursor:pointer;
+  user-select:none;
+}
+.select-all-wrap.visible { display:flex; }
+.select-all-wrap input[type="checkbox"] { accent-color:var(--text-mid); width:14px; height:14px; }
+
+.files-empty-state { text-align:center; padding:1.8rem 1rem; color:var(--text-dim); }
+.files-empty-state i { font-size:2rem; margin-bottom:.6rem; display:block; opacity:.35; }
+.files-empty-state p { font-size:.85rem; }
+
+/* ── File item ── */
+.file-item {
+  display:flex; align-items:center; gap:10px;
+  padding:.65rem .9rem; background:rgba(255,255,255,0.03);
+  border-radius:10px; margin-bottom:.5rem;
+  border:1px solid rgba(255,255,255,0.05);
+  border-left:3px solid var(--success);
+  animation:slideIn .28s ease; transition:var(--transition);
+  cursor:default;
+}
+.file-item:hover { background:rgba(255,255,255,0.05); }
+.file-item.file-renamed { border-left-color:var(--text-mid); }
+.file-item.file-unicode { border-left-color:var(--warn); }
+.file-item.file-vpngo   { border-left-color:var(--vpngo); }
+.file-item.file-selected { background:rgba(0,0,0,0.04); border-color:var(--border-bright); }
+
+.file-check { display:none; accent-color:var(--text); width:15px; height:15px; flex-shrink:0; cursor:pointer; }
+.adv-mode .file-check { display:block; }
+
+.file-name { display:flex; align-items:center; gap:7px; font-size:.88rem; color:var(--text); flex:1; min-width:0; }
+.file-name span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.file-name small { font-size:.72rem; flex-shrink:0; }
+.file-size { color:var(--text-mid); font-size:.78rem; flex-shrink:0; }
+/* per-file adv tags (horizontal, inline) */
+.file-adv-tags {
+  display:none; align-items:center; gap:6px; flex-shrink:0;
+}
+.adv-mode .file-adv-tags { display:flex; }
+.adv-tag {
+  font-size:.7rem; padding:2px 8px; border-radius:10px;
+  border:1px solid; cursor:pointer; transition:var(--transition);
+  font-family:var(--font-display); letter-spacing:.02em; white-space:nowrap;
+  background:transparent; color:inherit;
+}
+.adv-tag.exp-tag { border-color:rgba(246,168,35,.35); color:var(--warn); }
+.adv-tag.exp-tag.set { background:rgba(246,168,35,.12); }
+.adv-tag.loc-tag { border-color:rgba(0,0,0,.25); color:var(--text-mid); }
+.adv-tag.loc-tag.set { background:rgba(0,0,0,.06); }
+
+@keyframes slideIn { from{opacity:0;transform:translateX(-8px);} to{opacity:1;transform:translateX(0);} }
+
+/* ── Progress Circle ── */
+.upload-progress { display:none; margin-top:1.2rem; text-align:center; }
+.upload-progress.active { display:block; animation:fadeIn .5s ease; }
+@keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+.progress-circle { width:72px; height:72px; margin:0 auto .8rem; position:relative; }
+.progress-circle svg { width:100%; height:100%; transform:rotate(-90deg); }
+.progress-circle-bg   { fill:none; stroke:var(--border); stroke-width:4; }
+.progress-circle-fill {
+  fill:none; stroke:var(--text); stroke-width:4;
+  stroke-dasharray:283; stroke-dashoffset:283;
+  transition:stroke-dashoffset .5s ease;
+  filter:none;
+}
+.progress-text { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-family:var(--font-display); font-size:.9rem; font-weight:700; color:var(--text); }
+.upload-status { margin-top:.8rem; font-size:.88rem; color:var(--text-mid); }
+.upload-done-badge {
+  display:none; margin-top:.85rem;
+  background:#166534; color:#bbf7d0;
+  border:1px solid #15803d;
+  border-radius:25px; padding:.5rem 1.4rem;
+  font-family:var(--font-display); font-size:.88rem; font-weight:700;
+  letter-spacing:.04em; animation:fadeIn .4s ease;
+  display:none; align-items:center; justify-content:center; gap:7px;
+}
+.upload-done-badge.visible { display:inline-flex; }
+.progress-circle-fill.done { stroke: var(--success); }
+
+/* ── VPN Info Grid ── */
+.vpn-info { display:none; }
+.vpn-info.active { display:block; animation:slideDown .4s ease; }
+@keyframes slideDown { from{opacity:0;transform:translateY(-10px);} to{opacity:1;transform:translateY(0);} }
+.vpn-info h3 { font-family:var(--font-display); font-size:1rem; margin-bottom:.8rem; color:var(--text); display:flex; align-items:center; gap:8px; }
+.vpn-info h3 i { color:var(--text-mid); }
+.vpn-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:8px; margin-top:.8rem; }
+.vpn-item { display:flex; justify-content:space-between; padding:6px 10px; background:rgba(255,255,255,0.04); border-radius:8px; font-size:.8rem; border:1px solid var(--border); transition:var(--transition); }
+.vpn-item:hover { background:rgba(0,0,0,0.04); border-color:var(--border-bright); }
+.vpn-name  { color:var(--text-mid); }
+.vpn-extension { color:var(--text); font-weight:700; }
+
+/* ── Toast Messages ── */
+.toast-msg {
+  position:fixed; top:74px; right:15px; left:15px; max-width:480px; margin:0 auto;
+  padding:11px 14px; border-radius:10px; z-index:5000;
+  animation:slideInRight .3s ease; color:#fff;
+  display:flex; align-items:center; gap:8px;
+  box-shadow:0 4px 18px rgba(0,0,0,.55);
+}
+.toast-msg.error   { background:#dc2626; color:#fff; border:1px solid #b91c1c; }
+.toast-msg.success { background:#166534; color:#bbf7d0; border:1px solid #15803d; }
+.toast-msg.warning { background:#92400e; color:#fde68a; border:1px solid #b45309; }
+.toast-close { background:none; border:none; color:inherit; cursor:pointer; margin-left:auto; opacity:.7; font-size:.9rem; transition:opacity .15s; }
+.toast-close:hover { opacity:1; }
+@keyframes slideInRight { from{transform:translateX(110%);opacity:0;} to{transform:translateX(0);opacity:1;} }
+@keyframes slideOutRight { from{transform:translateX(0);opacity:1;} to{transform:translateX(110%);opacity:0;} }
+
+/* ════════════════════════════════════════════════
+   MODALS (shared base)
+   ════════════════════════════════════════════════ */
+.modal-overlay {
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  background:rgba(7,9,15,0.82);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  display:none; justify-content:center; align-items:center;
+  z-index:3000;
+}
+.modal-overlay.active { display:flex; animation:fadeIn .25s ease; }
+
+.modal-box {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:20px; padding:1.6rem;
+  width:92%; max-width:520px;
+  box-shadow:0 20px 50px rgba(0,0,0,.7), 0 0 0 1px var(--border);
+  animation:modalUp .35s ease;
+  position:relative;
+}
+@keyframes modalUp { from{opacity:0;transform:translateY(18px);} to{opacity:1;transform:translateY(0);} }
+.modal-box::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px; border-radius:20px 20px 0 0;
+  background:linear-gradient(90deg,#222,#666,#222);
+}
+
+.modal-head {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:1rem; padding-bottom:.8rem;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.modal-head h3 { font-family:var(--font-display); font-size:1.05rem; color:var(--text); display:flex; align-items:center; gap:8px; }
+.modal-head h3 i { color:var(--text-mid); }
+.modal-close {
+  background:none; border:none; color:var(--text-mid); font-size:1.2rem;
+  cursor:pointer; transition:var(--transition); padding:4px;
+}
+.modal-close:hover { color:var(--error); }
+
+/* input fields inside modals */
+.m-input {
+  width:100%; background:rgba(255,255,255,0.05);
+  border:1px solid var(--border); border-radius:9px;
+  padding:.65rem .9rem; color:var(--text); font-size:.92rem;
+  font-family:var(--font-body); transition:var(--transition); outline:none;
+}
+.m-input:focus { border-color:var(--text); box-shadow:0 0 0 2px rgba(0,0,0,0.08); background:#fff; }
+.m-input::placeholder { color:var(--text-dim); }
+.m-label { display:block; font-size:.78rem; font-family:var(--font-display); font-weight:700; color:var(--text-mid); letter-spacing:.04em; text-transform:uppercase; margin-bottom:.45rem; }
+.m-field { margin-bottom:1rem; }
+
+.modal-foot { display:flex; justify-content:flex-end; gap:10px; padding-top:1rem; border-top:1px solid rgba(255,255,255,.06); margin-top:.5rem; }
+
+/* ════════════════════════════════════════════════
+   RENAME MODAL
+   ════════════════════════════════════════════════ */
+#renameModal .modal-box { max-width:540px; }
+.rename-modal-body p { font-size:.88rem; color:var(--text-mid); line-height:1.55; margin-bottom:1rem; }
+.rename-list { max-height:280px; overflow-y:auto; margin-bottom:1rem; }
+.rename-item {
+  display:flex; align-items:center; gap:10px;
+  padding:.75rem .9rem; background:rgba(255,255,255,0.04);
+  border-radius:10px; margin-bottom:.7rem;
+  border:1px solid var(--border);
+}
+.rename-item-info { flex:1; min-width:0; }
+.rename-original { font-size:.82rem; color:var(--error); margin-bottom:4px; word-break:break-all; }
+.rename-original span { background:rgba(255,79,106,.1); padding:1px 5px; border-radius:4px; }
+.rename-input-container { display:flex; align-items:center; gap:8px; flex:2; }
+.rename-input {
+  flex:1; background:rgba(255,255,255,0.07); border:1px solid var(--border);
+  border-radius:8px; padding:.55rem .75rem; color:var(--text); font-size:.88rem;
+  transition:var(--transition); outline:none;
+}
+.rename-input:focus { border-color:var(--text-mid); box-shadow:0 0 0 2px var(--glow-cyan); }
+.rename-suggest {
+  background:linear-gradient(135deg,#222,#444); color:#ffffff;
+  border:none; border-radius:7px; padding:.35rem .75rem;
+  font-size:.78rem; font-family:var(--font-display); font-weight:700;
+  cursor:pointer; transition:var(--transition); white-space:nowrap;
+}
+.rename-suggest:hover { transform:translateY(-1px); box-shadow:0 3px 10px var(--glow-cyan); }
+.rename-modal-footer {
+  display:flex; justify-content:space-between; align-items:center;
+  padding-top:1rem; border-top:1px solid rgba(255,255,255,.06);
+}
+.rename-info { color:var(--text-dim); font-size:.82rem; flex:1; }
+.rename-actions { display:flex; gap:10px; }
+
+/* ════════════════════════════════════════════════
+   PIN MODAL
+   ════════════════════════════════════════════════ */
+.pin-modal-content { text-align:center; }
+.pin-modal-icon {
+  width:56px; height:56px;
+  background:rgba(0,0,0,0.05);
+  border:1px solid var(--border-bright); border-radius:16px;
+  display:inline-flex; align-items:center; justify-content:center; margin-bottom:.9rem;
+}
+.pin-modal-icon i { color:var(--text); font-size:1.5rem; filter:none; }
+.pin-modal-title { font-family:var(--font-display); font-size:1.2rem; font-weight:700; color:var(--text); margin-bottom:.35rem; }
+.pin-modal-subtitle { font-size:.84rem; color:var(--text-mid); margin-bottom:1.2rem; line-height:1.5; }
+.pin-modal-file-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(0,0,0,0.05); border:1px solid rgba(0,0,0,.15);
+  border-radius:20px; padding:4px 12px;
+  font-size:.78rem; color:var(--text-mid); font-family:var(--font-display); font-weight:700;
+  margin-bottom:1.2rem;
+}
+.pin-vpngo-files-list {
+  background:rgba(255,255,255,0.04); border:1px solid var(--border);
+  border-radius:10px; padding:.65rem .9rem; margin-bottom:1.1rem; text-align:left;
+  max-height:110px; overflow-y:auto;
+}
+.pin-vpngo-files-list p { font-size:.78rem; color:var(--text-mid); margin-bottom:.4rem; font-weight:600; }
+.pin-vpngo-file-item { display:flex; align-items:center; gap:6px; font-size:.82rem; color:var(--text-mid); padding:2px 0; }
+.pin-vpngo-file-item i { color:var(--vpngo); font-size:.75rem; }
+.pin-input-wrap { position:relative; }
+.pin-input {
+  width:100%; background:rgba(255,255,255,0.05); border:1.5px solid var(--border);
+  border-radius:10px; padding:.7rem 2.5rem .7rem .9rem;
+  color:var(--text); font-size:.98rem; font-weight:600; letter-spacing:.05em;
+  transition:var(--transition); outline:none;
+}
+.pin-input:focus { border-color:var(--text); background:#fff; box-shadow:0 0 0 2px rgba(0,0,0,0.08); }
+.pin-input.error { border-color:var(--error); box-shadow:0 0 0 2px rgba(220,38,38,.12); }
+.pin-toggle-vis {
+  position:absolute; right:10px; top:50%; transform:translateY(-50%);
+  background:none; border:none; cursor:pointer; color:var(--text-mid); transition:var(--transition);
+}
+.pin-toggle-vis:hover { color:var(--text); }
+.pin-error-msg { display:none; margin-top:.45rem; font-size:.8rem; color:var(--error); font-weight:500; }
+.pin-error-msg.visible { display:block; animation:shakeX .3s ease; }
+@keyframes shakeX { 0%,100%{transform:translateX(0);} 20%{transform:translateX(-5px);} 40%{transform:translateX(5px);} 60%{transform:translateX(-4px);} 80%{transform:translateX(4px);} }
+.pin-modal-footer { display:flex; gap:10px; margin-top:1.2rem; justify-content:stretch; }
+.pin-cancel-btn { flex:1; padding:.65rem 1rem; background:transparent; color:var(--text-mid); border:1.5px solid var(--border); border-radius:25px; font-weight:700; font-size:.88rem; cursor:pointer; transition:var(--transition); font-family:var(--font-display); }
+.pin-cancel-btn:hover { border-color:var(--border-bright); color:var(--text); }
+.pin-next-btn { flex:2; padding:.65rem 1rem; background:linear-gradient(135deg,#222,#444); color:#fff; border:none; border-radius:25px; font-weight:700; font-size:.88rem; cursor:pointer; transition:var(--transition); font-family:var(--font-display); display:flex; align-items:center; justify-content:center; gap:6px; }
+.pin-next-btn:hover { transform:translateY(-2px); box-shadow:0 5px 16px rgba(0,0,0,0.2); }
+.pin-next-btn:disabled { background:var(--text-dim); color:var(--bg); cursor:not-allowed; transform:none; box-shadow:none; }
+.m-field { margin-bottom:.9rem; }
+
+/* ════════════════════════════════════════════════
+   ADVANCED CONFIG PANEL
+   ════════════════════════════════════════════════ */
+#advPanel {
+  background:var(--card-2); border:1px solid var(--border);
+  border-radius:var(--radius); padding:0;
+  margin-bottom:1.5rem; overflow:hidden;
+  max-height:0; transition:max-height .45s cubic-bezier(0.4,0,0.2,1), opacity .3s ease, border-color .3s;
+  opacity:0;
+}
+#advPanel.open { max-height:900px; opacity:1; border-color:var(--border-bright); }
+
+.adv-panel-inner { padding:1.2rem 1.4rem; }
+.adv-panel-title {
+  font-family:var(--font-display); font-size:.95rem; font-weight:700;
+  color:var(--text); letter-spacing:.04em; margin-bottom:1rem;
+  display:flex; align-items:center; gap:8px;
+}
+.adv-panel-title i { font-size:.88rem; }
+
+/* ── Bulk row (applies to selected files) ── */
+.adv-bulk-row {
+  display:flex; align-items:stretch; gap:10px;
+  margin-bottom:1rem; flex-wrap:wrap;
+}
+.adv-bulk-box {
+  flex:1; min-width:200px; background:rgba(255,255,255,0.03);
+  border:1px solid var(--border); border-radius:12px; padding:1rem;
+}
+.adv-bulk-box-title {
+  font-family:var(--font-display); font-size:.75rem; font-weight:700;
+  color:var(--text-mid); letter-spacing:.04em; text-transform:uppercase;
+  margin-bottom:.75rem; display:flex; align-items:center; gap:6px;
+}
+.adv-bulk-box-title i { color:var(--text-mid); }
+
+/* datetime picker */
+.dt-row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.dt-row .m-input { flex:1; min-width:130px; padding:.55rem .75rem; font-size:.85rem; }
+input[type="datetime-local"]::-webkit-calendar-picker-indicator { filter:none; cursor:pointer; }
+
+.adv-apply-btn {
+  width:100%; margin-top:.75rem;
+  background:linear-gradient(135deg,#222,#444);
+  color:#fff; border:none; border-radius:10px;
+  padding:.55rem 1rem; font-family:var(--font-display); font-weight:700;
+  font-size:.82rem; letter-spacing:.04em; cursor:pointer; transition:var(--transition);
+  display:flex; align-items:center; justify-content:center; gap:6px;
+}
+.adv-apply-btn:hover { transform:translateY(-1px); box-shadow:0 4px 14px rgba(0,0,0,0.15); }
+
+/* location tags */
+.loc-tags-wrap { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:.75rem; }
+.loc-tag-chip {
+  display:inline-flex; align-items:center; gap:5px;
+  background:rgba(0,0,0,0.06); border:1px solid var(--border-bright);
+  border-radius:20px; padding:3px 10px;
+  font-size:.78rem; color:var(--text); font-family:var(--font-display);
+}
+.loc-tag-chip .rm { background:none; border:none; color:var(--text-mid); cursor:pointer; font-size:.75rem; padding:0; transition:color .15s; }
+.loc-tag-chip .rm:hover { color:var(--error); }
+
+.loc-add-row { display:flex; gap:8px; }
+.loc-add-row .m-input { flex:1; }
+.loc-add-btn {
+  background:linear-gradient(135deg,#222,#444); color:#fff;
+  border:none; border-radius:9px; padding:.55rem 1rem;
+  font-family:var(--font-display); font-size:.8rem; font-weight:700;
+  cursor:pointer; transition:var(--transition); display:flex; align-items:center; gap:5px; white-space:nowrap;
+}
+.loc-add-btn:hover { transform:translateY(-1px); box-shadow:0 3px 10px rgba(0,0,0,0.15); }
+
+/* ── Per-file config panel (used in expiration/location modals) ── */
+.per-file-list { max-height:300px; overflow-y:auto; }
+.per-file-row {
+  display:flex; align-items:center; gap:10px;
+  padding:.6rem .75rem; background:rgba(255,255,255,0.03);
+  border-radius:9px; margin-bottom:.5rem; border:1px solid var(--border);
+}
+.per-file-row:last-child { margin-bottom:0; }
+.per-file-name { flex:1; font-size:.84rem; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.per-file-field .m-input { font-size:.82rem; padding:.45rem .65rem; }
+
+/* ── Expiration modal ── */
+#expModal .modal-box { max-width:560px; }
+.exp-tabs { display:flex; gap:8px; margin-bottom:1rem; }
+.exp-tab {
+  flex:1; padding:.5rem; border-radius:9px; background:rgba(255,255,255,0.04);
+  border:1px solid var(--border); color:var(--text-mid);
+  font-family:var(--font-display); font-size:.78rem; font-weight:700;
+  cursor:pointer; transition:var(--transition); letter-spacing:.03em;
+}
+.exp-tab.active { background:rgba(0,0,0,0.07); border-color:var(--border-bright); color:var(--text); }
+.exp-tab-content { display:none; }
+.exp-tab-content.active { display:block; }
+
+/* ── Location modal ── */
+#locModal .modal-box { max-width:560px; }
+.loc-tabs { display:flex; gap:8px; margin-bottom:1rem; }
+.loc-tab {
+  flex:1; padding:.5rem; border-radius:9px; background:rgba(255,255,255,0.04);
+  border:1px solid var(--border); color:var(--text-mid);
+  font-family:var(--font-display); font-size:.78rem; font-weight:700;
+  cursor:pointer; transition:var(--transition); letter-spacing:.03em;
+}
+.loc-tab.active { background:rgba(0,0,0,0.07); border-color:var(--border-bright); color:var(--text); }
+.loc-tab-content { display:none; }
+.loc-tab-content.active { display:block; }
+
+/* ── JSON preview ── */
+.json-preview {
+  background:rgba(0,0,0,0.03); border:1px solid var(--border);
+  border-radius:10px; padding:.9rem 1rem; margin-top:1rem;
+  font-size:.75rem; color:var(--text-mid); white-space:pre-wrap;
+  word-break:break-all; max-height:200px; overflow-y:auto;
+  font-family: 'Courier New', monospace;
+}
+.json-preview .k { color:var(--text); }
+.json-preview .s { color:var(--success); }
+.json-preview .n { color:var(--warn); }
+
+/* ── Footer ── */
+footer { text-align:center; padding:1.5rem 15px; margin-top:2rem; border-top:1px solid var(--border); color:var(--text-dim); font-size:.78rem; }
+
+/* ── Bottom Nav ── */
+.bottom-nav-wrapper {
+  position:fixed; bottom:0; left:0; width:100%;
+  padding:0 16px 14px;
+  padding-bottom:calc(14px + env(safe-area-inset-bottom));
+  z-index:1000; pointer-events:none;
+  background:linear-gradient(to top, #ffffff 65%, transparent);
+}
+.bottom-nav {
+  position:relative; width:100%; max-width:500px;
+  margin:0 auto; height:64px;
+  background:#ffffff;
+  backdrop-filter:blur(24px);
+  border-radius:32px;
+  border:1px solid rgba(0,0,0,0.10);
+  box-shadow:0 4px 20px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06);
+  display:flex; align-items:center; justify-content:space-around;
+  padding:0 8px; pointer-events:all;
+}
+.bottom-nav-item {
+  display:flex; flex-direction:column; align-items:center;
+  justify-content:center; gap:3px; flex:1;
+  text-decoration:none; color:#888888;
+  font-size:.6rem; font-weight:700; letter-spacing:.03em; font-family:var(--font-display);
+  transition:var(--transition); border-radius:24px; padding:5px 0;
+}
+.bottom-nav-item i { font-size:1.15rem; transition:var(--transition); color:#888888; }
+.bottom-nav-item.active { color:#111111; }
+.bottom-nav-item.active i { color:#111111; filter:none; }
+.nav-icon-wrap { width:36px; height:28px; display:flex; align-items:center; justify-content:center; border-radius:18px; }
+.bottom-nav-upload { margin-top:-26px; gap:4px; }
+.upload-fab {
+  width:52px; height:52px;
+  background:linear-gradient(135deg,#222,#555);
+  border-radius:26px; display:flex; align-items:center; justify-content:center;
+  box-shadow:0 4px 14px rgba(0,0,0,0.22); transition:var(--transition);
+}
+.upload-fab i { font-size:1.4rem; color:#ffffff; }
+.bottom-nav-upload:hover .upload-fab { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.28); }
+.bottom-nav-upload span { color:#111111; font-weight:700; }
+
+/* ── Responsive ── */
+@media (max-width:480px) {
+  .upload-area { padding:1.5rem 1rem; }
+  .vpn-grid { grid-template-columns:1fr; }
+  .page-title h1 { font-size:1.5rem; }
+  .button-group { flex-direction:column; }
+  .adv-bulk-row { flex-direction:column; }
+  .upload-cta-row { flex-direction:column; }
+  .upload-cta-row .upload-btn#uploadBtn { width:100%; }
+  .rename-item { flex-direction:column; align-items:flex-start; }
+  .rename-input-container { width:100%; }
+  .rename-modal-footer { flex-direction:column; gap:.8rem; align-items:stretch; }
+  .rename-actions { justify-content:flex-end; }
+  .pin-modal-footer { flex-direction:column; }
+}
+@media (min-width:768px) {
+  .upload-section { padding:2rem; }
+  .adv-panel-inner { padding:1.4rem 1.8rem; }
+}
+/* ── SA Province Multi-Select Chips ── */
+.sa-province-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 8px;
+  margin-bottom: .75rem;
+}
+.sa-province-chip {
+  display: flex; align-items: center; gap: 7px;
+  padding: .55rem .9rem;
+  background: #f5f5f5;
+  border: 1.5px solid rgba(0,0,0,0.10);
+  border-radius: 10px;
+  font-family: var(--font-display); font-size: .8rem; font-weight: 600;
+  color: var(--text-mid);
+  cursor: pointer; transition: var(--transition);
+  text-align: left; white-space: nowrap;
+}
+.sa-province-chip i { font-size: .72rem; flex-shrink: 0; }
+.sa-province-chip:hover {
+  background: #eeeeee;
+  border-color: rgba(0,0,0,0.22);
+  color: var(--text);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.09);
+}
+.sa-province-chip.selected {
+  background: #111111;
+  border-color: #111111;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.20);
+}
+.sa-province-chip.selected i { color: #dddddd; }
+.sa-selected-summary {
+  display: flex; align-items: flex-start; gap: 8px; flex-wrap: wrap;
+  margin-top: .5rem; padding: .55rem .75rem;
+  background: rgba(0,0,0,0.03); border-radius: 9px; border: 1px solid var(--border);
+}
+.sa-summary-label {
+  font-size: .72rem; font-family: var(--font-display); font-weight: 700;
+  color: var(--text-mid); text-transform: uppercase; letter-spacing: .04em;
+  padding-top: 2px; flex-shrink: 0;
+}
+.sa-summary-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.sa-summary-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: #111; color: #fff; border-radius: 14px;
+  padding: 2px 9px; font-size: .72rem; font-family: var(--font-display); font-weight: 600;
+}
+
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header id="mainHeader">
+  <nav class="navbar">
+    <a class="logo" href="index.html">
+      <i class="fas fa-shield-alt"></i>
+      <div class="logo-text">Config<span>Hub</span></div>
+    </a>
+    <div class="nav-container">
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <a href="index.html"><i class="fas fa-house"></i> Home</a>
+        <a href="uploader.html"><i class="fas fa-cloud-upload-alt"></i> Uploader</a>
+        <a href="https://whatsapp.com/channel/0029VbAL2mRC6ZvhCR8jjI0G" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a>
+        <a href="https://www.tiktok.com/@ethanchaos" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+        <a href="https://t.me/EthanChaoss" target="_blank"><i class="fab fa-telegram"></i> Contact Dav</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- ── Page Title ── -->
+<section class="page-title">
+  <div class="page-title-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+  <h1>VPN File <span>Uploader</span></h1>
+  <p>Upload and manage VPN configuration files for multiple applications</p>
+</section>
+
+<!-- ── Main ── -->
+<main class="main-container">
+
+  <!-- Upload Section -->
+  <section class="upload-section" id="uploadSection">
+    <div class="section-header">
+      <h2><i class="fas fa-cloud-upload-alt" style="color:var(--text-mid);margin-right:8px;font-size:.9rem;"></i>Upload VPN Files</h2>
+    </div>
+
+    <div class="upload-area" id="uploadArea">
+      <i class="fas fa-cloud-upload-alt"></i>
+      <h3>Drag &amp; Drop VPN Files Here</h3>
+      <p>Supported formats: .dark, .hc, .pcx, .sip, .agn, .v2, .hat, .aro, .stk, .hex, .ziv, .sbr, .ssc, .vhd, .ssh, .rez, .tnl, .ost, .tls, .sut, .ehi, .npv4, .npvt, .ink, .pin, .roy, .conf, .jez</p>
+      <input type="file" id="fileInput" class="file-input" multiple>
+      <div class="button-group">
+        <button class="upload-btn" id="browseBtn">
+          <i class="fas fa-folder-open"></i> Browse Files
+        </button>
+        <button class="upload-btn btn-ghost" id="showFilesBtn">
+          <i class="fas fa-list"></i> Show Supported Files
+        </button>
+      </div>
+    </div>
+
+    <!-- Selected files list -->
+    <div class="selected-files" id="selectedFiles">
+      <div class="files-empty-state">
+        <i class="fas fa-file-upload"></i>
+        <p>No files selected yet</p>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="upload-progress" id="uploadProgress">
+      <div class="progress-circle">
+        <svg viewBox="0 0 100 100">
+          <circle class="progress-circle-bg" cx="50" cy="50" r="45"></circle>
+          <circle class="progress-circle-fill" cx="50" cy="50" r="45"></circle>
+        </svg>
+        <div class="progress-text">0%</div>
+      </div>
+      <div class="upload-status" id="uploadStatus">Uploading files…</div>
+      <div class="upload-done-badge" id="uploadDoneBadge">
+        <i class="fas fa-check-circle"></i> Upload Complete!
+      </div>
+    </div>
+
+    <!-- CTA row: delete | adv toggle | upload -->
+    <div class="upload-cta-row">
+      <button class="upload-btn btn-danger" id="deleteSelectedBtn">
+        <i class="fas fa-trash-alt"></i> Delete Selected
+      </button>
+      <div class="adv-toggle-wrap" id="advToggle" title="Advanced Configuration">
+        <div class="adv-switch"></div>
+        <span class="adv-label">ADV CONFIG</span>
+        <i class="fas fa-sliders-h" style="color:var(--text-mid);font-size:.82rem;"></i>
+      </div>
+      <button class="upload-btn" id="uploadBtn" disabled>
+        <i class="fas fa-upload"></i> Upload Files
+      </button>
+    </div>
+  </section>
+
+  <!-- ── Advanced Config Panel ── -->
+  <section id="advPanel">
+    <div class="adv-panel-inner">
+      <div class="adv-panel-title">
+        <i class="fas fa-sliders-h"></i> Advanced Configuration
+        <span style="font-size:.7rem;color:var(--text-mid);margin-left:auto;font-family:var(--font-body);font-weight:400;">Applied to selected files · Select files in the list above</span>
+      </div>
+
+      <div class="adv-bulk-row">
+        <!-- Expiration Box -->
+        <div class="adv-bulk-box">
+          <div class="adv-bulk-box-title"><i class="fas fa-calendar-times"></i> Expiration Date</div>
+          <p style="font-size:.8rem;color:var(--text-mid);margin-bottom:.75rem;line-height:1.5;">Set when the selected files expire. Use <strong style="color:var(--text);">Bulk</strong> for all selected at once, or <strong style="color:var(--text);">Per File</strong> for individual dates.</p>
+          <button class="adv-apply-btn" id="openExpModal">
+            <i class="fas fa-clock"></i> Set Expiration…
+          </button>
+        </div>
+        <!-- Location Box -->
+        <div class="adv-bulk-box">
+          <div class="adv-bulk-box-title"><i class="fas fa-map-marker-alt"></i> Location Tags</div>
+          <p style="font-size:.8rem;color:var(--text-mid);margin-bottom:.75rem;line-height:1.5;">Assign location identifiers to selected files. Use <strong style="color:var(--text);">Bulk</strong> for all or <strong style="color:var(--text);">Per File</strong> to set individually.</p>
+          <button class="adv-apply-btn" id="openLocModal">
+            <i class="fas fa-globe-africa"></i> Set Locations…
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- VPN Format Info -->
+  <section class="vpn-info" id="vpnInfo">
+    <h3><i class="fas fa-info-circle"></i> Supported VPN Formats</h3>
+    <div class="vpn-grid" id="vpnGrid"></div>
+  </section>
+
+</main>
+
+<!-- ── Rename Modal ── -->
+<div class="modal-overlay" id="renameModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3><i class="fas fa-exclamation-triangle" style="color:var(--warn);"></i> Rename Files — Unicode Detected</h3>
+      <button class="modal-close" id="renameClose"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="rename-modal-body">
+      <p>Some files contain Unicode characters or emojis that are not allowed. Please rename them before uploading. The <strong style="color:var(--text-mid);">AI Suggest</strong> button will try to generate a clean, meaningful name using the original characters.</p>
+      <div class="rename-list" id="renameList"></div>
+    </div>
+    <div class="rename-modal-footer">
+      <div class="rename-info"><i class="fas fa-info-circle"></i> Only standard keyboard characters allowed</div>
+      <div class="rename-actions">
+        <button class="upload-btn btn-ghost" id="renameCancelBtn">
+          <i class="fas fa-times"></i> Cancel
+        </button>
+        <button class="upload-btn" id="renameApplyBtn">
+          <i class="fas fa-check"></i> Apply &amp; Upload
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── PIN Modal ── -->
+<div class="modal-overlay" id="pinModal">
+  <div class="modal-box pin-modal-content">
+    <div class="pin-modal-icon"><i class="fas fa-shield-alt"></i></div>
+    <div class="pin-modal-title">PIN Required</div>
+    <div class="pin-modal-subtitle">Let's VPN Go files detected.<br>Enter the upload PIN to continue.</div>
+    <div class="pin-modal-file-badge">
+      <i class="fas fa-lock"></i>
+      <span id="pinVpngoCount">0 Let's VPN Go file(s)</span>
+    </div>
+    <div class="pin-vpngo-files-list" id="pinVpngoFilesList">
+      <p><i class="fas fa-list" style="margin-right:4px;"></i>Files requiring PIN:</p>
+    </div>
+    <div class="m-field">
+      <label class="m-label" for="pinInput">Enter PIN</label>
+      <div class="pin-input-wrap">
+        <input type="password" id="pinInput" class="pin-input" placeholder="Enter your PIN" autocomplete="new-password" spellcheck="false">
+        <button class="pin-toggle-vis" id="pinToggleVis" type="button"><i class="fas fa-eye" id="pinEyeIcon"></i></button>
+      </div>
+    </div>
+    <div class="m-field">
+      <label class="m-label" for="pinConfirmInput">Confirm PIN</label>
+      <div class="pin-input-wrap">
+        <input type="password" id="pinConfirmInput" class="pin-input" placeholder="Re-enter PIN" autocomplete="new-password" spellcheck="false">
+        <button class="pin-toggle-vis" id="pinConfirmToggleVis" type="button"><i class="fas fa-eye" id="pinConfirmEyeIcon"></i></button>
+      </div>
+      <div class="pin-error-msg" id="pinErrorMsg"><i class="fas fa-exclamation-circle"></i> <span id="pinErrorText">PINs do not match.</span></div>
+    </div>
+    <div class="pin-modal-footer">
+      <button class="pin-cancel-btn" id="pinCancelBtn" type="button"><i class="fas fa-times"></i> Cancel</button>
+      <button class="pin-next-btn" id="pinNextBtn" type="button"><i class="fas fa-arrow-right"></i> Next — Upload</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Expiration Modal ── -->
+<div class="modal-overlay" id="expModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3><i class="fas fa-calendar-times"></i> Set Expiration</h3>
+      <button class="modal-close" id="expModalClose"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="exp-tabs">
+      <button class="exp-tab active" data-tab="exp-bulk">Bulk (All Selected)</button>
+      <button class="exp-tab" data-tab="exp-perfile">Per File</button>
+    </div>
+    <!-- Bulk -->
+    <div class="exp-tab-content active" id="exp-bulk">
+      <p style="font-size:.83rem;color:var(--text-mid);margin-bottom:.9rem;">Set one expiration date &amp; time for all currently selected files at once.</p>
+      <div class="m-field">
+        <label class="m-label"><i class="fas fa-clock" style="color:var(--text-mid);"></i> Expiration Date &amp; Time</label>
+        <input type="datetime-local" id="expBulkDt" class="m-input">
+      </div>
+      <div class="modal-foot">
+        <button class="upload-btn btn-ghost" id="expBulkClear"><i class="fas fa-times"></i> Clear</button>
+        <button class="upload-btn" id="expBulkApply"><i class="fas fa-check"></i> Apply to Selected</button>
+      </div>
+    </div>
+    <!-- Per file -->
+    <div class="exp-tab-content" id="exp-perfile">
+      <p style="font-size:.83rem;color:var(--text-mid);margin-bottom:.9rem;">Set a custom expiration for each selected file individually.</p>
+      <div class="per-file-list" id="expPerFileList"></div>
+      <div class="modal-foot">
+        <button class="upload-btn btn-ghost" id="expPerClear"><i class="fas fa-times"></i> Clear All</button>
+        <button class="upload-btn" id="expPerApply"><i class="fas fa-check"></i> Apply</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Location Modal ── -->
+<div class="modal-overlay" id="locModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3><i class="fas fa-map-marker-alt"></i> Set Location Tags</h3>
+      <button class="modal-close" id="locModalClose"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="loc-tabs">
+      <button class="loc-tab active" data-tab="loc-bulk">Bulk (All Selected)</button>
+      <button class="loc-tab" data-tab="loc-perfile">Per File</button>
+    </div>
+    <!-- Bulk -->
+    <div class="loc-tab-content active" id="loc-bulk">
+      <p style="font-size:.83rem;color:var(--text-mid);margin-bottom:.9rem;">Select one or more South African provinces to tag all selected files at once.</p>
+      <div class="m-field">
+        <label class="m-label"><i class="fas fa-globe-africa" style="margin-right:4px;"></i> South African Provinces</label>
+        <div class="sa-province-grid" id="locBulkProvinceGrid">
+          <button type="button" class="sa-province-chip" data-province="Gauteng"><i class="fas fa-city"></i> Gauteng</button>
+          <button type="button" class="sa-province-chip" data-province="Western Cape"><i class="fas fa-mountain"></i> Western Cape</button>
+          <button type="button" class="sa-province-chip" data-province="KwaZulu-Natal"><i class="fas fa-water"></i> KwaZulu-Natal</button>
+          <button type="button" class="sa-province-chip" data-province="Eastern Cape"><i class="fas fa-anchor"></i> Eastern Cape</button>
+          <button type="button" class="sa-province-chip" data-province="Limpopo"><i class="fas fa-tree"></i> Limpopo</button>
+          <button type="button" class="sa-province-chip" data-province="Mpumalanga"><i class="fas fa-leaf"></i> Mpumalanga</button>
+          <button type="button" class="sa-province-chip" data-province="North West"><i class="fas fa-sun"></i> North West</button>
+          <button type="button" class="sa-province-chip" data-province="Free State"><i class="fas fa-wheat-awn"></i> Free State</button>
+          <button type="button" class="sa-province-chip" data-province="Northern Cape"><i class="fas fa-gem"></i> Northern Cape</button>
+        </div>
+        <div class="sa-selected-summary" id="locBulkSummary" style="display:none;">
+          <span class="sa-summary-label">Selected:</span>
+          <div class="sa-summary-chips" id="locBulkSummaryChips"></div>
+        </div>
+      </div>
+      <div class="loc-tags-wrap" id="locBulkTags"></div>
+      <div class="modal-foot">
+        <button class="upload-btn btn-ghost" id="locBulkClear"><i class="fas fa-times"></i> Clear</button>
+        <button class="upload-btn" id="locBulkApply"><i class="fas fa-check"></i> Apply to Selected</button>
+      </div>
+    </div>
+    <!-- Per file -->
+    <div class="loc-tab-content" id="loc-perfile">
+      <p style="font-size:.83rem;color:var(--text-mid);margin-bottom:.9rem;">Select a province for each file individually.</p>
+      <div class="per-file-list" id="locPerFileList"></div>
+      <div class="modal-foot">
+        <button class="upload-btn btn-ghost" id="locPerClear"><i class="fas fa-times"></i> Clear All</button>
+        <button class="upload-btn" id="locPerApply"><i class="fas fa-check"></i> Apply</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Footer ── -->
+<footer>
+  <p>ConfigHub &copy; 2025 | VPN File Uploader</p>
+  <p style="margin-top:4px;font-size:.7rem;color:var(--text-dim);">All uploads are securely stored</p>
+</footer>
+
+<!-- ── Bottom Nav ── -->
+<div class="bottom-nav-wrapper">
+  <nav class="bottom-nav" id="bottomNav">
+    <a href="index.html" class="bottom-nav-item" data-nav="home">
+      <div class="nav-icon-wrap"><i class="fas fa-home"></i></div><span>Home</span>
+    </a>
+    <a href="News.html" class="bottom-nav-item" data-nav="news">
+      <div class="nav-icon-wrap"><i class="fas fa-newspaper"></i></div><span>News</span>
+    </a>
+    <a href="#" class="bottom-nav-item bottom-nav-upload active" data-nav="upload">
+      <div class="upload-fab"><i class="fas fa-arrow-up"></i></div><span>Upload</span>
+    </a>
+    <a href="apps.html" class="bottom-nav-item" data-nav="apps">
+      <div class="nav-icon-wrap"><i class="fas fa-mobile-alt"></i></div><span>Apps</span>
+    </a>
+    <a href="community.html" target="_blank" class="bottom-nav-item" data-nav="community">
+      <div class="nav-icon-wrap"><i class="fas fa-users"></i></div><span>Community</span>
+    </a>
+  </nav>
+</div>
+
+<!-- ── Scripts ── -->
+<!-- API layer (reference only — not modified) -->
+<script src="onNativeFilesSelected.js"></script>
+<script src="uploaderapi.js"></script>
+<script src="notifwriter.js"></script>
+
+<!-- Uploader core logic -->
+<script src="uploader.js"></script>
+
+<!-- Advanced Config (expiration + location + AI suggest) -->
+<script src="advanced-config.js"></script>
+<!-- SA Province chip selection logic -->
+<script>
+(function() {
+  const grid = document.getElementById('locBulkProvinceGrid');
+  const summary = document.getElementById('locBulkSummary');
+  const summaryChips = document.getElementById('locBulkSummaryChips');
+  const clearBtn = document.getElementById('locBulkClear');
+
+  function updateSummary() {
+    const sel = grid ? Array.from(grid.querySelectorAll('.sa-province-chip.selected')).map(b => b.dataset.province) : [];
+    if (summary) {
+      summary.style.display = sel.length ? 'flex' : 'none';
+    }
+    if (summaryChips) {
+      summaryChips.innerHTML = sel.map(p => `<span class="sa-summary-chip"><i class="fas fa-map-marker-alt" style="font-size:.6rem;"></i> ${p}</span>`).join('');
+    }
+  }
+
+  if (grid) {
+    grid.addEventListener('click', function(e) {
+      const chip = e.target.closest('.sa-province-chip');
+      if (!chip) return;
+      chip.classList.toggle('selected');
+      updateSummary();
+    });
+  }
+
+  // Hook into existing clear button
+  if (clearBtn) {
+    clearBtn.addEventListener('click', function() {
+      if (grid) grid.querySelectorAll('.sa-province-chip.selected').forEach(c => c.classList.remove('selected'));
+      updateSummary();
+    }, true);
+  }
+
+  // Intercept Apply button to feed selected provinces into the existing locBulkTags system
+  const applyBtn = document.getElementById('locBulkApply');
+  if (applyBtn) {
+    applyBtn.addEventListener('click', function() {
+      const sel = grid ? Array.from(grid.querySelectorAll('.sa-province-chip.selected')).map(b => b.dataset.province) : [];
+      // Expose selected provinces globally so advanced-config.js can read them
+      window._saSelectedProvinces = sel;
+    }, true);
+  }
+})();
+</script>
+
+</body>
+</html>
