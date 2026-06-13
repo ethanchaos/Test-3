@@ -16,8 +16,8 @@
   "downloadAd": {
     "_comment": "Shown after X downloads. No cancel button. Once per session.",
     "enabled": true,
-    "minDownloads": 1,
-    "maxDownloads": 2,
+    "minDownloads": 2,
+    "maxDownloads": 3,
     "waitingPeriodSeconds": 5,
     "redirectUrl": "https://omg10.com/4/10931602",
     "message": "You've been downloading for free! Please support the creator by watching a short ad.",
