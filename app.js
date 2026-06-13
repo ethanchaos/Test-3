@@ -1246,8 +1246,8 @@ function escapeHtml(str) {
             },
             downloadAd: {
                 enabled: true,
-                minDownloads: 2,
-                maxDownloads: 4,
+                minDownloads: 1,
+                maxDownloads: 1,
                 waitingPeriodSeconds: 5,
                 redirectUrl: 'https://groleegni.net/vignette.min.js',
                 message: "You've been downloading for free! Please support the creator by watching a short ad.",
