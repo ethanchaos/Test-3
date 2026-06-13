@@ -1,5 +1,13 @@
 [
   {
+    "id": 149,
+    "title": "New Files Added",
+    "message": "New files for NPV Tunnel and HTTP Custom have been added recently. Tap to explore them.",
+    "link": "https://vpnconfighub.netlify.app/index.html",
+    "date": "2026-06-13",
+    "priority": "high"
+  },
+  {
     "id": 148,
     "title": "2 New ZIV PN Tunnel Configs Added",
     "message": "2 new ZIV PN Tunnel configurations have just been uploaded. Tap to browse and download them.",
