@@ -1,5 +1,16 @@
 [
   {
+    "name": "Germany VIP UDP PLUG 1",
+    "vpn": "ZIV PN Tunnel",
+    "filename": "Germany VIP UDP PLUG_1.ziv",
+    "date": "13 Jun 2026",
+    "config_id": "zivpntunnel",
+    "expires_at": "2026-06-13T14:30:00",
+    "locations": [
+      "Limpopo"
+    ]
+  },
+  {
     "name": "--MTN 1GB ---------- --",
     "vpn": "TLS Tunnel",
     "filename": "--MTN_1GB_----------_--.tls",
