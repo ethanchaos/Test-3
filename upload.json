@@ -1,5 +1,13 @@
 [
   {
+    "name": "ULURU X MTN ",
+    "vpn": "HTTP Custom",
+    "filename": "ULURU X MTN .hc",
+    "date": "13 Jun 2026",
+    "config_id": "httpcustom",
+    "expires_at": "2026-06-16T00:00:00"
+  },
+  {
     "name": "ZA DAILY UDP PLUG ",
     "vpn": "HTTP Custom",
     "filename": "ZA DAILY UDP PLUG .hc",
