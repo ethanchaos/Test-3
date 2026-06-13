@@ -6,7 +6,8 @@
     <meta name="description" content="Download working VPN configurations for all supported apps">
     <meta name="keywords" content="VPN configs, free VPN, VPN files, HTTP Custom, TLS Tunnel, HA Tunnel, Lets VPN GO">
     <title>ConfigHub &amp; Deovex – Lets VPN GO Files</title>
-
+<link rel="icon" href="/pics/chaos.png?v=1">
+    <link rel="shortcut icon" href="/pics/chaos.png?v=1">
     <!-- Cloudflare Web Analytics -->
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3619aaa99b9349adac8b88ba436e2db6"}'></script>
 
@@ -124,6 +125,12 @@
 
     <!-- Page filter: Lets VPN GO files only -->
     <script>
+
+if (!localStorage.getItem('dvx_session')) {
+    window.location.replace('https://chaosconfigurations.co.za/login');
+}
+
+        
         const VPN_SEARCH_TERMS = ['js', 'letsvpngo', 'lets vpn go', 'letsvpn'];
         const VPN_DISPLAY_NAME = "Letsvpn..";
         const VPN_ICON = "fas fa-lock";
