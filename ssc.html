@@ -88,9 +88,7 @@
         </div>
     </section>
 
-   if (!localStorage.getItem('dvx_session')) {
-    window.location.replace('https://chaosconfigurations.co.za/login');
-}
+
 
    <!-- Bottom Navigation -->
     <div class="bottom-nav-wrapper">
@@ -125,7 +123,9 @@
 <!-- Page filter: HA Tunnel files only -->
 <script>
 
-
+if (!localStorage.getItem('dvx_session')) {
+    window.location.replace('https://chaosconfigurations.co.za/login');
+}
     
 const VPN_SEARCH_TERMS = ['ssc','sshcustom','ssh custom','sshcus'];
 const VPN_DISPLAY_NAME = "SSH Custom";
