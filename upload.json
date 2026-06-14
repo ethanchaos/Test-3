@@ -1,5 +1,12 @@
 [
   {
+    "name": "ICE TIKTOK BYPASS ",
+    "vpn": "HTTP Injector",
+    "filename": "ICE TIKTOK BYPASS_.ehi",
+    "date": "14 Jun 2026",
+    "config_id": "httpinjector"
+  },
+  {
     "name": "Cell C Test",
     "vpn": "HA Tunnel",
     "filename": "Cell C Test.hat",
