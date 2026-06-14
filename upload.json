@@ -1,5 +1,13 @@
 [
   {
+    "name": "MTN 500mb vps",
+    "vpn": "HTTP Custom",
+    "filename": "MTN 500mb vps.hc",
+    "date": "14 Jun 2026",
+    "config_id": "httpcustom",
+    "expires_at": "2026-06-21T04:17:00"
+  },
+  {
     "name": "ItachaiGoat MTN 500MB DAILY UK SERVER",
     "vpn": "HTTP Custom",
     "filename": "ItachaiGoat MTN 500MB DAILY UK SERVER.hc",
