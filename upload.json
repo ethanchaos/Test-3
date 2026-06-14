@@ -300,13 +300,6 @@
     "config_id": "hatunnel"
   },
   {
-    "name": "500 MB DAILY plug Theboy",
-    "vpn": "HTTP Custom",
-    "filename": "500 MB DAILY plug Theboy.hc",
-    "date": "03 Jun 2026",
-    "config_id": "httpcustom"
-  },
-  {
     "name": "500MB BY WARH ",
     "vpn": "HA Tunnel",
     "filename": "500MB BY WARH_.hat",
