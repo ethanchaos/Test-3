@@ -1,5 +1,12 @@
 [
   {
+    "name": "Telecel Unlimited   1",
+    "vpn": "ZIV PN Tunnel",
+    "filename": "Telecel Unlimited __1.ziv",
+    "date": "14 Jun 2026",
+    "config_id": "zivpntunnel"
+  },
+  {
     "name": "MTN 500 MB DAILY BY BATMAN TECH   ",
     "vpn": "HA Tunnel",
     "filename": "MTN 500 MB DAILY BY BATMAN TECH __.hat",
