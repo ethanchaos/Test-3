@@ -1,5 +1,13 @@
 [
   {
+    "name": "Telecel Unlimited  ",
+    "vpn": "ZIV PN Tunnel",
+    "filename": "Telecel Unlimited _.ziv",
+    "date": "14 Jun 2026",
+    "config_id": "zivpntunnel",
+    "expires_at": "2026-06-14T09:50:00"
+  },
+  {
     "name": "Poland premium UDP by mrfwewords",
     "vpn": "ZIV PN Tunnel",
     "filename": "Poland premium UDP by mrfwewords.ziv",
