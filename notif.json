@@ -1,5 +1,13 @@
 [
   {
+    "id": 159,
+    "title": "New NPV Tunnel Config Added",
+    "message": "A fresh NPV Tunnel configuration has just been added. Tap to download it now.",
+    "link": "https://vpnconfighub.netlify.app/npvt.html",
+    "date": "2026-06-14",
+    "priority": "high"
+  },
+  {
     "id": 158,
     "title": "New Files Added",
     "message": "New files for HTTP Injector and HTTP Custom have been added recently. Tap to explore them.",
