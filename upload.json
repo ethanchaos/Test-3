@@ -39,14 +39,6 @@
     "config_id": "httpinjector"
   },
   {
-    "name": "Cell C Test",
-    "vpn": "HA Tunnel",
-    "filename": "Cell C Test.hat",
-    "date": "14 Jun 2026",
-    "config_id": "hatunnel",
-    "expires_at": "2026-06-14T10:45:00"
-  },
-  {
     "name": "Telecel Unlimited   1",
     "vpn": "ZIV PN Tunnel",
     "filename": "Telecel Unlimited __1.ziv",
@@ -66,14 +58,6 @@
     "filename": "MTN 500 MB DAILY BY BATMAN TECH ___.tls",
     "date": "14 Jun 2026",
     "config_id": "tlstunnel"
-  },
-  {
-    "name": "Telecel Unlimited  ",
-    "vpn": "ZIV PN Tunnel",
-    "filename": "Telecel Unlimited _.ziv",
-    "date": "14 Jun 2026",
-    "config_id": "zivpntunnel",
-    "expires_at": "2026-06-14T09:50:00"
   },
   {
     "name": "Poland premium UDP by mrfwewords",
@@ -136,28 +120,6 @@
     "expires_at": "2026-06-15T18:26:00"
   },
   {
-    "name": "UDP PLUG 1",
-    "vpn": "ZIV PN Tunnel",
-    "filename": "UDP PLUG_1.ziv",
-    "date": "13 Jun 2026",
-    "config_id": "zivpntunnel",
-    "expires_at": "2026-06-13T14:30:00",
-    "locations": [
-      "KwaZulu-Natal"
-    ]
-  },
-  {
-    "name": "Germany VIP UDP PLUG 1",
-    "vpn": "ZIV PN Tunnel",
-    "filename": "Germany VIP UDP PLUG_1.ziv",
-    "date": "13 Jun 2026",
-    "config_id": "zivpntunnel",
-    "expires_at": "2026-06-13T14:30:00",
-    "locations": [
-      "Limpopo"
-    ]
-  },
-  {
     "name": "MTN 500MB VIP",
     "vpn": "NPV Tunnel",
     "filename": "MTN 500MB VIP.npvt",
@@ -203,53 +165,6 @@
     "filename": "South Africa MTN 500MB Daily_4.hc",
     "date": "13 Jun 2026",
     "config_id": "httpcustom"
-  },
-  {
-    "name": "Chaoshub 500Mb daily plug  1",
-    "vpn": "TLS Tunnel",
-    "filename": "Chaoshub 500Mb daily plug _1.tls",
-    "date": "12 Jun 2026",
-    "config_id": "tlstunnel",
-    "expires_at": "2026-06-12T00:32:00",
-    "locations": [
-      "Gauteng",
-      "KwaZulu-Natal",
-      "Limpopo",
-      "Free State"
-    ]
-  },
-  {
-    "name": "South Africa MTN 500MB Daily 3",
-    "vpn": "HTTP Custom",
-    "filename": "South Africa MTN 500MB Daily_3.hc",
-    "date": "12 Jun 2026",
-    "config_id": "httpcustom",
-    "expires_at": "2026-06-12T21:11:00",
-    "locations": [
-      "Northern Cape"
-    ]
-  },
-  {
-    "name": "South Africa MTN 500MB Daily 2",
-    "vpn": "HTTP Custom",
-    "filename": "South Africa MTN 500MB Daily_2.hc",
-    "date": "12 Jun 2026",
-    "config_id": "httpcustom",
-    "expires_at": "2026-06-12T21:12:00",
-    "locations": [
-      "Limpopo"
-    ]
-  },
-  {
-    "name": "South Africa MTN 500MB Daily 1",
-    "vpn": "HTTP Custom",
-    "filename": "South Africa MTN 500MB Daily_1.hc",
-    "date": "12 Jun 2026",
-    "config_id": "httpcustom",
-    "expires_at": "2026-06-12T21:12:00",
-    "locations": [
-      "Limpopo"
-    ]
   },
   {
     "name": "Germany VIP UDP PLUG",
