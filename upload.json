@@ -1,5 +1,13 @@
 [
   {
+    "name": "MTN ZA 500mb Daily Cap",
+    "vpn": "NPV Tunnel",
+    "filename": "MTN ZA 500mb Daily Cap.npvt",
+    "date": "14 Jun 2026",
+    "config_id": "npvtunnel",
+    "expires_at": "2026-06-17T00:51:00"
+  },
+  {
     "name": "MTN 500mb vps",
     "vpn": "HTTP Custom",
     "filename": "MTN 500mb vps.hc",
