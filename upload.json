@@ -1,5 +1,13 @@
 [
   {
+    "name": "Cell C Test",
+    "vpn": "HA Tunnel",
+    "filename": "Cell C Test.hat",
+    "date": "14 Jun 2026",
+    "config_id": "hatunnel",
+    "expires_at": "2026-06-14T10:45:00"
+  },
+  {
     "name": "Telecel Unlimited   1",
     "vpn": "ZIV PN Tunnel",
     "filename": "Telecel Unlimited __1.ziv",
