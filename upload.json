@@ -279,13 +279,6 @@
     "config_id": "httpinjector"
   },
   {
-    "name": "400MB-DAILY  I[ShadowSocks]I ",
-    "vpn": "NPV Tunnel",
-    "filename": "400MB-DAILY  I[ShadowSocks]I_.npvt",
-    "date": "03 Jun 2026",
-    "config_id": "npvtunnel"
-  },
-  {
     "name": "400MB-DAILY  I[ShadowSocks]I  1",
     "vpn": "NPV Tunnel",
     "filename": "400MB-DAILY  I[ShadowSocks]I__1.npvt",
@@ -403,20 +396,6 @@
     "filename": "_MTN 500MB DAILY BY PANTHER_(2).tls",
     "date": "03 Jun 2026",
     "config_id": "tlstunnel"
-  },
-  {
-    "name": "  s           ",
-    "vpn": "NPV Tunnel",
-    "filename": "__s_ _____ ___.npvt",
-    "date": "03 Jun 2026",
-    "config_id": "npvtunnel"
-  },
-  {
-    "name": " shadow Rain-tel fast udp  ",
-    "vpn": "ZIV PN Tunnel",
-    "filename": "_shadow Rain-tel fast udp__.ziv",
-    "date": "03 Jun 2026",
-    "config_id": "zivpntunnel"
   },
   {
     "name": "version586",
