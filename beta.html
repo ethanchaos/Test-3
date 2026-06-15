@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="VPN configs, HTTP Custom, HA Tunnel, X Tunnel, Mr Ethan Chaos, Ethan chaos, chaosconfigurations, Chaos Configurations, TLS Tunnel, free VPN">
+    <meta name="description" content="Chaos Configurations — Providing cybersecurity and development services including basic tutorials">
+    <title>Chaos Configurations</title>
+    <link rel="icon" href="/pics/chaos.png?v=1">
+    <link rel="shortcut icon" href="/pics/chaos.png?v=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="org.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GL0YEB7LF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GL0YEB7LF6');
+</script>
+    <style>
+        /* ══ OVERFLOW FIX — prevents horizontal gap flash on load ══ */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
+        /* ══ PARTNERS SECTION ══ */
+        #partners {
+            padding: 72px 0 80px;
+            background: var(--bg);
+            background-image:
+                linear-gradient(rgba(0,0,0,0.028) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.028) 1px, transparent 1px);
+            background-size: 40px 40px;
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .partners-header {
+            padding: 0 24px;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+        }
+        .partners-header.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .partners-label {
+            font-family: var(--font-display);
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--light);
+            margin-bottom: 8px;
+        }
+
+        .partners-heading {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--dark);
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+        }
+
+        .partners-marquee-wrap {
+            overflow-x: auto;
+            overflow-y: visible;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            cursor: grab;
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+        }
+        .partners-marquee-wrap::-webkit-scrollbar { display: none; }
+        .partners-marquee-wrap.dragging { cursor: grabbing; }
+
+        .partners-marquee {
+            display: flex;
+            gap: 40px;
+            width: max-content;
+            padding: 8px 40px 16px;
+            /* no auto animation — manual only */
+        }
+
+        @keyframes marqueeScroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .partner-pill {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+        }
+        .partner-pill.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .partner-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: var(--bg2);
+            border: 2px solid var(--border);
+            transition: border-color 0.25s var(--ease),
+                        transform 0.25s var(--ease),
+                        box-shadow 0.25s var(--ease);
+        }
+        .partner-pill:hover .partner-avatar {
+            border-color: var(--dark);
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 10px 28px rgba(0,0,0,0.16);
+        }
+
+        .partner-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .partner-name {
+            font-family: var(--font-display);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: var(--dark);
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* ══ GET STARTED IN-PAGE PANEL ══ */
+        .gs-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0);
+            z-index: 1100;
+            pointer-events: none;
+            transition: background 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        .gs-overlay.open {
+            background: rgba(0,0,0,0.38);
+            pointer-events: all;
+        }
+
+        .gs-panel {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            border-radius: 24px 24px 0 0;
+            padding: 32px 24px 40px;
+            transform: translateY(100%);
+            transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+            z-index: 1101;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        .gs-panel.open {
+            transform: translateY(0);
+        }
+
+        /* drag handle */
+        .gs-handle {
+            width: 40px; height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            margin: 0 auto 28px;
+        }
+
+        /* eyebrow */
+        .gs-eyebrow {
+            font-family: var(--font-display);
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--light);
+            margin-bottom: 6px;
+        }
+
+        .gs-title {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 4px;
+            letter-spacing: 0.02em;
+            line-height: 1.25;
+        }
+
+        .gs-sub {
+            font-size: 0.86rem;
+            color: var(--light);
+            margin-bottom: 28px;
+            line-height: 1.55;
+        }
+
+        /* cards */
+        .gs-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .gs-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px 18px;
+            text-decoration: none;
+            color: var(--mid);
+            transition: background 0.22s var(--ease),
+                        border-color 0.22s var(--ease),
+                        transform 0.22s var(--ease),
+                        box-shadow 0.22s var(--ease);
+            cursor: pointer;
+        }
+        .gs-card:hover {
+            background: var(--bg2);
+            border-color: #bbb;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        .gs-card:active { transform: scale(0.98); }
+
+        .gs-card-icon {
+            width: 44px; height: 44px;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: background 0.22s var(--ease), border-color 0.22s var(--ease);
+        }
+        .gs-card:hover .gs-card-icon {
+            background: var(--dark);
+            border-color: var(--dark);
+        }
+        .gs-card-icon i {
+            font-size: 1.05rem;
+            color: var(--mid);
+            transition: color 0.22s var(--ease);
+        }
+        .gs-card:hover .gs-card-icon i { color: #fff; }
+
+        .gs-card-text strong {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--dark);
+            letter-spacing: 0.02em;
+            margin-bottom: 2px;
+        }
+        .gs-card-text span {
+            font-size: 0.78rem;
+            color: var(--light);
+        }
+
+        .gs-card-arrow {
+            margin-left: auto;
+            color: var(--border);
+            font-size: 0.8rem;
+            transition: color 0.22s var(--ease), transform 0.22s var(--ease);
+        }
+        .gs-card:hover .gs-card-arrow {
+            color: var(--mid);
+            transform: translateX(3px);
+        }
+
+        /* back button — bottom right */
+        .gs-back {
+            position: absolute;
+            bottom: 40px;
+            right: 24px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            background: none;
+            border: 1.5px solid var(--border);
+            border-radius: 40px;
+            padding: 8px 18px;
+            font-family: var(--font-display);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: var(--mid);
+            cursor: pointer;
+            transition: background 0.22s var(--ease),
+                        border-color 0.22s var(--ease),
+                        transform 0.22s var(--ease);
+        }
+        .gs-back:hover {
+            background: var(--fainter);
+            border-color: #999;
+            transform: translateY(-1px);
+        }
+        .gs-back i { font-size: 0.75rem; }
+    </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header>
+    <nav class="navbar">
+        <a href="/" class="logo-link">
+            <img class="logo-img" src="icon.png" alt="Chaos Configurations logo">
+            <span class="logo-wordmark">Chaos<span> Org</span></span>
+        </a>
+
+        <div class="nav-right">
+            <!-- Sign Up: hidden when user already has a session -->
+            <a href="/signup.html" class="btn-signup" id="headerSignupBtn">Sign Up</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="dropdown-menu" id="dropdownMenu">
+        <div class="dropdown-section-label">Navigation</div>
+        <a href="confighub.html" class="dropdown-item"><i class="fas fa-th-large"></i> Vpn Config Hub</a>
+        <a href="tutorials.html" class="dropdown-item"><i class="fas fa-graduation-cap"></i> Chaos Tutorials</a>
+        <a href="https://t.me/EthanChaoss" class="dropdown-item"><i class="fas fa-envelope"></i> Contact Dev</a>
+        <a href="https://whatsapp.com/channel/0029VbAL2mRC6ZvhCR8jjI0G" class="dropdown-item"><i class="fas fa-rss"></i> Follow Us</a>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-section-label">VPN</div>
+        <a href="confighub.html" class="dropdown-item"><i class="fas fa-shield-alt"></i>VPNConfig Hub</a>
+        <a href="community.html" class="dropdown-item"><i class="fas fa-users"></i> Vpn Community</a>
+    </div>
+</header>
+
+<!-- ══ HERO ══ -->
+<div class="hero-wrapper">
+
+    <!-- Animated corner logo burst -->
+    <div class="hero-corner-bg" id="cornerBg">
+        <div class="corner-ring"></div>
+        <div class="corner-ring2"></div>
+        <div class="corner-ring3"></div>
+        <img class="corner-img" src="icon.png" alt="">
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-eyebrow reveal">Cybersecurity · Development · Beginners</div>
+            <h1 class="reveal reveal-delay-1">Chaos<br><em>Configurations</em></h1>
+            <p class="hero-desc reveal reveal-delay-2">
+                Teaching cybersecurity and development from the ground up — free, structured, and built for complete beginners. Learn step by step and build real skills.
+            </p>
+            <div class="hero-buttons reveal reveal-delay-3">
+                <!-- Get Started now opens the in-page panel -->
+                <button class="btn-primary" id="getStartedBtn" type="button">
+                    Get Started <i class="fas fa-arrow-right"></i>
+                </button>
+                <a href="https://whatsapp.com/channel/0029VbAL2mRC6ZvhCR8jjI0G" class="btn-secondary">Follow Us <i class="fas fa-rss"></i></a>
+            </div>
+            <div class="hero-meta reveal reveal-delay-4">
+                <div class="hero-stat">
+                    <span class="hero-stat-num">Free</span>
+                    <span class="hero-stat-label">Beginner tutorials</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-num">6+</span>
+                    <span class="hero-stat-label">Learning tracks</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-num">0→Pro</span>
+                    <span class="hero-stat-label">Structured paths</span>
+                </div>
+            </div>
+            <!-- Stats row REMOVED — was blocking the background icon -->
+        </div>
+    </section>
+</div>
+
+<!-- ══ WHAT WE OFFER ══ -->
+<section id="offer">
+    <div class="section-header">
+        <div class="section-eyebrow reveal">What We Offer</div>
+        <h2 class="section-title reveal reveal-delay-1">Six Learning Tracks</h2>
+        <p class="section-subtitle">Structured content covering everything from your first line of code to advanced penetration testing.</p>
+    </div>
+    <div class="cards-grid">
+        <div class="offer-card reveal">
+            <span class="card-number">01</span>
+            <div class="offer-icon"><i class="fas fa-globe"></i></div>
+            <div class="offer-title">Web Development</div>
+            <p class="offer-desc">Build real websites from scratch. HTML, CSS, JavaScript, and modern frameworks explained clearly for beginners.</p>
+        </div>
+        <div class="offer-card reveal reveal-delay-2">
+            <span class="card-number">02</span>
+            <div class="offer-icon"><i class="fas fa-mobile-alt"></i></div>
+            <div class="offer-title">App Development</div>
+            <p class="offer-desc">Learn to build functional apps step by step. Beginner-friendly guides with real examples and error walkthroughs.</p>
+        </div>
+        <div class="offer-card reveal reveal-delay-3">
+            <span class="card-number">03</span>
+            <div class="offer-icon"><i class="fas fa-lock"></i></div>
+            <div class="offer-title">Cybersecurity Basics</div>
+            <p class="offer-desc">Understand how threats work, how systems are secured, and how to start thinking like a security professional.</p>
+        </div>
+        <div class="offer-card reveal reveal-delay-1">
+            <span class="card-number">04</span>
+            <div class="offer-icon"><i class="fas fa-bug"></i></div>
+            <div class="offer-title">Penetration Testing</div>
+            <p class="offer-desc">Hands-on intro to ethical hacking. Learn tools, techniques, and methodologies used in real security assessments.</p>
+        </div>
+        <div class="offer-card reveal reveal-delay-2">
+            <span class="card-number">05</span>
+            <div class="offer-icon"><i class="fas fa-terminal"></i></div>
+            <div class="offer-title">Script Development</div>
+            <p class="offer-desc">Write automation scripts and tools. From simple Bash to Python — practical scripts you'll actually use.</p>
+        </div>
+        <div class="offer-card reveal reveal-delay-3">
+            <span class="card-number">06</span>
+            <div class="offer-icon"><i class="fas fa-code"></i></div>
+            <div class="offer-title">Programming &amp; Coding</div>
+            <p class="offer-desc">Core programming concepts broken down simply. Build a solid foundation across multiple languages and paradigms.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section id="about" class="about-section">
+    <div class="about-inner-wrap">
+        <div class="about-inner">
+            <div>
+                <div class="section-eyebrow reveal">About</div>
+                <h2 class="section-title">Built for Complete Beginners</h2>
+                <p style="font-size:0.98rem;color:var(--text-light);line-height:1.8;margin-bottom:16px;">
+                    Chaos Configurations is a platform designed to teach cybersecurity basics through free and low-cost tutorials. Built for complete beginners so they can understand and start learning without confusion.
+                </p>
+                <p style="font-size:0.98rem;color:var(--text-light);line-height:1.8;">
+                    It also provides structured learning paths that help users grow from beginner level into skilled developers and cybersecurity learners.
+                </p>
+                <div class="about-tag-row">
+                    <span class="about-tag">Free Content</span>
+                    <span class="about-tag">Beginner First</span>
+                    <span class="about-tag">Structured Paths</span>
+                    <span class="about-tag">Real Skills</span>
+                </div>
+            </div>
+            <div class="about-visual">
+                <div class="about-card-sm reveal">
+                    <i class="fas fa-route"></i>
+                    <div>
+                        <h4>Structured Learning Paths</h4>
+                        <p>Progress from your first tutorial to professional-level skills without getting lost along the way.</p>
+                    </div>
+                </div>
+                <div class="about-card-sm reveal">
+                    <i class="fas fa-tools"></i>
+                    <div>
+                        <h4>Practical &amp; Hands-On</h4>
+                        <p>Every tutorial is built around real tools, real errors, and real scenarios — not theory alone.</p>
+                    </div>
+                </div>
+                <div class="about-card-sm reveal">
+                    <i class="fas fa-dollar-sign"></i>
+                    <div>
+                        <h4>Free &amp; Low-Cost</h4>
+                        <p>Quality cybersecurity education shouldn't have a paywall. Most content is completely free.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ FOUNDER ══ -->
+<section id="founder">
+    <div class="section-header">
+        <div class="section-eyebrow reveal">Founder</div>
+        <h2 class="section-title reveal reveal-delay-1">The Person Behind It</h2>
+    </div>
+    <div class="founder-grid reveal">
+        <!-- Sticky card -->
+        <div class="founder-card">
+            <div class="founder-avatar">
+                <img src="pics/mrec1.png" alt="Mr Ethan Chaos">
+            </div>
+            <div>
+                <div class="founder-name">Mr. Ethan Chaos</div>
+                <div class="founder-role">Founder &amp; Developer</div>
+            </div>
+            <div class="founder-divider"></div>
+            <div class="founder-skills">
+                <span class="skill-tag">Coding</span>
+                <span class="skill-tag">Programming</span>
+                <span class="skill-tag">Cybersecurity</span>
+                <span class="skill-tag">Pen Testing</span>
+                <span class="skill-tag">Scripting</span>
+            </div>
+        </div>
+        <!-- Content -->
+        <div class="founder-content reveal-right">
+            <h3>Started from scratch —<br>built something real.</h3>
+            <p>Started with very little knowledge but had a strong goal of becoming a web developer and cybersecurity specialist. Through continuous learning and building tools, he gained experience in coding, scripting, and cybersecurity.</p>
+            <p>Chaos Configurations was created because most online tutorials are either too advanced, incomplete, or repetitive, with very little focus on beginner understanding and real error fixing.</p>
+            <p>This platform was built to solve that problem — providing clear, structured, beginner-friendly cybersecurity learning. The kind of resource that didn't exist when it was needed most.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ══ PARTNERS ══ -->
+<section id="partners">
+    <div class="partners-header" id="partnersHeader">
+        <div class="partners-label">Partners</div>
+        <h3 class="partners-heading">The people behind<br>the mission.</h3>
+    </div>
+    <div class="partners-marquee-wrap">
+        <div class="partners-marquee" id="partnerMarquee">
+
+            <!-- Set A -->
+            <div class="partner-pill">
+                <div class="partner-avatar"><img src="pics/KevinMosala.jpg" alt="Partner 1"></div>
+                <span class="partner-name">Kevin Mosala</span>
+            </div>
+            <div class="partner-pill">
+                <div class="partner-avatar"><img src="pics/mars.jpg" alt="Partner 2"></div>
+                <span class="partner-name">Masters Tech</span>
+            </div>
+            <div class="partner-pill">
+                <div class="partner-avatar"><img src="pics/ttc.jpg" alt="Partner 3"></div>
+                <span class="partner-name">𝚃𝚛𝚒𝚋𝚊𝚕 𝙲𝚑𝚒𝚎𝚏</span>
+            </div>
+            <div class="partner-pill">
+                <div class="partner-avatar"><img src="pics/ulurunet.png" alt="Partner 4"></div>
+                <span class="partner-name">Uluru Net</span>
+            </div>
+
+             <div class="partner-pill">
+                <div class="partner-avatar"><img src="pics/mrec.png" alt="Partner 5"></div>
+                <span class="partner-name">Mr Ethan Chaos</span>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- ══ FINAL CTA ══ -->
+<section class="cta-section">
+    <div class="cta-inner reveal">
+        <span class="cta-eyebrow">Ready to level up?</span>
+        <h2 class="cta-title">Start learning<br>today. It's free.</h2>
+        <p class="cta-sub">No experience needed. Just bring the curiosity.</p>
+        <div class="cta-buttons">
+            <button class="btn-cta-primary" id="getStartedBtn2" type="button">
+                Get Started <i class="fas fa-arrow-right"></i>
+            </button>
+            <a href="https://whatsapp.com/channel/0029VbAL2mRC6ZvhCR8jjI0G" class="btn-cta-secondary"><i class="fas fa-users"></i> Join Community</a>
+        </div>
+    </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-logo">
+            <img src="icon.png" alt="logo">
+            Chaos Configurations
+        </div>
+        <div class="footer-copy">&copy; 2026 Chaos Configurations. All rights reserved.</div>
+    </div>
+</footer>
+
+
+<!-- ══ GET STARTED IN-PAGE PANEL ══ -->
+<div class="gs-overlay" id="gsOverlay"></div>
+
+<div class="gs-panel" id="gsPanel">
+    <div class="gs-handle"></div>
+
+    <div class="gs-eyebrow">Where to?</div>
+    <h2 class="gs-title">Get started with us</h2>
+    <p class="gs-sub">Pick where you want to begin — everything is free.</p>
+
+    <div class="gs-cards">
+
+        <!-- Chaos Tutorials -->
+        <a href="tutorials.html" class="gs-card">
+            <div class="gs-card-icon">
+                <i class="fas fa-book-open"></i>
+            </div>
+            <div class="gs-card-text">
+                <strong>Chaos Tutorials</strong>
+                <span>Free step-by-step cybersecurity &amp; dev guides</span>
+            </div>
+            <i class="fas fa-chevron-right gs-card-arrow"></i>
+        </a>
+
+        <!-- VPN Config Hub -->
+        <a href="confighub.html" class="gs-card">
+            <div class="gs-card-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="gs-card-text">
+                <strong>VPN Config Hub</strong>
+                <span>Tested VPN configurations, ready to use</span>
+            </div>
+            <i class="fas fa-chevron-right gs-card-arrow"></i>
+        </a>
+
+        <!-- Join Our Community -->
+        <a href="community.html" class="gs-card">
+            <div class="gs-card-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="gs-card-text">
+                <strong>Join Our Community</strong>
+                <span>Connect, follow, and grow with everyone</span>
+            </div>
+            <i class="fas fa-chevron-right gs-card-arrow"></i>
+        </a>
+
+    </div>
+
+    <!-- Back button — bottom right -->
+    <button class="gs-back" id="gsPanelBack" type="button">
+        <i class="fas fa-arrow-left"></i> Back
+    </button>
+</div>
+
+
+<!-- Scripts -->
+<script src="org.js"></script>
+<script>
+(function () {
+
+    /* ══ Partners drag-to-scroll with momentum ══ */
+    (function () {
+        const wrap = document.querySelector('.partners-marquee-wrap');
+        if (!wrap) return;
+
+        let isDown = false, startX, scrollLeft, velX = 0, lastX, rafId;
+
+        wrap.addEventListener('mousedown', function (e) {
+            isDown = true;
+            wrap.classList.add('dragging');
+            startX    = e.pageX - wrap.offsetLeft;
+            scrollLeft = wrap.scrollLeft;
+            lastX     = e.pageX;
+            velX      = 0;
+            cancelAnimationFrame(rafId);
+        });
+
+        wrap.addEventListener('mouseleave', endDrag);
+        wrap.addEventListener('mouseup',    endDrag);
+
+        wrap.addEventListener('mousemove', function (e) {
+            if (!isDown) return;
+            e.preventDefault();
+            velX = e.pageX - lastX;
+            lastX = e.pageX;
+            const x    = e.pageX - wrap.offsetLeft;
+            const walk = (x - startX) * 1.2;
+            wrap.scrollLeft = scrollLeft - walk;
+        });
+
+        function endDrag() {
+            if (!isDown) return;
+            isDown = false;
+            wrap.classList.remove('dragging');
+            // momentum coast
+            (function coast() {
+                if (Math.abs(velX) < 0.5) return;
+                wrap.scrollLeft -= velX;
+                velX *= 0.92;
+                rafId = requestAnimationFrame(coast);
+            })();
+        }
+
+        // Touch support
+        let touchStartX, touchScrollLeft;
+        wrap.addEventListener('touchstart', function (e) {
+            touchStartX    = e.touches[0].pageX;
+            touchScrollLeft = wrap.scrollLeft;
+        }, { passive: true });
+
+        wrap.addEventListener('touchmove', function (e) {
+            const dx = touchStartX - e.touches[0].pageX;
+            wrap.scrollLeft = touchScrollLeft + dx;
+        }, { passive: true });
+    })();
+
+    /* ══ Partners scroll reveal ══ */
+    const partnersHeader = document.getElementById('partnersHeader');
+    const partnerPills   = document.querySelectorAll('.partner-pill');
+
+    const partnersObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                partnersObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    if (partnersHeader) partnersObserver.observe(partnersHeader);
+    partnerPills.forEach((pill, i) => {
+        pill.style.transitionDelay = (i % 4) * 0.08 + 's';
+        partnersObserver.observe(pill);
+    });
+
+    /* ══ 1. Local DB — check dx_session (same key as signup/login) ══ */
+    const isLoggedIn = !!localStorage.getItem('dx_session');
+
+    /* Hide Sign Up button if already signed in */
+    const signupBtn = document.getElementById('headerSignupBtn');
+    if (isLoggedIn && signupBtn) {
+        signupBtn.style.display = 'none';
+    }
+
+    /* ══ 2. Get Started panel logic ══ */
+    const overlay   = document.getElementById('gsOverlay');
+    const panel     = document.getElementById('gsPanel');
+    const backBtn   = document.getElementById('gsPanelBack');
+
+    function openPanel() {
+        overlay.classList.add('open');
+        panel.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closePanel() {
+        overlay.classList.remove('open');
+        panel.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    /* Both "Get Started" buttons trigger the panel */
+    ['getStartedBtn', 'getStartedBtn2'].forEach(function (id) {
+        const btn = document.getElementById(id);
+        if (btn) btn.addEventListener('click', openPanel);
+    });
+
+    /* Close on back button */
+    backBtn.addEventListener('click', closePanel);
+
+    /* Close on overlay click */
+    overlay.addEventListener('click', closePanel);
+
+})();
+</script>
+</body>
+</html>
