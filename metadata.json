@@ -4,20 +4,20 @@
     "count": 11
   },
   "hatunnel": {
-    "last_updated": "2026-06-14 19:05:03",
-    "count": 8
+    "last_updated": "2026-06-17 02:00:03",
+    "count": 11
   },
   "darktunnel": {
     "last_updated": "2026-06-03 14:11:31",
     "count": 2
   },
   "httpinjector": {
-    "last_updated": "14 Jun 2026 15:27",
-    "count": 17
+    "last_updated": "2026-06-17 02:00:03",
+    "count": 4
   },
   "npvtunnel": {
-    "last_updated": "2026-06-14 19:09:53",
-    "count": 6
+    "last_updated": "2026-06-17 02:00:03",
+    "count": 9
   },
   "opentunnel": {
     "last_updated": "2025-12-10 18:50:10",
@@ -28,8 +28,8 @@
     "count": 15
   },
   "zivpntunnel": {
-    "last_updated": "2026-06-14 19:09:53",
-    "count": 4
+    "last_updated": "2026-06-17 02:00:03",
+    "count": 6
   },
   "sshcustom": {
     "last_updated": "2025-12-12 13:10:15",
@@ -44,16 +44,16 @@
     "count": 0
   },
   "letsvpngo": {
-    "last_updated": "2026-06-14 08:19:46",
-    "count": 15
+    "last_updated": "2026-06-17 02:00:03",
+    "count": 10
   },
   "socksiptunnel": {
     "last_updated": "2025-12-31 19:43:03",
     "count": 0
   },
   "starkvpn": {
-    "last_updated": "2026-06-14 08:19:46",
-    "count": 11
+    "last_updated": "2026-06-17 02:00:03",
+    "count": 3
   },
   "jezproxy": {
     "count": 1,
