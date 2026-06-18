@@ -242,13 +242,22 @@
     "ugh": 0,
     "nope": 0
   },
-  "GOAT _ FLASH POINT¶¥.hat": {
+  "GOAT _ FLASH POINTÂ¶Â¥.hat": {
     "total": 1,
     "love": 0,
     "great": 1,
     "happy": 0,
     "sad": 0,
     "ugh": 0,
+    "nope": 0
+  },
+  "GOAT _ FLASH POINT¶¥.hat": {
+    "total": 1,
+    "love": 0,
+    "great": 0,
+    "happy": 0,
+    "sad": 0,
+    "ugh": 1,
     "nope": 0
   }
 }
