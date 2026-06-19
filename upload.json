@@ -1,91 +1,17 @@
 [
   {
-    "name": "AllNET-UDP VPSÂ²",
+    "name": "AllNET-UDP VPSÃÂ²",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPSÂ².ziv",
+    "filename": "AllNET-UDP VPSÃÂ².ziv",
     "date": "17 Jun 2026",
     "config_id": "zivpntunnel"
   },
   {
-    "name": "AllNET-UDP VPSÂ¹",
+    "name": "AllNET-UDP VPSÃÂ¹",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPSÂ¹.ziv",
+    "filename": "AllNET-UDP VPSÃÂ¹.ziv",
     "date": "17 Jun 2026",
     "config_id": "zivpntunnel"
-  },
-  {
-    "name": "GOAT   FLASH POINTÂ¶Â¥",
-    "vpn": "HA Tunnel",
-    "filename": "GOAT _ FLASH POINTÂ¶Â¥.hat",
-    "date": "17 Jun 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": "Uluru Ã MTN",
-    "vpn": "NPV Tunnel",
-    "filename": "Uluru Ã MTN.npvt",
-    "date": "17 Jun 2026",
-    "config_id": "npvtunnel"
-  },
-  {
-    "name": "Uluru Ã MTN 1",
-    "vpn": "NPV Tunnel",
-    "filename": "Uluru Ã MTN_1.npvt",
-    "date": "17 Jun 2026",
-    "config_id": "npvtunnel"
-  },
-  {
-    "name": "Uluru Ã MTN 2",
-    "vpn": "NPV Tunnel",
-    "filename": "Uluru Ã MTN_2.npvt",
-    "date": "17 Jun 2026",
-    "config_id": "npvtunnel"
-  },
-  {
-    "name": "  --ÃwÃ¦mÃ¯ tts Â¹  mb  ---- 102759",
-    "vpn": "HA Tunnel",
-    "filename": "__--ÃwÃ¦mÃ¯_tts_Â¹__mb__----_102759.hat",
-    "date": "17 Jun 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": " Â  Â  Â     Â  Â  Â  Â  Â  Â  Â  -1",
-    "vpn": "HA Tunnel",
-    "filename": "_Â _Â _Â __ _Â _Â _Â _Â _Â _Â _Â _-1.hat",
-    "date": "17 Jun 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": "Telkom Vodacom and Rain ZA UDP ",
-    "vpn": "HTTP Custom",
-    "filename": "Telkom_Vodacom and Rain ZA UDP .hc",
-    "date": "14 Jun 2026",
-    "config_id": "httpcustom",
-    "expires_at": "2026-06-17T00:43:00"
-  },
-  {
-    "name": "MTN ZA 500mb Daily Cap",
-    "vpn": "NPV Tunnel",
-    "filename": "MTN ZA 500mb Daily Cap.npvt",
-    "date": "14 Jun 2026",
-    "config_id": "npvtunnel",
-    "expires_at": "2026-06-17T00:51:00"
-  },
-  {
-    "name": "MTN 500mb vps",
-    "vpn": "HTTP Custom",
-    "filename": "MTN 500mb vps.hc",
-    "date": "14 Jun 2026",
-    "config_id": "httpcustom",
-    "expires_at": "2026-06-21T04:17:00"
-  },
-  {
-    "name": "ItachaiGoat MTN 500MB DAILY UK SERVER",
-    "vpn": "HTTP Custom",
-    "filename": "ItachaiGoat MTN 500MB DAILY UK SERVER.hc",
-    "date": "14 Jun 2026",
-    "config_id": "httpcustom",
-    "expires_at": "2026-06-16T03:26:00"
   },
   {
     "name": "ICE TIKTOK BYPASS ",
@@ -102,73 +28,6 @@
     "config_id": "zivpntunnel"
   },
   {
-    "name": "MTN 500 MB DAILY BY BATMAN TECH   ",
-    "vpn": "HA Tunnel",
-    "filename": "MTN 500 MB DAILY BY BATMAN TECH __.hat",
-    "date": "14 Jun 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": "Poland premium UDP by mrfwewords",
-    "vpn": "ZIV PN Tunnel",
-    "filename": "Poland premium UDP by mrfwewords.ziv",
-    "date": "13 Jun 2026",
-    "config_id": "zivpntunnel",
-    "expires_at": "2026-06-16T20:47:00"
-  },
-  {
-    "name": "black chyldd 1gb daily",
-    "vpn": "NPV Tunnel",
-    "filename": "black chyldd 1gb daily.npvt",
-    "date": "13 Jun 2026",
-    "config_id": "npvtunnel"
-  },
-  {
-    "name": "ULURU X MTN ",
-    "vpn": "HTTP Custom",
-    "filename": "ULURU X MTN .hc",
-    "date": "13 Jun 2026",
-    "config_id": "httpcustom",
-    "expires_at": "2026-06-16T00:00:00"
-  },
-  {
-    "name": "ZA DAILY UDP PLUG ",
-    "vpn": "HTTP Custom",
-    "filename": "ZA DAILY UDP PLUG .hc",
-    "date": "13 Jun 2026",
-    "config_id": "httpcustom",
-    "expires_at": "2026-06-15T18:26:00"
-  },
-  {
-    "name": "ZA MTN 500MB ",
-    "vpn": "NPV Tunnel",
-    "filename": "ZA MTN 500MB .npvt",
-    "date": "13 Jun 2026",
-    "config_id": "npvtunnel",
-    "expires_at": "2026-06-15T18:26:00"
-  },
-  {
-    "name": "MTN 500MB VIP",
-    "vpn": "NPV Tunnel",
-    "filename": "MTN 500MB VIP.npvt",
-    "date": "13 Jun 2026",
-    "config_id": "npvtunnel"
-  },
-  {
-    "name": "  MTN 15MB DAILY  ",
-    "vpn": "HTTP Custom",
-    "filename": "__MTN 15MB DAILY__.hc",
-    "date": "13 Jun 2026",
-    "config_id": "httpcustom"
-  },
-  {
-    "name": "500 MB DAILY PLUG",
-    "vpn": "HTTP Custom",
-    "filename": "500 MB DAILY PLUG.hc",
-    "date": "13 Jun 2026",
-    "config_id": "httpcustom"
-  },
-  {
     "name": "UDP PLUG",
     "vpn": "ZIV PN Tunnel",
     "filename": "UDP PLUG.ziv",
@@ -176,39 +35,11 @@
     "config_id": "zivpntunnel"
   },
   {
-    "name": "South Africa MTN 500MB Daily 4",
-    "vpn": "HTTP Custom",
-    "filename": "South Africa MTN 500MB Daily_4.hc",
-    "date": "13 Jun 2026",
-    "config_id": "httpcustom"
-  },
-  {
     "name": "Germany VIP UDP PLUG",
     "vpn": "ZIV PN Tunnel",
     "filename": "Germany VIP UDP PLUG.ziv",
     "date": "12 Jun 2026",
     "config_id": "zivpntunnel"
-  },
-  {
-    "name": "[  ] LiQuId                     ",
-    "vpn": "HA Tunnel",
-    "filename": "[__] LiQuId _ _ ____ ____ ______.hat",
-    "date": "11 Jun 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": "South Africa MTN 500MB Daily",
-    "vpn": "HTTP Custom",
-    "filename": "South Africa MTN 500MB Daily.hc",
-    "date": "11 Jun 2026",
-    "config_id": "httpcustom"
-  },
-  {
-    "name": " World Cup  500MB(by THE-OTC)",
-    "vpn": "HTTP Custom",
-    "filename": "_World Cup__500MB(by THE-OTC).hc",
-    "date": "11 Jun 2026",
-    "config_id": "httpcustom"
   },
   {
     "name": " TIKTOK BYPASS ",
@@ -225,60 +56,11 @@
     "config_id": "letsvpngo"
   },
   {
-    "name": "MTN 10GB MONTHLY BY       MUKH THWA      ",
-    "vpn": "NPV Tunnel",
-    "filename": "MTN 10GB MONTHLY BY ______MUKH_THWA______.npvt",
-    "date": "7 Jun 2026",
-    "config_id": "npvtunnel"
-  },
-  {
-    "name": "THE CRONIC MTN 500",
-    "vpn": "HA Tunnel",
-    "filename": "THE CRONIC MTN 500.hat",
-    "date": "4 Jun 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": "300MB-DAILYIMTN-ZA",
-    "vpn": "HTTP Injector",
-    "filename": "300MB-DAILYIMTN-ZA.ehi",
-    "date": "03 Jun 2026",
-    "config_id": "httpinjector"
-  },
-  {
-    "name": "300MB-DAILYIMTN-ZA 1",
-    "vpn": "HTTP Injector",
-    "filename": "300MB-DAILYIMTN-ZA_1.ehi",
-    "date": "03 Jun 2026",
-    "config_id": "httpinjector"
-  },
-  {
-    "name": "400MB-DAILY  I[ShadowSocks]I  1",
-    "vpn": "NPV Tunnel",
-    "filename": "400MB-DAILY  I[ShadowSocks]I__1.npvt",
-    "date": "03 Jun 2026",
-    "config_id": "npvtunnel"
-  },
-  {
     "name": "50 MB Last push   1",
     "vpn": "HA Tunnel",
     "filename": "50 MB Last push __1.hat",
     "date": "03 Jun 2026",
     "config_id": "hatunnel"
-  },
-  {
-    "name": "500MB BY WARH ",
-    "vpn": "HA Tunnel",
-    "filename": "500MB BY WARH_.hat",
-    "date": "03 Jun 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": "Benathi   MTN300    ",
-    "vpn": "Stark VPN",
-    "filename": "Benathi___MTN300____.stk",
-    "date": "03 Jun 2026",
-    "config_id": "starkvpn"
   },
   {
     "name": "Darksocket MTN SA 60 MB",
@@ -288,27 +70,6 @@
     "config_id": "hatunnel"
   },
   {
-    "name": "MTN 300 MB VIP",
-    "vpn": "HTTP Custom",
-    "filename": "MTN 300 MB VIP.hc",
-    "date": "03 Jun 2026",
-    "config_id": "httpcustom"
-  },
-  {
-    "name": "MTN 500MB ZA VLESS",
-    "vpn": "Unknown",
-    "filename": "MTN 500MB ZA VLESS.dark",
-    "date": "03 Jun 2026",
-    "config_id": "darktunnel"
-  },
-  {
-    "name": "MTN 500MB ZA VLESS 1",
-    "vpn": "Unknown",
-    "filename": "MTN 500MB ZA VLESS_1.dark",
-    "date": "03 Jun 2026",
-    "config_id": "darktunnel"
-  },
-  {
     "name": "MTN Weekly Lite 100MB",
     "vpn": "Stark VPN",
     "filename": "MTN Weekly Lite 100MB.stk",
@@ -316,32 +77,11 @@
     "config_id": "starkvpn"
   },
   {
-    "name": "MTN 50MB Daily Plug by ghostnet------",
-    "vpn": "HA Tunnel",
-    "filename": "MTN_50MB_Daily_Plug_by_ghostnet------.hat",
-    "date": "03 Jun 2026",
-    "config_id": "hatunnel"
-  },
-  {
-    "name": "ZA MTN 500MB (DAILY) INDONESIA SSH",
-    "vpn": "Unknown",
-    "filename": "ZA MTN 500MB (DAILY) INDONESIA SSH.jez",
-    "date": "03 Jun 2026",
-    "config_id": "jezproxy"
-  },
-  {
     "name": "[TWITTER-BUNDLES ][WORLDWIDE  ][DAILY ]",
     "vpn": "HA Tunnel",
     "filename": "[TWITTER-BUNDLES_][WORLDWIDE _][DAILY_].hat",
     "date": "03 Jun 2026",
     "config_id": "hatunnel"
-  },
-  {
-    "name": "  MTN 500MB    Monthly",
-    "vpn": "Stark VPN",
-    "filename": "_ MTN 500MB __ Monthly.stk",
-    "date": "03 Jun 2026",
-    "config_id": "starkvpn"
   },
   {
     "name": " MTN 15MB  1",
