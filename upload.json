@@ -1,57 +1,57 @@
 [
   {
-    "name": "AllNET-UDP VPS²",
+    "name": "AllNET-UDP VPSÂ²",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPS².ziv",
+    "filename": "AllNET-UDP VPSÂ².ziv",
     "date": "17 Jun 2026",
     "config_id": "zivpntunnel"
   },
   {
-    "name": "AllNET-UDP VPS¹",
+    "name": "AllNET-UDP VPSÂ¹",
     "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPS¹.ziv",
+    "filename": "AllNET-UDP VPSÂ¹.ziv",
     "date": "17 Jun 2026",
     "config_id": "zivpntunnel"
   },
   {
-    "name": "GOAT   FLASH POINT¶¥",
+    "name": "GOAT   FLASH POINTÂ¶Â¥",
     "vpn": "HA Tunnel",
-    "filename": "GOAT _ FLASH POINT¶¥.hat",
+    "filename": "GOAT _ FLASH POINTÂ¶Â¥.hat",
     "date": "17 Jun 2026",
     "config_id": "hatunnel"
   },
   {
-    "name": "Uluru × MTN",
+    "name": "Uluru Ã MTN",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru × MTN.npvt",
+    "filename": "Uluru Ã MTN.npvt",
     "date": "17 Jun 2026",
     "config_id": "npvtunnel"
   },
   {
-    "name": "Uluru × MTN 1",
+    "name": "Uluru Ã MTN 1",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru × MTN_1.npvt",
+    "filename": "Uluru Ã MTN_1.npvt",
     "date": "17 Jun 2026",
     "config_id": "npvtunnel"
   },
   {
-    "name": "Uluru × MTN 2",
+    "name": "Uluru Ã MTN 2",
     "vpn": "NPV Tunnel",
-    "filename": "Uluru × MTN_2.npvt",
+    "filename": "Uluru Ã MTN_2.npvt",
     "date": "17 Jun 2026",
     "config_id": "npvtunnel"
   },
   {
-    "name": "  --Øwæmï tts ¹  mb  ---- 102759",
+    "name": "  --ÃwÃ¦mÃ¯ tts Â¹  mb  ---- 102759",
     "vpn": "HA Tunnel",
-    "filename": "__--Øwæmï_tts_¹__mb__----_102759.hat",
+    "filename": "__--ÃwÃ¦mÃ¯_tts_Â¹__mb__----_102759.hat",
     "date": "17 Jun 2026",
     "config_id": "hatunnel"
   },
   {
-    "name": "                        -1",
+    "name": " Â  Â  Â     Â  Â  Â  Â  Â  Â  Â  -1",
     "vpn": "HA Tunnel",
-    "filename": "_ _ _ __ _ _ _ _ _ _ _ _-1.hat",
+    "filename": "_Â _Â _Â __ _Â _Â _Â _Â _Â _Â _Â _-1.hat",
     "date": "17 Jun 2026",
     "config_id": "hatunnel"
   },
@@ -109,40 +109,12 @@
     "config_id": "hatunnel"
   },
   {
-    "name": "MTN 500 MB DAILY BY BATMAN TECH    ",
-    "vpn": "TLS Tunnel",
-    "filename": "MTN 500 MB DAILY BY BATMAN TECH ___.tls",
-    "date": "14 Jun 2026",
-    "config_id": "tlstunnel"
-  },
-  {
     "name": "Poland premium UDP by mrfwewords",
     "vpn": "ZIV PN Tunnel",
     "filename": "Poland premium UDP by mrfwewords.ziv",
     "date": "13 Jun 2026",
     "config_id": "zivpntunnel",
     "expires_at": "2026-06-16T20:47:00"
-  },
-  {
-    "name": "MTN 500MB PER DAY",
-    "vpn": "TLS Tunnel",
-    "filename": "MTN 500MB PER DAY.tls",
-    "date": "13 Jun 2026",
-    "config_id": "tlstunnel"
-  },
-  {
-    "name": "ZET FLASH    500MB",
-    "vpn": "TLS Tunnel",
-    "filename": "ZET FLASH __ 500MB.tls",
-    "date": "13 Jun 2026",
-    "config_id": "tlstunnel"
-  },
-  {
-    "name": "Toxiic 500mbs [RST]",
-    "vpn": "TLS Tunnel",
-    "filename": "Toxiic 500mbs [RST].tls",
-    "date": "13 Jun 2026",
-    "config_id": "tlstunnel"
   },
   {
     "name": "black chyldd 1gb daily",
@@ -197,18 +169,6 @@
     "config_id": "httpcustom"
   },
   {
-    "name": " MTN DAILY PLUG  1",
-    "vpn": "TLS Tunnel",
-    "filename": "_MTN DAILY PLUG__1.tls",
-    "date": "13 Jun 2026",
-    "config_id": "tlstunnel",
-    "locations": [
-      "Gauteng",
-      "Eastern Cape",
-      "Limpopo"
-    ]
-  },
-  {
     "name": "UDP PLUG",
     "vpn": "ZIV PN Tunnel",
     "filename": "UDP PLUG.ziv",
@@ -237,25 +197,11 @@
     "config_id": "hatunnel"
   },
   {
-    "name": "MTN 500MB ",
-    "vpn": "TLS Tunnel",
-    "filename": "MTN 500MB .tls",
-    "date": "11 Jun 2026",
-    "config_id": "tlstunnel"
-  },
-  {
     "name": "South Africa MTN 500MB Daily",
     "vpn": "HTTP Custom",
     "filename": "South Africa MTN 500MB Daily.hc",
     "date": "11 Jun 2026",
     "config_id": "httpcustom"
-  },
-  {
-    "name": " MTN DAILY PLUG ",
-    "vpn": "TLS Tunnel",
-    "filename": "_MTN DAILY PLUG_.tls",
-    "date": "11 Jun 2026",
-    "config_id": "tlstunnel"
   },
   {
     "name": " World Cup  500MB(by THE-OTC)",
@@ -272,27 +218,6 @@
     "config_id": "tlstunnel"
   },
   {
-    "name": "DANZO REVOLUTION ",
-    "vpn": "TLS Tunnel",
-    "filename": "DANZO REVOLUTION .tls",
-    "date": "11 Jun 2026",
-    "config_id": "tlstunnel"
-  },
-  {
-    "name": "MTN LIMITED ECHOEYES",
-    "vpn": "TLS Tunnel",
-    "filename": "MTN LIMITED ECHOEYES.tls",
-    "date": "11 Jun 2026",
-    "config_id": "tlstunnel"
-  },
-  {
-    "name": "RsaMtn500mb (1)",
-    "vpn": "TLS Tunnel",
-    "filename": "RsaMtn500mb (1).tls",
-    "date": "10 Jun 2026",
-    "config_id": "tlstunnel"
-  },
-  {
     "name": "version623",
     "vpn": "Lets VPN GO",
     "filename": "version623.js",
@@ -305,13 +230,6 @@
     "filename": "MTN 10GB MONTHLY BY ______MUKH_THWA______.npvt",
     "date": "7 Jun 2026",
     "config_id": "npvtunnel"
-  },
-  {
-    "name": "THE CRONIC MTN 500",
-    "vpn": "TLS Tunnel",
-    "filename": "THE CRONIC MTN 500.tls",
-    "date": "4 Jun 2026",
-    "config_id": "tlstunnel"
   },
   {
     "name": "THE CRONIC MTN 500",
@@ -363,13 +281,6 @@
     "config_id": "starkvpn"
   },
   {
-    "name": "Chaoshub 500Mb daily plug ",
-    "vpn": "TLS Tunnel",
-    "filename": "Chaoshub 500Mb daily plug .tls",
-    "date": "03 Jun 2026",
-    "config_id": "tlstunnel"
-  },
-  {
     "name": "Darksocket MTN SA 60 MB",
     "vpn": "HA Tunnel",
     "filename": "Darksocket MTN SA 60 MB.hat",
@@ -396,13 +307,6 @@
     "filename": "MTN 500MB ZA VLESS_1.dark",
     "date": "03 Jun 2026",
     "config_id": "darktunnel"
-  },
-  {
-    "name": "MTN DAILY 500 MB",
-    "vpn": "TLS Tunnel",
-    "filename": "MTN DAILY 500 MB.tls",
-    "date": "03 Jun 2026",
-    "config_id": "tlstunnel"
   },
   {
     "name": "MTN Weekly Lite 100MB",
@@ -445,13 +349,6 @@
     "filename": "_MTN 15MB__1.ehi",
     "date": "03 Jun 2026",
     "config_id": "httpinjector"
-  },
-  {
-    "name": " MTN 500MB DAILY BY PANTHER (2)",
-    "vpn": "TLS Tunnel",
-    "filename": "_MTN 500MB DAILY BY PANTHER_(2).tls",
-    "date": "03 Jun 2026",
-    "config_id": "tlstunnel"
   },
   {
     "name": "version586",
