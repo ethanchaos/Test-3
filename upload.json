@@ -1,19 +1,5 @@
 [
   {
-    "name": "AllNET-UDP VPSÃÂ²",
-    "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPSÃÂ².ziv",
-    "date": "17 Jun 2026",
-    "config_id": "zivpntunnel"
-  },
-  {
-    "name": "AllNET-UDP VPSÃÂ¹",
-    "vpn": "ZIV PN Tunnel",
-    "filename": "AllNET-UDP VPSÃÂ¹.ziv",
-    "date": "17 Jun 2026",
-    "config_id": "zivpntunnel"
-  },
-  {
     "name": "ICE TIKTOK BYPASS ",
     "vpn": "HTTP Injector",
     "filename": "ICE TIKTOK BYPASS_.ehi",
