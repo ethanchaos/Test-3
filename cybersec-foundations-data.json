@@ -73,7 +73,7 @@
       "badge": "Beginner",
       "color": "amber",
       "tag": "Tools",
-      "locked": fal
+      "locked": false
     },
     {
       "id": 6,
