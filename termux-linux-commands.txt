@@ -1,0 +1,200 @@
+100 Essential Termux/Linux Commands
+====================================
+
+pwd - Print the current working directory path
+ls - List files and directories in the current folder
+ls -l - List files in long format (permissions, size, date)
+ls -a - List all files, including hidden ones
+cd - Change the current directory
+cd .. - Move up one directory level
+cd ~ - Go to the home directory
+mkdir - Create a new directory
+rmdir - Remove an empty directory
+touch - Create a new empty file or update its timestamp
+cp - Copy files or directories
+mv - Move or rename files or directories
+rm - Remove (delete) files
+rm -r - Remove directories and their contents recursively
+rm -f - Force remove files without confirmation
+cat - Display the contents of a file
+less - View file contents one page at a time (scrollable)
+more - View file contents one screen at a time (basic pager)
+head - Show the first lines of a file
+tail - Show the last lines of a file
+nano - Open the Nano text editor
+vim - Open the Vim text editor
+echo - Print text or variable values to the screen
+clear - Clear the terminal screen
+history - Show a list of previously run commands
+whoami - Display the current logged-in username
+id - Show user and group ID information
+uname - Display system and kernel information
+hostname - Show or set the system's hostname
+date - Display or set the current date and time
+cal - Display a calendar
+man - Show the manual page for a command
+help - Display help information for shell built-in commands
+which - Show the full path of a command
+whereis - Locate the binary, source, and manual files for a command
+find - Search for files and directories matching criteria
+locate - Quickly find files by name using a prebuilt database
+grep - Search text using pattern matching
+sort - Sort lines of text in a file
+uniq - Remove or report duplicate lines
+wc - Count lines, words, and characters in a file
+cut - Extract sections from each line of a file
+paste - Merge lines from multiple files side by side
+tr - Translate or delete characters in text
+sed - Stream editor for find-and-replace and text transformation
+awk - Pattern scanning and text processing language
+xargs - Build and run commands from piped input
+tee - Output text to the screen and a file at the same time
+chmod - Change file or directory permissions
+chown - Change file or directory ownership
+ln - Create hard or symbolic links between files
+tar - Archive multiple files into one (.tar) file
+gzip - Compress files using gzip
+gunzip - Decompress gzip (.gz) files
+zip - Compress files into a .zip archive
+unzip - Extract files from a .zip archive
+du - Show disk usage of files and directories
+df - Show available and used disk space
+free - Display free and used memory (RAM)
+ps - List currently running processes
+top - Display live, updating process and resource usage
+kill - Terminate a process by its process ID (PID)
+killall - Terminate all processes matching a name
+pkill - Kill processes by name or other attributes
+jobs - List background jobs in the current shell
+bg - Resume a suspended job in the background
+fg - Bring a background job to the foreground
+nohup - Run a command immune to terminal hangups
+sleep - Pause execution for a set number of seconds
+watch - Run a command repeatedly and show live output
+time - Measure how long a command takes to run
+ping - Test network connectivity to a host
+curl - Transfer data to or from a URL
+wget - Download files from the web
+ssh - Securely connect to a remote machine
+scp - Securely copy files between hosts over SSH
+sftp - Securely transfer files interactively over SSH
+ip - Show or manage network interfaces and routing
+ifconfig - Display or configure network interface settings (legacy)
+netstat - Show network connections and statistics (legacy)
+ss - Show socket and network connection statistics
+nslookup - Query DNS to resolve domain names
+dig - Perform detailed DNS lookups
+traceroute - Trace the network path packets take to a host
+pkg - Termux's package management wrapper
+apt - Manage software packages (install, remove, update)
+apt update - Refresh the list of available packages
+apt upgrade - Upgrade all installed packages to newer versions
+apt install - Install a new package
+apt remove - Uninstall a package
+apt search - Search for available packages by name
+apt show - Display detailed info about a package
+git - Track and manage code with version control
+python - Run Python 2 scripts or interpreter (where available)
+python3 - Run Python 3 scripts or interpreter
+pip - Install Python packages (Python 2)
+pip3 - Install Python packages (Python 3)
+nmap - Scan networks and hosts for open ports and services
+env - Display or set environment variables
+printenv - Print environment variable values
+export - Set an environment variable for child processes
+unset - Remove a variable or function from the environment
+alias - Create a shortcut name for a command
+unalias - Remove a previously defined alias
+source - Run a script in the current shell session
+bash - Start the Bash shell
+sh - Start the basic Bourne shell
+zsh - Start the Z shell
+exit - Close the current terminal session
+logout - End a login shell session
+exec - Replace the current shell with a specified command
+su - Switch to another user (commonly root)
+sudo - Run a command with elevated (superuser) privileges
+groups - Show group memberships of a user
+passwd - Change a user's password
+useradd - Create a new user account
+userdel - Delete a user account
+usermod - Modify an existing user account
+groupadd - Create a new user group
+groupdel - Delete a user group
+mount - Attach a filesystem to the directory tree
+umount - Detach a mounted filesystem
+lsblk - List information about block devices
+blkid - Display block device attributes (UUID, type)
+fdisk - Partition a disk (view or edit partition tables)
+mkfs - Create a new filesystem on a device or partition
+fsck - Check and repair a filesystem
+sync - Flush filesystem buffers to disk
+dd - Copy and convert raw data block by block
+stat - Display detailed status info about a file
+file - Determine the type of a file
+realpath - Resolve and print the absolute path of a file
+basename - Strip directory path, leaving just the filename
+dirname - Strip the filename, leaving just the directory path
+readlink - Show the target of a symbolic link
+md5sum - Calculate or verify an MD5 checksum
+sha1sum - Calculate or verify a SHA-1 checksum
+sha256sum - Calculate or verify a SHA-256 checksum
+sha512sum - Calculate or verify a SHA-512 checksum
+cmp - Compare two files byte by byte
+diff - Show differences between two files
+patch - Apply changes from a diff file to a file
+strings - Extract readable text from a binary file
+hexdump - Display file contents in hexadecimal format
+xxd - Create or view a hex dump of a file
+od - Dump files in octal or other formats
+split - Split a file into smaller pieces
+join - Join lines from two files on a common field
+comm - Compare two sorted files line by line
+column - Format text into neat, aligned columns
+expand - Convert tabs in text to spaces
+unexpand - Convert spaces in text back to tabs
+nl - Number the lines of a file
+rev - Reverse the characters in each line
+yes - Repeatedly output a string (often used with pipes)
+seq - Print a sequence of numbers
+factor - Show the prime factors of a number
+expr - Evaluate basic expressions in the shell
+bc - Run an arbitrary-precision calculator
+printf - Format and print text (like echo, but more powerful)
+test - Evaluate conditional expressions in scripts
+true - Always return a successful exit status
+false - Always return a failure exit status
+script - Record a terminal session to a file
+screen - Manage multiple terminal sessions in one window
+tmux - Terminal multiplexer for split panes and sessions
+crontab - Schedule recurring automated tasks
+at - Schedule a one-time task to run later
+uptime - Show how long the system has been running
+dmesg - Display kernel and boot-time log messages
+vmstat - Report virtual memory statistics
+iostat - Report CPU and disk I/O statistics
+lscpu - Display CPU architecture information
+lsusb - List connected USB devices
+lspci - List connected PCI devices
+getprop - Get Android system property values (Termux/Android)
+termux-setup-storage - Grant Termux access to device shared storage
+termux-open - Open a file using its default Android app
+termux-open-url - Open a URL in the default browser
+termux-share - Share a file via Android's share menu
+termux-clipboard-get - Read the current Android clipboard content
+termux-clipboard-set - Set the Android clipboard content
+termux-toast - Show a short pop-up message (toast) on screen
+termux-vibrate - Trigger the device's vibration motor
+termux-wake-lock - Prevent the device from sleeping
+termux-wake-unlock - Release a previously set wake lock
+termux-battery-status - Show battery level and charging status
+termux-camera-info - Display information about device cameras
+termux-location - Get the device's current GPS location
+termux-sensor - Read data from device sensors
+termux-sms-send - Send an SMS text message
+termux-telephony-deviceinfo - Show telephony/device info (network, SIM)
+termux-telephony-cellinfo - Show info about nearby cell towers
+termux-volume - Get or set device audio volume levels
+termux-media-player - Play, pause, or control media playback
+termux-notification - Display a custom Android notification
+termux-download - Download a file using Android's download manager
