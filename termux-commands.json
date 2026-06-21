@@ -1,0 +1,283 @@
+{
+  "categories": [
+    {
+      "id": "nav",
+      "label": "Navigation & Directory",
+      "commands": [
+        { "cmd": "pwd", "desc": "Print the current working directory path" },
+        { "cmd": "ls", "desc": "List files and directories in the current folder" },
+        { "cmd": "ls -l", "desc": "List files in long format — shows permissions, size, and date" },
+        { "cmd": "ls -a", "desc": "List all files including hidden ones (starting with <code>.</code>)" },
+        { "cmd": "cd", "desc": "Change the current working directory" },
+        { "cmd": "cd ..", "desc": "Move up one directory level" },
+        { "cmd": "cd ~", "desc": "Go directly to the home directory" },
+        { "cmd": "mkdir", "desc": "Create a new directory" },
+        { "cmd": "rmdir", "desc": "Remove an empty directory" }
+      ]
+    },
+    {
+      "id": "file",
+      "label": "File Operations",
+      "commands": [
+        { "cmd": "touch", "desc": "Create a new empty file or update its timestamp" },
+        { "cmd": "cp", "desc": "Copy files or directories" },
+        { "cmd": "mv", "desc": "Move or rename files and directories" },
+        { "cmd": "rm", "desc": "Remove (delete) files" },
+        { "cmd": "rm -r", "desc": "Remove directories and their contents recursively" },
+        { "cmd": "rm -f", "desc": "Force remove files without confirmation prompts" },
+        { "cmd": "stat", "desc": "Display detailed status information about a file" },
+        { "cmd": "file", "desc": "Determine the type of a file" },
+        { "cmd": "realpath", "desc": "Resolve and print the absolute path of a file" },
+        { "cmd": "basename", "desc": "Strip the directory path, leaving just the filename" },
+        { "cmd": "dirname", "desc": "Strip the filename, leaving just the directory path" },
+        { "cmd": "readlink", "desc": "Show the target of a symbolic link" },
+        { "cmd": "ln", "desc": "Create hard or symbolic links between files" }
+      ]
+    },
+    {
+      "id": "text",
+      "label": "Viewing & Editing Text",
+      "commands": [
+        { "cmd": "cat", "desc": "Display the contents of a file to the terminal" },
+        { "cmd": "less", "desc": "View file contents one page at a time with scroll support" },
+        { "cmd": "more", "desc": "View file contents one screen at a time (basic pager)" },
+        { "cmd": "head", "desc": "Show the first lines of a file (default: first 10)" },
+        { "cmd": "tail", "desc": "Show the last lines of a file (default: last 10)" },
+        { "cmd": "nano", "desc": "Open the Nano text editor — beginner-friendly, keyboard shortcuts shown at bottom" },
+        { "cmd": "vim", "desc": "Open the Vim text editor — powerful but has a steep learning curve" },
+        { "cmd": "echo", "desc": "Print text or variable values to the screen" },
+        { "cmd": "printf", "desc": "Format and print text — like echo but more precise control" }
+      ]
+    },
+    {
+      "id": "search",
+      "label": "Searching & Filtering",
+      "commands": [
+        { "cmd": "find", "desc": "Search for files and directories matching specified criteria" },
+        { "cmd": "locate", "desc": "Quickly find files by name using a prebuilt database" },
+        { "cmd": "grep", "desc": "Search text using pattern matching — essential for filtering output" },
+        { "cmd": "sort", "desc": "Sort lines of text in a file alphabetically or numerically" },
+        { "cmd": "uniq", "desc": "Remove or report duplicate consecutive lines in a file" },
+        { "cmd": "wc", "desc": "Count lines, words, and characters in a file" },
+        { "cmd": "cut", "desc": "Extract specific sections (columns) from each line of a file" },
+        { "cmd": "paste", "desc": "Merge lines from multiple files side by side" },
+        { "cmd": "tr", "desc": "Translate or delete characters in text streams" },
+        { "cmd": "sed", "desc": "Stream editor for find-and-replace and text transformation" },
+        { "cmd": "awk", "desc": "Pattern scanning and powerful text processing language" },
+        { "cmd": "diff", "desc": "Show line-by-line differences between two files" },
+        { "cmd": "cmp", "desc": "Compare two files byte by byte" },
+        { "cmd": "comm", "desc": "Compare two sorted files line by line" }
+      ]
+    },
+    {
+      "id": "process",
+      "label": "Process Management",
+      "commands": [
+        { "cmd": "ps", "desc": "List currently running processes" },
+        { "cmd": "top", "desc": "Display live, updating process and resource usage" },
+        { "cmd": "kill", "desc": "Terminate a process by its Process ID (PID)" },
+        { "cmd": "killall", "desc": "Terminate all processes matching a given name" },
+        { "cmd": "pkill", "desc": "Kill processes by name or other matching attributes" },
+        { "cmd": "jobs", "desc": "List background jobs in the current shell session" },
+        { "cmd": "bg", "desc": "Resume a suspended job, continuing it in the background" },
+        { "cmd": "fg", "desc": "Bring a background job back to the foreground" },
+        { "cmd": "nohup", "desc": "Run a command that continues even after the terminal closes" },
+        { "cmd": "sleep", "desc": "Pause execution for a specified number of seconds" },
+        { "cmd": "watch", "desc": "Run a command repeatedly at intervals and display live output" },
+        { "cmd": "time", "desc": "Measure exactly how long a command takes to execute" },
+        { "cmd": "uptime", "desc": "Show how long the system (Termux session) has been running" }
+      ]
+    },
+    {
+      "id": "net",
+      "label": "Networking",
+      "commands": [
+        { "cmd": "ping", "desc": "Test network connectivity to a remote host" },
+        { "cmd": "curl", "desc": "Transfer data to or from a URL — supports many protocols" },
+        { "cmd": "wget", "desc": "Download files from the web non-interactively" },
+        { "cmd": "ssh", "desc": "Securely connect to and control a remote machine" },
+        { "cmd": "scp", "desc": "Securely copy files between local and remote machines over SSH" },
+        { "cmd": "sftp", "desc": "Interactively transfer files over SSH with an FTP-like interface" },
+        { "cmd": "ip", "desc": "Show and manage network interfaces and routing tables" },
+        { "cmd": "ifconfig", "desc": "Display or configure network interface settings (legacy)" },
+        { "cmd": "netstat", "desc": "Show active network connections and listening ports (legacy)" },
+        { "cmd": "ss", "desc": "Modern replacement for netstat — shows socket statistics" },
+        { "cmd": "nslookup", "desc": "Query DNS servers to resolve domain names to IPs" },
+        { "cmd": "dig", "desc": "Perform detailed and scriptable DNS lookups" },
+        { "cmd": "traceroute", "desc": "Trace the network path packets take to reach a host" },
+        { "cmd": "nmap", "desc": "Scan networks and hosts for open ports and running services" }
+      ]
+    },
+    {
+      "id": "pkg",
+      "label": "Package Management",
+      "commands": [
+        { "cmd": "pkg", "desc": "Termux's package management wrapper — the primary tool for installing software" },
+        { "cmd": "apt", "desc": "The underlying APT package manager — equivalent to <code>pkg</code> in Termux" },
+        { "cmd": "apt update", "desc": "Refresh the list of available packages from all configured repositories" },
+        { "cmd": "apt upgrade", "desc": "Upgrade all installed packages to their latest available versions" },
+        { "cmd": "apt install", "desc": "Install a new package and its dependencies" },
+        { "cmd": "apt remove", "desc": "Uninstall a package (keeps config files)" },
+        { "cmd": "apt search", "desc": "Search for available packages by name or keyword" },
+        { "cmd": "apt show", "desc": "Display detailed information about a specific package" }
+      ]
+    },
+    {
+      "id": "perms",
+      "label": "Permissions & Ownership",
+      "commands": [
+        { "cmd": "chmod", "desc": "Change file or directory permissions (read, write, execute)" },
+        { "cmd": "chown", "desc": "Change the owner and/or group of a file or directory" },
+        { "cmd": "su", "desc": "Switch to another user account (commonly used to switch to root)" },
+        { "cmd": "sudo", "desc": "Run a command with elevated superuser privileges" },
+        { "cmd": "groups", "desc": "Show all group memberships for the current or specified user" },
+        { "cmd": "passwd", "desc": "Change a user's password" },
+        { "cmd": "useradd", "desc": "Create a new user account on the system" },
+        { "cmd": "userdel", "desc": "Delete a user account" },
+        { "cmd": "usermod", "desc": "Modify an existing user account's settings" },
+        { "cmd": "groupadd", "desc": "Create a new user group" },
+        { "cmd": "groupdel", "desc": "Delete an existing user group" }
+      ]
+    },
+    {
+      "id": "archive",
+      "label": "Archives & Compression",
+      "commands": [
+        { "cmd": "tar", "desc": "Archive multiple files into one <code>.tar</code> file — often combined with gzip" },
+        { "cmd": "gzip", "desc": "Compress a file using the gzip algorithm" },
+        { "cmd": "gunzip", "desc": "Decompress gzip (<code>.gz</code>) compressed files" },
+        { "cmd": "zip", "desc": "Compress files and directories into a <code>.zip</code> archive" },
+        { "cmd": "unzip", "desc": "Extract files from a <code>.zip</code> archive" },
+        { "cmd": "split", "desc": "Split a large file into smaller pieces of a specified size" }
+      ]
+    },
+    {
+      "id": "system",
+      "label": "System Info & Disk",
+      "commands": [
+        { "cmd": "uname", "desc": "Display system and Linux kernel information" },
+        { "cmd": "hostname", "desc": "Show or set the system's hostname" },
+        { "cmd": "date", "desc": "Display or set the current system date and time" },
+        { "cmd": "cal", "desc": "Display a calendar for the current or specified month/year" },
+        { "cmd": "du", "desc": "Show disk usage of files and directories" },
+        { "cmd": "df", "desc": "Show total, used, and available disk space per filesystem" },
+        { "cmd": "free", "desc": "Display free and used system memory (RAM and swap)" },
+        { "cmd": "lscpu", "desc": "Display detailed CPU architecture and processor information" },
+        { "cmd": "lsblk", "desc": "List information about all available block (storage) devices" },
+        { "cmd": "getprop", "desc": "Get Android system property values — e.g. CPU ABI, Android version" },
+        { "cmd": "dmesg", "desc": "Display kernel and boot-time system log messages" },
+        { "cmd": "vmstat", "desc": "Report virtual memory, CPU, and I/O statistics" },
+        { "cmd": "iostat", "desc": "Report CPU and disk input/output statistics" }
+      ]
+    },
+    {
+      "id": "shell",
+      "label": "Shell & Environment",
+      "commands": [
+        { "cmd": "clear", "desc": "Clear the terminal screen of all previous output" },
+        { "cmd": "history", "desc": "Show a numbered list of all previously run commands" },
+        { "cmd": "whoami", "desc": "Display the currently logged-in username" },
+        { "cmd": "id", "desc": "Show the current user's UID, GID, and group memberships" },
+        { "cmd": "env", "desc": "Display all current environment variables" },
+        { "cmd": "printenv", "desc": "Print the value of a specific environment variable" },
+        { "cmd": "export", "desc": "Set an environment variable and make it available to child processes" },
+        { "cmd": "unset", "desc": "Remove a variable or function from the current shell environment" },
+        { "cmd": "alias", "desc": "Create a shortcut name (alias) for a longer command" },
+        { "cmd": "unalias", "desc": "Remove a previously defined alias" },
+        { "cmd": "source", "desc": "Execute a script within the current shell session (no new process)" },
+        { "cmd": "bash", "desc": "Start a new Bash shell session" },
+        { "cmd": "sh", "desc": "Start a basic Bourne shell session" },
+        { "cmd": "zsh", "desc": "Start the Z Shell — a feature-rich alternative to Bash" },
+        { "cmd": "exit", "desc": "Close the current terminal session or shell" },
+        { "cmd": "logout", "desc": "End a login shell session" },
+        { "cmd": "exec", "desc": "Replace the current shell process with a specified command" },
+        { "cmd": "man", "desc": "Show the manual (help) page for any command" },
+        { "cmd": "help", "desc": "Display help information for shell built-in commands" },
+        { "cmd": "which", "desc": "Show the full filesystem path to a command's executable" },
+        { "cmd": "whereis", "desc": "Locate the binary, source code, and manual files for a command" }
+      ]
+    },
+    {
+      "id": "hash",
+      "label": "Hashing & File Integrity",
+      "commands": [
+        { "cmd": "md5sum", "desc": "Calculate or verify an MD5 checksum for a file" },
+        { "cmd": "sha1sum", "desc": "Calculate or verify a SHA-1 checksum" },
+        { "cmd": "sha256sum", "desc": "Calculate or verify a SHA-256 checksum — recommended for integrity checks" },
+        { "cmd": "sha512sum", "desc": "Calculate or verify a SHA-512 checksum" },
+        { "cmd": "strings", "desc": "Extract human-readable text strings from any binary file" },
+        { "cmd": "hexdump", "desc": "Display file contents in formatted hexadecimal output" },
+        { "cmd": "xxd", "desc": "Create a hex dump of a file or reverse a hex dump back to binary" },
+        { "cmd": "od", "desc": "Dump file contents in octal, hex, or other numeric formats" }
+      ]
+    },
+    {
+      "id": "dev",
+      "label": "Development & Scripting",
+      "commands": [
+        { "cmd": "git", "desc": "Track and manage source code with version control" },
+        { "cmd": "python", "desc": "Run Python 2 scripts or start the Python 2 interpreter" },
+        { "cmd": "python3", "desc": "Run Python 3 scripts or start the Python 3 interpreter" },
+        { "cmd": "pip", "desc": "Install Python 2 packages from PyPI" },
+        { "cmd": "pip3", "desc": "Install Python 3 packages from PyPI" },
+        { "cmd": "xargs", "desc": "Build and run commands constructed from piped standard input" },
+        { "cmd": "tee", "desc": "Output text to the terminal and simultaneously write it to a file" },
+        { "cmd": "script", "desc": "Record an entire terminal session to a file for review" },
+        { "cmd": "screen", "desc": "Manage multiple virtual terminal sessions inside one window" },
+        { "cmd": "tmux", "desc": "Terminal multiplexer — split panes, detach/reattach sessions" },
+        { "cmd": "crontab", "desc": "Schedule recurring automated tasks at specified times" },
+        { "cmd": "at", "desc": "Schedule a one-time command to run at a specific future time" },
+        { "cmd": "bc", "desc": "Open an arbitrary-precision command-line calculator" },
+        { "cmd": "expr", "desc": "Evaluate basic arithmetic and logical expressions in the shell" },
+        { "cmd": "seq", "desc": "Print a sequence of numbers to the terminal" },
+        { "cmd": "test", "desc": "Evaluate conditional expressions — commonly used inside shell scripts" },
+        { "cmd": "patch", "desc": "Apply changes from a diff file to update an original source file" }
+      ]
+    },
+    {
+      "id": "termux",
+      "label": "Termux-Specific (Android)",
+      "commands": [
+        { "cmd": "termux-setup-storage", "desc": "Grant Termux access to the device's shared storage (Downloads, etc.)" },
+        { "cmd": "termux-open", "desc": "Open a file using its default Android application" },
+        { "cmd": "termux-open-url", "desc": "Open a URL in the default Android browser" },
+        { "cmd": "termux-share", "desc": "Share a file via Android's native share menu" },
+        { "cmd": "termux-clipboard-get", "desc": "Read the current content of the Android clipboard" },
+        { "cmd": "termux-clipboard-set", "desc": "Set the Android clipboard content from the terminal" },
+        { "cmd": "termux-toast", "desc": "Show a short pop-up toast notification on the Android screen" },
+        { "cmd": "termux-vibrate", "desc": "Trigger the device's vibration motor from the terminal" },
+        { "cmd": "termux-wake-lock", "desc": "Prevent the device from sleeping while a command runs" },
+        { "cmd": "termux-wake-unlock", "desc": "Release a previously set wake lock" },
+        { "cmd": "termux-battery-status", "desc": "Display battery level, temperature, and charging status" },
+        { "cmd": "termux-camera-info", "desc": "Display information about the device's available cameras" },
+        { "cmd": "termux-location", "desc": "Get the device's current GPS coordinates" },
+        { "cmd": "termux-sensor", "desc": "Read live data from device sensors (accelerometer, gyro, etc.)" },
+        { "cmd": "termux-sms-send", "desc": "Send an SMS text message directly from Termux" },
+        { "cmd": "termux-telephony-deviceinfo", "desc": "Show telephony and device info — network type, operator, SIM details" },
+        { "cmd": "termux-telephony-cellinfo", "desc": "Show signal information about nearby cell towers" },
+        { "cmd": "termux-volume", "desc": "Get or set device audio volume levels" },
+        { "cmd": "termux-media-player", "desc": "Play, pause, or control media playback from the terminal" },
+        { "cmd": "termux-notification", "desc": "Display a custom notification in the Android notification tray" },
+        { "cmd": "termux-download", "desc": "Download a file using Android's native download manager" }
+      ]
+    },
+    {
+      "id": "misc",
+      "label": "Text Utilities & Misc",
+      "commands": [
+        { "cmd": "column", "desc": "Format piped text into neat, aligned columns for readability" },
+        { "cmd": "expand", "desc": "Convert tab characters in text output to spaces" },
+        { "cmd": "unexpand", "desc": "Convert leading spaces back into tab characters" },
+        { "cmd": "nl", "desc": "Number each line of a file or input stream" },
+        { "cmd": "rev", "desc": "Reverse the order of characters on each line" },
+        { "cmd": "join", "desc": "Join lines from two sorted files based on a common field" },
+        { "cmd": "yes", "desc": "Repeatedly output a string — useful for auto-confirming prompts via pipe" },
+        { "cmd": "factor", "desc": "Display the prime factors of a given number" },
+        { "cmd": "true", "desc": "Always exit with a success (zero) status — used in scripts" },
+        { "cmd": "false", "desc": "Always exit with a failure (non-zero) status — used in scripts" },
+        { "cmd": "dd", "desc": "Copy and convert raw data block by block — used for disk imaging" },
+        { "cmd": "sync", "desc": "Flush all pending filesystem write buffers to disk immediately" }
+      ]
+    }
+  ]
+}

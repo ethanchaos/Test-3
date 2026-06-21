@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Chaos Configurations — Termux Basics for Beginners</title>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="nmap-tutorial.css" />
+<link rel="icon" href="/pics/chaos.png?v=1">
+<link rel="shortcut icon" href="/pics/chaos.png?v=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GL0YEB7LF6');
+</script>
+<!-- ── AD SCRIPTS ── -->
+<!-- Vignette ad -->
+<script>(function(s){s.dataset.zone='11181504',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+<!-- Inpage push -->
+<script src="https://5gvci.com/act/files/tag.min.js?z=11181506" data-cfasync="false" async></script>
+<!-- Push notifications -->
+<script src="https://5gvci.com/act/files/tag.min.js?z=11181514" data-cfasync="false" async></script>
+
+<style>
+  *, *::before, *::after { max-width: 100%; }
+  img, pre, table { max-width: 100%; }
+
+  /* ── Termux accent: green ── */
+  .tut-title em        { color: #3ddc84; }
+  .tut-eyebrow         { color: #3ddc84; }
+  .toc-link.active     { color: #3ddc84; }
+  .toc-link.active .toc-dot { background: #3ddc84; }
+  .tut-progress-fill   { background: #3ddc84; }
+
+  /* ── Download source cards ── */
+  .dl-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .dl-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color .15s, background .15s;
+    overflow: hidden;
+  }
+  .dl-card:hover { border-color: #2e2e2e; background: #141414; }
+  .dl-card-icon {
+    width: 40px; height: 40px; min-width: 40px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .dl-icon-github   { background: rgba(255,255,255,.06); color: #ccc; }
+  .dl-icon-fdroid   { background: rgba(29,160,192,.1);   color: #1da0c0; }
+  .dl-icon-official { background: rgba(61,220,132,.1);   color: #3ddc84; }
+  .dl-icon-playalt  { background: rgba(255,80,80,.1);    color: #ff5050; }
+  .dl-card-body { min-width: 0; flex: 1; overflow: hidden; }
+  .dl-card-name {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: .04em; color: var(--accent);
+    margin-bottom: 3px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .dl-card-url {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px; color: #555;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .dl-card-badge {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 8px; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 4px;
+    flex-shrink: 0; white-space: nowrap;
+  }
+  .badge-recommended { background: rgba(61,220,132,.12); color: var(--green); border: 1px solid rgba(61,220,132,.25); }
+  .badge-stable      { background: rgba(79,163,224,.12); color: var(--blue);  border: 1px solid rgba(79,163,224,.25); }
+  .badge-limited     { background: rgba(255,80,80,.10);  color: #ff5050; border: 1px solid rgba(255,80,80,.2); }
+  .badge-mirror      { background: rgba(255,255,255,.05); color: #666; border: 1px solid #222; }
+
+  /* ── YouTube embed ── */
+  .yt-wrap {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+    background: #000;
+  }
+  .yt-wrap iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+  .yt-caption {
+    font-size: 11.5px; color: #555;
+    text-align: center;
+    margin-top: -14px;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  /* ── Watch warning banner ── */
+  .watch-warn {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px 16px; border-radius: var(--radius);
+    border: 1px solid rgba(255,80,80,.3);
+    background: rgba(255,80,80,.07);
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .watch-warn-icon { flex-shrink: 0; margin-top: 1px; color: #ff5050; }
+  .watch-warn-body { min-width: 0; flex: 1; }
+  .watch-warn-label {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: #ff5050; margin-bottom: 4px;
+  }
+  .watch-warn-text { font-size: 12.5px; color: #888; line-height: 1.65; }
+
+  /* ── Commands table ── */
+  .cmd-table-section { margin-bottom: 24px; }
+  .cmd-category-label {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: #3ddc84;
+    padding: 10px 0 6px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0;
+  }
+  .cmd-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+  }
+  .cmd-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    min-width: 480px;
+  }
+  .cmd-table thead tr {
+    background: rgba(255,255,255,.03);
+  }
+  .cmd-table th {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: #555; padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    white-space: nowrap;
+  }
+  .cmd-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid rgba(255,255,255,.03);
+    color: #888; vertical-align: top;
+    line-height: 1.55;
+  }
+  .cmd-table tr:last-child td { border-bottom: none; }
+  .cmd-table tr:hover td { background: rgba(255,255,255,.015); }
+  .cmd-table td:first-child {
+    font-family: 'Fira Code', monospace;
+    font-size: 12px; color: #3ddc84;
+    white-space: nowrap;
+    min-width: 180px;
+  }
+  .cmd-table td code {
+    font-family: 'Fira Code', monospace; font-size: 11px;
+    background: rgba(255,255,255,.05); padding: 1px 5px; border-radius: 3px; color: #aaa;
+  }
+
+  /* ── Dynamic commands container ── */
+  .cmd-categories-root { width: 100%; }
+  .cmd-loading {
+    font-family: 'Fira Code', monospace;
+    font-size: 12px; color: #555;
+    padding: 24px 0; text-align: center;
+  }
+  .cmd-loading.cmd-error { color: #ff5050; }
+
+  /* ── Ensure dynamically-injected command tables always render
+       regardless of the scroll-reveal animation system ── */
+  #section-commands {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  #cmd-categories-root,
+  .cmd-table-wrap,
+  .cmd-table {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  .cmd-table tbody { display: table-row-group; }
+  .cmd-table tr { display: table-row; }
+  .cmd-table td, .cmd-table th { display: table-cell; }
+
+  /* ── Category pill ── */
+  .cat-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Oxanium', sans-serif;
+    font-size: 9px; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 20px;
+    margin-bottom: 12px;
+    margin-top: 24px;
+  }
+  .cat-nav      { background: rgba(61,220,132,.1); color: #3ddc84; border: 1px solid rgba(61,220,132,.2); }
+  .cat-file     { background: rgba(79,163,224,.1); color: #4fa3e0; border: 1px solid rgba(79,163,224,.2); }
+  .cat-text     { background: rgba(200,150,255,.1); color: #c896ff; border: 1px solid rgba(200,150,255,.2); }
+  .cat-search   { background: rgba(255,180,0,.1); color: #ffb400; border: 1px solid rgba(255,180,0,.2); }
+  .cat-process  { background: rgba(255,80,80,.1); color: #ff5050; border: 1px solid rgba(255,80,80,.2); }
+  .cat-net      { background: rgba(0,212,255,.1); color: #00d4ff; border: 1px solid rgba(0,212,255,.2); }
+  .cat-pkg      { background: rgba(61,220,132,.1); color: #3ddc84; border: 1px solid rgba(61,220,132,.2); }
+  .cat-perms    { background: rgba(255,140,0,.1); color: #ff8c00; border: 1px solid rgba(255,140,0,.2); }
+  .cat-archive  { background: rgba(180,100,255,.1); color: #b464ff; border: 1px solid rgba(180,100,255,.2); }
+  .cat-system   { background: rgba(200,200,200,.1); color: #aaa; border: 1px solid rgba(200,200,200,.2); }
+  .cat-shell    { background: rgba(255,200,0,.1); color: #ffc800; border: 1px solid rgba(255,200,0,.2); }
+  .cat-user     { background: rgba(100,180,255,.1); color: #64b4ff; border: 1px solid rgba(100,180,255,.2); }
+  .cat-hash     { background: rgba(255,100,150,.1); color: #ff6496; border: 1px solid rgba(255,100,150,.2); }
+  .cat-termux   { background: rgba(61,220,132,.1); color: #3ddc84; border: 1px solid rgba(61,220,132,.3); }
+  .cat-dev      { background: rgba(255,160,60,.1); color: #ffa03c; border: 1px solid rgba(255,160,60,.2); }
+  .cat-misc     { background: rgba(180,180,180,.1); color: #888; border: 1px solid rgba(180,180,180,.2); }
+
+  /* ── Table search bar ── */
+  .cmd-search-wrap {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+  }
+  .cmd-search-wrap svg { flex-shrink: 0; color: #444; }
+  .cmd-search-input {
+    flex: 1; background: none; border: none; outline: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; color: var(--accent);
+    caret-color: #3ddc84;
+  }
+  .cmd-search-input::placeholder { color: #444; }
+  .cmd-count {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 10px; font-weight: 700;
+    color: #555; letter-spacing: .06em;
+    white-space: nowrap;
+  }
+
+  /* ── Ad slot banner ── */
+  .ad-slot {
+    width: 100%;
+    min-height: 60px;
+    border-radius: var(--radius);
+    background: rgba(255,255,255,.02);
+    border: 1px dashed rgba(255,255,255,.06);
+    display: flex; align-items: center; justify-content: center;
+    margin: 24px 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .ad-slot-label {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 8px; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: rgba(255,255,255,.08);
+    position: absolute; top: 6px; left: 10px;
+    pointer-events: none;
+  }
+
+  /* ── Sign warn ── */
+  .sign-warn {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px 16px; border-radius: var(--radius);
+    border: 1px solid rgba(255,80,80,.2);
+    background: rgba(255,80,80,.05);
+    margin-bottom: 20px; overflow: hidden;
+  }
+  .sign-warn-icon { flex-shrink: 0; margin-top: 1px; color: #ff5050; }
+  .sign-warn-body { min-width: 0; flex: 1; }
+  .sign-warn-label {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: #ff5050; margin-bottom: 5px;
+  }
+  .sign-warn-text { font-size: 12.5px; color: #777; line-height: 1.65; word-break: break-word; }
+  .sign-warn-text strong { color: #bbb; }
+  .sign-warn-text code {
+    font-family: 'Fira Code', monospace; font-size: 11.5px;
+    background: rgba(255,255,255,.05); padding: 1px 5px; border-radius: 3px; color: #aaa;
+  }
+
+  /* hidden rows for filter */
+  .cmd-row-hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<!-- ══ AD TIMER ENGINE ══
+     Fires vignette + push re-trigger every 5 minutes -->
+<script>
+(function() {
+  var AD_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
+
+  function triggerAds() {
+    // Re-inject vignette
+    try {
+      var s = document.createElement('script');
+      s.dataset.zone = '11181504';
+      s.src = 'https://n6wxm.com/vignette.min.js';
+      document.body.appendChild(s);
+    } catch(e) {}
+
+    // Re-ping inpage push zone
+    try {
+      var p = document.createElement('script');
+      p.src = 'https://5gvci.com/act/files/tag.min.js?z=11181506&t=' + Date.now();
+      p.setAttribute('data-cfasync', 'false');
+      p.async = true;
+      document.body.appendChild(p);
+    } catch(e) {}
+
+    // Re-ping push notifications zone
+    try {
+      var n = document.createElement('script');
+      n.src = 'https://5gvci.com/act/files/tag.min.js?z=11181514&t=' + Date.now();
+      n.setAttribute('data-cfasync', 'false');
+      n.async = true;
+      document.body.appendChild(n);
+    } catch(e) {}
+  }
+
+  // Fire every 5 minutes
+  setInterval(triggerAds, AD_INTERVAL_MS);
+})();
+</script>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <div class="search-input-row">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+        <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M11 11L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      <input id="search-input" placeholder="Search tutorials…" autocomplete="off" />
+      <button class="search-close" id="search-close">✕</button>
+    </div>
+    <div class="search-results" id="search-results">
+      <div class="search-empty">Type to search tutorials…</div>
+    </div>
+  </div>
+</div>
+
+<!-- DRAWER OVERLAY -->
+<div class="drawer-overlay" id="drawer-overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <span class="drawer-title">Menu</span>
+    <button class="drawer-close" id="drawer-close">✕</button>
+  </div>
+  <div class="drawer-nav">
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="1" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="8" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="8" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
+      Dashboard
+    </a>
+    <a class="drawer-link active" href="tutorials.html">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 3.5h10M2 7h10M2 10.5h6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Tutorials
+    </a>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Upload
+    </a>
+    <div class="drawer-divider"></div>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="5" r="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 12c0-2.21 2.239-4 5-4s5 1.79 5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Account
+    </a>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M7 4v3.5l2 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Timers
+    </a>
+    <div class="drawer-divider"></div>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M7 5v2.5M7 9.5v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Settings
+    </a>
+  </div>
+  <div class="drawer-auth">
+    <a href="#" class="drawer-auth-btn drawer-login">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+        <path d="M5 3H3a1 1 0 00-1 1v6a1 1 0 001 1h2M9 10l3-3-3-3M12 7H6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Log In
+    </a>
+    <a href="#" class="drawer-auth-btn drawer-signup">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+        <circle cx="7" cy="5" r="2.5" stroke="currentColor" stroke-width="1.3"/>
+        <path d="M2 12c0-2.21 2.239-4 5-4s5 1.79 5 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        <path d="M11 2v4M9 4h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+      Sign Up
+    </a>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- Nav -->
+  <nav>
+    <a class="nav-logo" href="#">Chaos-<span>Org</span></a>
+    <div class="nav-icons">
+      <button class="nav-icon-btn" id="search-btn" title="Search (/)">
+        <svg viewBox="0 0 16 16" fill="none">
+          <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M11 11L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <button class="nav-icon-btn" id="menu-btn" title="Menu">
+        <svg viewBox="0 0 16 16" fill="none">
+          <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="tutorials.html" class="bc-link">Tutorials</a>
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M3.5 2L6.5 5L3.5 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="bc-current">Termux Basics</span>
+  </div>
+
+  <!-- Tutorial Hero -->
+  <div class="tut-hero">
+    <div class="tut-hero-meta">
+      <span class="tut-eyebrow">Beginner</span>
+      <span class="tut-dot">·</span>
+      <span class="tut-badge badge-beginner">Beginner</span>
+      <span class="tut-dot">·</span>
+      <span class="tut-read-time">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.3"/><path d="M6 3.5V6.5L7.5 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        56 min read
+      </span>
+    </div>
+    <h1 class="tut-title"><em>Termux</em> Basics — Complete Beginner's Guide</h1>
+    <p class="tut-subtitle">Everything you need to get started with Termux on Android — what it is, how to install it, and a complete reference of 100+ essential Linux commands with descriptions.</p>
+
+    <div class="tut-progress-bar-wrap">
+      <div class="tut-progress-labels">
+        <span>Your progress</span>
+        <span id="progress-pct">0%</span>
+      </div>
+      <div class="tut-progress-track"><div class="tut-progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <!-- Layout -->
+  <div class="tut-layout">
+    <main class="tut-main" id="tut-main">
+
+      <!-- ─── SECTION 1: What is Termux ─── -->
+      <section class="tut-section" id="section-what-is-termux" data-section="1">
+        <div class="section-header">
+          <div class="section-num">01</div>
+          <h2 class="section-title">What is Termux?</h2>
+        </div>
+
+        <div class="tut-img-wrap">
+          <div class="tut-img-real">
+            <img src="pics/termux.png" alt="Termux terminal app on Android" />
+          </div>
+          <div class="tut-img-caption">Termux — a full Linux terminal environment running directly on Android, no root required</div>
+        </div>
+
+        <p class="tut-para">
+          <strong>Termux</strong> is a free, open-source Android terminal emulator and Linux environment. It gives you a complete command-line shell on your Android device — no root required, no special firmware, nothing to unlock. Just install the app, open it, and you're in a real Linux shell.
+        </p>
+
+        <p class="tut-para">
+          Under the hood, Termux provides its own package manager (<code>pkg</code> / <code>apt</code>), a large repository of pre-compiled Linux tools, and a full POSIX-compatible environment. You can install tools like Python, Node.js, Git, Nmap, Metasploit, and hundreds more — directly on your phone.
+        </p>
+
+        <div class="info-card info-blue">
+          <div class="info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7v5M8 5.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="info-body">
+            <div class="info-label">Why Termux?</div>
+            <div class="info-text">Termux is the foundation for almost every Android-based hacking, scripting, and automation tool. NetHunter Rootless, M@☆ Zero-Rated Scanner, Metasploit, and dozens of other tools all run on top of Termux. Learning Termux basics is the single most important step before using any of them.</div>
+          </div>
+        </div>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="1">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ad slot between sections -->
+      <div class="ad-slot"><span class="ad-slot-label">Advertisement</span></div>
+
+      <!-- ─── SECTION 2: Watch First — Embedded Video ─── -->
+      <section class="tut-section" id="section-video" data-section="2">
+        <div class="section-header">
+          <div class="section-num">02</div>
+          <h2 class="section-title">Watch the Full Walkthrough</h2>
+        </div>
+
+        <div class="watch-warn">
+          <div class="watch-warn-icon">
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M8 2L1.5 13h13L8 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 7v3M8 11.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div class="watch-warn-body">
+            <div class="watch-warn-label">⚠ Important — Watch Before Starting</div>
+            <div class="watch-warn-text">It is strongly recommended to watch this video in full before attempting any commands or installations. The video covers the complete setup flow and explains key concepts that will save you hours of troubleshooting.</div>
+          </div>
+        </div>
+
+        <div class="yt-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/3I1LmWhY9Ig?si=KljZWouxig9HoMN2"
+            title="Termux Complete Beginner Guide"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            referrerpolicy="strict-origin-when-cross-origin">
+          </iframe>
+        </div>
+        <div class="yt-caption">Full Termux beginner walkthrough — 37 min · watch before proceeding</div>
+
+        <p class="tut-para">
+          The video above covers Termux installation, initial setup, essential commands, and package management from scratch. It's the fastest way to get a mental model of how everything fits together before you start typing commands.
+        </p>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="2">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 3: Download Termux ─── -->
+      <section class="tut-section" id="section-download" data-section="3">
+        <div class="section-header">
+          <div class="section-num">03</div>
+          <h2 class="section-title">Download Termux</h2>
+        </div>
+
+        <p class="tut-para">
+          Termux is available from several sources. The <strong>official builds from GitHub or F-Droid</strong> are the only recommended options — they are actively maintained, fully featured, and receive regular updates. The Play Store version is outdated and has restricted functionality.
+        </p>
+
+        <div class="sign-warn">
+          <div class="sign-warn-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L1.5 13h13L8 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 7v3M8 11.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div class="sign-warn-body">
+            <div class="sign-warn-label">Do not mix sources</div>
+            <div class="sign-warn-text">
+              GitHub, F-Droid, and the Play Store each sign Termux with a <strong>different certificate key</strong>. Installing from one source then updating from another will fail with <code>INSTALL_FAILED_UPDATE_INCOMPATIBLE</code>. Pick one source and stay with it.
+            </div>
+          </div>
+        </div>
+
+        <div class="dl-cards">
+
+          <a href="https://mspy.qzz.io/termuxoffical" target="_blank" rel="noopener" class="dl-card">
+            <div class="dl-card-icon dl-icon-official">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+            </div>
+            <div class="dl-card-body">
+              <div class="dl-card-name">Official Termux — Android 7+</div>
+              <div class="dl-card-url">mspy.qzz.io/termuxoffical</div>
+            </div>
+            <span class="dl-card-badge badge-recommended">Recommended</span>
+          </a>
+
+          <a href="https://mspy.qzz.io/termuxoffical5&6" target="_blank" rel="noopener" class="dl-card">
+            <div class="dl-card-icon dl-icon-fdroid">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+            </div>
+            <div class="dl-card-body">
+              <div class="dl-card-name">Official Termux — Android 5 &amp; 6</div>
+              <div class="dl-card-url">mspy.qzz.io/termuxoffical5&amp;6</div>
+            </div>
+            <span class="dl-card-badge badge-stable">Legacy</span>
+          </a>
+
+          <a href="https://github.com/termux/termux-app/releases" target="_blank" rel="noopener" class="dl-card">
+            <div class="dl-card-icon dl-icon-github">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.744 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            </div>
+            <div class="dl-card-body">
+              <div class="dl-card-name">GitHub Releases</div>
+              <div class="dl-card-url">github.com/termux/termux-app/releases</div>
+            </div>
+            <span class="dl-card-badge badge-stable">Stable</span>
+          </a>
+
+          <a href="https://f-droid.org/packages/com.termux/" target="_blank" rel="noopener" class="dl-card">
+            <div class="dl-card-icon dl-icon-fdroid">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L3 7v10l9 5 9-5V7L12 2zm0 2.18L19 8v8l-7 3.88L5 16V8l7-3.82z"/></svg>
+            </div>
+            <div class="dl-card-body">
+              <div class="dl-card-name">F-Droid</div>
+              <div class="dl-card-url">f-droid.org/packages/com.termux</div>
+            </div>
+            <span class="dl-card-badge badge-stable">Stable</span>
+          </a>
+
+          <a href="https://mspy.qzz.io/termuxplaystore" target="_blank" rel="noopener" class="dl-card">
+            <div class="dl-card-icon dl-icon-playalt">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3l18 9-18 9V3zm2 2.5v13l11-6.5-11-6.5z"/></svg>
+            </div>
+            <div class="dl-card-body">
+              <div class="dl-card-name">Play Store</div>
+              <div class="dl-card-url">mspy.qzz.io/termuxplaystore</div>
+            </div>
+            <span class="dl-card-badge badge-limited">Not Recommended</span>
+          </a>
+
+        </div>
+
+        <div class="info-card info-amber">
+          <div class="info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L1.5 13h13L8 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 7v3M8 11.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div class="info-body">
+            <div class="info-label">Enable Unknown Sources</div>
+            <div class="info-text">Since you're installing an APK outside the Play Store, you'll need to enable <strong>Install Unknown Apps</strong> for your browser or file manager in Android Settings → Apps → Special App Access.</div>
+          </div>
+        </div>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="3">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ad slot -->
+      <div class="ad-slot"><span class="ad-slot-label">Advertisement</span></div>
+
+      <!-- ─── SECTION 4: First-Time Setup ─── -->
+      <section class="tut-section" id="section-setup" data-section="4">
+        <div class="section-header">
+          <div class="section-num">04</div>
+          <h2 class="section-title">First-Time Setup</h2>
+        </div>
+
+        <p class="tut-para">
+          After installing Termux, open it for the first time. You'll see a black terminal screen — this is your Linux shell. The very first thing you should always do is update and upgrade all packages. This pulls the latest package lists and updates any pre-installed tools.
+        </p>
+
+        <p class="tut-para"><strong>Step 1 — Update package lists:</strong></p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="pkg update">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> pkg update</code></pre>
+        </div>
+
+        <p class="tut-para"><strong>Step 2 — Upgrade all installed packages:</strong></p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="pkg upgrade -y">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> pkg upgrade <span class="c-flag">-y</span></code></pre>
+        </div>
+
+        <p class="tut-para"><strong>Step 3 — Grant storage access</strong> (lets Termux read/write your phone's storage):</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="termux-setup-storage">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> termux-setup-storage</code></pre>
+        </div>
+
+        <p class="tut-para">A dialog will appear asking for storage permission — tap <strong>Allow</strong>. After this, a <code>~/storage</code> folder will appear linking to your phone's Downloads, Music, Pictures, and more.</p>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="4">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 5: Understanding the Shell ─── -->
+      <section class="tut-section" id="section-shell" data-section="5">
+        <div class="section-header">
+          <div class="section-num">05</div>
+          <h2 class="section-title">Understanding the Shell</h2>
+        </div>
+
+        <p class="tut-para">
+          When you open Termux, you're placed into a <strong>Bash shell</strong> (Bourne Again Shell). The shell is the program that reads your commands and runs them. Everything you type is processed here before being executed by the Linux kernel.
+        </p>
+
+        <p class="tut-para">
+          The prompt you see — typically <code>$</code> — is waiting for input. When a command is running you won't see the prompt. When it returns, the prompt reappears and you can type the next command.
+        </p>
+
+        <div class="info-card info-blue">
+          <div class="info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7v5M8 5.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="info-body">
+            <div class="info-label">Key concepts to know</div>
+            <div class="info-text">
+              Commands are case-sensitive — <code>ls</code> and <code>LS</code> are different. Flags modify command behaviour (e.g. <code>-l</code>, <code>-a</code>). Arguments are the targets a command acts on (e.g. a filename). You can chain commands with <code>&&</code> (run second only if first succeeds) or <code>|</code> (pipe output of one into the next).
+            </div>
+          </div>
+        </div>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="5">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ad slot -->
+      <div class="ad-slot"><span class="ad-slot-label">Advertisement</span></div>
+
+      <!-- ─── SECTION 6: 100 Essential Commands Reference ─── -->
+      <section class="tut-section" id="section-commands" data-section="6">
+        <div class="section-header">
+          <div class="section-num">06</div>
+          <h2 class="section-title">100+ Essential Commands Reference</h2>
+        </div>
+
+        <p class="tut-para">
+          A complete reference of essential Termux and Linux commands, grouped by category. Use the search box to instantly filter any command. Every command here works in Termux — some (marked Termux-specific) are exclusive to the Android environment.
+        </p>
+
+        <!-- Search bar -->
+        <div class="cmd-search-wrap">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/>
+            <path d="M11 11L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+          <input class="cmd-search-input" id="cmd-search" placeholder="Filter commands…" autocomplete="off" />
+          <span class="cmd-count" id="cmd-count">Loading…</span>
+        </div>
+
+        <!-- ── Commands render dynamically from termux-commands.json ── -->
+        <div id="cmd-categories-root" class="cmd-categories-root">
+          <div class="cmd-loading" id="cmd-loading">Loading commands…</div>
+        </div>
+
+        <!-- ad slot mid-table (kept after first batch of categories on render) -->
+        <div class="ad-slot" id="cmd-ad-slot-1" style="display:none;"><span class="ad-slot-label">Advertisement</span></div>
+        <div class="ad-slot" id="cmd-ad-slot-2" style="display:none;"><span class="ad-slot-label">Advertisement</span></div>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="6">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ad slot -->
+      <div class="ad-slot"><span class="ad-slot-label">Advertisement</span></div>
+
+      <!-- ─── SECTION 7: Tips for Beginners ─── -->
+      <section class="tut-section" id="section-tips" data-section="7">
+        <div class="section-header">
+          <div class="section-num">07</div>
+          <h2 class="section-title">Tips for Beginners</h2>
+        </div>
+
+        <p class="tut-para">A few things that will save you a lot of confusion when starting out with Termux:</p>
+
+        <div class="trouble-list">
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 5a2 2 0 114 0c0 1.5-2 2-2 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              Use Tab for autocomplete
+            </div>
+            <div class="trouble-a">Press <code>Tab</code> while typing a command or path to autocomplete it. Press it twice to see all matching options. This prevents typos and saves a huge amount of typing.</div>
+          </div>
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 5a2 2 0 114 0c0 1.5-2 2-2 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              Arrow keys scroll command history
+            </div>
+            <div class="trouble-a">Press the <code>↑</code> up arrow to recall previous commands. Press <code>↓</code> to go forward again. Run <code>history</code> to see a numbered list of all past commands.</div>
+          </div>
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 5a2 2 0 114 0c0 1.5-2 2-2 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              Ctrl+C stops a running command
+            </div>
+            <div class="trouble-a">If a command is running and you want to stop it, press <code>Ctrl+C</code>. This sends an interrupt signal and returns you to the prompt.</div>
+          </div>
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 5a2 2 0 114 0c0 1.5-2 2-2 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              Always update before installing
+            </div>
+            <div class="trouble-a">Before installing any tool, always run <code>pkg update && pkg upgrade -y</code> first. Many installation failures happen simply because the package index is stale.</div>
+          </div>
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 5a2 2 0 114 0c0 1.5-2 2-2 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              Use termux-wake-lock for long tasks
+            </div>
+            <div class="trouble-a">If you're running a long download or scan, run <code>termux-wake-lock</code> first to prevent Android from suspending the session. Run <code>termux-wake-unlock</code> when done.</div>
+          </div>
+        </div>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="7">Mark as read</button>
+        </div>
+      </section>
+
+      <!-- Completion card -->
+      <div class="completion-card" id="completion-card" style="display:none;">
+        <div class="completion-icon">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="15" stroke="var(--green)" stroke-width="2"/>
+            <path d="M11 18l5 5 9-9" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="completion-title">Tutorial Complete!</div>
+        <div class="completion-sub">You've covered Termux basics — what it is, how to install it, first-time setup, and a full reference of 100+ essential Linux commands. You're ready to move on to more advanced tools.</div>
+        <a href="tutorials.html" class="completion-btn">Back to Tutorials</a>
+      </div>
+
+    </main>
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="tut-sidebar">
+
+      <div class="sidebar-card" id="toc-card">
+        <div class="sidebar-card-title">Contents</div>
+        <nav class="toc-nav">
+          <a class="toc-link active" href="#section-what-is-termux" data-toc="1">
+            <span class="toc-dot" id="toc-dot-1"></span>
+            <span>What is Termux?</span>
+          </a>
+          <a class="toc-link" href="#section-video" data-toc="2">
+            <span class="toc-dot" id="toc-dot-2"></span>
+            <span>Watch First</span>
+          </a>
+          <a class="toc-link" href="#section-download" data-toc="3">
+            <span class="toc-dot" id="toc-dot-3"></span>
+            <span>Download Termux</span>
+          </a>
+          <a class="toc-link" href="#section-setup" data-toc="4">
+            <span class="toc-dot" id="toc-dot-4"></span>
+            <span>First-Time Setup</span>
+          </a>
+          <a class="toc-link" href="#section-shell" data-toc="5">
+            <span class="toc-dot" id="toc-dot-5"></span>
+            <span>Understanding the Shell</span>
+          </a>
+          <a class="toc-link" href="#section-commands" data-toc="6">
+            <span class="toc-dot" id="toc-dot-6"></span>
+            <span>100+ Commands Reference</span>
+          </a>
+          <a class="toc-link" href="#section-tips" data-toc="7">
+            <span class="toc-dot" id="toc-dot-7"></span>
+            <span>Beginner Tips</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">About this tutorial</div>
+        <div class="sidebar-meta-list">
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M7 1.5L1.5 4.5V9C1.5 11.5 3.8 13.5 7 14.5C10.2 13.5 12.5 11.5 12.5 9V4.5L7 1.5Z" stroke="currentColor" stroke-width="1.2"/></svg>
+            <span>Difficulty</span>
+            <span class="smr-val green">Beginner</span>
+          </div>
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M6 3.5V6.5L7.5 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span>Read time</span>
+            <span class="smr-val">56 min</span>
+          </div>
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 3.5h10M2 7h10M2 10.5h6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span>Sections</span>
+            <span class="smr-val">7</span>
+          </div>
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span>Platform</span>
+            <span class="smr-val">Android · No Root</span>
+          </div>
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 11L7 3l5 8H2z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            <span>Commands</span>
+            <span class="smr-val">189</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Next up</div>
+        <a href="nethunter-tutorial.html" class="next-tut-card">
+          <div class="ntc-thumb thumb-red">
+            <svg viewBox="0 0 44 44" fill="none" width="24" height="24">
+              <circle cx="22" cy="22" r="16" stroke="currentColor" stroke-width="2"/>
+              <path d="M16 22h12M22 16l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="ntc-body">
+            <div class="ntc-title">Installing NetHunter Rootless</div>
+            <div class="ntc-sub">Beginner · 10 min</div>
+          </div>
+        </a>
+      </div>
+
+    </aside>
+
+  </div>
+</div>
+
+<script src="nmap-tutorial.js"></script>
+<script>
+  // ── Progress override for 7 sections ──
+  (function() {
+    const STEPS = 7;
+    const origPct  = document.getElementById('progress-pct');
+    const origFill = document.getElementById('progress-fill');
+    document.querySelectorAll('.step-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setTimeout(() => {
+          const done = document.querySelectorAll('.step-btn.done').length;
+          const pct  = Math.round((done / STEPS) * 100);
+          if (origFill) origFill.style.width = pct + '%';
+          if (origPct)  origPct.textContent  = pct + '%';
+          if (done === STEPS) {
+            const cc = document.getElementById('completion-card');
+            if (cc) cc.style.display = 'block';
+          }
+        }, 50);
+      });
+    });
+  })();
+
+  // ── Commands: fetch JSON, render categories/tables, wire live search ──
+  (function() {
+    const root    = document.getElementById('cmd-categories-root');
+    const input   = document.getElementById('cmd-search');
+    const counter = document.getElementById('cmd-count');
+    const adSlot1 = document.getElementById('cmd-ad-slot-1');
+    const adSlot2 = document.getElementById('cmd-ad-slot-2');
+    if (!root) return;
+
+    // Icons matched to each category id (kept identical to original markup)
+    const ICONS = {
+      nav: '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 5h8M5 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      file: '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><rect x="1.5" y="1" width="7" height="8" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M3 4h4M3 6h3" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>',
+      text: '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3h6M2 5h6M2 7h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>',
+      search: '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="4.5" cy="4.5" r="3" stroke="currentColor" stroke-width="1.2"/><path d="M7 7l2 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>',
+      process: '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 3v2.5l1.5 1" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>',
+      net: '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3.5" stroke="currentColor" stroke-width="1.2"/><path d="M1.5 5h7M5 1.5C3.5 3 3.5 7 5 8.5M5 1.5C6.5 3 6.5 7 5 8.5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>',
+      pkg: '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><rect x="1.5" y="3" width="7" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 3V2a1.5 1.5 0 013 0v1" stroke="currentColor" stroke-width="1.2"/></svg>',
+      perms: '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><rect x="2.5" y="4.5" width="5" height="4" rx=".8" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 4.5V3a1.5 1.5 0 013 0v1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>',
+      archive: '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><rect x="1" y="2" width="8" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M1 4h8" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><path d="M4 5.5h2" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>',
+      system: '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><rect x="1" y="1" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 5l1.5 1.5L7 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      shell: '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 3.5L4 6l-2.5 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 8.5h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>',
+      hash: '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3h6M2 7h6M4 1v8M6 1v8" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>',
+      dev: '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 7l2.5-2.5L2 2M5.5 7.5h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      termux: '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><rect x="1" y="1.5" width="8" height="7" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M1 3.5h8" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><path d="M3 6l1.5 1.5L7 5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      misc: '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 3.5v3M3.5 5h3" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>'
+    };
+
+    // After these category ids, drop in an ad slot (matches original placement)
+    const AD_AFTER = { pkg: 'cmd-ad-slot-1', system: 'cmd-ad-slot-2' };
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function renderCategories(data) {
+      root.innerHTML = '';
+      let totalCommands = 0;
+
+      data.categories.forEach(cat => {
+        totalCommands += cat.commands.length;
+
+        const pill = document.createElement('div');
+        pill.className = 'cat-pill cat-' + cat.id;
+        pill.innerHTML = (ICONS[cat.id] || '') + ' ' + escapeHtml(cat.label);
+        root.appendChild(pill);
+
+        const wrap = document.createElement('div');
+        wrap.className = 'cmd-table-wrap';
+
+        const rowsHtml = cat.commands.map(c =>
+          '<tr class="cmd-row"><td>' + escapeHtml(c.cmd) + '</td><td>' + c.desc + '</td></tr>'
+        ).join('');
+
+        wrap.innerHTML =
+          '<table class="cmd-table" id="table-' + cat.id + '">' +
+            '<thead><tr><th>Command</th><th>Description</th></tr></thead>' +
+            '<tbody>' + rowsHtml + '</tbody>' +
+          '</table>';
+        root.appendChild(wrap);
+
+        // Move the relevant ad slot right after this category's table, if applicable
+        if (AD_AFTER[cat.id]) {
+          const slot = document.getElementById(AD_AFTER[cat.id]);
+          if (slot) {
+            slot.style.display = '';
+            root.appendChild(slot);
+          }
+        }
+      });
+
+      return totalCommands;
+    }
+
+    function wireSearch(total) {
+      if (counter) counter.textContent = total + ' command' + (total !== 1 ? 's' : '');
+      if (!input) return;
+
+      const allRows = Array.from(document.querySelectorAll('.cmd-row'));
+
+      input.addEventListener('input', function() {
+        const q = this.value.trim().toLowerCase();
+        let visible = 0;
+
+        allRows.forEach(row => {
+          const text = row.textContent.toLowerCase();
+          const match = !q || text.includes(q);
+          row.classList.toggle('cmd-row-hidden', !match);
+          if (match) visible++;
+        });
+
+        if (counter) counter.textContent = visible + ' command' + (visible !== 1 ? 's' : '');
+      });
+    }
+
+    fetch('termux-commands.json')
+      .then(res => {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(data => {
+        const total = renderCategories(data);
+        wireSearch(total);
+      })
+      .catch(err => {
+        console.error('Failed to load termux-commands.json:', err);
+        root.innerHTML = '<div class="cmd-loading cmd-error">Couldn\'t load the commands list. Make sure <code>termux-commands.json</code> is in the same folder as this page.</div>';
+        if (counter) counter.textContent = '0 commands';
+      });
+  })();
+</script>
+</body>
+</html>
