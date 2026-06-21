@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>chaos Configurations— Metasploit Framework Installation Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="nmap-tutorial.css" />
+<link rel="icon" href="/pics/chaos.png?v=1">
+<link rel="shortcut icon" href="/pics/chaos.png?v=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GL0YEB7LF6');
+</script> 
+  <style>
+  *, *::before, *::after { max-width: 100%; }
+  img, pre, table { max-width: 100%; }
+
+  /* ── Metasploit accent: blood red ── */
+  .tut-title em             { color: #d63031; }
+  .tut-eyebrow              { color: #d63031; }
+  .toc-link.active          { color: #d63031; }
+  .toc-link.active .toc-dot { background: #d63031; }
+  .tut-progress-fill        { background: #d63031; }
+
+  /* ── Platform split label ── */
+  .platform-split {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 28px 0 18px;
+  }
+  .platform-split::before,
+  .platform-split::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #1f1f1f;
+  }
+  .platform-split span {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 9px; font-weight: 700;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: #444;
+    white-space: nowrap;
+  }
+
+  /* ── Two-path chooser tabs (Kali vs Termux) — bigger than os-tabs ── */
+  .path-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .path-tab {
+    flex: 1;
+    padding: 11px 14px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--card);
+    font-family: 'Oxanium', sans-serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase;
+    color: #555;
+    cursor: pointer;
+    transition: border-color .15s, color .15s, background .15s;
+    text-align: center;
+  }
+  .path-tab.active {
+    border-color: #d63031;
+    color: #d63031;
+    background: rgba(214,48,49,.06);
+  }
+  .path-panel { display: none; }
+  .path-panel.active { display: block; }
+
+  /* ── msf banner styling ── */
+  .msf-banner {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    color: #d63031;
+    line-height: 1.4;
+    padding: 14px 16px;
+    background: rgba(214,48,49,.04);
+    border: 1px solid rgba(214,48,49,.15);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    overflow-x: auto;
+    white-space: pre;
+  }
+</style>
+</head>
+<body>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <div class="search-input-row">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+        <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M11 11L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      <input id="search-input" placeholder="Search tutorials…" autocomplete="off" />
+      <button class="search-close" id="search-close">✕</button>
+    </div>
+    <div class="search-results" id="search-results">
+      <div class="search-empty">Type to search tutorials…</div>
+    </div>
+  </div>
+</div>
+
+<!-- DRAWER -->
+<div class="drawer-overlay" id="drawer-overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <span class="drawer-title">Menu</span>
+    <button class="drawer-close" id="drawer-close">✕</button>
+  </div>
+  <div class="drawer-nav">
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="1" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="8" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="8" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
+      Dashboard
+    </a>
+    <a class="drawer-link active" href="tutorials.html">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 3.5h10M2 7h10M2 10.5h6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Tutorials
+    </a>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Upload
+    </a>
+    <div class="drawer-divider"></div>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="5" r="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 12c0-2.21 2.239-4 5-4s5 1.79 5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Account
+    </a>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M7 4v3.5l2 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Timers
+    </a>
+    <div class="drawer-divider"></div>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M7 5v2.5M7 9.5v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Settings
+    </a>
+  </div>
+  <div class="drawer-auth">
+    <a href="#" class="drawer-auth-btn drawer-login">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+        <path d="M5 3H3a1 1 0 00-1 1v6a1 1 0 001 1h2M9 10l3-3-3-3M12 7H6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Log In
+    </a>
+    <a href="#" class="drawer-auth-btn drawer-signup">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+        <circle cx="7" cy="5" r="2.5" stroke="currentColor" stroke-width="1.3"/>
+        <path d="M2 12c0-2.21 2.239-4 5-4s5 1.79 5 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        <path d="M11 2v4M9 4h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+      Sign Up
+    </a>
+  </div>
+</div>
+
+<div class="page">
+
+  <nav>
+    <a class="nav-logo" href="#">Chaos-<span>Org</span></a>
+    <div class="nav-icons">
+      <button class="nav-icon-btn" id="search-btn">
+        <svg viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M11 11L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      </button>
+      <button class="nav-icon-btn" id="menu-btn">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <div class="breadcrumb">
+    <a href="tutorials.html" class="bc-link">Tutorials</a>
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M3.5 2L6.5 5L3.5 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="bc-current">Metasploit Framework</span>
+  </div>
+
+  <div class="tut-hero">
+    <div class="tut-hero-meta">
+      <span class="tut-eyebrow">Tools</span>
+      <span class="tut-dot">·</span>
+      <span class="tut-badge badge-beginner">Beginner</span>
+      <span class="tut-dot">·</span>
+      <span class="tut-read-time">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.3"/><path d="M6 3.5V6.5L7.5 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        10 min read
+      </span>
+    </div>
+    <h1 class="tut-title">Installing <em>Metasploit</em> Framework — CLI Setup Guide</h1>
+    <p class="tut-subtitle">Get the world's most widely used penetration testing framework running on Kali Linux or Termux (NetHunter). Two install paths, one goal — a working <code>msfconsole</code>.</p>
+
+    <div class="tut-progress-bar-wrap">
+      <div class="tut-progress-labels">
+        <span>Your progress</span>
+        <span id="progress-pct">0%</span>
+      </div>
+      <div class="tut-progress-track"><div class="tut-progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <div class="tut-layout">
+    <main class="tut-main" id="tut-main">
+
+      <!-- ─── SECTION 1: What is Metasploit ─── -->
+      <section class="tut-section" id="section-what-is-msf" data-section="1">
+        <div class="section-header">
+          <div class="section-num">01</div>
+          <h2 class="section-title">What is Metasploit Framework?</h2>
+        </div>
+  <!-- Image 1: intro -->
+        <div class="tut-img-wrap">
+          <div class="tut-img-real">
+            <img src="pics/mesploit.png" alt="Cybersecurity penetration testing terminal and network exploitation" />
+          </div>
+          <div class="tut-img-caption">Metasploit Framework — thousands of exploits, payloads, and auxiliary modules, all accessible from a single CLI console</div>
+        </div>
+
+        <p class="tut-para">
+          The Metasploit Framework is an open-source penetration testing platform developed by Rapid7. It's the industry standard for exploit development, vulnerability research, and post-exploitation — used by security professionals, CTF players, and red teams worldwide.
+        </p>
+
+        <div class="info-card info-blue">
+          <div class="info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7v5M8 5.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="info-body">
+            <div class="info-label">Two install paths covered here</div>
+            <div class="info-text">
+              <strong>Kali / Linux</strong> — uses <code>sudo apt install metasploit-framework</code>. Full-featured, database-backed, updated via apt.<br /><br />
+              <strong>Termux (NetHunter)</strong> — uses <code>pkg install metasploit</code> via the unstable repo. Runs entirely on Android without root.
+            </div>
+          </div>
+        </div>
+
+      
+        <div class="info-card info-red">
+          <div class="info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L1.5 13h13L8 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 7v3M8 11.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div class="info-body">
+            <div class="info-label">Legal reminder</div>
+            <div class="info-text">Using Metasploit against systems you do not own or have explicit written permission to test is illegal. Only use it in authorised lab environments, CTFs, or on your own infrastructure.</div>
+          </div>
+        </div>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="1">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 2: Installation ─── -->
+      <section class="tut-section" id="section-install" data-section="2">
+        <div class="section-header">
+          <div class="section-num">02</div>
+          <h2 class="section-title">Installation</h2>
+        </div>
+
+        <p class="tut-para">Choose your platform. Both paths end with a working <code>msfconsole</code> — the commands are different but the outcome is the same.</p>
+
+        <!-- Platform chooser -->
+        <div class="path-tabs">
+          <button class="path-tab active" data-path="kali">Kali / Linux</button>
+          <button class="path-tab" data-path="termux">Termux / NetHunter</button>
+        </div>
+
+        <!-- ── KALI PATH ── -->
+        <div class="path-panel active" id="path-kali">
+
+          <p class="tut-para">On Kali, Metasploit is available directly from the official repos. Note that on a fresh Kali install it is usually pre-installed — check first before re-installing.</p>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" data-copy="sudo apt update&#10;sudo apt install metasploit-framework -y">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="c-muted">$</span> sudo apt update
+<span class="c-muted">$</span> sudo apt install metasploit-framework <span class="c-flag">-y</span></code></pre>
+          </div>
+
+          <div class="info-card info-blue" style="margin-top:0;">
+            <div class="info-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7v5M8 5.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <div class="info-body">
+              <div class="info-label">Pre-installed on Kali?</div>
+              <div class="info-text">Run <code>msfconsole --version</code> first. If it returns a version number, Metasploit is already installed and you just need to update it with <code>sudo apt update && sudo apt upgrade metasploit-framework</code>.</div>
+            </div>
+          </div>
+
+          <p class="tut-para">apt pulls in Ruby, PostgreSQL, and all other dependencies automatically. The download is around 500 MB — it may take a few minutes.</p>
+
+          
+
+        </div>
+
+        <!-- ── TERMUX PATH ── -->
+        <div class="path-panel" id="path-termux">
+
+          <p class="tut-para">On Termux (inside NetHunter or standalone), Metasploit lives in the unstable repo. Add it first, then install.</p>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash — Step 1: Update Termux</span>
+              <button class="copy-btn" data-copy="pkg update && pkg upgrade">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="c-muted">$</span> pkg update <span class="c-flag">&&</span> pkg upgrade</code></pre>
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash — Step 2: Add unstable repo</span>
+              <button class="copy-btn" data-copy="pkg install unstable-repo">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="c-muted">$</span> pkg install unstable-repo</code></pre>
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash — Step 3: Install Metasploit</span>
+              <button class="copy-btn" data-copy="pkg install metasploit">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="c-muted">$</span> pkg install metasploit</code></pre>
+          </div>
+
+          <div class="info-card info-amber">
+            <div class="info-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L1.5 13h13L8 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 7v3M8 11.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </div>
+            <div class="info-body">
+              <div class="info-label">Why unstable-repo?</div>
+              <div class="info-text">Metasploit is not in Termux's main package repo — it's hosted in the <strong>unstable</strong> repo due to its size and frequent updates. This is normal and expected, not a warning about stability of your system.</div>
+            </div>
+          </div>
+
+          <!-- Image 2 (termux variant): pkg install running -->
+          <div class="tut-img-wrap">
+            <div class="tut-img-real">
+              <img src="https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?w=900&q=80&fit=crop" alt="Android Termux terminal showing Metasploit package installation" />
+            </div>
+            <div class="tut-img-caption"><code>pkg install metasploit</code> running in Termux — this is a large download, keep your screen awake and stay on a solid Wi-Fi connection</div>
+          </div>
+
+        </div>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="2">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 3: Verify & Launch ─── -->
+      <section class="tut-section" id="section-verify" data-section="3">
+        <div class="section-header">
+          <div class="section-num">03</div>
+          <h2 class="section-title">Verify &amp; Launch</h2>
+        </div>
+
+        <p class="tut-para">Once installed, check the version first, then launch the console. These commands are the same on both Kali and Termux.</p>
+
+        <p class="tut-para"><strong>Check the version:</strong></p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="msfconsole --version">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> msfconsole <span class="c-flag">--version</span>
+<span class="c-output">Framework Version: 6.4.135-dev</span></code></pre>
+        </div>
+
+        <p class="tut-para"><strong>Launch msfconsole:</strong></p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="msfconsole">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> msfconsole</code></pre>
+        </div>
+
+        <!-- MSF ASCII banner -->
+        <div class="msf-banner">                                                  
+  _                                                    _
+ / \                                                  / \
+|   |               _   _      _   _      _   _      |   |
+|   |  \/\/    /\  / \ / \    / \ / \    / \ / \  /\ |   |
+|   |   /\    /  \|   |   |  |   |   |  |   |   |/  \|   |
+|   |  /  \  /----+   |   |  |   |   |  |   |   +----+   |
+ \_\/  \  / /      \_ | _/    \_/ \_/    \_/ \_/      \  \/
+        \/                                              \/
+
+       =[ metasploit v6.4.135-dev                        ]
++ -- --=[ 2430 exploits - 1255 auxiliary - 413 post       ]
++ -- --=[ 1474 payloads - 47 encoders - 11 nops           ]
++ -- --=[ 9 evasion                                       ]
+
+msf6 ></div>
+
+        <p class="tut-para">On <strong>Kali</strong>, you may be asked on first launch if you want to set up a PostgreSQL database — type <code>y</code>. A connected database makes module searches significantly faster. On <strong>Termux</strong> the database is not set up automatically; the console still works fully without it.</p>
+
+    
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="3">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 4: Essential msfconsole commands ─── -->
+      <section class="tut-section" id="section-commands" data-section="4">
+        <div class="section-header">
+          <div class="section-num">04</div>
+          <h2 class="section-title">Essential msfconsole Commands</h2>
+        </div>
+
+        <p class="tut-para">Once inside the <code>msf6 &gt;</code> prompt, these are the core commands you'll use constantly.</p>
+
+        <div class="flags-table-wrap">
+          <div class="flags-table-header">Core msfconsole commands</div>
+          <table class="flags-table">
+            <thead>
+              <tr><th>Command</th><th>What it does</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>help</code></td><td>Show all available console commands</td></tr>
+              <tr><td><code>search &lt;term&gt;</code></td><td>Search for exploits, modules, CVEs by keyword</td></tr>
+              <tr><td><code>use &lt;module&gt;</code></td><td>Load a module (e.g. <code>use exploit/multi/handler</code>)</td></tr>
+              <tr><td><code>show options</code></td><td>List required and optional settings for a loaded module</td></tr>
+              <tr><td><code>set RHOSTS &lt;ip&gt;</code></td><td>Set the target IP address</td></tr>
+              <tr><td><code>set LHOST &lt;ip&gt;</code></td><td>Set your local IP (for reverse shells)</td></tr>
+              <tr><td><code>run</code> / <code>exploit</code></td><td>Execute the loaded module</td></tr>
+              <tr><td><code>db_status</code></td><td>Check if PostgreSQL database is connected</td></tr>
+              <tr><td><code>exit</code></td><td>Exit msfconsole</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="tut-para">Example — searching for EternalBlue:</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">msfconsole</span>
+            <button class="copy-btn" data-copy="search eternalblue">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-output">msf6 &gt;</span> search eternalblue
+
+<span class="c-output">Matching Modules
+================
+
+   #  Name                                      Disclosure Date  Rank    Check  Description
+   -  ----                                      ---------------  ----    -----  -----------
+   0  auxiliary/scanner/smb/smb_ms17_010        2017-03-14       normal  No     MS17-010 SMB RCE Detection
+   1  exploit/windows/smb/ms17_010_eternalblue  2017-03-14       average Yes    MS17-010 EternalBlue SMB Remote Windows Kernel Pool Corruption</span></code></pre>
+        </div>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="4">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 5: Troubleshooting ─── -->
+      <section class="tut-section" id="section-troubleshoot" data-section="5">
+        <div class="section-header">
+          <div class="section-num">05</div>
+          <h2 class="section-title">Troubleshooting</h2>
+        </div>
+
+        <div class="trouble-list">
+
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              <code>msfconsole: command not found</code> on Kali
+            </div>
+            <div class="trouble-a">Run <code>sudo apt install metasploit-framework -y</code>. If the package doesn't exist, your sources may be outdated — run <code>sudo apt update</code> first and try again.</div>
+          </div>
+
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              <code>msfconsole: command not found</code> on Termux
+            </div>
+            <div class="trouble-a">Make sure you installed <code>unstable-repo</code> first — <code>pkg install unstable-repo</code> — then re-run <code>pkg install metasploit</code>. Without the unstable repo, Termux can't find the package.</div>
+          </div>
+
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              <code>db_status</code> shows not connected (Kali)
+            </div>
+            <div class="trouble-a">PostgreSQL isn't running. Start it and initialise the database with <code>sudo msfdb init</code> then relaunch msfconsole. A connected database speeds up module searches significantly.</div>
+          </div>
+
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              msfconsole is extremely slow to load on Termux
+            </div>
+            <div class="trouble-a">This is normal on first launch — Ruby initialising on Android is slow. Subsequent launches are faster. Keep your device plugged in and avoid running other heavy apps simultaneously.</div>
+          </div>
+
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              Antivirus blocking install on a Windows dual-boot / shared folder
+            </div>
+            <div class="trouble-a">Antivirus engines flag Metasploit as malware because it contains real exploits. Disable real-time protection on Windows before installing, or exclude the Metasploit directory from scanning. This does not affect a pure Kali/Termux install.</div>
+          </div>
+
+        </div>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="5">Mark as read</button>
+        </div>
+      </section>
+
+      <!-- RELATED -->
+    
+
+      <!-- Completion -->
+      <div class="completion-card" id="completion-card" style="display:none;">
+        <div class="completion-icon">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="15" stroke="var(--green)" stroke-width="2"/>
+            <path d="M11 18l5 5 9-9" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="completion-title">Tutorial Complete!</div>
+        <div class="completion-sub">Metasploit Framework is installed and msfconsole is running. Next: learn to use <code>db_nmap</code> to scan directly from within the console and automatically populate your workspace.</div>
+        <a href="tutorials.html" class="completion-btn">Back to Tutorials</a>
+      </div>
+
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside class="tut-sidebar">
+
+      <div class="sidebar-card" id="toc-card">
+        <div class="sidebar-card-title">Contents</div>
+        <nav class="toc-nav">
+          <a class="toc-link active" href="#section-what-is-msf" data-toc="1">
+            <span class="toc-dot" id="toc-dot-1"></span>
+            <span>What is Metasploit?</span>
+          </a>
+          <a class="toc-link" href="#section-install" data-toc="2">
+            <span class="toc-dot" id="toc-dot-2"></span>
+            <span>Installation</span>
+          </a>
+          <a class="toc-link" href="#section-verify" data-toc="3">
+            <span class="toc-dot" id="toc-dot-3"></span>
+            <span>Verify &amp; Launch</span>
+          </a>
+          <a class="toc-link" href="#section-commands" data-toc="4">
+            <span class="toc-dot" id="toc-dot-4"></span>
+            <span>Essential Commands</span>
+          </a>
+          <a class="toc-link" href="#section-troubleshoot" data-toc="5">
+            <span class="toc-dot" id="toc-dot-5"></span>
+            <span>Troubleshooting</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">About this tutorial</div>
+        <div class="sidebar-meta-list">
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M7 1.5L1.5 4.5V9C1.5 11.5 3.8 13.5 7 14.5C10.2 13.5 12.5 11.5 12.5 9V4.5L7 1.5Z" stroke="currentColor" stroke-width="1.2"/></svg>
+            <span>Difficulty</span>
+            <span class="smr-val green">Beginner</span>
+          </div>
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M6 3.5V6.5L7.5 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span>Read time</span>
+            <span class="smr-val">10 min</span>
+          </div>
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 3.5h10M2 7h10M2 10.5h6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span>Sections</span>
+            <span class="smr-val">5</span>
+          </div>
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span>Platform</span>
+            <span class="smr-val">Kali · Termux</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Next up</div>
+        <a href="#" class="next-tut-card">
+          <div class="ntc-thumb thumb-blue">
+            <svg viewBox="0 0 44 44" fill="none" width="24" height="24">
+              <circle cx="22" cy="22" r="16" stroke="currentColor" stroke-width="2"/>
+              <path d="M16 22h12M22 16l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="ntc-body">
+            <div class="ntc-title">Metasploit — First Exploit</div>
+            <div class="ntc-sub">Intermediate · 15 min</div>
+          </div>
+        </a>
+      </div>
+
+    </aside>
+
+  </div>
+</div>
+
+<script src="nmap-tutorial.js"></script>
+<script>
+  /* ── Path tab switcher (Kali vs Termux) ── */
+  document.querySelectorAll('.path-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.path;
+      document.querySelectorAll('.path-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.path-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const panel = document.getElementById('path-' + target);
+      if (panel) panel.classList.add('active');
+    });
+  });
+</script>
+  <script src="https://5gvci.com/act/files/tag.min.js?z=11181514" data-cfasync="false" async></script>
+<script src="https://5gvci.com/act/files/tag.min.js?z=11181506" data-cfasync="false" async></script>
+
+<script>(function(s){s.dataset.zone='11181504',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+</body>
+</html>

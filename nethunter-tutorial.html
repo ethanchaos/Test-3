@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>chaos Configurations— NetHunter Rootless Installation Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="nmap-tutorial.css" />
+<link rel="icon" href="/pics/chaos.png?v=1">
+<link rel="shortcut icon" href="/pics/chaos.png?v=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GL0YEB7LF6');
+</script> 
+  <style>
+  /* Hard reset — nothing escapes its column */
+  *, *::before, *::after { max-width: 100%; }
+  img, pre, table { max-width: 100%; }
+
+  /* ── NetHunter accent: kali dragon red ── */
+  .tut-title em        { color: #e84040; }
+  .tut-eyebrow         { color: #e84040; }
+  .toc-link.active     { color: #e84040; }
+  .toc-link.active .toc-dot { background: #e84040; }
+  .tut-progress-fill   { background: #e84040; }
+  .info-red .info-label { color: #e84040; }
+
+  /* ── Download source cards ── */
+  .dl-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .dl-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color .15s, background .15s;
+    overflow: hidden;
+  }
+  .dl-card:hover {
+    border-color: #2e2e2e;
+    background: #141414;
+  }
+  .dl-card-icon {
+    width: 40px; height: 40px; min-width: 40px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .dl-icon-github  { background: rgba(255,255,255,.06); color: #ccc; }
+  .dl-icon-fdroid  { background: rgba(29,160,192,.1);   color: #1da0c0; }
+  .dl-icon-apkpure { background: rgba(232,64,64,.1);    color: #e84040; }
+  .dl-card-body { min-width: 0; flex: 1; overflow: hidden; }
+  .dl-card-name {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: .04em; color: var(--accent);
+    margin-bottom: 3px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .dl-card-url {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px; color: #555;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .dl-card-badge {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 8px; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 4px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .badge-recommended { background: rgba(61,220,132,.12); color: var(--green); border: 1px solid rgba(61,220,132,.25); }
+  .badge-stable      { background: rgba(79,163,224,.12); color: var(--blue);  border: 1px solid rgba(79,163,224,.25); }
+  .badge-mirror      { background: rgba(255,255,255,.05); color: #666; border: 1px solid #222; }
+
+  /* ── Step numbered list (same tut-ol style, just reused) ── */
+
+  /* ── Important signing warning ── */
+  .sign-warn {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px 16px; border-radius: var(--radius);
+    border: 1px solid rgba(255,80,80,.2);
+    background: rgba(255,80,80,.05);
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .sign-warn-icon { flex-shrink: 0; margin-top: 1px; color: #ff5050; }
+  .sign-warn-body { min-width: 0; flex: 1; }
+  .sign-warn-label {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: #ff5050; margin-bottom: 5px;
+  }
+  .sign-warn-text {
+    font-size: 12.5px; color: #777; line-height: 1.65; word-break: break-word;
+  }
+  .sign-warn-text strong { color: #bbb; }
+  .sign-warn-text code {
+    font-family: 'Fira Code', monospace; font-size: 11.5px;
+    background: rgba(255,255,255,.05); padding: 1px 5px; border-radius: 3px; color: #aaa;
+  }
+</style>
+</head>
+<body>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <div class="search-input-row">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+        <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M11 11L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      <input id="search-input" placeholder="Search tutorials…" autocomplete="off" />
+      <button class="search-close" id="search-close">✕</button>
+    </div>
+    <div class="search-results" id="search-results">
+      <div class="search-empty">Type to search tutorials…</div>
+    </div>
+  </div>
+</div>
+
+<!-- DRAWER OVERLAY -->
+<div class="drawer-overlay" id="drawer-overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <span class="drawer-title">Menu</span>
+    <button class="drawer-close" id="drawer-close">✕</button>
+  </div>
+  <div class="drawer-nav">
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="1" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="8" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="8" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
+      Dashboard
+    </a>
+    <a class="drawer-link active" href="tutorials.html">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 3.5h10M2 7h10M2 10.5h6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Tutorials
+    </a>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Upload
+    </a>
+    <div class="drawer-divider"></div>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="5" r="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 12c0-2.21 2.239-4 5-4s5 1.79 5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Account
+    </a>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M7 4v3.5l2 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Timers
+    </a>
+    <div class="drawer-divider"></div>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M7 5v2.5M7 9.5v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Settings
+    </a>
+  </div>
+  <div class="drawer-auth">
+    <a href="#" class="drawer-auth-btn drawer-login">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+        <path d="M5 3H3a1 1 0 00-1 1v6a1 1 0 001 1h2M9 10l3-3-3-3M12 7H6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Log In
+    </a>
+    <a href="#" class="drawer-auth-btn drawer-signup">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+        <circle cx="7" cy="5" r="2.5" stroke="currentColor" stroke-width="1.3"/>
+        <path d="M2 12c0-2.21 2.239-4 5-4s5 1.79 5 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        <path d="M11 2v4M9 4h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+      Sign Up
+    </a>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- Nav -->
+  <nav>
+    <a class="nav-logo" href="#">Chaos-<span>Org</span></a>
+    <div class="nav-icons">
+      <button class="nav-icon-btn" id="search-btn" title="Search (/)">
+        <svg viewBox="0 0 16 16" fill="none">
+          <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M11 11L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <button class="nav-icon-btn" id="menu-btn" title="Menu">
+        <svg viewBox="0 0 16 16" fill="none">
+          <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="tutorials.html" class="bc-link">Tutorials</a>
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M3.5 2L6.5 5L3.5 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="bc-current">NetHunter Rootless</span>
+  </div>
+
+  <!-- Tutorial Hero -->
+  <div class="tut-hero">
+    <div class="tut-hero-meta">
+      <span class="tut-eyebrow">Tools</span>
+      <span class="tut-dot">·</span>
+      <span class="tut-badge badge-beginner">Beginner</span>
+      <span class="tut-dot">·</span>
+      <span class="tut-read-time">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.3"/><path d="M6 3.5V6.5L7.5 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        10 min read
+      </span>
+    </div>
+    <h1 class="tut-title">Installing <em>NetHunter</em> Rootless — Complete Setup Guide</h1>
+    <p class="tut-subtitle">Get a full Kali Linux environment on any Android device — no root required. Covers getting Termux, installing NetHunter Rootless, and launching your first session.</p>
+
+    <div class="tut-progress-bar-wrap">
+      <div class="tut-progress-labels">
+        <span>Your progress</span>
+        <span id="progress-pct">0%</span>
+      </div>
+      <div class="tut-progress-track"><div class="tut-progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <!-- Layout -->
+  <div class="tut-layout">
+    <main class="tut-main" id="tut-main">
+
+      <!-- ─── SECTION 1: What is NetHunter Rootless ─── -->
+      <section class="tut-section" id="section-what-is-nethunter" data-section="1">
+        <div class="section-header">
+          <div class="section-num">01</div>
+          <h2 class="section-title">What is NetHunter Rootless?</h2>
+        </div>
+        
+        
+                <!-- Image 1: intro -->
+        <div class="tut-img-wrap">
+          <div class="tut-img-real">
+            <img src="pics/nethuntericon.jpg" alt="Android phone with terminal and security tools" />
+          </div>
+          <div class="tut-img-caption">NetHunter Rootless turns any Android phone into a pocket Kali Linux machine — no root required</div>
+        </div>
+
+        <p class="tut-para">
+          Kali NetHunter is Offensive Security's mobile penetration testing platform. The <strong>Rootless</strong> edition runs entirely inside Termux on any unmodified Android device — no root, no custom recovery, no unlocked bootloader required.
+        </p>
+
+        <div class="info-card info-blue">
+          <div class="info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7v5M8 5.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="info-body">
+            <div class="info-label">What you get</div>
+            <div class="info-text">A full Kali Linux chroot inside Termux — access to hundreds of security tools including Nmap, Wireshark (TShark), Metasploit, and more, all without modifying your Android system.</div>
+          </div>
+        </div>
+
+
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="1">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 2: Get Termux ─── -->
+      <section class="tut-section" id="section-get-termux" data-section="2">
+        <div class="section-header">
+          <div class="section-num">02</div>
+          <h2 class="section-title">Getting Termux</h2>
+        </div>
+
+           <!-- Image 2: Termux sources -->
+        <div class="tut-img-wrap">
+          <div class="tut-img-real">
+            <img src="pics/termux.png" alt="Android phone download and app installation" />
+          </div>
+          <div class="tut-img-caption">Download Termux from GitHub Releases or F-Droid — both are the official, actively maintained sources</div>
+        </div>
+        
+        <p class="tut-para">
+          NetHunter Rootless runs inside Termux. You need to install Termux first. There are three places to get it — pick one and stick with it. <strong>Do not mix APKs from different sources</strong> — each source signs with a different key and mixing them will break updates.
+        </p>
+
+        <div class="sign-warn">
+          <div class="sign-warn-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L1.5 13h13L8 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 7v3M8 11.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div class="sign-warn-body">
+            <div class="sign-warn-label">Do not mix sources</div>
+            <div class="sign-warn-text">
+              GitHub, F-Droid, and APKPure each sign with a <strong>different key</strong>. If you install Termux from one source and then try to update from another, Android will block it with <code>INSTALL_FAILED_UPDATE_INCOMPATIBLE</code>. Choose one source and always update from the same place.
+            </div>
+          </div>
+        </div>
+
+         
+        
+        <div class="dl-cards">
+
+          <!-- GitHub -->
+          <a href="https://github.com/termux/termux-app/releases" target="_blank" rel="noopener" class="dl-card">
+            <div class="dl-card-icon dl-icon-github">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.744 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            </div>
+            <div class="dl-card-body">
+              <div class="dl-card-name">GitHub Releases</div>
+              <div class="dl-card-url">github.com/termux/termux-app/releases</div>
+            </div>
+            <span class="dl-card-badge badge-recommended">Recommended</span>
+          </a>
+
+          <!-- F-Droid -->
+          <a href="https://f-droid.org/packages/com.termux/" target="_blank" rel="noopener" class="dl-card">
+            <div class="dl-card-icon dl-icon-fdroid">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L3 7v10l9 5 9-5V7L12 2zm0 2.18L19 8v8l-7 3.88L5 16V8l7-3.82z"/></svg>
+            </div>
+            <div class="dl-card-body">
+              <div class="dl-card-name">F-Droid</div>
+              <div class="dl-card-url">f-droid.org/packages/com.termux</div>
+            </div>
+            <span class="dl-card-badge badge-stable">Stable</span>
+          </a>
+
+          <!-- APKPure -->
+          <a href="https://apkpure.com/termux-app/com.termux" target="_blank" rel="noopener" class="dl-card">
+            <div class="dl-card-icon dl-icon-apkpure">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </div>
+            <div class="dl-card-body">
+              <div class="dl-card-name">APKPure</div>
+              <div class="dl-card-url">apkpure.com/termux-app/com.termux</div>
+            </div>
+            <span class="dl-card-badge badge-mirror">Mirror</span>
+          </a>
+
+        </div>
+
+        <div class="info-card info-amber">
+          <div class="info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L1.5 13h13L8 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 7v3M8 11.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div class="info-body">
+            <div class="info-label">Not on the Play Store</div>
+            <div class="info-text">The Play Store version of Termux is outdated and has limited functionality. Use GitHub or F-Droid for the full experience. You will need to enable <strong>Install unknown apps</strong> in your Android settings for your browser or file manager.</div>
+          </div>
+        </div>
+
+    
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="2">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 3: Update Termux ─── -->
+      <section class="tut-section" id="section-update-termux" data-section="3">
+        <div class="section-header">
+          <div class="section-num">03</div>
+          <h2 class="section-title">Update Termux</h2>
+        </div>
+
+        <p class="tut-para">Open Termux after installing it. Before doing anything else, update the package manager and all base packages. This ensures the installer has access to the latest dependencies.</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="pkg update && pkg upgrade -y">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> pkg update <span class="c-flag">&&</span> pkg upgrade <span class="c-flag">-y</span></code></pre>
+        </div>
+
+        <p class="tut-para">If prompted to replace any config files, press <strong>N</strong> to keep the existing version. The upgrade may take a few minutes depending on your connection.</p>
+
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="3">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 4: Install Required Packages ─── -->
+      <section class="tut-section" id="section-install-deps" data-section="4">
+        <div class="section-header">
+          <div class="section-num">04</div>
+          <h2 class="section-title">Install Required Packages</h2>
+        </div>
+
+        <p class="tut-para">The NetHunter installer needs a few tools to download, extract, and set up the Kali chroot environment. Install them now.</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="pkg install wget curl proot tar -y">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> pkg install wget curl proot tar <span class="c-flag">-y</span></code></pre>
+        </div>
+
+        <!-- Flags table explaining what each package does -->
+        <div class="flags-table-wrap">
+          <div class="flags-table-header">What each package does</div>
+          <table class="flags-table">
+            <thead>
+              <tr><th>Package</th><th>Purpose</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>wget</code></td><td>Downloads the NetHunter installer script</td></tr>
+              <tr><td><code>curl</code></td><td>HTTP client used by the installer internally</td></tr>
+              <tr><td><code>proot</code></td><td>Fakes root inside the chroot without actually rooting the device</td></tr>
+              <tr><td><code>tar</code></td><td>Extracts the Kali rootfs archive</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="4">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 5: Download & Run Installer ─── -->
+      <section class="tut-section" id="section-installer" data-section="5">
+        <div class="section-header">
+          <div class="section-num">05</div>
+          <h2 class="section-title">Download &amp; Run the Installer</h2>
+        </div>
+
+        <p class="tut-para">With dependencies in place, download the official NetHunter installer, make it executable, and run it. The installer will pull down the Kali rootfs — this can take several minutes depending on your internet speed.</p>
+
+        <p class="tut-para"><strong>Step 1 — Download the installer:</strong></p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="wget -O install-nethunter-termux https://offs.ec/2MceZWr">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> wget <span class="c-flag">-O</span> install-nethunter-termux https://offs.ec/2MceZWr</code></pre>
+        </div>
+
+        <p class="tut-para"><strong>Step 2 — Make it executable:</strong></p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="chmod +x install-nethunter-termux">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> chmod <span class="c-flag">+x</span> install-nethunter-termux</code></pre>
+        </div>
+
+        <p class="tut-para"><strong>Step 3 — Run the installer:</strong></p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="./install-nethunter-termux">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> ./install-nethunter-termux
+<span class="c-output">  _  __     _ _   _   _             _
+ | |/ /__ _| (_) | \ | | ___| |_ | |__  _   _ _ __  | |_ ___ _ __
+ | ' // _` | | | |  \| |/ _ \ __|| '_ \| | | | '_ \ | __/ _ \ '__|
+ | . \ (_| | | | | |\  |  __/ |_ | | | | |_| | | | || ||  __/ |
+ |_|\_\__,_|_|_| |_| \_|\___|\__||_| |_|\__,_|_| |_| \__\___|_|
+
+[*] Checking architecture …
+[*] Downloading Kali NetHunter rootfs …</span></code></pre>
+        </div>
+
+        <div class="info-card info-blue">
+          <div class="info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7v5M8 5.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="info-body">
+            <div class="info-label">This will take a while</div>
+            <div class="info-text">The installer downloads and extracts a full Kali Linux rootfs — typically 400–800 MB. Keep Termux open and your screen awake, or disable sleep timeout in Android settings while it runs.</div>
+          </div>
+        </div>
+
+       
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="5">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 6: Start NetHunter ─── -->
+      <section class="tut-section" id="section-start-nethunter" data-section="6">
+        <div class="section-header">
+          <div class="section-num">06</div>
+          <h2 class="section-title">Starting NetHunter</h2>
+        </div>
+
+        <p class="tut-para">Once the installer finishes you're ready to launch. Two commands work — try the short one first.</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="nh">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> nh
+<span class="c-output">┌──(kali㉿nethunter)-[~]
+└─# _</span></code></pre>
+        </div>
+
+        <p class="tut-para">If <code>nh</code> doesn't work, use the full command:</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="nethunter">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> nethunter</code></pre>
+        </div>
+
+        <p class="tut-para">You'll drop into a Kali shell prompt. From here you have access to the full Kali toolset. Update Kali's own packages on first launch:</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="apt update && apt upgrade -y">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-output">┌──(kali㉿nethunter)-[~]
+└─#</span> apt update <span class="c-flag">&&</span> apt upgrade <span class="c-flag">-y</span></code></pre>
+        </div>
+
+      
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="6">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 7: Troubleshooting ─── -->
+      <section class="tut-section" id="section-troubleshoot" data-section="7">
+        <div class="section-header">
+          <div class="section-num">07</div>
+          <h2 class="section-title">Troubleshooting</h2>
+        </div>
+
+        <p class="tut-para">Common issues and how to fix them.</p>
+
+        <div class="trouble-list">
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              <code>INSTALL_FAILED_UPDATE_INCOMPATIBLE</code> when installing Termux
+            </div>
+            <div class="trouble-a">You have a version from a different source already installed (e.g. Play Store). Uninstall the existing Termux completely, then install from your chosen source — GitHub or F-Droid.</div>
+          </div>
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              Installer stalls or download fails mid-way
+            </div>
+            <div class="trouble-a">Your connection dropped or the screen timed out. Re-run <code>./install-nethunter-termux</code> — the installer can resume. Make sure to disable screen timeout in Android settings before running it again.</div>
+          </div>
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              <code>nh: command not found</code>
+            </div>
+            <div class="trouble-a">The installer didn't complete or the alias wasn't written. Try <code>nethunter</code> instead, or close and reopen Termux to reload the shell profile, then try <code>nh</code> again.</div>
+          </div>
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              Tools are missing inside the Kali session
+            </div>
+            <div class="trouble-a">The rootless install is minimal by design. Inside the Kali shell, use <code>apt install &lt;tool&gt;</code> to add what you need, e.g. <code>apt install nmap tshark -y</code>.</div>
+          </div>
+        </div>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="7">Mark as read</button>
+        </div>
+      </section>
+
+      <!-- ─── RELATED TUTORIALS ─── -->
+    
+      <!-- Completion card -->
+      <div class="completion-card" id="completion-card" style="display:none;">
+        <div class="completion-icon">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="15" stroke="var(--green)" stroke-width="2"/>
+            <path d="M11 18l5 5 9-9" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="completion-title">Tutorial Complete!</div>
+        <div class="completion-sub">You've installed NetHunter Rootless and have a full Kali shell running on your Android device. Next up: install your tools and set up KEX for a full desktop experience.</div>
+        <a href="tutorials.html" class="completion-btn">Back to Tutorials</a>
+      </div>
+
+    </main>
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="tut-sidebar">
+
+      <div class="sidebar-card" id="toc-card">
+        <div class="sidebar-card-title">Contents</div>
+        <nav class="toc-nav">
+          <a class="toc-link active" href="#section-what-is-nethunter" data-toc="1">
+            <span class="toc-dot" id="toc-dot-1"></span>
+            <span>What is NetHunter?</span>
+          </a>
+          <a class="toc-link" href="#section-get-termux" data-toc="2">
+            <span class="toc-dot" id="toc-dot-2"></span>
+            <span>Getting Termux</span>
+          </a>
+          <a class="toc-link" href="#section-update-termux" data-toc="3">
+            <span class="toc-dot" id="toc-dot-3"></span>
+            <span>Update Termux</span>
+          </a>
+          <a class="toc-link" href="#section-install-deps" data-toc="4">
+            <span class="toc-dot" id="toc-dot-4"></span>
+            <span>Install Dependencies</span>
+          </a>
+          <a class="toc-link" href="#section-installer" data-toc="5">
+            <span class="toc-dot" id="toc-dot-5"></span>
+            <span>Download &amp; Run Installer</span>
+          </a>
+          <a class="toc-link" href="#section-start-nethunter" data-toc="6">
+            <span class="toc-dot" id="toc-dot-6"></span>
+            <span>Starting NetHunter</span>
+          </a>
+          <a class="toc-link" href="#section-troubleshoot" data-toc="7">
+            <span class="toc-dot" id="toc-dot-7"></span>
+            <span>Troubleshooting</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">About this tutorial</div>
+        <div class="sidebar-meta-list">
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M7 1.5L1.5 4.5V9C1.5 11.5 3.8 13.5 7 14.5C10.2 13.5 12.5 11.5 12.5 9V4.5L7 1.5Z" stroke="currentColor" stroke-width="1.2"/></svg>
+            <span>Difficulty</span>
+            <span class="smr-val green">Beginner</span>
+          </div>
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M6 3.5V6.5L7.5 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span>Read time</span>
+            <span class="smr-val">10 min</span>
+          </div>
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 3.5h10M2 7h10M2 10.5h6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span>Sections</span>
+            <span class="smr-val">7</span>
+          </div>
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span>Platform</span>
+            <span class="smr-val">Android · No Root</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Next up</div>
+        <a href="wireshark-tutorial.html" class="next-tut-card">
+          <div class="ntc-thumb thumb-blue">
+            <svg viewBox="0 0 44 44" fill="none" width="24" height="24">
+              <circle cx="22" cy="22" r="16" stroke="currentColor" stroke-width="2"/>
+              <path d="M16 22h12M22 16l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="ntc-body">
+            <div class="ntc-title">Installing Wireshark &amp; TShark</div>
+            <div class="ntc-sub">Beginner · 10 min</div>
+          </div>
+        </a>
+      </div>
+
+    </aside>
+
+  </div>
+</div>
+
+<script>
+  /* Inline override: patch TOTAL_STEPS to 7 after the shared JS loads */
+</script>
+<script src="nmap-tutorial.js"></script>
+<script>
+  /* The shared JS declares TOTAL_STEPS as a const in its own scope.
+     We can't reassign it, but we CAN override updateProgress to use 7. */
+  (function() {
+    const STEPS = 7;
+    const origPct  = document.getElementById('progress-pct');
+    const origFill = document.getElementById('progress-fill');
+    /* Watch the completed Set via a MutationObserver on step buttons */
+    document.querySelectorAll('.step-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setTimeout(() => {
+          const done = document.querySelectorAll('.step-btn.done').length;
+          const pct  = Math.round((done / STEPS) * 100);
+          if (origFill) origFill.style.width = pct + '%';
+          if (origPct)  origPct.textContent  = pct + '%';
+          if (done === STEPS) {
+            const cc = document.getElementById('completion-card');
+            if (cc) { cc.style.display = 'block'; }
+          }
+        }, 50);
+      });
+    });
+  })();
+</script>
+</body>
+</html>

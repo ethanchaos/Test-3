@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cybersecurity Foundations — Chaos Org</title>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link rel="stylesheet" href="tutorials.css" />
+<link rel="icon" href="/pics/chaos.png?v=1">
+<link rel="shortcut icon" href="/pics/chaos.png?v=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GL0YEB7LF6');
+</script> 
+  <style>
+/* ── Drawer auth ── */
+.drawer { display: flex; flex-direction: column; }
+.drawer-nav { flex: 1; }
+.drawer-auth {
+  padding: 16px 14px 24px;
+  border-top: 1px solid var(--border);
+  display: none; flex-direction: row; gap: 8px; margin-top: auto;
+}
+.drawer-auth-btn {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  gap: 8px; padding: 10px 16px; border-radius: 8px;
+  font-family: var(--font-display); font-size: 11px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  text-decoration: none; transition: opacity .15s, transform .15s;
+  cursor: pointer; white-space: nowrap;
+}
+.drawer-auth-btn:hover { opacity: .88; transform: translateY(-1px); }
+.drawer-auth-btn:active { transform: translateY(0); }
+.drawer-login  { background: #1a1a1a; border: 1px solid #2e2e2e; color: #aaa; }
+.drawer-login:hover { border-color: #3a3a3a; color: var(--accent); opacity: 1; }
+.drawer-signup { background: #fff; border: 1px solid #fff; color: #0a0a0a; box-shadow: 0 2px 12px rgba(255,255,255,.12); }
+.drawer-signup:hover { box-shadow: 0 4px 20px rgba(255,255,255,.2); opacity: 1; }
+
+/* ── Breadcrumb ── */
+.breadcrumb {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 32px;
+  font-family: var(--font-display); font-size: 10px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+}
+.breadcrumb a { color: var(--muted); text-decoration: none; transition: color .15s; }
+.breadcrumb a:hover { color: var(--accent); }
+.breadcrumb-sep { opacity: .3; }
+.breadcrumb-current { color: var(--accent); }
+
+/* ── Course hero ── */
+.tut-hero {
+  position: relative; overflow: hidden;
+  border: 1px solid rgba(61,220,132,.2); border-radius: 14px;
+  background: #0a1410; margin-bottom: 36px;
+  display: grid; grid-template-columns: 1fr 320px; min-height: 220px;
+}
+@media (max-width: 640px) {
+  .tut-hero { grid-template-columns: 1fr; }
+  .tut-hero-img { height: 160px; }
+}
+.tut-hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: linear-gradient(105deg, transparent 40%, rgba(61,220,132,.05) 55%, transparent 70%);
+  background-size: 200% 100%; animation: sweep 5s ease-in-out infinite;
+}
+@keyframes sweep { 0%,100%{background-position:200% 0} 50%{background-position:0 0} }
+.tut-hero-content {
+  padding: 32px 32px 28px; display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 2;
+}
+.tut-hero-eyebrow {
+  font-family: var(--font-display); font-size: 9px; font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--green);
+  display: flex; align-items: center; gap: 8px;
+}
+.tut-hero-eyebrow::before { content:''; display:block; width:20px; height:1px; background:var(--green); opacity:.5; }
+.tut-hero-title { font-family: var(--font-display); font-size: clamp(20px,3.5vw,28px); font-weight: 800; letter-spacing: -.01em; line-height: 1.2; }
+.tut-hero-desc { font-size: 12.5px; color: #666; line-height: 1.65; max-width: 440px; }
+.tut-hero-meta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 4px; }
+.tut-hero-meta .meta-item { display: flex; align-items: center; gap: 5px; font-family: var(--font-display); font-size: 10px; font-weight: 600; letter-spacing: .06em; color: var(--muted); }
+.tut-hero-meta .meta-item svg { opacity: .45; width: 11px; height: 11px; }
+.hero-badge { font-family: var(--font-display); font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 3px 9px; border-radius: 4px; background: rgba(61,220,132,.12); color: var(--green); }
+.tut-hero-progress { margin-top: 2px; }
+.tut-hero-progress-label { font-family: var(--font-display); font-size: 9px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; display: flex; justify-content: space-between; }
+.tut-hero-progress-label span:last-child { color: var(--green); }
+.progress-bar { height: 2px; background: rgba(255,255,255,.06); border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 2px; background: var(--green); transition: width .6s ease; }
+.tut-hero-img { position: relative; overflow: hidden; border-left: 1px solid rgba(61,220,132,.12); }
+.tut-hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(.45) saturate(.6); }
+.tut-hero-img::after { content:''; position:absolute; inset:0; background: linear-gradient(to right,#0a1410 0%,transparent 40%), linear-gradient(135deg,rgba(61,220,132,.14) 0%,transparent 60%); pointer-events:none; }
+.tut-hero-status {
+  position: absolute; top: 16px; right: 16px; z-index: 3;
+  font-family: var(--font-display); font-size: 9px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 999px;
+  display: flex; align-items: center; gap: 5px;
+}
+.status-inprogress { background: rgba(245,166,35,.12); color: var(--amber); border: 1px solid rgba(245,166,35,.2); }
+.status-completed  { background: rgba(61,220,132,.1);  color: var(--green);  border: 1px solid rgba(61,220,132,.2); }
+.status-none       { display: none !important; }
+.tut-hero-status .sdot { width:5px; height:5px; border-radius:50%; }
+@keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+
+/* ── Lesson cards ── */
+.lesson-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 14px; }
+.lesson-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  display: flex; flex-direction: column; text-decoration: none; color: inherit;
+  position: relative; overflow: hidden; opacity: 0;
+  animation: card-in .4s ease forwards;
+  transition: border-color .2s, transform .2s, box-shadow .2s; cursor: pointer;
+}
+.lesson-card:hover { border-color: #2e2e2e; transform: translateY(-3px); box-shadow: 0 10px 36px rgba(0,0,0,.45); }
+@keyframes card-in { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+.lesson-step {
+  position: absolute; top: 10px; left: 10px; z-index: 10;
+  font-family: var(--font-display); font-size: 9px; font-weight: 800; letter-spacing: .1em;
+  width: 22px; height: 22px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.08); color: var(--muted);
+}
+.lesson-check {
+  position: absolute; top: 8px; right: 8px; z-index: 10;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: rgba(61,220,132,.15); border: 1px solid rgba(61,220,132,.3);
+  display: flex; align-items: center; justify-content: center;
+}
+.lesson-ribbon {
+  position: absolute; top: 8px; right: 8px; z-index: 10;
+  font-family: var(--font-display); font-size: 8px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 999px; display: flex; align-items: center; gap: 4px;
+  background: rgba(245,166,35,.15); color: var(--amber); border: 1px solid rgba(245,166,35,.25);
+}
+.lesson-ribbon .sdot { width:4px; height:4px; border-radius:50%; background:var(--amber); animation:pulse-dot 1.4s ease-in-out infinite; }
+.lesson-lock { position: absolute; top: 10px; right: 10px; z-index: 10; color: var(--muted); opacity: .35; }
+.lesson-thumb { width:100%; height:118px; position:relative; overflow:hidden; flex-shrink:0; }
+.lesson-thumb img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s ease,filter .3s ease; filter:brightness(.5) saturate(.6); }
+.lesson-card:not(.locked):hover .lesson-thumb img { transform:scale(1.05); filter:brightness(.62) saturate(.78); }
+.lesson-thumb::before { content:''; position:absolute; inset:0; z-index:1; pointer-events:none; }
+.lesson-thumb::after  { content:''; position:absolute; inset:0; background:linear-gradient(to bottom,transparent 35%,var(--card) 100%); z-index:2; }
+.lthumb-green::before  { background: rgba(61,220,132,.18); }
+.lthumb-amber::before  { background: rgba(245,166,35,.18); }
+.lthumb-blue::before   { background: rgba(79,163,224,.18); }
+.lthumb-purple::before { background: rgba(160,110,255,.18); }
+.lthumb-red::before    { background: rgba(255,80,80,.18); }
+.lesson-card.locked .lesson-thumb img { filter: brightness(.2) saturate(0); }
+.lesson-card.locked .lesson-step { color:#333; border-color:#222; }
+.lesson-body { display:flex; flex-direction:column; gap:5px; padding:14px 14px 0; }
+.lesson-title { font-family:var(--font-display); font-size:13px; font-weight:700; letter-spacing:.01em; line-height:1.3; color:var(--accent); }
+.lesson-card.locked .lesson-title { color: var(--muted); }
+.lesson-desc { font-size:11.5px; color:var(--muted); line-height:1.55; }
+.lesson-progress { padding: 8px 14px 0; }
+.lesson-progress-bar { height:2px; background:rgba(255,255,255,.06); border-radius:2px; overflow:hidden; }
+.lesson-progress-fill { height:100%; border-radius:2px; transition:width .5s ease; }
+.fill-green { background: var(--green); }
+.fill-amber { background: var(--amber); }
+.lesson-footer { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:auto; padding:10px 14px 14px; }
+.lesson-card.locked .lesson-body     { opacity: .4; }
+.lesson-card.locked .lesson-progress { opacity: .15; }
+.lesson-card.locked .lesson-footer   { opacity: .3; pointer-events: none; }
+</style>
+</head>
+<body>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <div class="search-input-row">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+        <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M11 11L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      <input id="search-input" placeholder="Search tutorials…" autocomplete="off" />
+      <button class="search-close" id="search-close">✕</button>
+    </div>
+    <div class="search-results" id="search-results">
+      <div class="search-empty">Type to search tutorials…</div>
+    </div>
+  </div>
+</div>
+
+<!-- DRAWER -->
+<div class="drawer-overlay" id="drawer-overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <span class="drawer-title">Menu</span>
+    <button class="drawer-close" id="drawer-close">✕</button>
+  </div>
+  <div class="drawer-nav">
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="1" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="8" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="8" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
+      Dashboard
+    </a>
+    <a class="drawer-link active" href="tutorials.html">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 3.5h10M2 7h10M2 10.5h6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Tutorials
+    </a>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Upload
+    </a>
+    <div class="drawer-divider"></div>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="5" r="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 12c0-2.21 2.239-4 5-4s5 1.79 5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Account
+    </a>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M7 4v3.5l2 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Timers
+    </a>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2h10v2H2zM2 6h10v2H2zM2 10h6v2H2z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+      File Manager
+    </a>
+    <div class="drawer-divider"></div>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M7 5v2.5M7 9.5v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Settings
+    </a>
+  </div>
+  <div class="drawer-auth">
+    <a href="#" class="drawer-auth-btn drawer-login">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M5 3H3a1 1 0 00-1 1v6a1 1 0 001 1h2M9 10l3-3-3-3M12 7H6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Log In
+    </a>
+    <a href="#" class="drawer-auth-btn drawer-signup">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="5" r="2.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 12c0-2.21 2.239-4 5-4s5 1.79 5 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M11 2v4M9 4h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      Sign Up
+    </a>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- Nav -->
+  <nav>
+    <a class="nav-logo" href="tutorials.html">
+      <i class="fas fa-graduation-cap" style="font-size:18px;margin-right:8px;color:var(--muted);"></i>Chaos <span>Org</span>
+    </a>
+    <div class="nav-icons">
+      <button class="nav-icon-btn" id="search-btn" title="Search (/)">
+        <svg viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M11 11L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      </button>
+      <button class="nav-icon-btn" id="menu-btn" title="Menu">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="tutorials.html">← Tutorials</a>
+    <span class="breadcrumb-sep">/</span>
+    <span class="breadcrumb-current" id="breadcrumb-title">Cybersecurity Foundations</span>
+  </div>
+
+  <!-- Hero — injected by JS -->
+  <div id="hero-slot"></div>
+
+  <!-- Section label -->
+  <div class="section-label">
+    Lessons
+    <span class="count-pill" id="lesson-count">— lessons</span>
+  </div>
+
+  <!-- Lesson grid — injected by JS -->
+  <div class="lesson-grid" id="lesson-grid"></div>
+
+</div>
+
+<script>
+/* ══ CLOCK SVG ══ */
+const CLOCK_SVG = `<svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.3"/><path d="M6 3.5V6.5L7.5 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`;
+const LOCK_SVG  = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="3" y="6" width="8" height="6" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 6V4.5a2 2 0 014 0V6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`;
+const CHECK_SVG = `<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5L4 7.5L8 3" stroke="#3ddc84" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const BADGE_CLASS = { Beginner: 'badge-beginner', Intermediate: 'badge-intermediate', Advanced: 'badge-advanced' };
+
+/* ══ SESSION CHECK ══ */
+(function() {
+  const auth = document.querySelector('.drawer-auth');
+  if (auth) auth.style.display = localStorage.getItem('dvx_session') ? 'none' : 'flex';
+})();
+
+/* ══ IndexedDB — same DB as tutorials index ══ */
+const DB_NAME    = 'chaos-tutorial-progress';
+const DB_STORE   = 'progress';
+const DB_VERSION = 1;
+const PAGE_KEY   = 'cybersec-foundations';
+
+let db = null;
+let lessonProgress = {}; // { lessonId: { pct, state: 'none'|'inprogress'|'completed' } }
+let DATA = null;
+
+function openDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded = e => {
+      const d = e.target.result;
+      if (!d.objectStoreNames.contains(DB_STORE))
+        d.createObjectStore(DB_STORE, { keyPath: 'id' });
+    };
+    req.onsuccess = e => resolve(e.target.result);
+    req.onerror   = e => reject(e.target.error);
+  });
+}
+
+async function loadProgress() {
+  if (!db) return {};
+  return new Promise(resolve => {
+    const tx  = db.transaction(DB_STORE, 'readonly');
+    const req = tx.objectStore(DB_STORE).get(PAGE_KEY);
+    req.onsuccess = e => resolve(e.target.result ? (e.target.result.lessons || {}) : {});
+    req.onerror   = () => resolve({});
+  });
+}
+
+async function saveProgress() {
+  if (!db) return;
+  return new Promise(resolve => {
+    const tx = db.transaction(DB_STORE, 'readwrite');
+    tx.objectStore(DB_STORE).put({ id: PAGE_KEY, lessons: lessonProgress });
+    tx.oncomplete = resolve;
+    tx.onerror    = resolve;
+  });
+}
+
+/* ══ RENDER HERO ══ */
+function renderHero(course, lessons) {
+  const total     = lessons.length;
+  const completed = Object.values(lessonProgress).filter(p => p.state === 'completed').length;
+  const pct       = Math.round((completed / total) * 100);
+  const hasProgress = completed > 0;
+  const allDone   = completed === total;
+  const statusClass = allDone ? 'status-completed' : hasProgress ? 'status-inprogress' : 'status-none';
+  const statusLabel = allDone ? 'Completed' : 'In Progress';
+  const dotStyle  = allDone
+    ? 'style="animation:none;background:var(--green)"'
+    : 'style="animation:pulse-dot 1.4s ease-in-out infinite;background:var(--amber)"';
+
+  document.getElementById('hero-slot').innerHTML = `
+    <div class="tut-hero" id="tut-hero">
+      <div class="tut-hero-status ${statusClass}" id="hero-status">
+        <span class="sdot" ${dotStyle}></span>
+        ${statusLabel}
+      </div>
+      <div class="tut-hero-content">
+        <div class="tut-hero-eyebrow">${course.eyebrow}</div>
+        <div class="tut-hero-title">${course.title}</div>
+        <div class="tut-hero-desc">${course.description}</div>
+        <div class="tut-hero-meta">
+          <span class="meta-item">${CLOCK_SVG} ${course.totalDuration}</span>
+          <span class="meta-item">
+            <svg viewBox="0 0 12 12" fill="none"><rect x="1.5" y="2.5" width="9" height="7" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M4 2.5V1.5M8 2.5V1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            ${total} lessons
+          </span>
+          <span class="hero-badge">${course.badge}</span>
+        </div>
+        <div class="tut-hero-progress">
+          <div class="tut-hero-progress-label">
+            <span>Overall Progress</span>
+            <span>${completed} / ${total} completed</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+        </div>
+      </div>
+      <div class="tut-hero-img">
+        <img src="${course.image}" alt="${course.imageAlt}" loading="lazy" />
+      </div>
+    </div>`;
+}
+
+/* ══ RENDER LESSONS ══ */
+function renderLessons(lessons) {
+  document.getElementById('lesson-count').textContent = lessons.length + ' lessons';
+
+  document.getElementById('lesson-grid').innerHTML = lessons.map((l, i) => {
+    const p     = lessonProgress[l.id] || { pct: 0, state: 'none' };
+    const state = p.state;
+    const pct   = p.pct;
+
+    // Override locked from JSON unless progress says otherwise
+    const isLocked = l.locked && state === 'none';
+
+    let indicator = '';
+    if (state === 'completed') {
+      indicator = `<div class="lesson-check">${CHECK_SVG}</div>`;
+    } else if (state === 'inprogress') {
+      indicator = `<div class="lesson-ribbon"><span class="sdot"></span> In Progress</div>`;
+    } else if (isLocked) {
+      indicator = `<div class="lesson-lock">${LOCK_SVG}</div>`;
+    }
+
+    const fillColor  = state === 'completed' ? 'fill-green' : 'fill-amber';
+    const showBar    = state !== 'none';
+    const lockedAttr = isLocked ? ' locked' : '';
+    const stepPad    = i + 1 < 10 ? '0' + (i + 1) : (i + 1);
+
+    return `
+    <a class="lesson-card${lockedAttr}" href="${l.href}" data-lesson-id="${l.id}"
+       style="animation-delay:${(i * 0.05) + 0.05}s">
+      <div class="lesson-step">${stepPad}</div>
+      ${indicator}
+      <div class="lesson-thumb lthumb-${l.color}">
+        <img src="${l.image}" alt="${l.imageAlt}" loading="lazy" />
+      </div>
+      <div class="lesson-body">
+        <div class="lesson-title">${l.title}</div>
+        <div class="lesson-desc">${l.description}</div>
+      </div>
+      ${showBar ? `<div class="lesson-progress"><div class="lesson-progress-bar"><div class="lesson-progress-fill ${fillColor}" style="width:${pct}%"></div></div></div>` : ''}
+      <div class="lesson-footer">
+        <span class="meta-item">${CLOCK_SVG} ${l.duration}</span>
+        <div class="card-tags"><span class="tag">${l.tag}</span></div>
+        <span class="card-badge ${BADGE_CLASS[l.badge] || 'badge-beginner'}">${l.badge}</span>
+      </div>
+    </a>`;
+  }).join('');
+
+  // Lesson cards are plain links — clicking navigates straight to l.href.
+  // Locked lessons (no progress yet, locked:true in JSON) block navigation.
+  // Unlocked lessons mark 'inprogress' on click-through (fire-and-forget,
+  // never blocks navigation), but never downgrade an already-completed lesson.
+  document.querySelectorAll('.lesson-card').forEach(card => {
+    card.addEventListener('click', e => {
+      const id  = parseInt(card.dataset.lessonId);
+      if (card.classList.contains('locked')) { e.preventDefault(); return; }
+      const cur = lessonProgress[id]?.state || 'none';
+      if (cur === 'completed') return; // don't touch completed lessons
+      lessonProgress[id] = { pct: 50, state: 'inprogress' };
+      saveProgress(); // not awaited — navigation proceeds immediately
+    });
+  });
+}
+
+/* ══ DRAWER ══ */
+const menuBtn       = document.getElementById('menu-btn');
+const drawer        = document.getElementById('drawer');
+const drawerOverlay = document.getElementById('drawer-overlay');
+const drawerClose   = document.getElementById('drawer-close');
+menuBtn.addEventListener('click', () => { drawer.classList.add('open'); drawerOverlay.classList.add('open'); });
+drawerClose.addEventListener('click', () => { drawer.classList.remove('open'); drawerOverlay.classList.remove('open'); });
+drawerOverlay.addEventListener('click', () => { drawer.classList.remove('open'); drawerOverlay.classList.remove('open'); });
+
+/* ══ SEARCH ══ */
+const searchBtn     = document.getElementById('search-btn');
+const searchOverlay = document.getElementById('search-overlay');
+const searchClose   = document.getElementById('search-close');
+const searchInput   = document.getElementById('search-input');
+searchBtn.addEventListener('click', () => { searchOverlay.classList.add('open'); setTimeout(() => searchInput.focus(), 80); });
+searchClose.addEventListener('click', () => { searchOverlay.classList.remove('open'); searchInput.value = ''; });
+searchOverlay.addEventListener('click', e => { if (e.target === searchOverlay) { searchOverlay.classList.remove('open'); searchInput.value = ''; } });
+document.addEventListener('keydown', e => {
+  if (e.key === '/' && !e.target.matches('input,textarea')) { e.preventDefault(); searchOverlay.classList.add('open'); setTimeout(() => searchInput.focus(), 80); }
+  if (e.key === 'Escape') { searchOverlay.classList.remove('open'); drawer.classList.remove('open'); drawerOverlay.classList.remove('open'); }
+});
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim().toLowerCase();
+  const results = document.getElementById('search-results');
+  if (!DATA || !q) { results.innerHTML = '<div class="search-empty">Type to search lessons…</div>'; return; }
+  const hits = DATA.lessons.filter(l => l.title.toLowerCase().includes(q) || l.description.toLowerCase().includes(q) || l.tag.toLowerCase().includes(q));
+  if (!hits.length) { results.innerHTML = `<div class="search-empty">No lessons match "${q}"</div>`; return; }
+  const colorMap = { green:'#3ddc84', amber:'#f5a623', blue:'#4fa3e0', purple:'#a06eff', red:'#ff5050' };
+  results.innerHTML = hits.map(l => `
+    <a class="search-result-item" href="${l.href}">
+      <div class="sri-thumb" style="border:1px solid ${colorMap[l.color]||'#555'}33;overflow:hidden;border-radius:8px;">
+        <img src="${l.image}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+      <div class="sri-body">
+        <div class="sri-title">${l.title}</div>
+        <div class="sri-sub">${l.badge} · ${l.description.slice(0,60)}…</div>
+      </div>
+    </a>`).join('');
+});
+
+/* ══ MARK LESSON COMPLETE ══
+   Call this from a lesson's own content page (e.g. nmap-tutorial.html) once
+   its quiz/checklist confirms the lesson is done:
+     window.opener?.markLessonComplete(1)   // if opened from this page
+   or, more simply, have each lesson page open its own DB connection and
+   write directly: db.transaction(DB_STORE,'readwrite')
+     .objectStore(DB_STORE).put({ id: 'cybersec-foundations', lessons: {...} })
+   using the same DB_NAME/DB_STORE/PAGE_KEY constants as this file. */
+async function markLessonComplete(lessonId) {
+  lessonProgress[lessonId] = { pct: 100, state: 'completed' };
+  await saveProgress();
+}
+window.markLessonComplete = markLessonComplete;
+
+/* ══ BOOT ══ */
+(async () => {
+  try {
+    const res = await fetch('cybersec-foundations-data.json');
+    DATA = await res.json();
+  } catch(e) {
+    console.error('Failed to load cybersec-foundations-data.json:', e);
+    document.getElementById('lesson-grid').innerHTML = '<p style="color:var(--muted);padding:20px">Could not load lesson data.</p>';
+    return;
+  }
+
+  document.getElementById('breadcrumb-title').textContent = DATA.course.title;
+  document.title = DATA.course.title + ' — Chaos Org';
+
+  try {
+    db = await openDB();
+    lessonProgress = await loadProgress();
+  } catch(e) {
+    console.warn('IndexedDB unavailable:', e);
+  }
+
+  renderHero(DATA.course, DATA.lessons);
+  renderLessons(DATA.lessons);
+})();
+</script>
+</body>
+</html>

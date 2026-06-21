@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>chaos Configurations— SQLmap Installation Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="nmap-tutorial.css" />
+<link rel="icon" href="/pics/chaos.png?v=1">
+<link rel="shortcut icon" href="/pics/chaos.png?v=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GL0YEB7LF6');
+</script> 
+  <style>
+  *, *::before, *::after { max-width: 100%; }
+  img, pre, table { max-width: 100%; }
+
+  /* ── SQLmap accent: python yellow-green ── */
+  .tut-title em             { color: #c8d645; }
+  .tut-eyebrow              { color: #c8d645; }
+  .toc-link.active          { color: #c8d645; }
+  .toc-link.active .toc-dot { background: #c8d645; }
+  .tut-progress-fill        { background: #c8d645; }
+
+  /* ── Platform path tabs ── */
+  .path-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .path-tab {
+    flex: 1;
+    padding: 11px 14px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--card);
+    font-family: 'Oxanium', sans-serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase;
+    color: #555;
+    cursor: pointer;
+    transition: border-color .15s, color .15s, background .15s;
+    text-align: center;
+  }
+  .path-tab.active {
+    border-color: #c8d645;
+    color: #c8d645;
+    background: rgba(200,214,69,.06);
+  }
+  .path-panel { display: none; }
+  .path-panel.active { display: block; }
+
+  /* ── SQLmap ASCII banner ── */
+  .sqlmap-banner {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    color: #c8d645;
+    line-height: 1.4;
+    padding: 14px 16px;
+    background: rgba(200,214,69,.04);
+    border: 1px solid rgba(200,214,69,.15);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  /* ── Attack chain step list ── */
+  .chain-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .chain-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 13px 15px;
+  }
+  .chain-step-num {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 11px; font-weight: 700;
+    color: #c8d645;
+    background: rgba(200,214,69,.1);
+    border: 1px solid rgba(200,214,69,.2);
+    width: 24px; height: 24px; min-width: 24px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .chain-step-body { min-width: 0; flex: 1; }
+  .chain-step-title {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 12px; font-weight: 700;
+    color: #ccc; margin-bottom: 3px;
+  }
+  .chain-step-desc {
+    font-size: 12.5px; color: #666; line-height: 1.6; word-break: break-word;
+  }
+  .chain-step-desc code {
+    font-family: 'Fira Code', monospace; font-size: 11.5px;
+    background: rgba(255,255,255,.05);
+    padding: 1px 5px; border-radius: 3px; color: #999;
+  }
+</style>
+</head>
+<body>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <div class="search-input-row">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+        <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M11 11L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      <input id="search-input" placeholder="Search tutorials…" autocomplete="off" />
+      <button class="search-close" id="search-close">✕</button>
+    </div>
+    <div class="search-results" id="search-results">
+      <div class="search-empty">Type to search tutorials…</div>
+    </div>
+  </div>
+</div>
+
+<!-- DRAWER -->
+<div class="drawer-overlay" id="drawer-overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <span class="drawer-title">Menu</span>
+    <button class="drawer-close" id="drawer-close">✕</button>
+  </div>
+  <div class="drawer-nav">
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="1" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="8" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="8" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
+      Dashboard
+    </a>
+    <a class="drawer-link active" href="tutorials.html">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 3.5h10M2 7h10M2 10.5h6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Tutorials
+    </a>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Upload
+    </a>
+    <div class="drawer-divider"></div>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="5" r="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 12c0-2.21 2.239-4 5-4s5 1.79 5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Account
+    </a>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M7 4v3.5l2 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Timers
+    </a>
+    <div class="drawer-divider"></div>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M7 5v2.5M7 9.5v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Settings
+    </a>
+  </div>
+  <div class="drawer-auth">
+    <a href="#" class="drawer-auth-btn drawer-login">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+        <path d="M5 3H3a1 1 0 00-1 1v6a1 1 0 001 1h2M9 10l3-3-3-3M12 7H6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Log In
+    </a>
+    <a href="#" class="drawer-auth-btn drawer-signup">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+        <circle cx="7" cy="5" r="2.5" stroke="currentColor" stroke-width="1.3"/>
+        <path d="M2 12c0-2.21 2.239-4 5-4s5 1.79 5 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        <path d="M11 2v4M9 4h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+      Sign Up
+    </a>
+  </div>
+</div>
+
+<div class="page">
+
+  <nav>
+    <a class="nav-logo" href="#">Chaos-<span>Org</span></a>
+    <div class="nav-icons">
+      <button class="nav-icon-btn" id="search-btn">
+        <svg viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M11 11L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      </button>
+      <button class="nav-icon-btn" id="menu-btn">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <div class="breadcrumb">
+    <a href="tutorials.html" class="bc-link">Tutorials</a>
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M3.5 2L6.5 5L3.5 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="bc-current">SQLmap</span>
+  </div>
+
+  <div class="tut-hero">
+    <div class="tut-hero-meta">
+      <span class="tut-eyebrow">Tools</span>
+      <span class="tut-dot">·</span>
+      <span class="tut-badge badge-beginner">Beginner</span>
+      <span class="tut-dot">·</span>
+      <span class="tut-read-time">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.3"/><path d="M6 3.5V6.5L7.5 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        10 min read
+      </span>
+    </div>
+    <h1 class="tut-title">Installing <em>SQLmap</em> — SQL Injection Tool Setup Guide</h1>
+    <p class="tut-subtitle">Get the world's most popular automated SQL injection framework running on Kali Linux or Termux. Pure CLI — works on any platform with Python 3.</p>
+
+    <div class="tut-progress-bar-wrap">
+      <div class="tut-progress-labels">
+        <span>Your progress</span>
+        <span id="progress-pct">0%</span>
+      </div>
+      <div class="tut-progress-track"><div class="tut-progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <div class="tut-layout">
+    <main class="tut-main" id="tut-main">
+
+      <!-- ─── SECTION 1: What is SQLmap ─── -->
+      <section class="tut-section" id="section-what-is-sqlmap" data-section="1">
+        <div class="section-header">
+          <div class="section-num">01</div>
+          <h2 class="section-title">What is SQLmap?</h2>
+        </div>
+
+         <!-- Image 1: intro / tool overview -->
+        <div class="tut-img-wrap">
+          <div class="tut-img-real">
+            <img src="pics/logo-sqlmap.jpg" alt="Database server infrastructure and SQL vulnerability scanning" />
+          </div>
+          <div class="tut-img-caption">SQLmap automates the entire SQL injection workflow — from detection through database enumeration to credential extraction</div>
+        </div>
+        
+        <p class="tut-para">
+          SQLmap is an open-source penetration testing tool written in Python that automates the detection and exploitation of SQL injection vulnerabilities in web applications. Point it at a vulnerable URL parameter and it handles everything — fingerprinting the database engine, extracting tables, dumping credentials, and more.
+        </p>
+
+        <div class="info-card info-blue">
+          <div class="info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7v5M8 5.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="info-body">
+            <div class="info-label">Pure CLI — no GUI needed</div>
+            <div class="info-text">Unlike Burp Suite or ZAP, SQLmap is entirely terminal-based. It runs natively on Kali, inside NetHunter, and directly in Termux on Android — no desktop environment, KEX, or VNC required.</div>
+          </div>
+        </div>
+
+       
+
+        <div class="info-card info-red">
+          <div class="info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L1.5 13h13L8 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 7v3M8 11.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div class="info-body">
+            <div class="info-label">Legal reminder</div>
+            <div class="info-text">SQLmap itself displays this warning on every run — using it against targets without explicit permission is illegal. Only test on systems you own or have written authorisation to test. Use intentionally vulnerable practice apps like <strong>DVWA</strong>, <strong>WebGoat</strong>, or <strong>HackTheBox</strong> for learning.</div>
+          </div>
+        </div>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="1">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 2: Installation ─── -->
+      <section class="tut-section" id="section-install" data-section="2">
+        <div class="section-header">
+          <div class="section-num">02</div>
+          <h2 class="section-title">Installation</h2>
+        </div>
+
+        <p class="tut-para">SQLmap is a Python tool — it installs cleanly on both Kali and Termux. Pick your platform below.</p>
+
+        <div class="path-tabs">
+          <button class="path-tab active" data-path="kali">Kali / NetHunter</button>
+          <button class="path-tab" data-path="termux">Termux / Android</button>
+        </div>
+
+        <!-- ── KALI PATH ── -->
+        <div class="path-panel active" id="path-kali">
+
+          <p class="tut-para">SQLmap is pre-installed on most Kali builds. Check first — if it's already there, just update it. If not, one apt command installs it.</p>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash — Check if already installed</span>
+              <button class="copy-btn" data-copy="sqlmap --version">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="c-muted">$</span> sqlmap <span class="c-flag">--version</span>
+<span class="c-output">1.10.4#stable</span></code></pre>
+          </div>
+
+          <p class="tut-para">If that returns a version number, SQLmap is already installed. Update it with:</p>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash — Update existing install</span>
+              <button class="copy-btn" data-copy="sudo apt update && sudo apt upgrade sqlmap -y">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="c-muted">$</span> sudo apt update <span class="c-flag">&&</span> sudo apt upgrade sqlmap <span class="c-flag">-y</span></code></pre>
+          </div>
+
+          <p class="tut-para">If SQLmap is not installed, install it fresh:</p>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash — Fresh install</span>
+              <button class="copy-btn" data-copy="sudo apt update&#10;sudo apt install sqlmap -y">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="c-muted">$</span> sudo apt update
+<span class="c-muted">$</span> sudo apt install sqlmap <span class="c-flag">-y</span></code></pre>
+          </div>
+
+        </div>
+
+        <!-- ── TERMUX PATH ── -->
+        <div class="path-panel" id="path-termux">
+
+          <p class="tut-para">On Termux, SQLmap isn't in the main pkg repo — install Python and git, then clone directly from the official GitHub repo. This gives you the latest version every time.</p>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash — Step 1: Update and install dependencies</span>
+              <button class="copy-btn" data-copy="pkg update && pkg upgrade -y&#10;pkg install python git -y">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="c-muted">$</span> pkg update <span class="c-flag">&&</span> pkg upgrade <span class="c-flag">-y</span>
+<span class="c-muted">$</span> pkg install python git <span class="c-flag">-y</span></code></pre>
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash — Step 2: Clone SQLmap from GitHub</span>
+              <button class="copy-btn" data-copy="git clone --depth 1 https://github.com/sqlmapproject/sqlmap.git sqlmap-dev">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="c-muted">$</span> git clone <span class="c-flag">--depth 1</span> https://github.com/sqlmapproject/sqlmap.git sqlmap-dev</code></pre>
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash — Step 3: Run it</span>
+              <button class="copy-btn" data-copy="cd sqlmap-dev&#10;python3 sqlmap.py --version">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="c-muted">$</span> cd sqlmap-dev
+<span class="c-muted">$</span> python3 sqlmap.py <span class="c-flag">--version</span>
+<span class="c-output">1.10.4#stable</span></code></pre>
+          </div>
+
+          <div class="info-card info-blue" style="margin-top:0;">
+            <div class="info-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7v5M8 5.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <div class="info-body">
+              <div class="info-label">Make a shortcut alias</div>
+              <div class="info-text">To avoid typing <code>python3 ~/sqlmap-dev/sqlmap.py</code> every time, add an alias to your shell profile:<br /><br /><code>echo "alias sqlmap='python3 ~/sqlmap-dev/sqlmap.py'" >> ~/.bashrc && source ~/.bashrc</code><br /><br />Now you can just type <code>sqlmap</code> like on Kali.</div>
+            </div>
+          </div>
+
+        </div>
+
+      
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="2">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 3: Verify & First Run ─── -->
+      <section class="tut-section" id="section-verify" data-section="3">
+        <div class="section-header">
+          <div class="section-num">03</div>
+          <h2 class="section-title">Verify &amp; First Run</h2>
+        </div>
+
+        <p class="tut-para">Once installed, verify it launches cleanly and shows the banner.</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="sqlmap --version">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> sqlmap <span class="c-flag">--version</span></code></pre>
+        </div>
+
+        <p class="tut-para">Run <code>sqlmap -h</code> to see the full help banner and confirm the tool is working:</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="sqlmap -h">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> sqlmap <span class="c-flag">-h</span></code></pre>
+        </div>
+
+        <!-- SQLmap ASCII banner -->
+        <div class="sqlmap-banner">        ___
+       __H__
+ ___ ___[,]_____ ___ ___  {1.10.4#stable}
+|_ -| . [.]     | .'| . |
+|___|_  [)]_|_|_|__,|  _|
+      |_|V...       |_|   https://sqlmap.org
+
+Usage: python3 sqlmap [options]
+
+  -h, --help          Show basic help message and exit
+  -hh                 Show advanced help message and exit
+  --version           Show program's version number and exit
+  -v VERBOSE          Verbosity level: 0-6 (default 1)
+
+Target:
+  -u URL              Target URL (e.g. "http://site.com/page.php?id=1")
+  -r REQUESTFILE      Load HTTP request from a file</div>
+
+     
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="3">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 4: Basic Usage ─── -->
+      <section class="tut-section" id="section-basic-use" data-section="4">
+        <div class="section-header">
+          <div class="section-num">04</div>
+          <h2 class="section-title">Basic Usage — SQL Injection Workflow</h2>
+        </div>
+
+        <p class="tut-para">A typical SQLmap workflow follows these steps — always against targets you own or are authorised to test. The example URL used here is a local practice machine.</p>
+
+        <div class="chain-steps">
+
+          <div class="chain-step">
+            <div class="chain-step-num">1</div>
+            <div class="chain-step-body">
+              <div class="chain-step-title">Test a URL for injection</div>
+              <div class="chain-step-desc">Point SQLmap at a URL with a parameter and let it detect whether SQL injection is present.</div>
+            </div>
+          </div>
+
+          <div class="chain-step">
+            <div class="chain-step-num">2</div>
+            <div class="chain-step-body">
+              <div class="chain-step-title">Enumerate databases</div>
+              <div class="chain-step-desc">Once injection is confirmed, list all databases on the server with <code>--dbs</code>.</div>
+            </div>
+          </div>
+
+          <div class="chain-step">
+            <div class="chain-step-num">3</div>
+            <div class="chain-step-body">
+              <div class="chain-step-title">List tables in a database</div>
+              <div class="chain-step-desc">Target a specific database with <code>-D dbname --tables</code> to see what tables exist.</div>
+            </div>
+          </div>
+
+          <div class="chain-step">
+            <div class="chain-step-num">4</div>
+            <div class="chain-step-body">
+              <div class="chain-step-title">Dump table contents</div>
+              <div class="chain-step-desc">Extract the data from a specific table with <code>-D dbname -T tablename --dump</code>.</div>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="tut-para">Each of those steps as actual commands (replace the URL with your authorised target):</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash — Step 1: Test for injection</span>
+            <button class="copy-btn" data-copy='sqlmap -u "http://target.local/page.php?id=1"'>
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> sqlmap <span class="c-flag">-u</span> <span class="c-string">"http://target.local/page.php?id=1"</span></code></pre>
+        </div>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash — Step 2: Enumerate databases</span>
+            <button class="copy-btn" data-copy='sqlmap -u "http://target.local/page.php?id=1" --dbs'>
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> sqlmap <span class="c-flag">-u</span> <span class="c-string">"http://target.local/page.php?id=1"</span> <span class="c-flag">--dbs</span>
+<span class="c-output">[*] available databases [2]:
+[*] information_schema
+[*] acuart</span></code></pre>
+        </div>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash — Step 3: List tables</span>
+            <button class="copy-btn" data-copy='sqlmap -u "http://target.local/page.php?id=1" -D acuart --tables'>
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> sqlmap <span class="c-flag">-u</span> <span class="c-string">"http://target.local/page.php?id=1"</span> <span class="c-flag">-D</span> acuart <span class="c-flag">--tables</span>
+<span class="c-output">[8 tables]
++-----------+
+| artists   |
+| carts     |
+| categ     |
+| featured  |
+| guestbook |
+| pictures  |
+| products  |
+| users     |
++-----------+</span></code></pre>
+        </div>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash — Step 4: Dump a table</span>
+            <button class="copy-btn" data-copy='sqlmap -u "http://target.local/page.php?id=1" -D acuart -T users --dump'>
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> sqlmap <span class="c-flag">-u</span> <span class="c-string">"http://target.local/page.php?id=1"</span> <span class="c-flag">-D</span> acuart <span class="c-flag">-T</span> users <span class="c-flag">--dump</span></code></pre>
+        </div>
+
+        <!-- Essential flags reference table -->
+        <div class="flags-table-wrap">
+          <div class="flags-table-header">Essential SQLmap flags</div>
+          <table class="flags-table">
+            <thead>
+              <tr><th>Flag</th><th>What it does</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>-u URL</code></td><td>Target URL with a parameter (required)</td></tr>
+              <tr><td><code>--dbs</code></td><td>Enumerate all databases on the server</td></tr>
+              <tr><td><code>-D &lt;db&gt;</code></td><td>Target a specific database</td></tr>
+              <tr><td><code>--tables</code></td><td>List tables in the specified database</td></tr>
+              <tr><td><code>-T &lt;table&gt;</code></td><td>Target a specific table</td></tr>
+              <tr><td><code>--dump</code></td><td>Extract and display the table contents</td></tr>
+              <tr><td><code>--batch</code></td><td>Auto-answer all prompts (non-interactive mode)</td></tr>
+              <tr><td><code>--random-agent</code></td><td>Use a random User-Agent to reduce WAF detection</td></tr>
+              <tr><td><code>--proxy http://127.0.0.1:8080</code></td><td>Route traffic through Burp Suite for analysis</td></tr>
+              <tr><td><code>-r file.txt</code></td><td>Load a saved HTTP request file (captured from Burp)</td></tr>
+              <tr><td><code>--level=5 --risk=3</code></td><td>Increase test depth and payload aggressiveness</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="4">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 5: Troubleshooting ─── -->
+      <section class="tut-section" id="section-troubleshoot" data-section="5">
+        <div class="section-header">
+          <div class="section-num">05</div>
+          <h2 class="section-title">Troubleshooting</h2>
+        </div>
+
+        <div class="trouble-list">
+
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              <code>sqlmap: command not found</code> on Kali
+            </div>
+            <div class="trouble-a">Run <code>sudo apt install sqlmap -y</code>. SQLmap is pre-installed on most Kali builds but may be missing from a minimal install. Check with <code>apt-cache show sqlmap</code> to confirm it's in your repos.</div>
+          </div>
+
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              <code>python3: command not found</code> on Termux
+            </div>
+            <div class="trouble-a">Python isn't installed. Run <code>pkg install python -y</code> then retry. On Termux, <code>python3</code> and <code>python</code> both point to the same binary after install.</div>
+          </div>
+
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              SQLmap says the target is not injectable
+            </div>
+            <div class="trouble-a">The parameter may be protected or the test level is too low. Try adding <code>--level=5 --risk=3</code> to run deeper tests. Also ensure the URL parameter you're targeting actually exists and returns different responses — test manually in a browser first.</div>
+          </div>
+
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              WAF or firewall blocking requests
+            </div>
+            <div class="trouble-a">Add <code>--random-agent</code> to randomise the User-Agent header, or route through Burp with <code>--proxy http://127.0.0.1:8080</code>. For tougher WAFs, try tamper scripts: <code>--tamper=space2comment,between</code>.</div>
+          </div>
+
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              SQLmap keeps prompting — I want it to run automatically
+            </div>
+            <div class="trouble-a">Add <code>--batch</code> to your command. This tells SQLmap to auto-accept all default answers to prompts and run without user interaction — useful for scripting or long sessions.</div>
+          </div>
+
+        </div>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="5">Mark as read</button>
+        </div>
+      </section>
+
+      <!-- RELATED -->
+
+
+      <!-- Completion -->
+      <div class="completion-card" id="completion-card" style="display:none;">
+        <div class="completion-icon">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="15" stroke="var(--green)" stroke-width="2"/>
+            <path d="M11 18l5 5 9-9" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="completion-title">Tutorial Complete!</div>
+        <div class="completion-sub">SQLmap is installed and you know the core workflow. Next: intercept a POST request in Burp Suite and load it into SQLmap with <code>-r</code> for even more control over what gets tested.</div>
+        <a href="tutorials.html" class="completion-btn">Back to Tutorials</a>
+      </div>
+
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside class="tut-sidebar">
+
+      <div class="sidebar-card" id="toc-card">
+        <div class="sidebar-card-title">Contents</div>
+        <nav class="toc-nav">
+          <a class="toc-link active" href="#section-what-is-sqlmap" data-toc="1">
+            <span class="toc-dot" id="toc-dot-1"></span>
+            <span>What is SQLmap?</span>
+          </a>
+          <a class="toc-link" href="#section-install" data-toc="2">
+            <span class="toc-dot" id="toc-dot-2"></span>
+            <span>Installation</span>
+          </a>
+          <a class="toc-link" href="#section-verify" data-toc="3">
+            <span class="toc-dot" id="toc-dot-3"></span>
+            <span>Verify &amp; First Run</span>
+          </a>
+          <a class="toc-link" href="#section-basic-use" data-toc="4">
+            <span class="toc-dot" id="toc-dot-4"></span>
+            <span>Basic Usage</span>
+          </a>
+          <a class="toc-link" href="#section-troubleshoot" data-toc="5">
+            <span class="toc-dot" id="toc-dot-5"></span>
+            <span>Troubleshooting</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">About this tutorial</div>
+        <div class="sidebar-meta-list">
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M7 1.5L1.5 4.5V9C1.5 11.5 3.8 13.5 7 14.5C10.2 13.5 12.5 11.5 12.5 9V4.5L7 1.5Z" stroke="currentColor" stroke-width="1.2"/></svg>
+            <span>Difficulty</span>
+            <span class="smr-val green">Beginner</span>
+          </div>
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M6 3.5V6.5L7.5 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span>Read time</span>
+            <span class="smr-val">10 min</span>
+          </div>
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 3.5h10M2 7h10M2 10.5h6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span>Sections</span>
+            <span class="smr-val">5</span>
+          </div>
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span>Platform</span>
+            <span class="smr-val">Kali · Termux</span>
+          </div>
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 3.5h10M2 7h10M2 10.5h6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span>Type</span>
+            <span class="smr-val" style="color:#3ddc84;">CLI only</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Next up</div>
+        <a href="#" class="next-tut-card">
+          <div class="ntc-thumb thumb-blue">
+            <svg viewBox="0 0 44 44" fill="none" width="24" height="24">
+              <circle cx="22" cy="22" r="16" stroke="currentColor" stroke-width="2"/>
+              <path d="M16 22h12M22 16l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="ntc-body">
+            <div class="ntc-title">SQLmap — Tamper Scripts &amp; WAF Bypass</div>
+            <div class="ntc-sub">Intermediate · 12 min</div>
+          </div>
+        </a>
+      </div>
+
+    </aside>
+
+  </div>
+</div>
+
+<script src="nmap-tutorial.js"></script>
+<script>
+  /* ── Path tab switcher ── */
+  document.querySelectorAll('.path-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.path;
+      document.querySelectorAll('.path-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.path-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const panel = document.getElementById('path-' + target);
+      if (panel) panel.classList.add('active');
+    });
+  });
+</script>
+  <script src="https://5gvci.com/act/files/tag.min.js?z=11181514" data-cfasync="false" async></script>
+<script src="https://5gvci.com/act/files/tag.min.js?z=11181506" data-cfasync="false" async></script>
+
+<script>(function(s){s.dataset.zone='11181504',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+</body>
+</html>

@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>chaos Configurations— Wireshark Installation Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="nmap-tutorial.css" />
+<link rel="icon" href="/pics/chaos.png?v=1">
+<link rel="shortcut icon" href="/pics/chaos.png?v=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GL0YEB7LF6');
+</script> 
+  <style>
+  /* Hard reset — nothing escapes its column */
+  *, *::before, *::after { max-width: 100%; }
+  img, pre, table { max-width: 100%; }
+
+  /* ── Wireshark accent: tshark blue-green ── */
+  .tut-title em { color: #1da0c0; }
+  .tut-eyebrow  { color: #1da0c0; }
+  .toc-link.active { color: #1da0c0; }
+  .toc-link.active .toc-dot { background: #1da0c0; }
+  .tut-progress-fill { background: #1da0c0; }
+
+  /* ── GUI notice box (amber with desktop icon) ── */
+  .gui-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 18px;
+    border-radius: 10px;
+    border: 1px solid rgba(245,166,35,.35);
+    background: rgba(245,166,35,.06);
+    margin-bottom: 24px;
+  }
+  .gui-notice-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #f5a623;
+  }
+  .gui-notice-body { min-width: 0; flex: 1; }
+  .gui-notice-label {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: #f5a623; margin-bottom: 6px;
+  }
+  .gui-notice-text {
+    font-size: 12.5px; color: #888; line-height: 1.65;
+    word-break: break-word;
+  }
+  .gui-notice-text strong { color: #bbb; }
+  .gui-notice-text code {
+    font-family: 'Fira Code', monospace;
+    font-size: 11.5px;
+    background: rgba(255,255,255,.05);
+    padding: 1px 5px; border-radius: 3px; color: #aaa;
+  }
+
+  /* Separator between CLI and GUI sections */
+  .tool-split-label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 32px 0 20px;
+  }
+  .tool-split-label::before,
+  .tool-split-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #1f1f1f;
+  }
+  .tool-split-label span {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 9px; font-weight: 700;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: #444;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <div class="search-input-row">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+        <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M11 11L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      <input id="search-input" placeholder="Search tutorials…" autocomplete="off" />
+      <button class="search-close" id="search-close">✕</button>
+    </div>
+    <div class="search-results" id="search-results">
+      <div class="search-empty">Type to search tutorials…</div>
+    </div>
+  </div>
+</div>
+
+<!-- DRAWER OVERLAY -->
+<div class="drawer-overlay" id="drawer-overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <span class="drawer-title">Menu</span>
+    <button class="drawer-close" id="drawer-close">✕</button>
+  </div>
+  <div class="drawer-nav">
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="1" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="8" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="8" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
+      Dashboard
+    </a>
+    <a class="drawer-link active" href="tutorials.html">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 3.5h10M2 7h10M2 10.5h6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Tutorials
+    </a>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Upload
+    </a>
+    <div class="drawer-divider"></div>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="5" r="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 12c0-2.21 2.239-4 5-4s5 1.79 5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Account
+    </a>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M7 4v3.5l2 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Timers
+    </a>
+    <div class="drawer-divider"></div>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M7 5v2.5M7 9.5v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Settings
+    </a>
+  </div>
+
+  <!-- Auth buttons pinned to drawer bottom -->
+  <div class="drawer-auth">
+    <a href="#" class="drawer-auth-btn drawer-login">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+        <path d="M5 3H3a1 1 0 00-1 1v6a1 1 0 001 1h2M9 10l3-3-3-3M12 7H6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Log In
+    </a>
+    <a href="#" class="drawer-auth-btn drawer-signup">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+        <circle cx="7" cy="5" r="2.5" stroke="currentColor" stroke-width="1.3"/>
+        <path d="M2 12c0-2.21 2.239-4 5-4s5 1.79 5 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        <path d="M11 2v4M9 4h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+      Sign Up
+    </a>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- Nav -->
+  <nav>
+    <a class="nav-logo" href="#">Chaos-<span>Org</span></a>
+    <div class="nav-icons">
+      <button class="nav-icon-btn" id="search-btn" title="Search (/)">
+        <svg viewBox="0 0 16 16" fill="none">
+          <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M11 11L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <button class="nav-icon-btn" id="menu-btn" title="Menu">
+        <svg viewBox="0 0 16 16" fill="none">
+          <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="tutorials.html" class="bc-link">Tutorials</a>
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M3.5 2L6.5 5L3.5 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="bc-current">Wireshark Installation</span>
+  </div>
+
+  <!-- Tutorial Hero -->
+  <div class="tut-hero">
+    <div class="tut-hero-meta">
+      <span class="tut-eyebrow">Tools</span>
+      <span class="tut-dot">·</span>
+      <span class="tut-badge badge-beginner">Beginner</span>
+      <span class="tut-dot">·</span>
+      <span class="tut-read-time">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.3"/><path d="M6 3.5V6.5L7.5 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        10 min read
+      </span>
+    </div>
+    <h1 class="tut-title">Installing <em>Wireshark</em> — Complete Setup Guide</h1>
+    <p class="tut-subtitle">Install TShark (CLI) and Wireshark (GUI), capture your first packets, and understand the difference between the two tools. Covers NetHunter and Kali Linux.</p>
+
+    <!-- Progress tracker -->
+    <div class="tut-progress-bar-wrap">
+      <div class="tut-progress-labels">
+        <span>Your progress</span>
+        <span id="progress-pct">0%</span>
+      </div>
+      <div class="tut-progress-track"><div class="tut-progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <!-- Layout: main + sidebar -->
+  <div class="tut-layout">
+
+    <!-- ── MAIN CONTENT ── -->
+    <main class="tut-main" id="tut-main">
+
+      <!-- ─── SECTION 1: What is Wireshark ─── -->
+      <section class="tut-section" id="section-what-is-wireshark" data-section="1">
+        <div class="section-header">
+          <div class="section-num">01</div>
+          <h2 class="section-title">What is Wireshark?</h2>
+        </div>
+        
+                <!-- Image 1: intro / hero -->
+        <div class="tut-img-wrap">
+          <div class="tut-img-real">
+            <img src="pics/wires.png" alt="Network cables and packet flow infrastructure" />
+          </div>
+          <div class="tut-img-caption">Wireshark sits between your network interface and your analysis workflow — capturing every packet that passes through</div>
+        </div>
+
+        <p class="tut-para">
+          Wireshark is the world's most widely used network protocol analyser. It lets you capture and inspect network traffic in real time, down to the individual packet level. Security professionals use it for traffic analysis, debugging, and understanding network behaviour.
+        </p>
+
+        <div class="info-card info-blue">
+          <div class="info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7v5M8 5.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="info-body">
+            <div class="info-label">Two tools, one engine</div>
+            <div class="info-text">
+              Wireshark and TShark share the same underlying packet capture engine (libpcap/npcap).
+              <strong>TShark</strong> is the terminal/CLI version — ideal for NetHunter, headless Kali, and scripting.
+              <strong>Wireshark</strong> is the full graphical interface — requires a desktop environment, KEX, or a VNC session on Android.
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="1">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 2: Installing TShark (CLI) ─── -->
+      <section class="tut-section" id="section-tshark" data-section="2">
+        <div class="section-header">
+          <div class="section-num">02</div>
+          <h2 class="section-title">Installing TShark — CLI</h2>
+        </div>
+
+        <p class="tut-para">TShark is the command-line packet analyser. It runs anywhere Wireshark's engine is supported — including NetHunter and headless Kali — with no desktop required.</p>
+
+        <!-- OS Tab switcher -->
+        <div class="os-tabs">
+          <button class="os-tab active" data-os="kali">Kali / NetHunter</button>
+          <button class="os-tab" data-os="debian">Debian / Ubuntu</button>
+          <button class="os-tab" data-os="arch">Arch Linux</button>
+        </div>
+
+        <div class="os-panel active" id="os-kali">
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" data-copy="sudo apt update&#10;sudo apt install tshark -y">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="c-muted">$</span> sudo apt update
+<span class="c-muted">$</span> sudo apt install tshark <span class="c-flag">-y</span></code></pre>
+          </div>
+          <div class="info-card info-amber" style="margin-top:0;">
+            <div class="info-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L1.5 13h13L8 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 7v3M8 11.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </div>
+            <div class="info-body">
+              <div class="info-label">Non-root capture prompt</div>
+              <div class="info-text">During install, a dialog asks <strong>"Should non-superusers be able to capture packets?"</strong> — select <strong>Yes</strong> to allow your user to capture without <code>sudo</code> every time.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="os-panel" id="os-debian">
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" data-copy="sudo apt update&#10;sudo apt install tshark -y">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="c-muted">$</span> sudo apt update
+<span class="c-muted">$</span> sudo apt install tshark <span class="c-flag">-y</span></code></pre>
+          </div>
+        </div>
+
+        <div class="os-panel" id="os-arch">
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" data-copy="sudo pacman -S wireshark-cli">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="c-muted">$</span> sudo pacman <span class="c-flag">-S</span> wireshark-cli</code></pre>
+          </div>
+        </div>
+
+        
+
+        <p class="tut-para">Verify TShark installed correctly and check its version:</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="tshark --version">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> tshark <span class="c-flag">--version</span>
+<span class="c-output">TShark (Wireshark) 4.2.2 (Git commit xxxxxxxx).
+Copyright 1998-2024 Gerald Combs &lt;gerald@wireshark.org&gt; and contributors.
+Running on Linux 6.1.0-kali9-amd64</span></code></pre>
+        </div>
+
+        <p class="tut-para">To run a basic capture on your default interface, simply type:</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="tshark">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> tshark
+<span class="c-output">Capturing on 'eth0'
+    1 0.000000000 192.168.1.10 → 8.8.8.8      DNS 74 Standard query A example.com
+    2 0.012453000      8.8.8.8 → 192.168.1.10 DNS 90 Standard query response …</span></code></pre>
+        </div>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="2">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 3: Installing Wireshark (GUI) ─── -->
+      <section class="tut-section" id="section-wireshark-gui" data-section="3">
+        <div class="section-header">
+          <div class="section-num">03</div>
+          <h2 class="section-title">Installing Wireshark — GUI</h2>
+        </div>
+
+        <!-- GUI notice box -->
+        <div class="gui-notice">
+          <div class="gui-notice-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <rect x="2" y="3" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M6 16h6M9 13v3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="gui-notice-body">
+            <div class="gui-notice-label">Desktop environment required</div>
+            <div class="gui-notice-text">
+              Wireshark's graphical interface requires a running desktop. On <strong>NetHunter or Kali for Android</strong>, launch a desktop session first via <strong>KEX</strong> (<code>kex &amp;</code>) or a <strong>VNC client</strong> before starting Wireshark. On a standard Kali install with a desktop, just run it directly.
+            </div>
+          </div>
+        </div>
+
+        <!-- OS Tab switcher -->
+        <div class="os-tabs">
+          <button class="os-tab active" data-os="gui-kali">Kali / NetHunter</button>
+          <button class="os-tab" data-os="gui-debian">Debian / Ubuntu</button>
+          <button class="os-tab" data-os="gui-arch">Arch Linux</button>
+        </div>
+
+        <div class="os-panel active" id="os-gui-kali">
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" data-copy="sudo apt update&#10;sudo apt install wireshark -y">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="c-muted">$</span> sudo apt update
+<span class="c-muted">$</span> sudo apt install wireshark <span class="c-flag">-y</span></code></pre>
+          </div>
+        </div>
+
+        <div class="os-panel" id="os-gui-debian">
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" data-copy="sudo apt update&#10;sudo apt install wireshark -y">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="c-muted">$</span> sudo apt update
+<span class="c-muted">$</span> sudo apt install wireshark <span class="c-flag">-y</span></code></pre>
+          </div>
+        </div>
+
+        <div class="os-panel" id="os-gui-arch">
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" data-copy="sudo pacman -S wireshark-qt">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="c-muted">$</span> sudo pacman <span class="c-flag">-S</span> wireshark-qt</code></pre>
+          </div>
+        </div>
+
+     
+        <p class="tut-para">Once installed, launch the GUI from your desktop session or from a terminal inside KEX / VNC:</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="wireshark">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> wireshark</code></pre>
+        </div>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="3">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 4: Add user to wireshark group ─── -->
+      <section class="tut-section" id="section-permissions" data-section="4">
+        <div class="section-header">
+          <div class="section-num">04</div>
+          <h2 class="section-title">Setting Up Capture Permissions</h2>
+        </div>
+
+        <p class="tut-para">By default, capturing packets requires root. To allow your normal user to capture without <code>sudo</code> on every launch, add yourself to the <code>wireshark</code> group.</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="sudo usermod -aG wireshark $USER&#10;newgrp wireshark">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> sudo usermod <span class="c-flag">-aG</span> wireshark $USER
+<span class="c-muted">$</span> newgrp wireshark</code></pre>
+        </div>
+
+        <div class="info-card info-amber">
+          <div class="info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L1.5 13h13L8 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 7v3M8 11.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div class="info-body">
+            <div class="info-label">Log out to apply</div>
+            <div class="info-text"><code>newgrp wireshark</code> applies the group change to your current shell only. For it to apply system-wide, <strong>log out and log back in</strong> (or reboot). On NetHunter, restart your KEX/VNC session.</div>
+          </div>
+        </div>
+
+        <p class="tut-para">Alternatively, re-run the Debian configuration to toggle non-root capture via the interactive menu:</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="sudo dpkg-reconfigure wireshark-common">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> sudo dpkg-reconfigure wireshark-common</code></pre>
+        </div>
+
+       
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="4">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 5: First Capture ─── -->
+      <section class="tut-section" id="section-first-capture" data-section="5">
+        <div class="section-header">
+          <div class="section-num">05</div>
+          <h2 class="section-title">Running Your First Capture</h2>
+        </div>
+
+        <p class="tut-para">With both tools installed, try capturing some live traffic. Always capture only on networks you own or have explicit permission to monitor.</p>
+
+        <div class="info-card info-red">
+          <div class="info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L1.5 13h13L8 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 7v3M8 11.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div class="info-body">
+            <div class="info-label">Legal reminder</div>
+            <div class="info-text">Intercepting network traffic on networks you don't own or have written permission to test is illegal in most jurisdictions. Only capture on your own lab, your own hotspot, or an explicitly authorised target.</div>
+          </div>
+        </div>
+
+        <div class="tool-split-label"><span>CLI — TShark</span></div>
+
+        <p class="tut-para">List your available network interfaces first, then start a capture on a specific one:</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="tshark -D">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> tshark <span class="c-flag">-D</span>
+<span class="c-output">1. eth0
+2. wlan0
+3. lo (Loopback)
+4. any</span></code></pre>
+        </div>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="tshark -i wlan0 -c 50">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> tshark <span class="c-flag">-i</span> wlan0 <span class="c-flag">-c</span> 50
+<span class="c-output">Capturing on 'wlan0'
+  1 0.000000 192.168.1.1  → 192.168.1.55  TCP 74 443→52341 [SYN, ACK]
+  2 0.000122 192.168.1.55 → 192.168.1.1   TCP 66 52341→443 [ACK]
+  …
+Packets captured: 50</span></code></pre>
+        </div>
+
+        <div class="tool-split-label"><span>GUI — Wireshark</span></div>
+
+        <ol class="tut-ol">
+          <li>Launch <strong>Wireshark</strong> from your desktop or <code>wireshark</code> in the KEX terminal</li>
+          <li>Select your interface from the welcome screen (e.g. <em>wlan0</em> or <em>eth0</em>)</li>
+          <li>Click the blue shark-fin <strong>Start</strong> button — packets begin scrolling immediately</li>
+          <li>Press the red <strong>Stop</strong> square when you have enough data</li>
+          <li>Use the <strong>filter bar</strong> at the top to narrow results (e.g. <em>http</em>, <em>dns</em>, <em>tcp.port == 443</em>)</li>
+        </ol>
+
+        <!-- Common TShark flags reference -->
+        <div class="flags-table-wrap">
+          <div class="flags-table-header">Common TShark flags</div>
+          <table class="flags-table">
+            <thead>
+              <tr><th>Flag</th><th>What it does</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>-i eth0</code></td><td>Capture on a specific interface</td></tr>
+              <tr><td><code>-D</code></td><td>List all available interfaces</td></tr>
+              <tr><td><code>-c 100</code></td><td>Stop after capturing 100 packets</td></tr>
+              <tr><td><code>-w out.pcap</code></td><td>Write capture to a file</td></tr>
+              <tr><td><code>-r file.pcap</code></td><td>Read and analyse a saved capture</td></tr>
+              <tr><td><code>-Y "dns"</code></td><td>Apply a display filter (same syntax as Wireshark)</td></tr>
+              <tr><td><code>-T fields</code></td><td>Output specific fields only (great for scripting)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="5">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 6: Troubleshooting ─── -->
+      <section class="tut-section" id="section-troubleshoot" data-section="6">
+        <div class="section-header">
+          <div class="section-num">06</div>
+          <h2 class="section-title">Troubleshooting</h2>
+        </div>
+
+        <p class="tut-para">Common issues and how to fix them on Kali and NetHunter.</p>
+
+        <div class="trouble-list">
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              <code>tshark: command not found</code>
+            </div>
+            <div class="trouble-a">TShark isn't installed or isn't on your PATH. Run <code>sudo apt install tshark -y</code>. On NetHunter, make sure you're in the Kali chroot session, not the Android base shell.</div>
+          </div>
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              Permission denied on capture interface
+            </div>
+            <div class="trouble-a">Your user isn't in the <code>wireshark</code> group yet. Run <code>sudo usermod -aG wireshark $USER</code> then log out and back in. Or prefix with <code>sudo tshark</code> as a quick workaround.</div>
+          </div>
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              Wireshark crashes or won't open (NetHunter / Android)
+            </div>
+            <div class="trouble-a">Wireshark needs a display. Start KEX first with <code>kex &amp;</code> or connect your VNC client, then launch <code>wireshark</code> from within that session. Running it from a raw Android terminal without a display will fail.</div>
+          </div>
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              No interfaces listed by <code>tshark -D</code>
+            </div>
+            <div class="trouble-a">The capture daemon can't see your interfaces without root. Run <code>sudo tshark -D</code> to confirm they exist, then fix permissions with the <code>wireshark</code> group method in section 4.</div>
+          </div>
+        </div>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="6">Mark as read</button>
+        </div>
+      </section>
+
+      <!-- ─── RELATED TUTORIALS ─── -->
+   
+
+      <!-- Completion card -->
+      <div class="completion-card" id="completion-card" style="display:none;">
+        <div class="completion-icon">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="15" stroke="var(--green)" stroke-width="2"/>
+            <path d="M11 18l5 5 9-9" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="completion-title">Tutorial Complete!</div>
+        <div class="completion-sub">You've installed TShark and Wireshark and captured your first packets. Next up: display filters and protocol dissection.</div>
+        <a href="tutorials.html" class="completion-btn">Back to Tutorials</a>
+      </div>
+
+    </main>
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="tut-sidebar">
+
+      <!-- Contents -->
+      <div class="sidebar-card" id="toc-card">
+        <div class="sidebar-card-title">Contents</div>
+        <nav class="toc-nav">
+          <a class="toc-link active" href="#section-what-is-wireshark" data-toc="1">
+            <span class="toc-dot" id="toc-dot-1"></span>
+            <span>What is Wireshark?</span>
+          </a>
+          <a class="toc-link" href="#section-tshark" data-toc="2">
+            <span class="toc-dot" id="toc-dot-2"></span>
+            <span>Installing TShark (CLI)</span>
+          </a>
+          <a class="toc-link" href="#section-wireshark-gui" data-toc="3">
+            <span class="toc-dot" id="toc-dot-3"></span>
+            <span>Installing Wireshark (GUI)</span>
+          </a>
+          <a class="toc-link" href="#section-permissions" data-toc="4">
+            <span class="toc-dot" id="toc-dot-4"></span>
+            <span>Capture Permissions</span>
+          </a>
+          <a class="toc-link" href="#section-first-capture" data-toc="5">
+            <span class="toc-dot" id="toc-dot-5"></span>
+            <span>Your First Capture</span>
+          </a>
+          <a class="toc-link" href="#section-troubleshoot" data-toc="6">
+            <span class="toc-dot" id="toc-dot-6"></span>
+            <span>Troubleshooting</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Tutorial info -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">About this tutorial</div>
+        <div class="sidebar-meta-list">
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M7 1.5L1.5 4.5V9C1.5 11.5 3.8 13.5 7 14.5C10.2 13.5 12.5 11.5 12.5 9V4.5L7 1.5Z" stroke="currentColor" stroke-width="1.2"/></svg>
+            <span>Difficulty</span>
+            <span class="smr-val green">Beginner</span>
+          </div>
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M6 3.5V6.5L7.5 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span>Read time</span>
+            <span class="smr-val">10 min</span>
+          </div>
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 3.5h10M2 7h10M2 10.5h6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span>Sections</span>
+            <span class="smr-val">6</span>
+          </div>
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span>Platform</span>
+            <span class="smr-val">Kali · NetHunter</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Next up -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Next up</div>
+        <a href="#" class="next-tut-card">
+          <div class="ntc-thumb thumb-blue">
+            <svg viewBox="0 0 44 44" fill="none" width="24" height="24">
+              <circle cx="22" cy="22" r="16" stroke="currentColor" stroke-width="2"/>
+              <path d="M16 22h12M22 16l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="ntc-body">
+            <div class="ntc-title">Wireshark Display Filters</div>
+            <div class="ntc-sub">Intermediate · 14 min</div>
+          </div>
+        </a>
+      </div>
+
+    </aside>
+
+  </div>
+</div>
+
+<script src="nmap-tutorial.js"></script>
+  <script src="https://5gvci.com/act/files/tag.min.js?z=11181514" data-cfasync="false" async></script>
+<script src="https://5gvci.com/act/files/tag.min.js?z=11181506" data-cfasync="false" async></script>
+
+<script>(function(s){s.dataset.zone='11181504',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+</body>
+</html>

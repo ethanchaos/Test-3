@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>chaos Configurations— Nmap Installation Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="nmap-tutorial.css" />
+<link rel="icon" href="/pics/chaos.png?v=1">
+<link rel="shortcut icon" href="/pics/chaos.png?v=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GL0YEB7LF6');
+</script> 
+  <style>
+  /* Hard reset — nothing escapes its column */
+  *, *::before, *::after { max-width: 100%; }
+  img, pre, table { max-width: 100%; }
+</style>
+</head>
+<body>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <div class="search-input-row">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+        <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M11 11L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      <input id="search-input" placeholder="Search tutorials…" autocomplete="off" />
+      <button class="search-close" id="search-close">✕</button>
+    </div>
+    <div class="search-results" id="search-results">
+      <div class="search-empty">Type to search tutorials…</div>
+    </div>
+  </div>
+</div>
+
+<!-- DRAWER OVERLAY -->
+<div class="drawer-overlay" id="drawer-overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <span class="drawer-title">Menu</span>
+    <button class="drawer-close" id="drawer-close">✕</button>
+  </div>
+  <div class="drawer-nav">
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="1" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="8" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="8" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
+      Dashboard
+    </a>
+    <a class="drawer-link active" href="tutorials.html">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 3.5h10M2 7h10M2 10.5h6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Tutorials
+    </a>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Upload
+    </a>
+    <div class="drawer-divider"></div>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="5" r="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 12c0-2.21 2.239-4 5-4s5 1.79 5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Account
+    </a>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M7 4v3.5l2 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Timers
+    </a>
+    <div class="drawer-divider"></div>
+    <a class="drawer-link" href="#">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M7 5v2.5M7 9.5v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Settings
+    </a>
+  </div>
+
+  <!-- Auth buttons pinned to drawer bottom -->
+  <div class="drawer-auth">
+    <a href="#" class="drawer-auth-btn drawer-login">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+        <path d="M5 3H3a1 1 0 00-1 1v6a1 1 0 001 1h2M9 10l3-3-3-3M12 7H6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Log In
+    </a>
+    <a href="#" class="drawer-auth-btn drawer-signup">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+        <circle cx="7" cy="5" r="2.5" stroke="currentColor" stroke-width="1.3"/>
+        <path d="M2 12c0-2.21 2.239-4 5-4s5 1.79 5 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        <path d="M11 2v4M9 4h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+      Sign Up
+    </a>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- Nav -->
+  <nav>
+    <a class="nav-logo" href="#">Chaos-<span>Org</span></a>
+    <div class="nav-icons">
+      <button class="nav-icon-btn" id="search-btn" title="Search (/)">
+        <svg viewBox="0 0 16 16" fill="none">
+          <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M11 11L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <button class="nav-icon-btn" id="menu-btn" title="Menu">
+        <svg viewBox="0 0 16 16" fill="none">
+          <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="tutorials.html" class="bc-link">Tutorials</a>
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M3.5 2L6.5 5L3.5 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="bc-current">Nmap Installation</span>
+  </div>
+
+  <!-- Tutorial Hero -->
+  <div class="tut-hero">
+    <div class="tut-hero-meta">
+      <span class="tut-eyebrow">Tools</span>
+      <span class="tut-dot">·</span>
+      <span class="tut-badge badge-beginner">Beginner</span>
+      <span class="tut-dot">·</span>
+      <span class="tut-read-time">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.3"/><path d="M6 3.5V6.5L7.5 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        8 min read
+      </span>
+    </div>
+    <h1 class="tut-title">Installing <em>Nmap</em> — Complete Setup Guide</h1>
+    <p class="tut-subtitle">Install, verify, and run your first Nmap scan on Linux, macOS, and Windows. No prior experience needed.</p>
+
+    <!-- Progress tracker -->
+    <div class="tut-progress-bar-wrap">
+      <div class="tut-progress-labels">
+        <span>Your progress</span>
+        <span id="progress-pct">0%</span>
+      </div>
+      <div class="tut-progress-track"><div class="tut-progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <!-- Layout: main + sidebar -->
+  <div class="tut-layout">
+
+    <!-- ── MAIN CONTENT ── -->
+    <main class="tut-main" id="tut-main">
+
+      <!-- ─── SECTION 1 ─── -->
+      <section class="tut-section" id="section-what-is-nmap" data-section="1">
+        <div class="section-header">
+          <div class="section-num">01</div>
+          <h2 class="section-title">What is Nmap?</h2>
+        </div>
+
+           <!-- Image: what is nmap -->
+        <div class="tut-img-wrap">
+          <div class="tut-img-real">
+            <img src="pics/Nmap.png" alt="Network cables and server infrastructure" />
+          </div>
+          <div class="tut-img-caption">Nmap maps network hosts and services across your infrastructure</div>
+        </div>
+        
+        
+        <p class="tut-para">
+          Nmap (Network Mapper) is a free, open-source tool for network discovery and security auditing. It's used by network administrators to discover hosts and services on a network, and by security professionals to map attack surfaces.
+        </p>
+
+        <div class="info-card info-blue">
+          <div class="info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7v5M8 5.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="info-body">
+            <div class="info-label">What you'll be able to do</div>
+            <div class="info-text">Discover live hosts, identify open ports, detect OS and software versions, and run scripted vulnerability scans — all from the command line.</div>
+          </div>
+        </div>
+
+     
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="1">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 2: Linux ─── -->
+      <section class="tut-section" id="section-linux" data-section="2">
+        <div class="section-header">
+          <div class="section-num">02</div>
+          <h2 class="section-title">Installing on Linux</h2>
+        </div>
+
+        <p class="tut-para">Linux is the most common platform for Nmap. Most distros ship a package so installation is a single command.</p>
+
+        <!-- OS Tab switcher -->
+        <div class="os-tabs">
+          <button class="os-tab active" data-os="debian">Debian / Ubuntu</button>
+          <button class="os-tab" data-os="fedora">Fedora / RHEL</button>
+          <button class="os-tab" data-os="arch">Arch Linux</button>
+        </div>
+
+        <div class="os-panel active" id="os-debian">
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" data-copy="sudo apt update&#10;sudo apt install nmap -y">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="c-muted">$</span> sudo apt update
+<span class="c-muted">$</span> sudo apt install nmap <span class="c-flag">-y</span></code></pre>
+          </div>
+        </div>
+
+        <div class="os-panel" id="os-fedora">
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" data-copy="sudo dnf install nmap -y">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="c-muted">$</span> sudo dnf install nmap <span class="c-flag">-y</span></code></pre>
+          </div>
+        </div>
+
+        <div class="os-panel" id="os-arch">
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" data-copy="sudo pacman -S nmap">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="c-muted">$</span> sudo pacman <span class="c-flag">-S</span> nmap</code></pre>
+          </div>
+        </div>
+
+    
+
+        <p class="tut-para">Once installation finishes, verify it worked:</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="nmap --version">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> nmap <span class="c-flag">--version</span>
+<span class="c-output">Nmap version 7.94 ( https://nmap.org )
+Platform: x86_64-pc-linux-gnu
+Compiled with: ...openssl...</span></code></pre>
+        </div>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="2">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 3: macOS ─── -->
+      <section class="tut-section" id="section-macos" data-section="3">
+        <div class="section-header">
+          <div class="section-num">03</div>
+          <h2 class="section-title">Installing on macOS</h2>
+        </div>
+
+        <p class="tut-para">The easiest way on macOS is Homebrew. If you don't have Homebrew yet, install it first.</p>
+
+        <div class="info-card info-amber">
+          <div class="info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L1.5 13h13L8 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 7v3M8 11.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div class="info-body">
+            <div class="info-label">Homebrew required</div>
+            <div class="info-text">If you don't have Homebrew, visit <strong>brew.sh</strong> and paste the install command into your terminal first.</div>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="brew install nmap">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> brew install nmap</code></pre>
+        </div>
+
+        
+
+        <p class="tut-para">Alternatively, Nmap provides a <strong>.dmg installer</strong> from the official website at <strong>nmap.org/download</strong> if you prefer a GUI installer.</p>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="3">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 4: Windows ─── -->
+      <section class="tut-section" id="section-windows" data-section="4">
+        <div class="section-header">
+          <div class="section-num">04</div>
+          <h2 class="section-title">Installing on Windows</h2>
+        </div>
+
+        <p class="tut-para">Windows users get a GUI installer that also installs Zenmap (the graphical frontend) and Npcap (the packet capture driver Nmap depends on).</p>
+
+        <ol class="tut-ol">
+          <li>Go to <strong>nmap.org/download.html</strong> and download the latest <em>Windows self-installer</em> (.exe)</li>
+          <li>Run the installer as Administrator — accept the Npcap license when prompted</li>
+          <li>Keep all default options checked (Npcap, register Nmap path)</li>
+          <li>Click <em>Install</em> and wait for completion</li>
+        </ol>
+
+      
+
+        <p class="tut-para">After installation, open <strong>Command Prompt</strong> or <strong>PowerShell</strong> as Administrator and verify:</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">powershell</span>
+            <button class="copy-btn" data-copy="nmap --version">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">PS&gt;</span> nmap <span class="c-flag">--version</span>
+<span class="c-output">Nmap version 7.94 ( https://nmap.org )
+Platform: i686-pc-windows-windows</span></code></pre>
+        </div>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="4">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 5: First Scan ─── -->
+      <section class="tut-section" id="section-first-scan" data-section="5">
+        <div class="section-header">
+          <div class="section-num">05</div>
+          <h2 class="section-title">Running Your First Scan</h2>
+        </div>
+
+        <p class="tut-para">With Nmap installed, try a few foundational scans. Always test against hosts you own or have explicit permission to scan.</p>
+
+        <div class="info-card info-red">
+          <div class="info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L1.5 13h13L8 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 7v3M8 11.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div class="info-body">
+            <div class="info-label">Legal reminder</div>
+            <div class="info-text">Scanning networks you do not own or have written permission to test is illegal in most jurisdictions. Only scan your own lab or explicitly authorized targets.</div>
+          </div>
+        </div>
+
+        <p class="tut-para">Scan your local machine to test everything is working:</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">bash</span>
+            <button class="copy-btn" data-copy="nmap localhost">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.3"/></svg>
+              Copy
+            </button>
+          </div>
+          <pre><code><span class="c-muted">$</span> nmap localhost
+<span class="c-output">Starting Nmap 7.94 ( https://nmap.org )
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000052s latency).
+Not shown: 997 closed tcp ports (conn-refused)
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+5432/tcp open  postgresql
+
+Nmap done: 1 IP address (1 host up) scanned in 0.04s</span></code></pre>
+        </div>
+
+        <!-- Common flags reference -->
+        <div class="flags-table-wrap">
+          <div class="flags-table-header">Common Nmap flags</div>
+          <table class="flags-table">
+            <thead>
+              <tr><th>Flag</th><th>What it does</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>-sV</code></td><td>Detect service versions on open ports</td></tr>
+              <tr><td><code>-O</code></td><td>Enable OS detection (requires root)</td></tr>
+              <tr><td><code>-p 1-1000</code></td><td>Scan ports 1 through 1000 only</td></tr>
+              <tr><td><code>-T4</code></td><td>Aggressive timing (faster scan)</td></tr>
+              <tr><td><code>-A</code></td><td>Enable OS + version detection + scripts</td></tr>
+              <tr><td><code>-oN out.txt</code></td><td>Save output to a file</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="5">Mark as read</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ─── SECTION 6: Troubleshoot ─── -->
+      <section class="tut-section" id="section-troubleshoot" data-section="6">
+        <div class="section-header">
+          <div class="section-num">06</div>
+          <h2 class="section-title">Troubleshooting</h2>
+        </div>
+
+        <p class="tut-para">Hit a wall? Here are the most common issues and how to fix them.</p>
+
+        <div class="trouble-list">
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              <code>nmap: command not found</code>
+            </div>
+            <div class="trouble-a">The binary isn't on your PATH. On Linux run <code>which nmap</code> to check. On Windows, re-run the installer and make sure <em>"Add Nmap to PATH"</em> is checked.</div>
+          </div>
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              OS detection requires root / Administrator
+            </div>
+            <div class="trouble-a">Use <code>sudo nmap -O &lt;target&gt;</code> on Linux/macOS. On Windows, open CMD or PowerShell as Administrator.</div>
+          </div>
+          <div class="trouble-item">
+            <div class="trouble-q">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 5c0-.828.5-1.5 1.5-1.5S10 4.172 10 5c0 1-1 1.5-2 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="10" r=".8" fill="currentColor"/></svg>
+              Scan shows all ports filtered
+            </div>
+            <div class="trouble-a">A firewall is likely blocking probes. Try <code>nmap -Pn &lt;target&gt;</code> to skip the ping check and scan anyway.</div>
+          </div>
+        </div>
+
+        <div class="step-complete-row">
+          <button class="step-btn" data-step="6">Mark as read</button>
+        </div>
+      </section>
+
+      <!-- ─── RELATED TUTORIALS ─── -->
+     
+      <!-- Completion card -->
+      <div class="completion-card" id="completion-card" style="display:none;">
+        <div class="completion-icon">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="15" stroke="var(--green)" stroke-width="2"/>
+            <path d="M11 18l5 5 9-9" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="completion-title">Tutorial Complete!</div>
+        <div class="completion-sub">You've installed Nmap and run your first scan. Next up: port scanning techniques and NSE scripts.</div>
+        <a href="tutorials.html" class="completion-btn">Back to Tutorials</a>
+      </div>
+
+    </main>
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="tut-sidebar">
+
+      <!-- Contents -->
+      <div class="sidebar-card" id="toc-card">
+        <div class="sidebar-card-title">Contents</div>
+        <nav class="toc-nav">
+          <a class="toc-link active" href="#section-what-is-nmap" data-toc="1">
+            <span class="toc-dot" id="toc-dot-1"></span>
+            <span>What is Nmap?</span>
+          </a>
+          <a class="toc-link" href="#section-linux" data-toc="2">
+            <span class="toc-dot" id="toc-dot-2"></span>
+            <span>Installing on Linux</span>
+          </a>
+          <a class="toc-link" href="#section-macos" data-toc="3">
+            <span class="toc-dot" id="toc-dot-3"></span>
+            <span>Installing on macOS</span>
+          </a>
+          <a class="toc-link" href="#section-windows" data-toc="4">
+            <span class="toc-dot" id="toc-dot-4"></span>
+            <span>Installing on Windows</span>
+          </a>
+          <a class="toc-link" href="#section-first-scan" data-toc="5">
+            <span class="toc-dot" id="toc-dot-5"></span>
+            <span>Your First Scan</span>
+          </a>
+          <a class="toc-link" href="#section-troubleshoot" data-toc="6">
+            <span class="toc-dot" id="toc-dot-6"></span>
+            <span>Troubleshooting</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Tutorial info -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">About this tutorial</div>
+        <div class="sidebar-meta-list">
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M7 1.5L1.5 4.5V9C1.5 11.5 3.8 13.5 7 14.5C10.2 13.5 12.5 11.5 12.5 9V4.5L7 1.5Z" stroke="currentColor" stroke-width="1.2"/></svg>
+            <span>Difficulty</span>
+            <span class="smr-val green">Beginner</span>
+          </div>
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M6 3.5V6.5L7.5 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span>Read time</span>
+            <span class="smr-val">8 min</span>
+          </div>
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 3.5h10M2 7h10M2 10.5h6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span>Sections</span>
+            <span class="smr-val">6</span>
+          </div>
+          <div class="sidebar-meta-row">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span>Platform</span>
+            <span class="smr-val">Linux · macOS · Windows</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Next up -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Next up</div>
+        <a href="#" class="next-tut-card">
+          <div class="ntc-thumb thumb-blue">
+            <svg viewBox="0 0 44 44" fill="none" width="24" height="24">
+              <circle cx="22" cy="22" r="16" stroke="currentColor" stroke-width="2"/>
+              <path d="M16 22h12M22 16l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="ntc-body">
+            <div class="ntc-title">Nmap Scripting Engine (NSE)</div>
+            <div class="ntc-sub">Intermediate · 12 min</div>
+          </div>
+        </a>
+      </div>
+
+    </aside>
+
+  </div>
+</div>
+
+<script src="nmap-tutorial.js"></script>
+</body>
+</html>

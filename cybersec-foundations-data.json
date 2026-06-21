@@ -1,0 +1,92 @@
+{
+  "course": {
+    "id": "cybersec-foundations",
+    "eyebrow": "Getting Started",
+    "title": "Cybersecurity Foundations",
+    "description": "A complete intro to the platform: setting up your environment, running your first recon script, and understanding the toolchain behind our walkthroughs.",
+    "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=640&q=80&auto=format&fit=crop",
+    "imageAlt": "Cybersecurity dark terminal glow",
+    "badge": "Beginner",
+    "totalDuration": "66 min total"
+  },
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Installing Nmap — Complete Setup Guide",
+      "description": "Install, verify, and run your first Nmap scan on Linux, macOS, and Windows. No prior experience needed.",
+      "image": "pics/Nmap.png",
+      "imageAlt": "Network cables and server infrastructure",
+      "href": "nmap-tutorial.html",
+      "duration": "8 min",
+      "badge": "Beginner",
+      "color": "amber",
+      "tag": "Tools",
+      "locked": false
+    },
+    {
+      "id": 2,
+      "title": "Installing Burp Suite Community Edition",
+      "description": "Get PortSwigger's industry-standard web proxy running on Kali Linux or via the JAR method on Termux with a desktop session. GUI required — two paths covered.",
+      "image": "pics/burb.jpg",
+      "imageAlt": "Web application security proxy and HTTP traffic interception",
+      "href": "burpsuite-tutorial.html",
+      "duration": "10 min",
+      "badge": "Beginner",
+      "color": "red",
+      "tag": "Tools",
+      "locked": false
+    },
+    {
+      "id": 3,
+      "title": "Installing Metasploit Framework — CLI Setup Guide",
+      "description": "Get the world's most widely used penetration testing framework running on Kali Linux or Termux (NetHunter). Two install paths, one goal — a working msfconsole.",
+      "image": "pics/mesploit.png",
+      "imageAlt": "Cybersecurity penetration testing terminal and network exploitation",
+      "href": "metasploit-tutorial.html",
+      "duration": "10 min",
+      "badge": "Beginner",
+      "color": "red",
+      "tag": "Tools",
+      "locked": false
+    },
+    {
+      "id": 4,
+      "title": "Installing SQLmap — SQL Injection Tool Setup Guide",
+      "description": "Get the world's most popular automated SQL injection framework running on Kali Linux or Termux. Pure CLI — works on any platform with Python 3.",
+      "image": "pics/logo-sqlmap.jpg",
+      "imageAlt": "Database server infrastructure and SQL vulnerability scanning",
+      "href": "sqlmap-tutorial.html",
+      "duration": "10 min",
+      "badge": "Beginner",
+      "color": "blue",
+      "tag": "Tools",
+      "locked": true
+    },
+    {
+      "id": 5,
+      "title": "Installing Wireshark — Complete Setup Guide",
+      "description": "Install TShark (CLI) and Wireshark (GUI), capture your first packets, and understand the difference between the two tools. Covers NetHunter and Kali Linux.",
+      "image": "pics/wires.png",
+      "imageAlt": "Network cables and packet flow infrastructure",
+      "href": "wireshark-tutorial.html",
+      "duration": "10 min",
+      "badge": "Beginner",
+      "color": "amber",
+      "tag": "Tools",
+      "locked": fal
+    },
+    {
+      "id": 6,
+      "title": "Installing ZAP — Web App Scanner Setup Guide",
+      "description": "Install the Zed Attack Proxy (ZAP by Checkmarx) on Kali Linux, launch the GUI, and run your first automated web vulnerability scan in minutes.",
+      "image": "pics/zep.png",
+      "imageAlt": "Web application security scanning and vulnerability analysis",
+      "href": "zap-tutorial.html",
+      "duration": "8 min",
+      "badge": "Beginner",
+      "color": "green",
+      "tag": "Tools",
+      "locked": true
+    }
+  ]
+}

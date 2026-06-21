@@ -1,0 +1,46 @@
+{
+  "featured": {
+    "id": "cybersec-foundations",
+    "eyebrow": "Start here",
+    "title": "Cybersecurity Foundations — Getting Started in 10 Minutes",
+    "description": "A complete intro to the platform: setting up your environment, running your first recon script, and understanding the toolchain behind our walkthroughs.",
+    "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=560&q=80&auto=format&fit=crop",
+    "imageAlt": "Cybersecurity dark terminal glow",
+    "href": "cybersec-foundations.html",
+    "tags": ["getting-started", "cybersecurity"],
+    "duration": "66 min",
+    "sections": "4 sections",
+    "badge": "Beginner",
+    "totalLessons": 6
+  },
+  "tutorials": [
+    {
+      "id": "kali-nethunter",
+      "title": "Installing NetHunter Rootless — Complete Setup Guide",
+      "description": "Get a full Kali Linux environment on any Android device — no root required. Covers getting Termux, installing NetHunter Rootless, and launching your first session.",
+      "image": "pics/nethuntericon.jpg",
+      "imageAlt": "Android phone with terminal and security tools",
+      "href": "nethunter-tutorial.html",
+      "tags": ["tools", "cybersecurity"],
+      "duration": "10 min",
+      "badge": "Beginner",
+      "color": "red",
+      "tag": "Tools"
+    },
+  
+{
+  "id": "mtk-zero-rated-scanner",
+  "title": "M@☆ Zero-Rated Scanner v76.45 — Complete Setup Guide",
+  "description": "The ultimate framework for precision zero-rated network discovery and host analysis. Install Termux, verify your device architecture, deploy the scanner, and register your V-Key for full access.",
+  "image": "pics/mtkscript.jpg",
+  "imageAlt": "M@☆ Zero-Rated Scanner running in Termux terminal",
+  "href": "mtk-scanner-tutorial.html",
+  "tags": ["tools", "cybersecurity"],
+  "duration": "12 min",
+  "badge": "Beginner",
+  "color": "cyan",
+  "tag": "Tools"
+}
+
+]
+}
