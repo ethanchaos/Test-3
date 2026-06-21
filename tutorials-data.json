@@ -4,7 +4,7 @@
     "eyebrow": "Start here",
     "title": "Cybersecurity Foundations — Getting Started in 10 Minutes",
     "description": "A complete intro to the platform: setting up your environment, running your first recon script, and understanding the toolchain behind our walkthroughs.",
-    "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=560&q=80&auto=format&fit=crop",
+    "image": "pics/Cyber-Security-Icon-Concept-2-1-1024x632.jpeg",
     "imageAlt": "Cybersecurity dark terminal glow",
     "href": "cybersec-foundations.html",
     "tags": ["getting-started", "cybersecurity"],
