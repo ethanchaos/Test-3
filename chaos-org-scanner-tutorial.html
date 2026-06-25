@@ -135,6 +135,19 @@
     pointer-events:none;
   }
 
+  /* ── Override amber/yellow from nmap-tutorial.css ── */
+  .c-flag    { color: #7ec8e3 !important; }   /* was amber → now light-blue */
+  .c-string  { color: #a8d8a8 !important; }   /* was amber/yellow → now soft-green */
+  .c-warn    { color: #ccc    !important; }
+  .badge-beginner { color: #3ddc84 !important; border-color: rgba(61,220,132,.3) !important; background: rgba(61,220,132,.08) !important; }
+  .smr-val.green  { color: #3ddc84 !important; }
+  /* catch any remaining amber/yellow CSS vars */
+  :root {
+    --amber: #ccc;
+    --yellow: #ccc;
+    --warn-color: #ccc;
+  }
+
   /* ── Alt launch card ── */
   .alt-launch {
     display:flex; align-items:flex-start; gap:12px;
