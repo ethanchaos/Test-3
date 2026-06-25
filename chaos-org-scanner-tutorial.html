@@ -1035,6 +1035,11 @@
 
 <script src="nmap-tutorial.js"></script>
 <script>
+
+if (!localStorage.getItem('dvx_session')) {
+    window.location.replace('https://chaosconfigurations.co.za/login');
+}
+  
   (function() {
     const STEPS = 10;
     const origPct  = document.getElementById('progress-pct');
