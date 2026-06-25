@@ -16,6 +16,19 @@
   "tutorials": [
 
     {
+  "id": "chaos-org-scanner",
+  "title": "Installing Chaos-Org Scanner — Complete Setup Guide",
+  "description": "A powerful Python-based network scanning tool built for VPN  Creators . Install Termux, download the scanner, set up Python dependencies, and start performing TLS / SSL network assessments.",
+  "image": "pics/chaos-org-scanner.jpg",
+  "imageAlt": "Chaos-Org Scanner running in Termux terminal",
+  "href": "chaos-org-scanner-tutorial.html",
+  "tags": ["tools", VPN", "python"],
+  "duration": "10 min",
+  "badge": "Beginner",
+  "tag": "Tools"
+    },
+
+    {
   "id": "termux-basics",
   "title": "Termux Basics — Complete Beginner's Guide",
   "description": "Everything you need to get started with Termux on Android — what it is, how to install it, first-time setup, and a complete searchable reference of 100+ essential Linux and Termux-specific commands.",
