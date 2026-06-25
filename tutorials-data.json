@@ -22,7 +22,7 @@
   "image": "pics/chaos-org-scanner.jpg",
   "imageAlt": "Chaos-Org Scanner running in Termux terminal",
   "href": "chaos-org-scanner-tutorial.html",
-  "tags": ["tools", VPN", "python"],
+  "tags": ["tools", "VPN", "python"],
   "duration": "10 min",
   "badge": "Beginner",
   "tag": "Tools"
