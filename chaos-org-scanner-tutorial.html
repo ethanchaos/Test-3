@@ -135,20 +135,33 @@
     pointer-events:none;
   }
 
-  /* ── Kill amber — only override what's actually amber in nmap-tutorial.css ── */
-  :root { --amber: #888888; }   /* neutralise --amber var used in trouble-q and info-amber */
+  /* ── Force accent white + kill amber ── */
+  /* --accent on live server is orange; override it and every element that uses it */
+  html, :root { --accent: #ffffff; --amber: #888888; }
 
-  /* trouble-q: icon + code were var(--amber) */
-  .trouble-q svg              { color: #555 !important; }
-  .trouble-q code             { color: #aaa !important; }
+  .nav-logo,
+  .tut-title,
+  .section-title,
+  .completion-title,
+  .sidebar-card-title,
+  .ntc-title,
+  .related-title,
+  .dl-card-name,
+  .dev-name          { color: #ffffff !important; }
 
-  /* info-amber card: border, icon, label were var(--amber) */
-  .info-amber                 { border-color: rgba(255,255,255,.1)  !important;
-                                background:   rgba(255,255,255,.02) !important; }
-  .info-amber .info-icon      { color: #888 !important; }
-  .info-amber .info-label     { color: #ccc !important; }
+  .nav-logo span     { color: #00d4ff !important; }
 
-  /* c-string not defined in nmap-tutorial.css — define it here */
+  .ntc-thumb         { background: rgba(61,220,132,.15) !important; color: #3ddc84 !important; }
+  .ntc-thumb svg     { color: #3ddc84 !important; }
+  .thumb-green       { background: rgba(61,220,132,.15) !important; }
+
+  .trouble-q svg     { color: #555 !important; }
+  .trouble-q code    { color: #aaa !important; }
+
+  .info-amber                { border-color: rgba(255,255,255,.1) !important; background: rgba(255,255,255,.02) !important; }
+  .info-amber .info-icon     { color: #888 !important; }
+  .info-amber .info-label    { color: #ccc !important; }
+
   .c-string { color: #a8d8a8; }
 
   /* ── Alt launch card ── */
