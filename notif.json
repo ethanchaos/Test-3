@@ -1,5 +1,13 @@
 [
   {
+    "id": 164,
+    "title": "New Lets VPN GO Config Added",
+    "message": "A fresh Lets VPN GO configuration has just been added. Tap to download it now.",
+    "link": "https://vpnconfighub.netlify.app/letsgo.html",
+    "date": "2026-06-27",
+    "priority": "high"
+  },
+  {
     "id": 163,
     "title": "New HTTP Custom Config Added",
     "message": "A fresh HTTP Custom configuration has just been added. Tap to download it now.",
