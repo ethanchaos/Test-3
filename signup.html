@@ -193,40 +193,40 @@
         }
 
         .section-divider span {
-            font-size: .7rem;
-            color: var(--text-light);
-            font-family: var(--font-display);
-            letter-spacing: .06em;
-            white-space: nowrap;
+            font-size: .72rem;
+            font-weight: 700;
+            color: var(--text-medium);
+            letter-spacing: .04em;
         }
 
-        /* ── Info note ── */
+        /* ── Social note ── */
         .social-note {
-            font-size: .8rem;
-            color: var(--text-light);
-            margin-bottom: 14px;
             display: flex;
             align-items: flex-start;
             gap: 8px;
-            background: rgba(0,0,0,0.03);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+            font-size: .78rem;
+            color: var(--text-light);
+            margin-bottom: 16px;
             padding: 10px 12px;
+            background: rgba(0,0,0,.02);
+            border-radius: 8px;
         }
 
-        .social-note i { color: var(--accent-cyan); margin-top: 2px; flex-shrink: 0; }
+        .social-note i { flex-shrink: 0; margin-top: 2px; color: var(--accent-cyan); }
 
-        /* ── Errors ── */
+        /* ── Error message ── */
         .field-error {
-            font-size: .78rem;
-            color: var(--error-red);
-            margin-top: 5px;
             display: none;
+            font-size: .75rem;
+            color: var(--error-red);
+            margin-top: 6px;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            animation: fadeIn .3s ease;
         }
 
         .field-error.show { display: flex; }
+        .field-error i { font-size: .68rem; }
 
         .form-msg {
             border-radius: 10px;
@@ -247,10 +247,10 @@
             color: var(--error-red);
         }
 
-        /* ── Buttons ── */
+        /* ── Button ── */
         .auth-btn {
             width: 100%;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
             color: #ffffff;
             border: none;
             border-radius: 10px;
@@ -284,33 +284,95 @@
         .auth-btn.loading .btn-spinner { display: block; }
         .auth-btn.loading .btn-text    { display: none; }
 
-        /* next button (outline style) */
-        .next-btn {
-            width: 100%;
-            background: transparent;
-            color: var(--text-dark);
-            border: 1.5px solid var(--border-active);
-            border-radius: 10px;
-            padding: 13px;
-            font-family: var(--font-display);
-            font-size: .95rem;
-            font-weight: 700;
-            letter-spacing: .06em;
-            cursor: pointer;
-            transition: var(--transition);
-            margin-top: 14px;
+        /* ── Welcome page ── */
+        .welcome-body {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .welcome-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            margin: 0 auto 24px;
+            color: white;
+            font-size: 32px;
+            animation: popIn .6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .next-btn:hover {
-            background: var(--accent-glow);
-            border-color: var(--accent-cyan);
-            transform: translateY(-2px);
+        @keyframes popIn {
+            0%   { transform: scale(0) rotate(-20deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
         }
 
+        .welcome-body h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .welcome-sub {
+            font-size: .85rem;
+            color: var(--text-light);
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        /* ── Capabilities list ── */
+        .cap-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .cap-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .cap-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(0,0,0,.04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--accent-cyan);
+            font-size: .9rem;
+        }
+
+        .cap-text { text-align: left; }
+        .cap-text strong { display: block; font-size: .85rem; color: var(--text-dark); margin-bottom: 2px; }
+        .cap-text span { font-size: .75rem; color: var(--text-light); }
+
+        /* ── Next button ── */
+        .next-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            padding: 14px;
+            font-family: var(--font-display);
+            font-size: .95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .next-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
         .next-btn:active { transform: scale(.98); }
 
         /* ── Footer link ── */
@@ -330,103 +392,8 @@
 
         .auth-footer a:hover { opacity: .75; }
 
-        /* ════════════════════════════════
-           PAGE 2 — Welcome / confirmation
-           ════════════════════════════════ */
-        .welcome-body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 8px 0 4px;
-        }
-
-        .welcome-icon {
-            width: 80px; height: 80px;
-            background: rgba(0,0,0,0.04);
-            border: 2px solid var(--accent-cyan);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .welcome-icon i { font-size: 2.2rem; color: var(--accent-cyan); }
-
-        .welcome-body h2 {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 10px;
-            letter-spacing: .02em;
-        }
-
-        .welcome-body .welcome-sub {
-            color: var(--text-light);
-            font-size: .9rem;
-            max-width: 300px;
-            line-height: 1.6;
-            margin-bottom: 28px;
-        }
-
-        /* capability pills */
-        .cap-list {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 28px;
-            text-align: left;
-        }
-
-        .cap-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--secondary-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 12px 14px;
-            transition: var(--transition);
-        }
-
-        .cap-item:hover {
-            border-color: var(--border-active);
-            background: var(--card-hover);
-        }
-
-        .cap-icon {
-            width: 34px; height: 34px;
-            background: var(--accent-glow);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .cap-icon i { color: var(--accent-cyan); font-size: .95rem; }
-
-        .cap-text strong {
-            display: block;
-            font-size: .88rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            font-family: var(--font-display);
-            letter-spacing: .02em;
-        }
-
-        .cap-text span {
-            font-size: .78rem;
-            color: var(--text-light);
-        }
-
-        /* ── Animations ── */
-        @keyframes fadeIn    { from{opacity:0}          to{opacity:1} }
-        @keyframes fadeInUp  { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
-        @keyframes spin      { to{transform:rotate(360deg)} }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes spin   { to { transform: rotate(360deg); } }
 
         @media (max-width: 480px) { .auth-card { padding: 24px 18px; } }
     </style>
@@ -445,7 +412,7 @@
             </button>
             <div class="dropdown-menu" id="dropdownMenu">
                 <a href="index.html"><i class="fas fa-house"></i> Home</a>
-                <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <a href="login.html"><i class="fas fa-sign-in-alt"></i> Log In</a>
                 <a href="https://whatsapp.com/channel/0029VbAL2mRC6ZvhCR8jjI0G" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a>
                 <a href="https://t.me/EthanChaoss" target="_blank"><i class="fab fa-telegram"></i> Contact Dav</a>
             </div>
@@ -456,23 +423,15 @@
 <section class="content-section">
     <div class="auth-wrap">
 
-        <!-- Dynamic header -->
-        <div class="section-header" id="pageHeader">
-            <h1 id="pageTitle"><i class="fas fa-user-plus"></i> Create Account</h1>
-            <p id="pageSubtitle">Join to access VPN configurations</p>
+        <div class="section-header">
+            <h1><i class="fas fa-user-plus"></i> Create Your Account</h1>
+            <p>Join ConfigHub &amp; Deovex today</p>
         </div>
 
         <div class="auth-card">
 
-            <!-- Step indicator -->
-            <div class="step-dots">
-                <div class="step-dot active" id="dot1"></div>
-                <div class="step-dot"        id="dot2"></div>
-            </div>
-
-            <!-- ════════════ PAGES TRACK ════════════ -->
             <div class="pages-clip">
-                <div class="pages-track" id="pagesTrack">
+                <div class="pages-track">
 
                     <!-- ── PAGE 1: Sign-up form ── -->
                     <div class="page-slide" id="page1">
@@ -519,8 +478,6 @@
                             </div>
                         </div>
 
-                     
-
                         <!-- Province -->
                         <div class="field-group">
                             <div class="field-label">
@@ -553,7 +510,7 @@
                             <span>Fill at least one field so we can reach you.</span>
                         </div>
 
-                           <!-- Email -->
+                        <!-- Email -->
                         <div class="field-group">
                             <div class="field-label">
                                 <i class="fas fa-envelope"></i> Email
@@ -659,8 +616,13 @@
     </div>
 </section>
 
+<!-- Android Bridge Initializer -->
+<script src="android-bridge.js"></script>
+
+<!-- Authentication Libraries -->
 <script src="deovex-pp.js"></script>
 <script src="deovex-auth.js"></script>
 <script src="https://jade-marshmallow-7c18d3.netlify.app/deovex-signup.js"></script>
+
 </body>
 </html>
