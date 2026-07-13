@@ -57,7 +57,10 @@
     "creator": "uluru",
     "date": "13 Jul 2026",
     "config_id": "npvtunnel",
-    "curl-youtube": "https://youtube.com"
+    "curl-youtube": "https://youtube.com",
+    "curl-tiktok": "https://tiktok.com",
+    "curl-facebook": "https://facebook.com",
+    "curl-telegram": "https://Telegram.com"
   },
   {
     "name": "  --Øwæmï tts ¹  mb  ---- 102759",
@@ -107,8 +110,7 @@
     "vpn": "HTTP Injector",
     "filename": "ICE TIKTOK BYPASS_.ehi",
     "date": "14 Jun 2026",
-    "config_id": "httpinjector",
-    
+    "config_id": "httpinjector"
   },
   {
     "name": "Telecel Unlimited   1",
