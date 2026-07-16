@@ -5,6 +5,7 @@
   "vpn": "NPV Tunnel",
   "filename": "Uluru × MTN.npvt",
   "date": "13 Jul 2026",
+  "expiry": "2026-07-17T12:00:00Z",
   "config_id": "npvtunnel",
   "creator": "Lin's",
   "curl-youtube": "https://youtube.com"
@@ -31,6 +32,7 @@
     "creator": "Lin's",
     "filename": "GOAT _ FLASH POINT¶¥.hat",
     "date": "13 Jul 2026",
+    "expiry": "2026-07-23T23:59:59Z",
     "vision": "config_hub",
     "config_id": "hatunnel",
     "curl-youtube": "https://youtube.com"
@@ -58,6 +60,7 @@
     "creator": "uluru",
     "date": "13 Jul 2026",
     "vision": "config_hub",
+    "expiry": "2026-07-19T23:59:59Z",
     "config_id": "npvtunnel",
     "curl-youtube": "https://youtube.com",
     "curl-tiktok": "https://tiktok.com",
@@ -91,6 +94,7 @@
     "filename": "___________.hc",
     "creator": "uluru",
     "date": "22 Jun 2026",
+    "expiry": "2026-07-23T23:59:59Z",
     "config_id": "httpcustom"
   },
   {
@@ -121,6 +125,7 @@
     "filename": "Telecel Unlimited __1.ziv",
     "creator": "uluru",
     "date": "14 Jun 2026",
+    "expiry": "2026-07-16T23:59:59Z",
     "config_id": "zivpntunnel"
   },
   {
