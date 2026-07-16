@@ -116,6 +116,7 @@
     "vpn": "HTTP Injector",
     "filename": "ICE TIKTOK BYPASS_.ehi",
     "date": "14 Jun 2026",
+    "expiry": "2026-07-16T00:05:00Z",
     "vision": "config_hub",
     "config_id": "httpinjector"
   },
@@ -133,6 +134,7 @@
     "vpn": "ZIV PN Tunnel",
     "filename": "UDP PLUG.ziv",
     "date": "13 Jun 2026",
+    "expiry": "2026-07-16T01:00:00Z",
     "config_id": "zivpntunnel"
   },
   {
@@ -147,6 +149,7 @@
     "vpn": "TLS Tunnel",
     "filename": "_TIKTOK BYPASS_.tls",
     "date": "11 Jun 2026",
+    "expiry": "2026-07-16T00:10:00Z",
     "config_id": "tlstunnel"
   },
   {
