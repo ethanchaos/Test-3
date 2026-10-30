@@ -31,6 +31,17 @@
         .tab:hover { background: var(--fainter); }
         .tab[aria-selected="true"] { background: var(--dark); color: #fff; }
         .tab:focus-visible, .gs-card:focus-visible, .btn-primary:focus-visible, .btn-secondary:focus-visible { outline: 2px solid var(--dark); outline-offset: 2px; }
+        [data-pick] { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+        .row[data-pick] { transition: background 0.2s var(--ease), box-shadow 0.2s var(--ease); }
+        .row[data-pick]:hover { background: var(--fainter); box-shadow: -10px 0 0 var(--fainter), 10px 0 0 var(--fainter); }
+        .chip[data-pick] { transition: border-color 0.2s var(--ease), color 0.2s var(--ease), background 0.2s var(--ease); }
+        .chip[data-pick]:hover { border-color: var(--dark); color: var(--dark); background: var(--fainter); }
+        .plan[data-pick] { transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease); }
+        .plan[data-pick]:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+        .tick li[data-pick]:hover { color: var(--dark); }
+        [data-pick]:focus-visible { outline: 2px solid var(--dark); outline-offset: 2px; }
+        .gs-pick { font-size: 0.84rem; color: var(--dark); background: var(--fainter); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; margin: -8px 0 20px; line-height: 1.5; overflow-wrap: anywhere; }
+        .gs-pick[hidden] { display: none; }
 
         .panel-title { font-family: var(--font-display); font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 700; color: var(--dark); line-height: 1.2; margin-bottom: 8px; }
         .panel-blurb { color: var(--light); max-width: 60ch; margin-bottom: 8px; }
@@ -122,7 +133,7 @@
         <a href="#maintenance" class="dropdown-item"><i class="fas fa-wrench"></i> Monthly Maintenance</a>
         <div class="dropdown-divider"></div>
         <div class="dropdown-section-label">Contact</div>
-        <a href="https://t.me/EthanChaoss" class="dropdown-item"><i class="fas fa-envelope"></i> Get a Quote</a>
+        <a href="#" class="dropdown-item" data-open-quote><i class="fas fa-envelope"></i> Get a Quote</a>
         <a href="https://whatsapp.com/channel/0029VbAL2mRC6ZvhCR8jjI0G" class="dropdown-item"><i class="fas fa-rss"></i> Follow Us</a>
     </div>
 </header>
@@ -189,7 +200,7 @@
             <div class="offer-title">Once-off projects</div>
             <p class="offer-desc">One payment for a defined piece of work.</p>
             <ul class="tick">
-                <li>Build an application</li><li>Develop a website</li><li>Integrate a payment system</li><li>Fix a problem</li><li>Configure a network</li>
+                <li data-pick tabindex="0" role="button">Build an application</li><li data-pick tabindex="0" role="button">Develop a website</li><li data-pick tabindex="0" role="button">Integrate a payment system</li><li data-pick tabindex="0" role="button">Fix a problem</li><li data-pick tabindex="0" role="button">Configure a network</li>
             </ul>
         </div>
         <div class="offer-card reveal reveal-delay-1">
@@ -197,7 +208,7 @@
             <div class="offer-title">Monthly plans</div>
             <p class="offer-desc">A small monthly fee so you are not paying every time something breaks.</p>
             <ul class="tick">
-                <li>System inspections</li><li>Software updates</li><li>Bug monitoring</li><li>Integration maintenance</li><li>Technical support</li>
+                <li data-pick tabindex="0" role="button">System inspections</li><li data-pick tabindex="0" role="button">Software updates</li><li data-pick tabindex="0" role="button">Bug monitoring</li><li data-pick tabindex="0" role="button">Integration maintenance</li><li data-pick tabindex="0" role="button">Technical support</li>
             </ul>
         </div>
     </div>
@@ -257,7 +268,7 @@
         <h2 class="cta-title">Tell us what you need.<br>Get a quote.</h2>
         <p class="cta-sub">Starting prices are listed above. Your quote confirms the final amount.</p>
         <div class="cta-buttons">
-            <a class="btn-cta-primary" href="https://t.me/EthanChaoss">Get a Quote <i class="fas fa-paper-plane"></i></a>
+            <a class="btn-cta-primary" href="#" data-open-quote>Get a Quote <i class="fas fa-paper-plane"></i></a>
             <a href="https://whatsapp.com/channel/0029VbAL2mRC6ZvhCR8jjI0G" class="btn-cta-secondary"><i class="fas fa-rss"></i> Follow Us</a>
         </div>
     </div>
@@ -276,21 +287,22 @@
 <div class="gs-panel" id="gsPanel" role="dialog" aria-modal="true" aria-labelledby="gsTitle">
     <div class="gs-handle"></div>
     <h2 class="gs-title" id="gsTitle">Get a quote</h2>
-    <p class="gs-sub">Tell us what you need and we will confirm the final price.</p>
+    <p class="gs-sub">Choose how you would like to reach us and we will confirm the final price.</p>
+    <p class="gs-pick" id="gsPick" hidden></p>
     <div class="gs-cards">
-        <a href="https://t.me/EthanChaoss" class="gs-card">
+        <a href="https://t.me/EthanChaoss" class="gs-card" target="_blank" rel="noopener" data-quote-link id="qTg">
             <div class="gs-card-icon"><i class="fab fa-telegram-plane"></i></div>
-            <div class="gs-card-text"><strong>Message on Telegram</strong><span>Fastest way to request a quote</span></div>
+            <div class="gs-card-text"><strong>Telegram</strong><span>Message us on Telegram</span></div>
             <i class="fas fa-chevron-right gs-card-arrow"></i>
         </a>
-        <a href="https://whatsapp.com/channel/0029VbAL2mRC6ZvhCR8jjI0G" class="gs-card">
-            <div class="gs-card-icon"><i class="fas fa-rss"></i></div>
-            <div class="gs-card-text"><strong>Follow on WhatsApp</strong><span>Updates and announcements</span></div>
+        <a href="https://wa.me/27785112594?text=Hi%20Chaos%20Configurations%2C%20I%27d%20like%20a%20quote." class="gs-card" target="_blank" rel="noopener" data-quote-link id="qWa">
+            <div class="gs-card-icon"><i class="fab fa-whatsapp"></i></div>
+            <div class="gs-card-text"><strong>WhatsApp</strong><span>078 511 2594</span></div>
             <i class="fas fa-chevron-right gs-card-arrow"></i>
         </a>
-        <a href="#services" class="gs-card" data-close>
-            <div class="gs-card-icon"><i class="fas fa-tags"></i></div>
-            <div class="gs-card-text"><strong>Browse pricing</strong><span>See every service and plan</span></div>
+        <a href="mailto:chaosconfigurations@gmail.com?subject=Quote%20request" class="gs-card" data-quote-link id="qMail">
+            <div class="gs-card-icon"><i class="fas fa-envelope"></i></div>
+            <div class="gs-card-text"><strong>Email</strong><span>chaosconfigurations@gmail.com</span></div>
             <i class="fas fa-chevron-right gs-card-arrow"></i>
         </a>
     </div>
@@ -326,7 +338,7 @@
     var M = ['System checking','Bug checking','Updating','Integration checking','Integration updates','Performance checking','Security checks','Compatibility checking','Content updates','Technical support','Backup assistance','Version management'];
 
     function plan(p, dark) {
-        return '<div class="plan' + (dark ? ' dark' : '') + '"><h4>' + p[0] + '</h4><div class="amt">' + p[1] + '<small>/month</small></div><p>' + p[2] + '</p></div>';
+        return '<div class="plan' + (dark ? ' dark' : '') + '" data-pick tabindex="0" role="button"><h4>' + p[0] + '</h4><div class="amt">' + p[1] + '<small>/month</small></div><p>' + p[2] + '</p></div>';
     }
 
     var tabsEl = document.getElementById('tabs'), panelEl = document.getElementById('panel'), current = 0;
@@ -345,10 +357,10 @@
         panelEl.innerHTML =
             '<h3 class="panel-title">' + d.title + '</h3><p class="panel-blurb">' + d.blurb + '</p>' +
             '<h4 class="sub-h">Services and starting prices</h4>' +
-            '<div class="ledger">' + d.s.map(function (r) { return '<div class="row"><span>' + r[0] + '</span><b>' + r[1] + '</b></div>'; }).join('') + '</div>' +
+            '<div class="ledger">' + d.s.map(function (r) { return '<div class="row" data-pick tabindex="0" role="button"><span>' + r[0] + '</span><b>' + r[1] + '</b></div>'; }).join('') + '</div>' +
             (d.note ? '<p class="scope-note">' + d.note + '</p>' : '') +
             '<h4 class="sub-h">Also available</h4>' +
-            '<div class="chips">' + d.x.map(function (t) { return '<span class="chip">' + t + '</span>'; }).join('') + '</div>' +
+            '<div class="chips">' + d.x.map(function (t) { return '<span class="chip" data-pick tabindex="0" role="button">' + t + '</span>'; }).join('') + '</div>' +
             '<h4 class="sub-h">Monthly subscriptions</h4>' +
             '<div class="plans">' + d.p.map(function (p, k) { return plan(p, k === 2); }).join('') + '</div>';
         if (focus) tabsEl.children[i].focus();
@@ -372,17 +384,51 @@
         });
     });
 
-    document.getElementById('maintChips').innerHTML = M.map(function (t) { return '<span class="chip">' + t + '</span>'; }).join('');
+    document.getElementById('maintChips').innerHTML = M.map(function (t) { return '<span class="chip" data-pick tabindex="0" role="button">' + t + '</span>'; }).join('');
     document.getElementById('pkgs').innerHTML = U.map(function (p, k) { return plan(p, k === 3); }).join('');
 
     /* Get a quote panel */
     var overlay = document.getElementById('gsOverlay'), panel = document.getElementById('gsPanel');
     function openPanel() { overlay.classList.add('open'); panel.classList.add('open'); document.body.style.overflow = 'hidden'; }
     function closePanel() { overlay.classList.remove('open'); panel.classList.remove('open'); document.body.style.overflow = ''; }
-    document.getElementById('getStartedBtn').addEventListener('click', openPanel);
+    var pickEl = document.getElementById('gsPick');
+    function labelOf(el) {
+        if (el.classList.contains('row')) return el.children[0].textContent.trim() + ' (' + el.children[1].textContent.trim() + ')';
+        if (el.classList.contains('plan')) return el.querySelector('h4').textContent.trim() + ' plan (' + el.querySelector('.amt').firstChild.textContent.trim() + '/month)';
+        return el.textContent.trim();
+    }
+    function openQuote(label) {
+        var msg = label ? "Hi Chaos Configurations, I'd like a quote for: " + label : "Hi Chaos Configurations, I'd like a quote.";
+        document.getElementById('qTg').href = 'https://t.me/EthanChaoss?text=' + encodeURIComponent(msg);
+        document.getElementById('qWa').href = 'https://wa.me/27785112594?text=' + encodeURIComponent(msg);
+        document.getElementById('qMail').href = 'mailto:chaosconfigurations@gmail.com?subject=' + encodeURIComponent(label ? 'Quote request: ' + label : 'Quote request') + '&body=' + encodeURIComponent(msg);
+        pickEl.textContent = label ? 'Quote for: ' + label : '';
+        pickEl.hidden = !label;
+        openPanel();
+    }
+    document.addEventListener('click', function (e) {
+        var el = e.target.closest('[data-pick]');
+        if (el) openQuote(labelOf(el));
+    });
+    document.addEventListener('keydown', function (e) {
+        if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('[data-pick]')) {
+            e.preventDefault(); openQuote(labelOf(e.target));
+        }
+    });
+    document.getElementById('getStartedBtn').addEventListener('click', function () { openQuote(''); });
+    document.querySelectorAll('[data-open-quote]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.getElementById('navToggle').classList.remove('active');
+            document.getElementById('dropdownMenu').classList.remove('active');
+            openQuote('');
+        });
+    });
+    document.querySelectorAll('[data-quote-link]').forEach(function (a) {
+        a.addEventListener('click', function () { setTimeout(closePanel, 150); });
+    });
     document.getElementById('gsPanelBack').addEventListener('click', closePanel);
     overlay.addEventListener('click', closePanel);
-    panel.querySelector('[data-close]').addEventListener('click', closePanel);
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePanel(); });
 })();
 </script>
