@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="keywords" content="Android app development, website development, proxy configuration, DNS configuration, Chaos Configurations, Ethan Chaos, South Africa">
+    <meta name="description" content="Chaos Configurations — Engineering Digital Possibilities. Android apps, websites and technical configurations, with monthly maintenance plans. Prices in ZAR.">
+    <title>Chaos Configurations — Engineering Digital Possibilities</title>
+    <link rel="icon" href="Chaosneworg.png">
+    <link rel="shortcut icon" href="Chaosneworg.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Chaosneworg.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GL0YEB7LF6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GL0YEB7LF6');
+    </script>
+    <style>
+        html, body { overflow-x: hidden; max-width: 100%; }
+
+        .hero-tag { font-family: var(--font-display); font-size: clamp(1.05rem, 2.4vw, 1.35rem); font-weight: 600; color: var(--dark); margin-bottom: 14px; }
+
+        /* ══ SERVICES ══ */
+        .tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 6px; background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 36px; }
+        .tab { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 6px; background: none; border: 0; border-radius: 9px; cursor: pointer; font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; letter-spacing: 0.03em; color: var(--mid); transition: background 0.2s var(--ease), color 0.2s var(--ease); }
+        .tab small { font-family: var(--font-body); font-size: 0.72rem; font-weight: 500; opacity: 0.7; }
+        .tab:hover { background: var(--fainter); }
+        .tab[aria-selected="true"] { background: var(--dark); color: #fff; }
+        .tab:focus-visible, .gs-card:focus-visible, .btn-primary:focus-visible, .btn-secondary:focus-visible { outline: 2px solid var(--dark); outline-offset: 2px; }
+        [data-pick] { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+        .row[data-pick] { transition: background 0.2s var(--ease), box-shadow 0.2s var(--ease); }
+        .row[data-pick]:hover { background: var(--fainter); box-shadow: -10px 0 0 var(--fainter), 10px 0 0 var(--fainter); }
+        .chip[data-pick] { transition: border-color 0.2s var(--ease), color 0.2s var(--ease), background 0.2s var(--ease); }
+        .chip[data-pick]:hover { border-color: var(--dark); color: var(--dark); background: var(--fainter); }
+        .plan[data-pick] { transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease); }
+        .plan[data-pick]:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+        .tick li[data-pick]:hover { color: var(--dark); }
+        [data-pick]:focus-visible { outline: 2px solid var(--dark); outline-offset: 2px; }
+        .gs-pick { font-size: 0.84rem; color: var(--dark); background: var(--fainter); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; margin: -8px 0 20px; line-height: 1.5; overflow-wrap: anywhere; }
+        .gs-pick[hidden] { display: none; }
+        /* ══ PROJECTS ══ */
+        #projects { padding-bottom: 0; }
+        .proj-row-head { text-align: center; margin: 0 0 6px; }
+        .proj-row-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--dark); }
+        .carousel { position: relative; width: min(100vw, 700px); margin-left: 50%; transform: translateX(-50%); }
+        .carousel + .proj-row-head { margin-top: 40px; }
+        .proj-row { --cw: min(78vw, 340px); position: relative; display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; padding: 12px calc((100% - var(--cw)) / 2) 18px; scrollbar-width: none; }
+        .proj-row::-webkit-scrollbar { display: none; }
+        .proj { flex: 0 0 var(--cw); min-width: 0; scroll-snap-align: center; scroll-snap-stop: always; background: var(--card); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow); transition: opacity 0.35s var(--ease), transform 0.35s var(--ease); }
+        .carousel.is-ready .proj { opacity: 0.5; transform: scale(0.93); }
+        .carousel.is-ready .proj.is-active { opacity: 1; transform: none; box-shadow: var(--shadow-lg); }
+        .proj-media { background: linear-gradient(160deg, var(--bg2), var(--fainter)); border-bottom: 1px solid var(--border); flex: 1 1 auto; min-height: 310px; padding: 26px 12px; display: flex; align-items: center; justify-content: center; }
+        .proj-media img { display: block; width: 100%; height: auto; cursor: zoom-in; }
+        .dev-phone { width: 128px; flex: 0 0 auto; border: 4px solid #141414; border-radius: 20px; overflow: hidden; background: #141414; box-shadow: var(--shadow-lg); }
+        .dev-phone + .dev-phone { margin-left: 12px; margin-top: 34px; }
+        .wide-pair { display: flex; flex-direction: column; width: 100%; max-width: 310px; }
+        .dev-wide { width: 84%; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: #fff; box-shadow: var(--shadow-lg); }
+        .dev-wide.a { align-self: flex-start; }
+        .dev-wide.b { align-self: flex-end; margin-top: -34px; }
+        .proj-body { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 8px; flex: 0 0 auto; }
+        .proj-tag { font-family: var(--font-display); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--light); }
+        .proj-body h4 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--dark); line-height: 1.25; }
+        .proj-body p { font-size: 0.9rem; color: var(--mid); line-height: 1.65; }
+        .proj-cta { margin-top: 10px; align-self: flex-start; font-family: var(--font-display); font-size: 0.82rem; font-weight: 600; color: var(--dark); background: none; border: 1px solid var(--dark); border-radius: 9px; padding: 9px 14px; cursor: pointer; transition: background 0.2s var(--ease), color 0.2s var(--ease); }
+        .proj-cta:hover { background: var(--dark); color: #fff; }
+        .car-dots { display: flex; justify-content: center; gap: 9px; margin-top: 2px; }
+        .car-dot { position: relative; width: 8px; height: 8px; padding: 0; border: 0; border-radius: 8px; background: #cfcfcf; cursor: pointer; transition: width 0.3s var(--ease), background 0.3s var(--ease); }
+        .car-dot::before { content: ''; position: absolute; inset: -9px -5px; }
+        .car-dot.on { width: 24px; background: var(--dark); }
+        .car-btn { display: none; position: absolute; top: calc(50% - 44px); z-index: 3; width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--border); background: #fff; color: var(--dark); box-shadow: var(--shadow-lg); cursor: pointer; align-items: center; justify-content: center; transition: background 0.2s var(--ease), color 0.2s var(--ease); }
+        .car-btn:hover { background: var(--dark); color: #fff; }
+        .car-prev { left: 10px; } .car-next { right: 10px; }
+        @media (hover: hover) and (pointer: fine) { .car-btn { display: flex; } }
+        @media (prefers-reduced-motion: reduce) { .proj { transition: none; } }
+        .lb { position: fixed; inset: 0; z-index: 1200; background: rgba(0,0,0,0.86); display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.25s var(--ease); cursor: zoom-out; }
+        .lb.open { opacity: 1; pointer-events: auto; }
+        .lb img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 12px; box-shadow: 0 10px 50px rgba(0,0,0,0.5); }
+        .lb-x { position: absolute; top: max(14px, env(safe-area-inset-top)); right: 14px; width: 42px; height: 42px; border-radius: 50%; border: 0; background: rgba(255,255,255,0.18); color: #fff; font-size: 1.5rem; line-height: 1; cursor: pointer; }
+
+        .panel-title { font-family: var(--font-display); font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 700; color: var(--dark); line-height: 1.2; margin-bottom: 8px; }
+        .panel-blurb { color: var(--light); max-width: 60ch; margin-bottom: 8px; }
+        .sub-h { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--dark); margin: 40px 0 14px; }
+
+        .ledger { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); column-gap: 56px; background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 6px 24px; }
+        .row { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; padding: 12px 0; border-bottom: 1px dotted #c9c9c9; font-size: 0.92rem; color: var(--mid); }
+        .row span:first-child { min-width: 0; }
+        .row b { flex-shrink: 0; font-family: var(--font-display); font-size: 0.95rem; color: var(--dark); white-space: nowrap; }
+        .scope-note { font-size: 0.8rem; color: var(--light); margin-top: 12px; }
+
+        .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .chip { font-size: 0.82rem; font-weight: 500; color: var(--mid); background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; }
+
+        .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 16px; }
+        .plan { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 6px; }
+        .plan h4 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--dark); }
+        .amt { font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; color: var(--dark); line-height: 1.1; }
+        .amt small { font-size: 0.8rem; font-weight: 500; color: var(--light); }
+        .plan p { font-size: 0.85rem; color: var(--light); line-height: 1.6; }
+        .plan.dark { background: var(--dark); border-color: var(--dark); }
+        .plan.dark h4, .plan.dark .amt { color: #fff; }
+        .plan.dark small, .plan.dark p { color: rgba(255,255,255,0.6); }
+
+        /* ══ HOW / MAINTENANCE ══ */
+        .two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 24px; }
+        .tick { list-style: none; margin-top: 14px; display: grid; gap: 8px; }
+        .tick li { position: relative; padding-left: 20px; font-size: 0.88rem; color: var(--light); }
+        .tick li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 8px; height: 2px; background: var(--dark); }
+        .example { margin-top: 28px; padding: 18px 22px; border-left: 3px solid var(--dark); background: var(--bg2); border-radius: 0 12px 12px 0; font-size: 0.95rem; color: var(--mid); }
+        .example b { color: var(--dark); }
+
+        .maint-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 72px); align-items: start; }
+        .pkgs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+        .caveat { margin-top: 24px; font-size: 0.85rem; color: var(--light); }
+
+        /* ══ GET A QUOTE PANEL ══ */
+        .gs-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0); z-index: 1100; pointer-events: none; transition: background 0.4s var(--ease); }
+        .gs-overlay.open { background: rgba(0,0,0,0.38); pointer-events: all; }
+        .gs-panel { position: fixed; bottom: 0; left: 0; right: 0; max-width: 520px; max-height: 92dvh; overflow-y: auto; margin: 0 auto; background: var(--bg2); border-top: 1px solid var(--border); border-radius: 24px 24px 0 0; padding: 28px 24px max(32px, env(safe-area-inset-bottom)); transform: translateY(105%); visibility: hidden; transition: transform 0.45s var(--ease), visibility 0.45s; z-index: 1101; }
+        .gs-panel.open { transform: translateY(0); visibility: visible; }
+        .gs-handle { width: 40px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 24px; }
+        .gs-title { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; line-height: 1.25; }
+        .gs-sub { font-size: 0.86rem; color: var(--light); margin-bottom: 24px; line-height: 1.55; }
+        .gs-cards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+        .gs-card { display: flex; align-items: center; gap: 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; text-decoration: none; color: var(--mid); transition: background 0.22s var(--ease), border-color 0.22s var(--ease), box-shadow 0.22s var(--ease); }
+        .gs-card:hover { background: var(--bg2); border-color: #bbb; box-shadow: var(--shadow); }
+        .gs-card-icon { width: 44px; height: 44px; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.22s var(--ease); }
+        .gs-card:hover .gs-card-icon { background: var(--dark); border-color: var(--dark); }
+        .gs-card-icon i { color: var(--mid); transition: color 0.22s; }
+        .gs-card:hover .gs-card-icon i { color: #fff; }
+        .gs-card-text { min-width: 0; }
+        .gs-card-text strong { display: block; font-family: var(--font-display); font-size: 0.92rem; color: var(--dark); margin-bottom: 2px; }
+        .gs-card-text span { font-size: 0.78rem; color: var(--light); }
+        .gs-card-arrow { margin-left: auto; color: var(--border); font-size: 0.8rem; }
+        .gs-back { display: flex; width: fit-content; margin-left: auto; align-items: center; gap: 7px; background: none; border: 1.5px solid var(--border); border-radius: 40px; padding: 8px 18px; font-family: var(--font-display); font-size: 0.78rem; font-weight: 700; color: var(--mid); cursor: pointer; }
+        .gs-back:hover { background: var(--fainter); border-color: #999; }
+
+        @media (max-width: 860px) { .maint-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 520px) {
+            .tab .pre { display: none; }
+            .ledger { padding: 4px 16px; }
+            .pkgs { grid-template-columns: 1fr; }
+            .hero-buttons .btn-primary, .hero-buttons .btn-secondary { flex: 1 1 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header>
+    <nav class="navbar">
+        <a href="/" class="logo-link">
+            <img class="logo-img" src="Chaosneworg.png" alt="Chaos Configurations logo">
+            <span class="logo-wordmark">Chaos<span> Org</span></span>
+        </a>
+        <div class="nav-right">
+            <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="dropdown-menu" id="dropdownMenu">
+        <div class="dropdown-section-label">Services</div>
+        <a href="#projects" class="dropdown-item"><i class="fas fa-th-large"></i> Our Projects</a>
+        <a href="#services" data-tab="apps" class="dropdown-item"><i class="fas fa-mobile-alt"></i> Chaos Apps</a>
+        <a href="#services" data-tab="web" class="dropdown-item"><i class="fas fa-globe"></i> Chaos Web</a>
+        <a href="#services" data-tab="configs" class="dropdown-item"><i class="fas fa-sliders-h"></i> Chaos Configs</a>
+        <a href="#maintenance" class="dropdown-item"><i class="fas fa-wrench"></i> Monthly Maintenance</a>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-section-label">Contact</div>
+        <a href="#" class="dropdown-item" data-open-quote><i class="fas fa-envelope"></i> Get a Quote</a>
+        <a href="https://whatsapp.com/channel/0029VbAL2mRC6ZvhCR8jjI0G" class="dropdown-item"><i class="fas fa-rss"></i> Follow Us</a>
+    </div>
+</header>
+
+<!-- ══ HERO ══ -->
+<div class="hero-wrapper">
+    <div class="hero-corner-bg" id="cornerBg">
+        <div class="corner-ring"></div>
+        <div class="corner-ring2"></div>
+        <div class="corner-ring3"></div>
+        <img class="corner-img" src="Chaosneworg.png" alt="">
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-eyebrow reveal">Apps, websites and configurations</div>
+            <h1 class="reveal reveal-delay-1">Chaos<br><em>Configurations</em></h1>
+            <p class="hero-tag reveal reveal-delay-2">Engineering Digital Possibilities.</p>
+            <p class="hero-desc reveal reveal-delay-2">
+                Android apps, websites and technical setups, built to your brief. Pay once for the build, then keep it healthy with a monthly maintenance plan. Prices are in South African Rand.
+            </p>
+            <div class="hero-buttons reveal reveal-delay-3">
+                <a class="btn-primary" href="#services">View Pricing <i class="fas fa-arrow-right"></i></a>
+                <button class="btn-secondary" id="getStartedBtn" type="button">Get a Quote <i class="fas fa-paper-plane"></i></button>
+            </div>
+            <div class="hero-meta reveal reveal-delay-4">
+                <div class="hero-stat">
+                    <span class="hero-stat-num" data-count="3">3</span>
+                    <span class="hero-stat-label">Divisions</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-num" data-count="50" data-prefix="R">R50</span>
+                    <span class="hero-stat-label">Projects from</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-num" data-count="49" data-prefix="R" data-suffix="/mo">R49/mo</span>
+                    <span class="hero-stat-label">Maintenance from</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ══ PROJECTS ══ -->
+<section id="projects">
+    <div class="section-header">
+        <div class="section-eyebrow reveal">Our work</div>
+        <h2 class="section-title reveal reveal-delay-1">Projects we have built</h2>
+        <p class="section-subtitle">A look at our apps and websites.</p>
+    </div>
+    <div class="proj-row-head"><h3 class="proj-row-title">Chaos projects</h3></div>
+    <div class="carousel" data-carousel>
+        <button type="button" class="car-btn car-prev" aria-label="Previous project"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="proj-row" role="list" tabindex="0" aria-label="Chaos projects">
+        <article class="proj" role="listitem">
+            <div class="proj-media">
+                <div class="dev-phone"><img src="proj-chaos-link-hotspot.webp" width="600" height="1300" loading="lazy" alt="Chaos Link home screen with the start button and network details"></div>
+                <div class="dev-phone"><img src="proj-chaos-link-settings.webp" width="600" height="1300" loading="lazy" alt="Chaos Link settings with devices, data usage and privacy filtering"></div>
+            </div>
+            <div class="proj-body">
+                <span class="proj-tag">Android app</span>
+                <h4>Chaos Link</h4>
+                <p>Share your connection over Hotspot or Wi-Fi Direct. Manage devices, data limits, blocked apps and filters.</p>
+                <button type="button" class="proj-cta" data-pick data-label="a project like Chaos Link">Get a quote</button>
+            </div>
+        </article>
+        <article class="proj" role="listitem">
+            <div class="proj-media">
+                <div class="dev-phone"><img src="proj-chaos-hub-home.webp" width="600" height="1300" loading="lazy" alt="Chaos Hub file list with search, filters and download buttons"></div>
+                <div class="dev-phone"><img src="proj-chaos-hub-settings.webp" width="600" height="1300" loading="lazy" alt="Chaos Hub settings with device profile and filtration"></div>
+            </div>
+            <div class="proj-body">
+                <span class="proj-tag">Android app</span>
+                <h4>Chaos Hub</h4>
+                <p>Browse, search and download configuration files. Filter by tunnel type, react, share and manage your profile.</p>
+                <button type="button" class="proj-cta" data-pick data-label="a project like Chaos Hub">Get a quote</button>
+            </div>
+        </article>
+        <article class="proj" role="listitem">
+            <div class="proj-media">
+                <div class="wide-pair">
+                    <div class="dev-wide a"><img src="proj-chaos-browser-tv.webp" width="1100" height="626" loading="lazy" alt="Chaos Browser home screen on a TV with the input mode menu open"></div>
+                    <div class="dev-wide b"><img src="proj-chaos-browser-youtube.webp" width="1100" height="626" loading="lazy" alt="YouTube playing in Chaos Browser on a TV"></div>
+                </div>
+            </div>
+            <div class="proj-body">
+                <span class="proj-tag">Android app</span>
+                <h4>Chaos Browser</h4>
+                <p>A browser built for the TV remote, with cursor or D-pad control, quick-access tiles and a custom home screen.</p>
+                <button type="button" class="proj-cta" data-pick data-label="a project like Chaos Browser">Get a quote</button>
+            </div>
+        </article>
+        <article class="proj" role="listitem">
+            <div class="proj-media">
+                <div class="dev-phone"><img src="proj-chaos-tutorials.webp" width="600" height="1300" loading="lazy" alt="Chaos Org tutorials list with beginner tags"></div>
+                <div class="dev-phone"><img src="proj-chaos-tutorials-2.webp" width="600" height="1300" loading="lazy" alt="Chaos Org tutorial cards for Nmap, Burp Suite and Metasploit"></div>
+            </div>
+            <div class="proj-body">
+                <span class="proj-tag">Web platform</span>
+                <h4>Chaos Org Tutorials</h4>
+                <p>Free cybersecurity and development tutorials in a dark, easy-to-scan layout with search and difficulty tags.</p>
+                <button type="button" class="proj-cta" data-pick data-label="a project like Chaos Org Tutorials">Get a quote</button>
+            </div>
+        </article>
+        </div>
+        <button type="button" class="car-btn car-next" aria-label="Next project"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        <div class="car-dots"></div>
+    </div>
+    <div class="proj-row-head"><h3 class="proj-row-title">Other projects</h3></div>
+    <div class="carousel" data-carousel>
+        <button type="button" class="car-btn car-prev" aria-label="Previous project"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="proj-row" role="list" tabindex="0" aria-label="Other projects">
+        <article class="proj" role="listitem">
+            <div class="proj-media">
+                <div class="wide-pair">
+                    <div class="dev-wide a"><img src="proj-staynest-hero.webp" width="1100" height="626" loading="lazy" alt="StayNest website hero with a pool and mountains"></div>
+                    <div class="dev-wide b"><img src="proj-staynest-rooms.webp" width="1100" height="626" loading="lazy" alt="StayNest room cards with prices and a check availability button"></div>
+                </div>
+            </div>
+            <div class="proj-body">
+                <span class="proj-tag">Website</span>
+                <h4>StayNest</h4>
+                <p>A boutique hotel booking website with a full-screen hero, room cards with prices, a gallery and reviews.</p>
+                <button type="button" class="proj-cta" data-pick data-label="a project like StayNest">Get a quote</button>
+            </div>
+        </article>
+        <article class="proj" role="listitem">
+            <div class="proj-media">
+                <div class="wide-pair">
+                    <div class="dev-wide a"><img src="proj-novatech.webp" width="1100" height="626" loading="lazy" alt="NovaTech agency website hero with a dashboard card"></div>
+                    <div class="dev-wide b"><img src="proj-novatech-pricing.webp" width="1100" height="626" loading="lazy" alt="NovaTech pricing section with three plans"></div>
+                </div>
+            </div>
+            <div class="proj-body">
+                <span class="proj-tag">Website</span>
+                <h4>NovaTech</h4>
+                <p>A dark, modern agency website with a dashboard-style hero and clear pricing and contact sections.</p>
+                <button type="button" class="proj-cta" data-pick data-label="a project like NovaTech">Get a quote</button>
+            </div>
+        </article>
+        <article class="proj" role="listitem">
+            <div class="proj-media">
+                <div class="dev-phone"><img src="proj-turfexpress.webp" width="600" height="1300" loading="lazy" alt="TurfExpress food delivery app showing restaurants and popular dishes"></div>
+                <div class="dev-phone"><img src="proj-turfexpress-cart.webp" width="600" height="1300" loading="lazy" alt="TurfExpress cart with items, delivery fee and place order button"></div>
+            </div>
+            <div class="proj-body">
+                <span class="proj-tag">Web app</span>
+                <h4>TurfExpress</h4>
+                <p>A mobile food-delivery web app with restaurants, popular dishes and a cart with delivery fee and total.</p>
+                <button type="button" class="proj-cta" data-pick data-label="a project like TurfExpress">Get a quote</button>
+            </div>
+        </article>
+        </div>
+        <button type="button" class="car-btn car-next" aria-label="Next project"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        <div class="car-dots"></div>
+    </div>
+</section>
+
+<!-- ══ SERVICES ══ -->
+<section id="services">
+    <div class="section-header">
+        <div class="section-eyebrow reveal">Services</div>
+        <h2 class="section-title reveal reveal-delay-1">Three divisions, one team</h2>
+        <p class="section-subtitle">All prices are in ZAR and are starting prices. Your final quote depends on scope and technical requirements.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Divisions" id="tabs"></div>
+    <div id="panel" role="tabpanel" tabindex="0"></div>
+</section>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section id="how" style="padding-top:0">
+    <div class="section-header">
+        <div class="section-eyebrow reveal">How it works</div>
+        <h2 class="section-title reveal reveal-delay-1">Pay once to build. Pay monthly to keep it running.</h2>
+    </div>
+    <div class="two">
+        <div class="offer-card reveal">
+            <div class="offer-icon"><i class="fas fa-hammer"></i></div>
+            <div class="offer-title">Once-off projects</div>
+            <p class="offer-desc">One payment for a defined piece of work.</p>
+            <ul class="tick">
+                <li data-pick tabindex="0" role="button">Build an application</li><li data-pick tabindex="0" role="button">Develop a website</li><li data-pick tabindex="0" role="button">Integrate a payment system</li><li data-pick tabindex="0" role="button">Fix a problem</li><li data-pick tabindex="0" role="button">Configure a network</li>
+            </ul>
+        </div>
+        <div class="offer-card reveal reveal-delay-1">
+            <div class="offer-icon"><i class="fas fa-rotate"></i></div>
+            <div class="offer-title">Monthly plans</div>
+            <p class="offer-desc">A small monthly fee so you are not paying every time something breaks.</p>
+            <ul class="tick">
+                <li data-pick tabindex="0" role="button">System inspections</li><li data-pick tabindex="0" role="button">Software updates</li><li data-pick tabindex="0" role="button">Bug monitoring</li><li data-pick tabindex="0" role="button">Integration maintenance</li><li data-pick tabindex="0" role="button">Technical support</li>
+            </ul>
+        </div>
+    </div>
+    <p class="example reveal"><b>Example:</b> a R1,500 professional website plus Web Standard at R199/month covers the build, then monthly checks, content updates and support.</p>
+</section>
+
+<!-- ══ MAINTENANCE ══ -->
+<section id="maintenance" class="about-section">
+    <div class="about-inner-wrap">
+        <div class="maint-grid">
+            <div>
+                <div class="section-eyebrow reveal">Monthly Maintenance</div>
+                <h2 class="section-title">Keep your site or app healthy</h2>
+                <p class="section-subtitle" style="margin-bottom:24px">These plans apply to websites, Android applications and supported software systems.</p>
+                <div class="chips" id="maintChips"></div>
+                <p class="caveat">Plans cover maintenance, not unlimited new development. Hosting, domains, paid APIs and third-party subscriptions are charged separately.</p>
+            </div>
+            <div class="pkgs" id="pkgs"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ FOUNDER ══ -->
+<section id="founder">
+    <div class="section-header">
+        <div class="section-eyebrow reveal">Founder</div>
+        <h2 class="section-title reveal reveal-delay-1">The person behind it</h2>
+    </div>
+    <div class="founder-grid reveal">
+        <div class="founder-card">
+            <div class="founder-avatar"><img src="mrec1.png" alt="Mr Ethan Chaos"></div>
+            <div>
+                <div class="founder-name">Mr. Ethan Chaos</div>
+                <div class="founder-role">Founder &amp; Developer</div>
+            </div>
+            <div class="founder-divider"></div>
+            <div class="founder-skills">
+                <span class="skill-tag">Android</span>
+                <span class="skill-tag">Web</span>
+                <span class="skill-tag">Configurations</span>
+                <span class="skill-tag">Cybersecurity</span>
+                <span class="skill-tag">Scripting</span>
+            </div>
+        </div>
+        <div class="founder-content reveal-right">
+            <h3>Started from scratch —<br>built something real.</h3>
+            <p>Started with very little knowledge but had a strong goal of becoming a web developer and cybersecurity specialist. Through continuous learning and building tools, he gained experience in coding, scripting, and cybersecurity.</p>
+            <p>Chaos Configurations brings that hands-on approach to client work: Android apps, websites and network configurations, with monthly maintenance so what gets built keeps working.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ══ FINAL CTA ══ -->
+<section class="cta-section">
+    <div class="cta-inner reveal">
+        <span class="cta-eyebrow">Have a project in mind?</span>
+        <h2 class="cta-title">Tell us what you need.<br>Get a quote.</h2>
+        <p class="cta-sub">Starting prices are listed above. Your quote confirms the final amount.</p>
+        <div class="cta-buttons">
+            <a class="btn-cta-primary" href="#" data-open-quote>Get a Quote <i class="fas fa-paper-plane"></i></a>
+            <a href="https://whatsapp.com/channel/0029VbAL2mRC6ZvhCR8jjI0G" class="btn-cta-secondary"><i class="fas fa-rss"></i> Follow Us</a>
+        </div>
+    </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-logo"><img src="Chaosneworg.png" alt="logo"> Chaos Configurations</div>
+        <div class="footer-copy">&copy; 2026 Chaos Configurations. Prices in ZAR, subject to final quote.</div>
+    </div>
+</footer>
+
+<div class="lb" id="lb" aria-hidden="true"><button class="lb-x" type="button" aria-label="Close">&times;</button><img id="lbImg" alt=""></div>
+
+<!-- ══ GET A QUOTE PANEL ══ -->
+<div class="gs-overlay" id="gsOverlay"></div>
+<div class="gs-panel" id="gsPanel" role="dialog" aria-modal="true" aria-labelledby="gsTitle">
+    <div class="gs-handle"></div>
+    <h2 class="gs-title" id="gsTitle">Get a quote</h2>
+    <p class="gs-sub">Choose how you would like to reach us and we will confirm the final price.</p>
+    <p class="gs-pick" id="gsPick" hidden></p>
+    <div class="gs-cards">
+        <a href="https://t.me/EthanChaoss" class="gs-card" target="_blank" rel="noopener" data-quote-link id="qTg">
+            <div class="gs-card-icon"><i class="fab fa-telegram-plane"></i></div>
+            <div class="gs-card-text"><strong>Telegram</strong><span>Message us on Telegram</span></div>
+            <i class="fas fa-chevron-right gs-card-arrow"></i>
+        </a>
+        <a href="https://wa.me/27785112594?text=Hi%20Chaos%20Configurations%2C%20I%27d%20like%20a%20quote." class="gs-card" target="_blank" rel="noopener" data-quote-link id="qWa">
+            <div class="gs-card-icon"><i class="fab fa-whatsapp"></i></div>
+            <div class="gs-card-text"><strong>WhatsApp</strong><span>078 511 2594</span></div>
+            <i class="fas fa-chevron-right gs-card-arrow"></i>
+        </a>
+        <a href="mailto:chaosconfigurations@gmail.com?subject=Quote%20request" class="gs-card" data-quote-link id="qMail">
+            <div class="gs-card-icon"><i class="fas fa-envelope"></i></div>
+            <div class="gs-card-text"><strong>Email</strong><span>chaosconfigurations@gmail.com</span></div>
+            <i class="fas fa-chevron-right gs-card-arrow"></i>
+        </a>
+    </div>
+    <button class="gs-back" id="gsPanelBack" type="button"><i class="fas fa-arrow-left"></i> Back</button>
+</div>
+
+<script src="Chaosneworg.js"></script>
+<script>
+(function () {
+    /* ══ Catalogue data — edit prices here ══ */
+    var D = [
+        { id: 'apps', pre: 'Chaos ', name: 'Apps', sub: 'Android',
+          title: 'Android Application Development',
+          blurb: 'Custom Android apps, from a simple WebView wrapper to complex builds.',
+          s: [['HTML to APK (WebView)','R100'],['HTML to XML conversion','R250'],['HTML to XML (complex)','R500'],['Basic custom APK','R450'],['Custom Android application','R1,000'],['Advanced Android application','R2,500'],['Complex application development','R5,000–R10,000'],['Application UI redesign','R250'],['Application bug fixing','R100'],['Android application updates','R150'],['WebView implementation','R150'],['Firebase integration','R350'],['AdMob integration','R250'],['Payment gateway integration','R450'],['API integration','R350'],['Login and registration systems','R350'],['Application optimisation','R200'],['APK signing and release preparation','R100'],['Application maintenance setup','R150']],
+          x: ['Application icon integration','Splash screen development','Navigation implementation','Local storage','Settings pages','Custom themes','Internet connectivity handling','Android permissions configuration','Notifications','Application debugging','Version upgrades','APK and AAB generation'],
+          note: 'Advanced features are subject to technical requirements and project scope.',
+          p: [['App Basic','R99','Monthly application check and minor fixes'],['App Standard','R199','Checks, minor updates and bug fixing'],['App Premium','R399','Checks, updates, integrations support and priority assistance']] },
+        { id: 'web', pre: 'Chaos ', name: 'Web', sub: 'Websites',
+          title: 'Website & Web Application Development',
+          blurb: 'Websites and web apps that work on every screen, from landing pages to dashboards.',
+          s: [['Basic HTML website','R250'],['One-page website','R350'],['Business website','R750'],['Professional website','R1,500'],['Advanced website','R3,000'],['Web application','R1,500'],['Website redesign','R350'],['Website bug fixing','R100'],['HTML/CSS editing','R100'],['Responsive design','R250'],['Contact form integration','R150'],['WhatsApp integration','R100'],['Google Maps integration','R150'],['Payment integration','R450'],['API integration','R350'],['Database integration','R500'],['Admin dashboard','R750'],['Domain setup assistance','R150'],['Hosting setup assistance','R150'],['Website speed optimisation','R250']],
+          x: ['Landing pages','Portfolio websites','Business websites','Product catalogues','E-commerce interfaces','Login and registration pages','Admin dashboards','Contact forms','WhatsApp buttons','Website analytics integration','Database connectivity','API connectivity','Mobile responsiveness','Website security configuration','Website content updates'],
+          p: [['Web Basic','R99','Monthly website check and minor corrections'],['Web Standard','R199','Checks, content updates and maintenance'],['Web Premium','R399','Checks, updates, integrations support and priority assistance']] },
+        { id: 'configs', pre: 'Chaos ', name: 'Configs', sub: 'Technical',
+          title: 'Technical Configurations & Digital Solutions',
+          blurb: 'Network configurations, Android configurations and technical support.',
+          s: [['Basic Android configuration','R50'],['Custom application configuration','R100'],['Proxy configuration','R100'],['DNS configuration','R100'],['Wi-Fi configuration assistance','R100'],['Hotspot configuration assistance','R100'],['VPN configuration assistance','R150'],['Network troubleshooting','R150'],['Application optimisation','R150'],['Custom configuration package','R200'],['Advanced network configuration','R350'],['Technical consultation','R100']],
+          x: ['Proxy setup and troubleshooting','DNS configuration','Wi-Fi troubleshooting','Hotspot configuration','Android application settings','Network diagnostics','Connectivity troubleshooting','Application configuration','Custom configuration files','Network performance checks','Technical assistance','Configuration documentation'],
+          p: [['Config Basic','R49','Monthly configuration check'],['Config Standard','R99','Checks, configuration updates and troubleshooting'],['Config Premium','R199','Checks, updates, troubleshooting and priority support']] }
+    ];
+    var U = [['Starter','R99','1 monthly inspection'],['Business','R249','Inspections, minor updates and basic troubleshooting'],['Professional','R499','Inspections, updates, integrations and maintenance'],['Enterprise','R999','Extended maintenance and priority support']];
+    var M = ['System checking','Bug checking','Updating','Integration checking','Integration updates','Performance checking','Security checks','Compatibility checking','Content updates','Technical support','Backup assistance','Version management'];
+
+    function plan(p, dark) {
+        return '<div class="plan' + (dark ? ' dark' : '') + '" data-pick tabindex="0" role="button"><h4>' + p[0] + '</h4><div class="amt">' + p[1] + '<small>/month</small></div><p>' + p[2] + '</p></div>';
+    }
+
+    var tabsEl = document.getElementById('tabs'), panelEl = document.getElementById('panel'), current = 0;
+
+    tabsEl.innerHTML = D.map(function (d, i) {
+        return '<button class="tab" role="tab" id="tab-' + d.id + '" data-i="' + i + '"><span><span class="pre">' + d.pre + '</span>' + d.name + '</span><small>' + d.sub + '</small></button>';
+    }).join('');
+
+    function select(i, focus) {
+        var d = D[i]; current = i;
+        tabsEl.querySelectorAll('.tab').forEach(function (t, j) {
+            t.setAttribute('aria-selected', j === i ? 'true' : 'false');
+            t.tabIndex = j === i ? 0 : -1;
+        });
+        panelEl.setAttribute('aria-labelledby', 'tab-' + d.id);
+        panelEl.innerHTML =
+            '<h3 class="panel-title">' + d.title + '</h3><p class="panel-blurb">' + d.blurb + '</p>' +
+            '<h4 class="sub-h">Services and starting prices</h4>' +
+            '<div class="ledger">' + d.s.map(function (r) { return '<div class="row" data-pick tabindex="0" role="button"><span>' + r[0] + '</span><b>' + r[1] + '</b></div>'; }).join('') + '</div>' +
+            (d.note ? '<p class="scope-note">' + d.note + '</p>' : '') +
+            '<h4 class="sub-h">Also available</h4>' +
+            '<div class="chips">' + d.x.map(function (t) { return '<span class="chip" data-pick tabindex="0" role="button">' + t + '</span>'; }).join('') + '</div>' +
+            '<h4 class="sub-h">Monthly subscriptions</h4>' +
+            '<div class="plans">' + d.p.map(function (p, k) { return plan(p, k === 2); }).join('') + '</div>';
+        if (focus) tabsEl.children[i].focus();
+    }
+
+    tabsEl.addEventListener('click', function (e) {
+        var t = e.target.closest('.tab'); if (t) select(+t.dataset.i);
+    });
+    tabsEl.addEventListener('keydown', function (e) {
+        var k = { ArrowRight: 1, ArrowLeft: -1 }[e.key]; if (!k) return;
+        e.preventDefault(); select((current + k + D.length) % D.length, true);
+    });
+    select(0);
+
+    /* Dropdown links jump to a division */
+    document.querySelectorAll('[data-tab]').forEach(function (a) {
+        a.addEventListener('click', function () {
+            select(D.findIndex(function (d) { return d.id === a.dataset.tab; }));
+            document.getElementById('navToggle').classList.remove('active');
+            document.getElementById('dropdownMenu').classList.remove('active');
+        });
+    });
+
+    document.getElementById('maintChips').innerHTML = M.map(function (t) { return '<span class="chip" data-pick tabindex="0" role="button">' + t + '</span>'; }).join('');
+    document.getElementById('pkgs').innerHTML = U.map(function (p, k) { return plan(p, k === 3); }).join('');
+
+    /* Get a quote panel */
+    var overlay = document.getElementById('gsOverlay'), panel = document.getElementById('gsPanel');
+    function openPanel() { overlay.classList.add('open'); panel.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closePanel() { overlay.classList.remove('open'); panel.classList.remove('open'); document.body.style.overflow = ''; }
+    var pickEl = document.getElementById('gsPick');
+    function labelOf(el) {
+        if (el.dataset.label) return el.dataset.label;
+        if (el.classList.contains('row')) return el.children[0].textContent.trim() + ' (' + el.children[1].textContent.trim() + ')';
+        if (el.classList.contains('plan')) return el.querySelector('h4').textContent.trim() + ' plan (' + el.querySelector('.amt').firstChild.textContent.trim() + '/month)';
+        return el.textContent.trim();
+    }
+    function openQuote(label) {
+        var msg = label ? "Hi Chaos Configurations, I'd like a quote for: " + label : "Hi Chaos Configurations, I'd like a quote.";
+        document.getElementById('qTg').href = 'https://t.me/EthanChaoss?text=' + encodeURIComponent(msg);
+        document.getElementById('qWa').href = 'https://wa.me/27785112594?text=' + encodeURIComponent(msg);
+        document.getElementById('qMail').href = 'mailto:chaosconfigurations@gmail.com?subject=' + encodeURIComponent(label ? 'Quote request: ' + label : 'Quote request') + '&body=' + encodeURIComponent(msg);
+        pickEl.textContent = label ? 'Quote for: ' + label : '';
+        pickEl.hidden = !label;
+        openPanel();
+    }
+    document.addEventListener('click', function (e) {
+        var el = e.target.closest('[data-pick]');
+        if (el) openQuote(labelOf(el));
+    });
+    document.addEventListener('keydown', function (e) {
+        if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('[data-pick]')) {
+            e.preventDefault(); openQuote(labelOf(e.target));
+        }
+    });
+    document.getElementById('getStartedBtn').addEventListener('click', function () { openQuote(''); });
+    /* Menu links that scroll down also close the menu */
+    document.querySelectorAll('#dropdownMenu a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function () {
+            document.getElementById('navToggle').classList.remove('active');
+            document.getElementById('dropdownMenu').classList.remove('active');
+        });
+    });
+    /* Project screenshots: tap to enlarge */
+    var lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg');
+    function closeLb() { lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true'); }
+    document.addEventListener('click', function (e) {
+        var im = e.target.closest('.proj-media img');
+        if (im) { lbImg.src = im.src; lbImg.alt = im.alt; lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false'); }
+    });
+    lb.addEventListener('click', closeLb);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
+    /* Project carousels: one centred card at a time, loops both ways */
+    document.querySelectorAll('[data-carousel]').forEach(function (car) {
+        var row = car.querySelector('.proj-row'), orig = [].slice.call(row.children), N = orig.length;
+        var dotsEl = car.querySelector('.car-dots'), cur = -1, timer, stride;
+        function copies() {
+            return orig.map(function (c) {
+                var k = c.cloneNode(true); k.setAttribute('aria-hidden', 'true');
+                k.querySelectorAll('button, a').forEach(function (x) { x.tabIndex = -1; });
+                return k;
+            });
+        }
+        for (var s = 0; s < 2; s++) copies().forEach(function (k) { row.insertBefore(k, orig[0]); });
+        for (var t = 0; t < 2; t++) copies().forEach(function (k) { row.appendChild(k); });
+        var cards = [].slice.call(row.children);
+        var dots = orig.map(function (c, k) {
+            var b = document.createElement('button'); b.type = 'button'; b.className = 'car-dot';
+            b.setAttribute('aria-label', 'Show ' + c.querySelector('h4').textContent);
+            b.addEventListener('click', function () {
+                var d = k - (cur % N); if (d > N / 2) d -= N; if (d < -N / 2) d += N;
+                go(cur + d, true);
+            });
+            dotsEl.appendChild(b); return b;
+        });
+        function metrics() { stride = cards[1].offsetLeft - cards[0].offsetLeft; }
+        function leftFor(i) { var c = cards[i]; return c.offsetLeft - (row.clientWidth - c.offsetWidth) / 2; }
+        function go(i, smooth) { row.scrollTo({ left: leftFor(i), behavior: smooth ? 'smooth' : 'auto' }); }
+        function nearest() {
+            var i = Math.round((row.scrollLeft + row.clientWidth / 2 - cards[0].offsetLeft - cards[0].offsetWidth / 2) / stride);
+            return Math.max(0, Math.min(cards.length - 1, i));
+        }
+        function paint() {
+            var i = nearest(); if (i === cur) return;
+            if (cur >= 0) cards[cur].classList.remove('is-active');
+            cards[i].classList.add('is-active'); cur = i;
+            dots.forEach(function (d, k) { d.classList.toggle('on', k === i % N); });
+        }
+        function settle() {
+            var i = nearest();
+            if (i < N || i >= 4 * N) {
+                var j = 2 * N + (i % N);
+                row.style.scrollSnapType = 'none'; row.scrollLeft += (j - i) * stride;
+                requestAnimationFrame(function () { row.style.scrollSnapType = ''; paint(); });
+            }
+        }
+        row.addEventListener('scroll', function () {
+            requestAnimationFrame(paint); clearTimeout(timer); timer = setTimeout(settle, 140);
+        }, { passive: true });
+        /* tapping a side card brings it to the centre first */
+        row.addEventListener('click', function (e) {
+            var c = e.target.closest('.proj'); if (!c) return;
+            var i = cards.indexOf(c);
+            if (i !== cur) { e.stopPropagation(); e.preventDefault(); go(i, true); }
+        }, true);
+        row.addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1, true); }
+            if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1, true); }
+        });
+        car.querySelector('.car-prev').addEventListener('click', function () { go(cur - 1, true); });
+        car.querySelector('.car-next').addEventListener('click', function () { go(cur + 1, true); });
+        window.addEventListener('resize', function () { metrics(); go(cur, false); });
+        metrics(); go(2 * N, false); paint(); car.classList.add('is-ready');
+        /* small nudge the first time it scrolls into view, so it is clear the cards move */
+        if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            var io = new IntersectionObserver(function (en) {
+                if (!en[0].isIntersecting) return; io.disconnect();
+                var x = row.scrollLeft; row.style.scrollSnapType = 'none';
+                row.scrollTo({ left: x + 64, behavior: 'smooth' });
+                setTimeout(function () { row.scrollTo({ left: x, behavior: 'smooth' }); }, 520);
+                setTimeout(function () { row.style.scrollSnapType = ''; }, 1150);
+            }, { threshold: 0.7 });
+            io.observe(car);
+        }
+    });
+    document.querySelectorAll('[data-open-quote]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.getElementById('navToggle').classList.remove('active');
+            document.getElementById('dropdownMenu').classList.remove('active');
+            openQuote('');
+        });
+    });
+    document.querySelectorAll('[data-quote-link]').forEach(function (a) {
+        a.addEventListener('click', function () { setTimeout(closePanel, 150); });
+    });
+    document.getElementById('gsPanelBack').addEventListener('click', closePanel);
+    overlay.addEventListener('click', closePanel);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePanel(); });
+})();
+</script>
+</body>
+</html>
